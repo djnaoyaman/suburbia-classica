@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SUBURBIA CLASSICA — A Mellow Classical Selection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#14161c; --panel:#1b1e26; --line:#2c303b; --text:#e8e4dc; --sub:#9a97a0;
+  --accent:#d9b382; --accent2:#7f9bbf;
+  --serif:"Noto Serif JP","游明朝","Yu Mincho",serif; --sans:"Noto Sans JP","游ゴシック","Yu Gothic",sans-serif;
+  --en:"Cormorant Garamond","Noto Serif JP",serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.9}
+a{color:inherit}
+header{padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+header .logo{font-family:var(--en);font-weight:600;font-size:28px;letter-spacing:.28em;margin:0;line-height:1.2}
+header .logo a{text-decoration:none}
+header .tag{font-family:var(--en);font-size:15px;letter-spacing:.2em;color:var(--accent);margin-top:2px}
+#banner{display:none;background:#3a2a1a;color:#f0d9b5;padding:10px 24px;font-size:13px}
+.layout{display:grid;grid-template-columns:380px 1fr;gap:32px;max-width:1200px;margin:0 auto;padding:24px}
+@media(max-width:860px){.layout{grid-template-columns:1fr;padding:16px}}
+.player{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;align-self:start}
+@media(min-width:861px){.player{position:sticky;top:16px}}
+.vwrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden}
+.vwrap iframe,.vwrap #yt{position:absolute;inset:0;width:100%;height:100%}
+.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,11,15,.72);z-index:2;cursor:pointer}
+.overlay span{border:1px solid var(--accent);color:var(--accent);padding:10px 22px;border-radius:999px;font-family:var(--en);font-size:17px;letter-spacing:.18em}
+.overlay.hide{display:none}
+.now{margin:12px 2px 6px}
+.now .label{font-size:11px;color:var(--sub);letter-spacing:.2em}
+.now .t{font-family:var(--serif);font-size:16px}
+.now .c{font-size:12px;color:var(--sub)}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+button,.btn{background:none;border:1px solid var(--line);color:var(--text);padding:6px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{border-color:var(--accent);color:var(--accent)}
+label.auto{font-size:12px;color:var(--sub);margin-left:auto;display:flex;gap:6px;align-items:center;cursor:pointer}
+.status{font-size:12px;color:var(--accent2);min-height:1.4em;margin-top:6px}
+h2{font-family:var(--serif);font-weight:600;font-size:15px;letter-spacing:.12em;color:var(--accent);margin:36px 0 10px;padding-top:6px;border-top:1px solid var(--line)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.chip{font-size:12px;padding:3px 12px;border:1px solid var(--line);border-radius:999px;color:var(--sub);cursor:pointer;background:none}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card .no{font-size:11px;color:var(--sub);letter-spacing:.2em}
+.card .tt{font-family:var(--serif);font-size:16px;margin:2px 0}
+.card .cc{font-size:12px;color:var(--sub)}
+.card .tg{margin-top:8px;font-size:11px;color:var(--accent2)}
+.card.playing{border-color:var(--accent)}
+.song h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:0 0 2px;line-height:1.4}
+.song .en{color:var(--sub);font-size:13px;margin-bottom:16px;font-family:var(--en);font-size:16px;letter-spacing:.04em}
+.lead{font-family:var(--serif);font-size:16px}
+.meta{display:grid;grid-template-columns:110px 1fr;border-top:1px solid var(--line);margin:16px 0}
+.meta div{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.meta .k{color:var(--sub);font-size:12px;letter-spacing:.1em}
+.pend{color:#7b7882}
+.steps{list-style:none;padding:0;margin:0}
+.steps li{padding:10px 0 10px 14px;border-left:2px solid var(--line);margin-bottom:6px;font-size:14px}
+.steps li b{display:block;font-weight:500;color:var(--accent2);font-size:13px}
+ul.plain{margin:0;padding-left:1.2em;font-size:14px}
+ul.plain li{margin-bottom:8px}
+ul.plain small,.note{color:var(--sub);font-size:12px}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.src a{display:block;font-size:12px;color:var(--sub);word-break:break-all;margin-bottom:2px}
+p{margin:0 0 12px;font-size:14px}
+.lead{font-size:16px}
+footer{max-width:1200px;margin:0 auto;padding:8px 24px 40px;color:var(--sub);font-size:12px}
+.opts{margin-left:auto;display:flex;flex-direction:column;gap:2px;align-items:flex-end}
+.opts label{font-size:12px;color:var(--sub);display:flex;gap:6px;align-items:center;cursor:pointer}
+/* ---- screensaver / display mode ---- */
+#ss{position:fixed;inset:0;z-index:100;background:#000;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s linear 1.2s;color:#f3ece0}
+#ss.on{opacity:1;visibility:visible;transition:opacity 1.2s ease;cursor:none}
+#ss.light{color:#2b2622}
+#ssc{position:absolute;inset:0;width:100%;height:100%;transition:opacity .8s ease}
+#ss .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.38) 100%)}
+#ss.light .vig{background:radial-gradient(ellipse at center,transparent 60%,rgba(60,40,20,.18) 100%)}
+#ss .brand{position:absolute;top:36px;left:44px;font-family:var(--en);font-weight:500;letter-spacing:.42em;font-size:13px;opacity:.7}
+#ss .info{position:absolute;left:44px;bottom:48px;max-width:70vw;transition:opacity .8s ease}
+#ss .info .np{font-family:var(--en);letter-spacing:.34em;font-size:12px;opacity:.65;margin-bottom:10px}
+#ss .info .tj{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3.2vw,40px);line-height:1.35;letter-spacing:.06em}
+#ss .info .te{font-family:var(--en);font-style:italic;font-size:clamp(15px,1.7vw,22px);opacity:.78;margin-top:4px}
+#ss .info .tc{font-family:var(--en);letter-spacing:.24em;font-size:13px;margin-top:14px;opacity:.65;text-transform:uppercase}
+#ss .info .tc i{display:inline-block;width:36px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px;opacity:.6}
+@media(max-width:600px){#ss .brand{left:24px;top:24px}#ss .info{left:24px;bottom:32px}}
+</style>
+</head>
+<body>
+<header>
+  <p class="logo"><a href="#/">SUBURBIA CLASSICA</a></p>
+  <div class="tag">A Mellow Classical Selection</div>
+</header>
+<div id="banner">このファイルを直接開く方法（file://）では、YouTube側の制限で再生できないことがあります。サーバー（localhostや無料ホスティング）経由で開いてください。</div>
+
+<div class="layout">
+  <aside class="player">
+    <div class="vwrap">
+      <div id="yt"></div>
+      <div class="overlay" id="overlay"><span>▶ START</span></div>
+    </div>
+    <div class="now">
+      <div class="label">NOW PLAYING</div>
+      <div class="t" id="nowTitle">-</div>
+      <div class="c" id="nowSub"></div>
+    </div>
+    <div class="ctrl">
+      <button id="bPrev" title="前の曲">⏮</button>
+      <button id="bToggle" title="再生/一時停止">⏯</button>
+      <button id="bNext" title="次の曲">⏭</button>
+      <button id="bShow" title="ディスプレイ表示（全画面）">◐ 全画面</button>
+      <div class="opts">
+        <label><input type="checkbox" id="auto" checked>自動で次の曲へ</label>
+        <label><input type="checkbox" id="saver" checked>再生中はアートを表示</label>
+      </div>
+    </div>
+    <div class="status" id="status"></div>
+  </aside>
+  <main id="view"></main>
+</div>
+<div id="ss" aria-hidden="true">
+  <canvas id="ssc"></canvas>
+  <div class="vig"></div>
+  <div class="brand">SUBURBIA CLASSICA</div>
+  <div class="info" id="ssInfo">
+    <div class="np">NOW PLAYING</div>
+    <div class="tj" id="ssTj"></div>
+    <div class="te" id="ssTe"></div>
+    <div class="tc"><i></i><span id="ssTc"></span></div>
+  </div>
+</div>
+<footer>解説文は出典を調べたうえで本サイトが独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</footer>
+
+<script>
+const SONGS = [
+{
+ id:"fur-elise", title:"エリーゼのために", en:"Für Elise — Bagatelle No.25 in A minor, WoO 59",
+ composer:"ベートーヴェン", era:"古典派", year:"1810年（草稿）／1867年出版", opus:"WoO 59（バガテル第25番）", key:"イ短調・3/8拍子", form:"バガテル／5部ロンド（ピアノ独奏）", mood:["穏やか","切ない"],
+ summary:"約3分のロンド形式の小品。冒頭の半音の揺れが、一度聴けば忘れられない主題を作っている。",
+ diff:"ヘンレ版は販売店情報で「中級」（数値は未確認）。英国王立音楽院のグレードで10段階中のLevel 7。",
+ story:"ベートーヴェンが39歳だった1810年4月27日付とされる小品。主旋律の原型は1808年ごろ、交響曲第6番のスケッチ帳に16小節の旋律として書き留められており、後の形とは少し違っていた。1810年春には全曲の草稿（ボンのベートーヴェン・ハウス所蔵、BH 116）が書かれ、同じ紙に『エグモント』や行進曲WoO 19のスケッチがあることから時期が絞られる。1822年にはこの草稿に手直しが入り「12番」の番号が振られたため、バガテル集の最終曲にする構想があったらしいが、完成しなかった。生前は出版されず、自筆譜は失われている。世に出たのは没後40年の1867年で、ルートヴィヒ・ノールが書簡集の中で紹介した。ノールの説明では、楽譜はもともとテレーゼ・マルファッティの遺品で、のちにミュンヘンのバベッテ・ブレードルが持っていた。",
+ pub:"生前は未出版。1867年、ルートヴィヒ・ノール編『ベートーヴェン新書簡集』（シュトゥットガルト、コッタ社）に掲載されたのが最初。初演の記録は未確認。1822年稿は伴奏が大きく異なり、左手アルペジオが16分音符分ずれる。",
+ ded:"ノールによれば、自筆譜に『Für Elise am 27 April zur Erinnerung von L. v. Bthvn』とあったとされる。「エリーゼ」の正体は不明で、テレーゼ・マルファッティ説（現在は否定的）、エリーザベト・レッケル説、エリーゼ・バーレンスフェルト説、エリーゼ・シャハナー説などがあるが、確証はない。",
+ nameOrigin:"ノールが伝えた自筆譜の献辞「Für Elise（エリーゼのために）」による。ただし原本は現存せず、Therese→Eliseの書き間違い説や、献辞を後の所有者が書き加えたとする説もある。",
+ structure:[
+  ["A（Poco moto、イ短調、3/8）","EとD#が揺れ動く有名な主題。アルペッジョの伴奏とともに、問いと答えの形の8小節を作る。9小節目から平行調をかすめ、属音Eを引き延ばして主題に戻る。"],
+  ["B（23小節〜、ヘ長調）","下属調側のヘ長調で始まり、主題の音形を少し装飾して示す。属調ハ長調へ転じ、32分音符の走句で終止を繰り返す。"],
+  ["A（再現）","冒頭部がそのまま戻る。"],
+  ["C（59小節〜、主調）","主音の保続低音の上で、和音を激しく連打する。ナポリ和音をかすめ、76小節で完全に静止する。"],
+  ["A（最終）と結び","イ短調の上行アルペッジョと2オクターブの半音階下降を経て、A部が最後に回帰し、後奏なしで終わる。"]],
+ features:"ABACA型の5部ロンド、イ短調、3/8拍子。冒頭の半音揺れ（E-D#）の音形で曲が識別でき、8小節ずつの対称構造は反復にも向く。B・C両エピソードの旋律も冒頭の音高輪郭（上方隣接音から下降音階）を使い、全体に統一感がある。トリル、分散和音、オクターブ、トレモロ、連打音、3度・6度の重音、半音階など技法は多彩で、小品ながら練習曲的でもある。版により7小節目の2つめの音がEかDかが異なる（ノール版はE、草稿に近い読みはD）。",
+ perf:"ピアノ学習5年目前後の中級入門曲として知られる。旋律にオクターブの広がりがあり、小学校高学年程度の手の大きさが目安。難所はBの32分音符走句とCの高速な上行アルペッジョ。冒頭の弱音の保ち方と、A部を毎回同じに聴かせない工夫が聴かせどころ。",
+ recs:[["マレイ・ペライア","年・レーベル未確認","映画『不滅の恋人』（1995）の場面で使われた演奏としてTunefindに記載。演奏の特徴は出典で確認できず。"]],
+ films:[["不滅の恋人 (Immortal Beloved)","1995","ベートーヴェンが甥カールに初見で弾かせ、続いて自分でも弾き始める場面。","https://www.tunefind.com/movie/immortal-beloved-1995"]],
+ cms:[["日産スカイライン（7代目R31型クーペ）のCM。テクノ調アレンジ","1985〜1990年の販売期間内（放映年は未確認）","https://ja.wikipedia.org/wiki/エリーゼのために"]],
+ textbooks:[],
+ related:["バガテル集 Op.33・Op.119・Op.126（「第25番」の通し番号は、これらを1〜24番とみなした数え方）","『エグモント』Op.84・行進曲WoO 19（草稿が同じ紙にスケッチを含む）","ピアノソナタ第24番「テレーゼ」","ポピュラー曲での引用例：「情熱の花」（1959、カテリーナ・ヴァレンテ）ほか"],
+ imslp:"https://imslp.org/wiki/Für_Elise,_WoO_59_(Beethoven,_Ludwig_van)",
+ trivia:["ドイツ語の音名で「E-L-I-S-E」の文字を読むと、冒頭3音（E-D#-E）と対応するという指摘がある（Kopitz紹介の説）。","台湾ではごみ収集車の接近を知らせる曲として使われ、日本でも収集車や駅の接近メロディなどで耳にする。","ノールが見たという自筆譜は現存せず、そもそも存在しなかった可能性まで論じる研究者もいる（反論もある）。"],
+ sources:["https://ja.wikipedia.org/wiki/エリーゼのために","https://en.wikipedia.org/wiki/Für_Elise","https://imslp.org/wiki/Für_Elise,_WoO_59_(Beethoven,_Ludwig_van)","https://www.tunefind.com/movie/immortal-beloved-1995"],
+ yt:{id:"bP70gBZc564",who:"Georgii Cherkin"}
+},
+{
+ id:"moonlight", title:"ピアノソナタ第14番「月光」第1楽章", en:"Piano Sonata No.14 “Moonlight” Op.27-2, 1st movement",
+ composer:"ベートーヴェン", era:"古典派", year:"1801年", opus:"Op.27-2", key:"嬰ハ短調・2/2拍子", form:"ピアノソナタ（第1楽章 Adagio sostenuto）", mood:["夜","切ない"],
+ summary:"途切れない三連符の伴奏の上で、低い旋律がゆっくり語られる緩徐楽章。ソナタの一般的な配置を逆にし、緩い楽章から始まる。",
+ diff:"ヘンレ版は販売店情報で「上級」（数値は未確認）。第1楽章単独は技術的に平易だが、音量の幅が小さいぶん難しい。",
+ story:"1801年、ベートーヴェンが30歳のころに完成した作品で、委嘱を受けた証拠はない。作品27の2曲（第13番と第14番）には、どちらも「幻想曲風ソナタ」という題が付けられた。伝統的な「急−緩−急」を避け、緩やかな楽章から始めて速度を段階的に上げ、重心を終楽章に置いた配置になっている。献呈相手のジュリエッタ・グイチャルディは、1801年11月にヴェーゲラーへ宛てた手紙で恋心をほのめかした弟子だが、この献呈は当初からの意図ではなく、本来グイチャルディに捧げる予定だったロンドOp.51-2をリヒノフスキー家の令嬢に贈ることになったため、代わりにこのソナタが充てられたとされる。",
+ pub:"初版はウィーンのカッピ社から1802年に出版。日付は資料により異なり、日本語版Wikipediaは「1802年3月」、英語版Wikipediaは初版タイトルページに「2 August 1802」とあるとする。このため月日は断定しない。タイトルページには「チェンバロまたはピアノフォルテのための」とあり、当時の出版社の販売上の慣行とされる。初演の記録は未確認。",
+ ded:"伯爵令嬢ジュリエッタ（ジュリー）・グイチャルディ。ただし献呈は最終段階で決まったもので、当初グイチャルディに予定されていたのはロンドOp.51-2（セイヤーによる）。",
+ nameOrigin:"ベートーヴェン自身の命名ではない。詩人ルートヴィヒ・レルシュタープが、第1楽章の効果を「月明かりに揺れる湖」のような情景にたとえたことに由来する（命名時期は英語版が1824年、日本語版が1832年で食い違う）。「ルツェルン湖の舟」という有名な表現は、1852年にヴィルヘルム・フォン・レンツが付け加えたものらしい。チェルニーは先んじて「夜景。遠くから悲しげな亡霊の声が聞こえる」と評した。ベートーヴェンはこの人気を快く思っていなかったとされる。",
+ structure:[
+  ["冒頭指示（Adagio sostenuto）","「全曲を極めて繊細に、ダンパーなしで演奏すること」という指示で始まる。現代ピアノではサステインペダルを使い続ける解釈になるが、響きが濁りやすい。形式の見方は、三部形式とする説や、変則的なソナタ形式とする説に分かれる。"],
+  ["序奏とA主題","低音のオクターブに続き、途切れない三連符の伴奏の上に付点リズムの旋律が置かれる。葬送を思わせる、とする見方もある。"],
+  ["B主題と中間部","ロ長調付近でB主題が出る。中間部ではA主題の素材から出発し、旋律的な要素が薄れ、三連符が高音域へ弧を描いて上り下りする。"],
+  ["再現","A主題が再び現れ、B主題も続いて再現される。"],
+  ["コーダ","約2オクターブにわたる三連符の往復の下で、低音がA主題のリズムを繰り返し、最弱音で終わる。アタッカの指示で休みなく第2楽章（Allegretto、変ニ長調）へ進む。"]],
+ features:"嬰ハ短調、2/2拍子。右手の三連符が最後まで途切れず、この音型が全体のトーンを決める。旋律は主に低音側で語られ、右手は同じ音型を保つ。音量はpp〜pの範囲にとどまる。弱音と持続音を重ねたペダルの響きが主役で、旋律の動きは小さい。この三連符の音型は終楽章のアルペッジョの動機へ発展し、全曲の統一にも関わる。",
+ perf:"最大の課題はペダル。現代のピアノは当時より余韻が長く、楽譜どおりの踏みっぱなしでは和声が濁る。対策として、和声の変わり目ごとに踏み替える、ハーフペダルを使う、低音を無音で押さえてソステヌートペダルで保持する、などの方法がある。トーヴィは、速いテンポを選んで12/8のようになる解釈を戒めた。全曲では終楽章が技術・持久力ともに最も難しい。",
+ recs:[
+  ["アルトゥール・シュナーベル","1934","テンポの速い演奏と評される。レーベルは未確認。"],
+  ["ヴィルヘルム・ケンプ","1960","単独録音。音質・解釈の両面で、1965年の全集録音より好まれるとされる。レーベルは未確認。"],
+  ["エミール・ギレリス","1983","ドイツ・グラモフォン。率直で誠実な演奏と評される。"],
+  ["スティーヴン・コヴァセヴィチ","1999","EMI。史上最高水準の1つとする評価がある一方、音質はやや窮屈とされる。"]],
+ films:[
+  ["不滅の恋人 (Immortal Beloved)","1995","新しいピアノの蓋に頭をつけて音を感じ取りながら弾くベートーヴェンを、隣室からジュリエッタ・グイチャルディとその父がのぞき見る場面。","https://www.tunefind.com/movie/immortal-beloved-1995"],
+  ["Moonlight Sonata（ロータル・メンデス監督）","1937","パデレフスキが第1楽章を演奏。登場人物の亡き両親を結びつける曲として登場するとされる（上映案内ページの要約。本文は精読していない）。","https://www.dhm.de/zeughauskino/en/screening/moonlight-sonata-6705/"],
+  ["名探偵コナン ピアノソナタ『月光』殺人事件","公開年未確認","第1楽章と第2楽章が流れる場面がある（日本語版Wikipediaの記述）。","https://ja.wikipedia.org/wiki/ピアノソナタ第14番_(ベートーヴェン)"]],
+ cms:[], textbooks:[],
+ related:["ピアノソナタ第13番 Op.27-1（同じ「幻想曲風ソナタ」）","ロンド ト長調 Op.51-2（当初グイチャルディへの献呈が予定された作品）","ピアノソナタ第8番「悲愴」、第23番「熱情」（三大ピアノソナタ）","ショスタコーヴィチ ヴィオラ・ソナタ Op.147（第3楽章に第1楽章が断片的に引用される）","カール・ボーム「瞑想曲」Op.296（第1楽章にヴァイオリン旋律を加えた作品）"],
+ imslp:"https://imslp.org/wiki/Piano_Sonata_No.14,_Op.27/2_(Beethoven,_Ludwig_van)",
+ trivia:["日本の戦前の国語読本に載った「盲目の少女のために即興で作った」という『月光の曲』の話は、19世紀ヨーロッパで作られた創作で、事実ではない。","弟子チェルニーによると、ベートーヴェン自身は、この曲が人気を集めすぎたことを不満に思い、「もっといいものを書いたのに」といった趣旨のことを言ったとされる。","リストは第2楽章を「2つの深淵の間に咲く一輪の花」と評した。"],
+ sources:["https://ja.wikipedia.org/wiki/ピアノソナタ第14番_(ベートーヴェン)","https://en.wikipedia.org/wiki/Piano_Sonata_No._14_(Beethoven)","https://www.tunefind.com/movie/immortal-beloved-1995","https://gramophone.co.uk/articles/beethoven-s-moonlight-sonata-a-deep-dive-into-the-best-recordings","https://imslp.org/wiki/Piano_Sonata_No.14,_Op.27/2_(Beethoven,_Ludwig_van)"],
+ yt:{id:"HWEdnNqusIA",who:"近藤由貴"}
+},
+{
+ id:"tristesse", title:"別れの曲（練習曲 Op.10-3）", en:"Étude Op.10 No.3 in E major “Tristesse”",
+ composer:"ショパン", era:"ロマン派", year:"1832年", opus:"Op.10-3", key:"ホ長調・2/4拍子", form:"練習曲（ピアノ独奏）／三部形式", mood:["切ない","穏やか"],
+ summary:"速さを競う練習曲とは正反対に、遅いテンポで旋律を歌わせる練習曲。右手が旋律・内声・伴奏の三層を受け持つ。",
+ diff:"ヘンレ難易度 7（difficult）。ABRSMグレードは未確認。",
+ story:"1832年、22歳のショパンがパリで書いた曲。Op.10の練習曲集は1829年ごろから数年かけて書き継がれ、この曲は後期にあたる。標題は「練習曲」だが、従来の練習曲と違い、遅いテンポで旋律を歌わせる曲である。伝記作家ニークスによると、弟子のグートマンがこの曲をさらっていたとき、ショパンは「これほど美しい旋律は二度と書けないだろう」と言い、両手を組んで「ああ、わが祖国よ」と叫んだという。望郷の思いを重ねて語られる逸話だが、後年の伝記に載ったもので、同時代の記録は確認できていない。自筆譜は2種類残り、速度標語はVivace、次いでVivace ma non troppoと書かれている。出版時にショパンがLento ma non troppo（8分音符=100）へ改めたとみられる。2つ目の自筆譜の末尾には、第4番へ間を置かずに入るアタッカの指示がある。",
+ pub:"作曲は1832年（曲集Op.10全体は1829〜32年）。Op.10は1833年に出版（英語版Wikipediaはパリのシュレザンジェ版、1833年6月を引く）。初演は未確認。自筆譜はニューヨークのレーマン・コレクション（Vivace）とワルシャワのショパン博物館（Vivace ma non troppo）に1種ずつ。練習曲集の世界初録音は1927年とされる（日本語版Wikipedia脚注）。",
+ ded:"Op.10の曲集全体がフランツ・リストに献呈されている。この曲だけの献呈は確認できなかった。",
+ nameOrigin:"日本で定着した「別れの曲」という通称は、1934年のドイツ映画『Abschiedswalzer』（邦題『別れの曲』、ゲツァ・フォン・ボルヴァリー監督）の邦題に由来する。この映画はショパンの伝記映画で、本曲が主題曲に使われた。日本では1935年にキャストを替えたフランス語版（La chanson de l'adieu）が公開されて大ヒットし、これを機に本曲が「別れの曲」と呼ばれるようになった。海外の通称は「Tristesse（悲しみ）」で、フランス語圏では「L'intimité」、英語圏では「Farewell」とも呼ぶ。いずれもショパン自身が付けたものではない。",
+ structure:[
+  ["A部（冒頭〜約20小節、Lento ma non troppo）","右手の最上声が息の長い旋律を歌い、内声と細かい16分音符の揺れが同じ手で伴奏を務める。左手は和音とシンコペーションで支える。楽句の構成は(5+3)+(5+7)小節という非対称型。声部ごとに別々のクレッシェンド・ディミヌエンド記号が付くのも新しい点。"],
+  ["B部（poco più animato、約21〜61小節）","旋律と伴奏が重音の連なりに融合する中間部。8小節の楽句が5つ並び、第3楽句は減7と三全音の連続で転調が激しい。第4楽句（46〜53小節）は両手の6度重音によるクライマックス。第5楽句（54〜61小節）は属七の和音を引き延ばしてA部再現へつなぐ。"],
+  ["A'部と終結","A部が短縮して戻り、静かに閉じる。自筆譜末尾には第4番へのアタッカ指示がある。"]],
+ features:"三部形式（A-B-A'）で、夜想曲のような歌の曲想が指摘されることが多い。A部の伴奏は右手の細かい揺れと左手のシンコペーションが重なる。旋律には音の反復が多く、第4〜5小節の長3度の揺れはドビュッシー的な響きを先取りしているとカゼッラが述べている。B部は減7の和音と三全音を連ね、ホ長調を保ちつつ半音階的な色合いが強まる。ペダル指示は自筆譜にも原典版にも見当たらない。",
+ perf:"右手は弱い3本の指（中指・薬指・小指）が旋律、親指と人差し指が16分音符の伴奏を受け持つ。一つの手で声部ごとに音量とタッチを変えることが課題。コルトーは、上声をforteのレガート、中声をmp、最下声の16分音符をppのスタッカートにして別々に練習することを勧める。指定のテンポは8分音符=100だが、エキエルは、実演は常にこれより遅いか、はるかに遅いと述べる。B部の6度重音のクライマックスは、A部よりずっと速く弾かれるのが通例。",
+ recs:[["ヴィルヘルム・バックハウス","1927","練習曲集の世界初録音とされる（日本語版Wikipedia脚注）。レーベルは未確認。"]],
+ films:[
+  ["別れの曲 (Abschiedswalzer / La chanson de l'adieu)","1934","ショパンの伝記映画。恋人コンスタンツィアの18歳の誕生日に贈る曲として、本曲が主題曲に使われる。日本では1935年にフランス語版が公開。","https://ja.wikipedia.org/wiki/別れの曲_(映画)"],
+  ["さびしんぼう","年未確認","原曲が全編にわたって使われ、エンディングではアレンジ版が歌入りで流れる。","https://ja.wikipedia.org/wiki/練習曲作品10-3_(ショパン)"],
+  ["男はつらいよ（TVドラマ版最終回）","年未確認","マドンナ・冬子の家の縁側で、寅次郎が婚約者の存在を知る場面で、隣家のピアノから流れる。1973年の映画『私の寅さん』で再現された。","https://ja.wikipedia.org/wiki/練習曲作品10-3_(ショパン)"],
+  ["101回目のプロポーズ（TVドラマ）","年未確認","ヒロインの亡き婚約者が好んだ曲として場面のBGMになる。","https://ja.wikipedia.org/wiki/練習曲作品10-3_(ショパン)"]],
+ cms:[], textbooks:[],
+ related:["練習曲 Op.10-4（自筆譜がアタッカで続くよう指示）","練習曲 Op.25-7（夜想曲風の練習曲）","ゴドフスキー編 左手のための版（変ニ長調に移調）","歌曲「No Other Love」（1950年、本曲に基づく）"],
+ imslp:"https://imslp.org/wiki/Études,_Op.10_(Chopin,_Frédéric)",
+ trivia:["日本で「別れの曲」と呼ばれるのは1935年の映画のヒットがきっかけで、海外ではこの通称は通じない。","自筆譜の速度標語はVivaceだったが、出版時にLento ma non troppoへ変更された。","ゴドフスキーは本曲を左手だけで弾く版に編曲した。変ニ長調に移調し、両手で弾いているような錯覚を生む作りである。"],
+ sources:["https://ja.wikipedia.org/wiki/練習曲作品10-3_(ショパン)","https://ja.wikipedia.org/wiki/別れの曲_(映画)","https://en.wikipedia.org/wiki/Étude_Op._10,_No._3_(Chopin)","https://www.henle.de/Etude-E-major-op.-10-no.-3/HN-656","https://imslp.org/wiki/Études,_Op.10_(Chopin,_Frédéric)"],
+ yt:{id:"bzBH9Nm1BP8",who:"要確認"}
+},
+{
+ id:"fantaisie-impromptu", title:"幻想即興曲", en:"Fantaisie-Impromptu in C-sharp minor, Op.66 (posth.)",
+ composer:"ショパン", era:"ロマン派", year:"1834年", opus:"Op.66（遺作）", key:"嬰ハ短調・2/2拍子", form:"即興曲／複合三部形式（ピアノ独奏）", mood:["華やか","切ない"],
+ summary:"右手の16分音符と左手の三連符がぶつかる両端部と、中間部の甘い旋律の対比。ショパン自身は生前に出版しなかった。",
+ diff:"ヘンレ難易度 7（小売サイト経由の情報で、ヘンレ公式での確認は未了）。ABRSMグレードは未確認。",
+ story:"1834年にショパンが作曲したとされる。同じ年にはOp.17のマズルカやOp.18のワルツも生まれたが、本作だけは生前に出版されなかった。理由は不明で、ベートーヴェンの「月光」ソナタに似すぎているのを気にしたという説、同じ1834年に出たモシェレスの即興曲との類似を気にしたという説がある。ショパンは遺言で未発表作品の公表を禁じたとされるが、友人のフォンタナが1855年に遺作として世に出した。1960年ごろ、ルービンシュタインがパリの競売で「エステ男爵夫人のアルバム」を入手し、1835年の日付が入ったショパン自筆の清書譜を見つけた。表紙には「エステ男爵夫人のために作曲」とあり、フォンタナ版とは音やニュアンスの違いが多い。ルービンシュタインはこれを決定稿と考えた。ただし日本語版Wikipediaは発見を1962年としており、年に食い違いがある。",
+ pub:"1855年、ユリアン・フォンタナが遺作として出版（Op.69・70のワルツと同時）。初演は未確認。自筆清書譜（1835年付）を基にした版は、ウィーン原典版、ポーランド国民版、ペータース版、ヘンレ版などに収められている。録音は、フォンタナ版の例にバックハウス（1908年）、自筆譜版の例にルービンシュタイン（1964年）が挙げられる（日本語版Wikipedia）。",
+ ded:"公式な献呈者は未確認。1835年の自筆清書譜の表紙に、フランス語で「エステ男爵夫人のために作曲」とある。ルービンシュタインは、有償の委嘱作だった可能性を推測している。日本語版Wikipediaは「エステ公爵夫人（ショパンの弟子）への献呈」と記し、英語版の「男爵夫人」と表記が異なる。",
+ nameOrigin:"「幻想即興曲」の題はショパンの生前にはなく、フォンタナが1855年に出版したときに付けた。即興曲としては最初に書かれたが出版が最後になったため、第4番という番号になった。この番号は旧全集の便宜上のもの。",
+ structure:[
+  ["A部（Allegro agitato、嬰ハ短調、2/2）","右手の16分音符と左手の三連符が絶えず絡み合い、休みなく動く。「月光」ソナタ第3楽章との類似がオスターのシェンカー分析で指摘されている。"],
+  ["B部（Largo → Moderato cantabile、変ニ長調）","嬰ハ長調と異名同音の変ニ長調に移り、のびやかな歌になる。この旋律は1917年のポピュラー曲『I'm Always Chasing Rainbows』に引用された。"],
+  ["A'部（Presto、嬰ハ短調へ復帰）","冒頭の急速な動きが戻る。"],
+  ["コーダ","左手がB部の主題を静かに弾き直し、右手は16分音符を続ける。最後は嬰ハ長調の和音（ピカルディ終止）で静かに閉じる。"]],
+ features:"複合三部形式（A-B-A'）。2/2拍子の中で、右手の16分音符と左手の三連符が交差リズムを作り、緊迫感を支える。中間部は同主調の異名同音（変ニ長調）に移り、急から緩へ性格を一変させる。オスターの分析では、同じ嬰ハ短調の「月光」ソナタとの類縁が強い。主題提示の2小節後の急速なパッセージは、「月光」終楽章のカデンツァと同じ音を1オクターヴ上で用いる。一方、ハネカーは一部を「感傷的」で「気高さに欠ける」と批判している。",
+ perf:"右手の16分音符と左手の三連符のずれを、拍が崩れずに保つことが最大の課題。ノンストップの急速なパッセージを滑らかなレガートで弾き通す持久力が要る。中間部は旋律を歌わせつつ伴奏の流れを保つ。版によって音が異なるため、フォンタナ版と自筆譜版のどちらを使うかを決めておく。",
+ recs:[
+  ["ヴィルヘルム・バックハウス","1908","フォンタナ版による録音例（日本語版Wikipedia）。レーベルは未確認。"],
+  ["アルトゥール・ルービンシュタイン","1964","自筆譜を発見した本人による、自筆譜版の演奏例（日本語版Wikipedia）。レーベルは未確認。"]],
+ films:[], cms:[], textbooks:[],
+ related:["ベートーヴェン「月光」ソナタ（嬰ハ短調、特に第3楽章）","モシェレス 即興曲 変ホ長調 Op.89（類似が指摘される）","即興曲第1〜3番（Op.29、36、51）","モンポウ「ショパンの主題による変奏曲」第10変奏（中間部を引用）","ジョージ・クラム「マクロコスモス」第1巻「夢のイメージ」（中間部を3回引用）"],
+ imslp:"https://imslp.org/wiki/Fantaisie-impromptu,_Op.66_(Chopin,_Frédéric)",
+ trivia:["ショパンは遺言で未発表作品の公表を禁じたとされるが、フォンタナがそれに背いて出版した。","自筆の清書譜は長く行方が分からず、1960年ごろにルービンシュタインが競売で入手するまで知られていなかった。","中間部の旋律は1917年の『I'm Always Chasing Rainbows』にそのまま使われた。"],
+ sources:["https://ja.wikipedia.org/wiki/幻想即興曲","https://en.wikipedia.org/wiki/Fantaisie-Impromptu","https://imslp.org/wiki/Fantaisie-impromptu,_Op.66_(Chopin,_Frédéric)","https://www.henle.de/en/Fantaisie-Impromptu-C-sharp-minor-op.-posth.-66/HN-1320"],
+ yt:{id:"75x6DncZDgI",who:"Arthur Rubinstein"}
+},
+{
+ id:"nocturne-9-2", title:"ノクターン第2番", en:"Nocturne in E-flat major, Op.9 No.2",
+ composer:"ショパン", era:"ロマン派", year:"1830〜31年頃", opus:"Op.9-2", key:"変ホ長調・12/8拍子", form:"夜想曲（ピアノ独奏）", mood:["夜","穏やか"],
+ summary:"揺れる左手の伴奏の上で、同じ旋律が回帰するたびに装飾を増していく夜想曲。ショパンの夜想曲の中でも特に広く親しまれている。",
+ diff:"ヘンレ版（夜想曲集 HN 233）での難易度は 6（medium）。ABRSMグレードは未確認。",
+ story:"ショパンはポーランドの動乱の中で1831年にパリへ移り、そのまま帰国できなくなった。作品9の三曲の夜想曲は1830〜31年頃に書かれ（IMSLPは1830-31年）、ショパンにとって初めて出版された夜想曲集である。夜想曲というジャンルはアイルランド出身のジョン・フィールドが築いたもので、アルペジオの伴奏に歌うような旋律を載せる型を持つ。サロン向けの作品が求められた若い作曲家にとって、格好の形式だった。本曲もフィールドの影響が強いとされるが、旋律が回帰するたびに装飾が増す点には、イタリア・オペラの装飾的な歌唱からの影響が指摘される。ショパンは再現のたびに自由に変奏して弾いたと伝えられ、弟子の楽譜にも装飾の書き込み例が残る。なお、具体的な作曲日や直接のきっかけを伝える一次資料は確認できなかった。",
+ pub:"1832年にパリ等で出版。ただしモーガン図書館の書誌ではパリのシュレジンジャー版とライプツィヒのキストナー版を「1832?」と疑問符付きで記し、初版を1833年とする記述もあり、出版年は資料間で揺れがある。初演は未確認。",
+ ded:"マリー・プレイエル（ピアノ製作会社プレイエル社のカミーユ・プレイエルの妻で、ベルリオーズの元婚約者）。",
+ nameOrigin:"「ノクターン（夜想曲）」の語は、夜を指すラテン語Noxに由来し、修道院の晩祷や夜の黙想の意味合いから転じたと考えられている。ピアノ独奏曲のジャンルはジョン・フィールドが始めた。本曲に固有の愛称は確認できず、日本では「ショパンのノクターン」と言えばこの曲を指すことが多い。",
+ structure:[
+  ["A（主題提示）","Andante、変ホ長調、12/8。弱音でレガートに歌う旋律が、優美な上行の跳躍を伴って始まる。"],
+  ["A（反復）","主題が繰り返され、装飾音が加わる。"],
+  ["B（副次旋律）","副次的な旋律がルバートで奏される。"],
+  ["A（再現・装飾増）→ B（再現）","主題と副次旋律が再び現れ、そのたびに装飾が増える。"],
+  ["A＋コーダ","主題が最も装飾された形で戻り、コーダへ。終わり近くの小節にはsenza tempo（テンポなし）の指示があり、リズムの自由度が高い。全体はA-A-B-A-B-A-コーダ（ロンド風）と見る説と、英語版が示す拡張された二部形式（A,A,B,A,B,A＋コーダ）とする説がある。"]],
+ features:"拍子は12/8で、左手は広い音域に配置した分散和音をダンパーペダルでつなぎ、旋律を支える響きの土台にしている。伴奏は12拍を3拍ずつ四つに分けるワルツ風の揺れを緩やかに強調する。右手の旋律は再現のたびにトリルや装飾音で飾られ、イタリア・オペラの装飾的歌唱を思わせる。構造は単純だが、変奏によって同じ旋律を繰り返しながら表情を変える点が特徴。一方で、旋律が装飾されて繰り返されるだけで内容は乏しいとする見方もある。",
+ perf:"ポイントは、(1)左手を均一に保ちつつペダルで響きをつなぐ、(2)右手の装飾音を拍の中に自然に収めるルバート、(3)再現ごとに装飾を増やしながら歌の流れを切らないこと、(4)senza tempoの小節の処理。ショパン自身が変奏を加えて弾いたとされるため、版や弟子の書き込み例を参照する演奏者も多い。",
+ recs:[["アルトゥール・ルービンシュタイン","1965（一部1967）","RCA Victor LSC-7050（2LP）、のちRCA Red SealでCD化。Stereophile誌のレビューは、飾り気のない素直な歌と、鐘のような右手の音色、繊細なペダリングを評価している。"]],
+ films:[
+  ["バッド・サンタ (Bad Santa)","2003","オープニング・シークエンスで使用。演奏はイディル・ビレットと記載（二次的な出典のため要再確認）。","https://artofthetitle.com/title/bad-santa"],
+  ["愛情物語","1956","主題曲としてカーメン・キャバレロが本曲をアレンジして演奏した『To Love Again』が使用された。原曲そのものではなくアレンジ。","https://ja.wikipedia.org/wiki/夜想曲第2番_(ショパン)"]],
+ cms:[["au（KDDI）「三太郎」シリーズ『本命？』篇（アレンジ版をBGMに使用）","2017","https://ja.wikipedia.org/wiki/夜想曲第2番_(ショパン)"]],
+ textbooks:[],
+ related:["夜想曲 作品9-1（変ロ短調）・9-3（ロ長調）","ジョン・フィールドの夜想曲（ジャンルの源流）","夜想曲第16番 変ホ長調 作品55-2（同じ変ホ長調の後期夜想曲）","カーメン・キャバレロ編曲『To Love Again』（1956年映画『愛情物語』主題曲）"],
+ imslp:"https://imslp.org/wiki/Nocturnes,_Op.9_(Chopin,_Frédéric)",
+ trivia:["台北捷運の松山新店線では、本曲のアレンジが列車接近のメロディに使われている。","献呈相手のマリー・プレイエルは、ベルリオーズの元婚約者で、プレイエル社社長カミーユ・プレイエルの妻だった。","ショパンは再現部で即興的に装飾を変えたと伝えられ、弟子の楽譜にはその変奏例が書き込まれている。"],
+ sources:["https://ja.wikipedia.org/wiki/夜想曲第2番_(ショパン)","https://en.wikipedia.org/wiki/Nocturnes,_Op._9_(Chopin)","https://imslp.org/wiki/Nocturnes,_Op.9_(Chopin,_Frédéric)","https://henle.de/Nocturnes/HN-233","https://stereophile.com/content/recording-february-1968-chopin-nocturnes"],
+ yt:{id:"9E6b3swbnWg",who:"Vadim Chaimovich"}
+},
+{
+ id:"raindrop", title:"前奏曲 第15番「雨だれ」", en:"Prelude in D-flat major, Op.28 No.15 “Raindrop”",
+ composer:"ショパン", era:"ロマン派", year:"1838〜39年", opus:"Op.28-15", key:"変ニ長調・4/4拍子", form:"前奏曲（ピアノ独奏）／三部形式", mood:["雨","夜"],
+ summary:"曲全体で鳴り続ける同じ音が、雨だれを思わせる。穏やかな主題と、暗く迫る中間部の対比。24曲の前奏曲で最長。",
+ diff:"ヘンレ版単独版（HN 854）の難易度は 5（medium）。ABRSMグレードは未確認。",
+ story:"作品28の24の前奏曲は、1839年1月にマジョルカ島で完成したことが、友人フォンタナ宛ての手紙から確認できる。着手の時期は明らかでなく、1831年から1838年までの諸説がある。ショパンは1838年11月から翌年2月まで、ジョルジュ・サンドとともに島に滞在し、雨の多い湿った冬と体調不良に苦しんだ。ヘンレ版の解説によれば、第15番は、サンドの回想では島の嵐の中で書かれたとされるが、最初のスケッチはすでにパリで作られていたことを示す資料もある。サンドの回想録は、雨の夜にショパンが、自分が湖で溺れ、冷たい水滴が胸に規則的に落ちる夢を見たと記す一方、ショパンは雨音を模倣したと解釈されることに強く反発した、とも伝える。つまり「島で雨音を聞いて書いた」という通説は、史実としては裏付けが弱い。曲集は1839年9月に出版された。",
+ pub:"作品28全体は1839年9月に出版。第15番単独の初演の日時・演奏者は未確認。ショパン自身が演奏会で取り上げたのは24曲中4曲までと伝えられる。",
+ ded:"作品28全体は、フランス版がカミーユ・プレイエル、ドイツ版がヨゼフ・クリストフ・ケスラーに献呈。第15番に固有の献呈は確認できない。",
+ nameOrigin:"「雨だれ」はショパン自身の命名ではない。命名者と時期は確認できなかった。【史実】1838〜39年の冬にショパンとサンドがマジョルカ島に滞在したこと。作品28の完成が1839年1月のマジョルカであること。サンドが回想録で、雨の夜にショパンが水滴の夢を見て、雨音の模倣だとする解釈に抗議したと書いていること。【伝承・推測】この逸話に出てくる曲を、サンドは曲名で特定していない。多くの評論家が、繰り返される変イ音（嬰ト音）の響きから第15番だと推測してきたにすぎない。ピーター・ダヤンは、サンドもショパンの抗議を受け入れ、この曲を雨音の模倣ではなく自然の響きの音楽的な翻訳と見ていたと指摘している。",
+ structure:[
+  ["A（変ニ長調、Sostenuto、4/4）","穏やかで晴朗な主題。変イ音の連打が曲全体を通して鳴り続け、雨だれに聴こえる要因となる。"],
+  ["B（嬰ハ短調）","異名同音で嬰ハ短調に移り、陰鬱で重い中間部へ。属音のペダルが途切れず低音で続く（バッソ・オスティナート）。変イ音は嬰ト音として、より執拗になる。"],
+  ["A'（変ニ長調への回帰）","冒頭の主題に戻る。ニークスは、中間部の悪夢から覚めた後の清明な自然のようだと評した。"]],
+ features:"曲全体の核は、右手内側または低音域で刻まれ続ける変イ音（中間部では異名同音の嬰ト音）。変ニ長調の明るさと嬰ハ短調の暗さが異名同音を介して対比され、同じ反復音が文脈によって意味を変える。24曲中で最も長く、演奏時間は約5〜7分。中間部では属音の持続音が低音に固定され、音が積み重なって緊迫感を強める。長調から短調への移行は、両調が異名同音で結ばれていることを活かした大胆な場面転換である。",
+ perf:"技術的な難所は少ないが、(1)終始鳴る反復音を、一定の脈動を保ちつつ機械的にならない音量とタッチで弾き分けること、(2)中間部で反復音が大きくなる際に、旋律線を見失わないこと、(3)長調部と短調部の性格の切り替え、(4)ペダルによる響きの濁りのコントロール、が主なポイント。演奏時間が長めなので、全体の設計が重要になる。",
+ recs:[
+  ["アルフレッド・コルトー","1933/34（第15番のみ1950年録音もあり）","Gramophone誌が1933/34年の前奏曲集録音を名盤として論じている。レーベルは未確認。"],
+  ["マルタ・アルゲリッチ","年未確認","ドイツ・グラモフォンの前奏曲集録音。現代の録音で最も満足度の高いものの一つと評する記事がある（要原典確認）。"]],
+ films:[
+  ["007 ムーンレイカー","1979","ボンドが敵役ドラックスの邸宅で初めて会う場面で、ドラックスがこの曲を弾いている。","https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)"],
+  ["夢（黒澤明監督『Dreams』）","1990","ゴッホの絵画を見る美術館の場面で、約7分半にわたり断続的に流れる。","https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)"],
+  ["プロメテウス（リドリー・スコット監督）","2012","原曲と劇伴中の引用の両方で作品全体にわたり使われる。個別の場面は未確認。","https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)"]],
+ cms:[["Halo 3（Xbox 360）の宣伝映像『Halo: Believe.』","2007","https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)"]],
+ cmNote:"日本国内のCMでの第15番の使用は確認できなかった（日本の太田胃散のCMは第7番）。",
+ textbooks:[["教育出版『中学校音楽鑑賞用教材集』令和7年度版（副教材。教科書本体ではない）","中学2・3年下—2、第13番「24の前奏曲 作品28」から第15番（「日本と西洋の音楽の歩み」の項）","https://www.kyoiku-shuppan.co.jp/book/book/cate0/cate2/cate206/kanshou-r7jh.html"]],
+ related:["24の前奏曲 作品28（全曲、特に第7番イ長調、第20番ハ短調）","前奏曲 嬰ハ短調 作品45","前奏曲 変イ長調 B.86","バッハ『平均律クラヴィーア曲集』（前奏曲集の範）","ジャン・フランセによる管弦楽編曲（1967年、前奏曲集全曲）"],
+ imslp:"https://imslp.org/wiki/Preludes,_Op.28_(Chopin,_Frédéric)",
+ trivia:["24曲の中で最も長い前奏曲で、演奏時間はおおむね5〜7分。","サンドの回想録に出てくるのは「水滴の夢」の逸話で、曲名は書かれていない。第15番とするのは後世の推測である。","2022年のゲーム『Fall Guys』は、Halo 3の宣伝映像『Believe』のパロディでこの曲を使った。"],
+ sources:["https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)","https://ja.wikipedia.org/wiki/前奏曲_(ショパン)","https://www.henle.de/Prelude-D-flat-major-op.-28-no.-15-Raindrop/HN-854","https://www.polygon.com/22809986/halo-3-believe-ad-campaign-making-of-unreleased-version","https://www.kyoiku-shuppan.co.jp/book/book/cate0/cate2/cate206/kanshou-r7jh.html","https://gramophone.co.uk/articles/classics-reconsidered-alfred-cortot-s-1933-34-recording-of-chopin-s-preludes"],
+ yt:{id:"pVLOcy253KI",who:"Kassia"}
+},
+{
+ id:"clair-de-lune", title:"月の光（ベルガマスク組曲 第3曲）", en:"Clair de lune — Suite bergamasque, L.75 No.3",
+ composer:"ドビュッシー", era:"印象派", year:"1890年頃（1905年出版）", opus:"ベルガマスク組曲 第3曲", key:"変ニ長調・9/8拍子", form:"組曲の1曲（ピアノ独奏）", mood:["夜","穏やか"],
+ summary:"弱音の和音と流れるアルペッジョで、月明かりの情景を描いた小品。ヴェルレーヌの詩に結びつく題名を持つ。",
+ diff:"ヘンレ版の難易度は 5（medium）。同じ組曲の前奏曲は7、メヌエットとパスピエは6。ABRSMグレードは未確認。",
+ story:"ドビュッシーは1890年ごろ、20代後半でピアノ組曲を構想し、前奏曲・メヌエット・「感傷的な散歩」・パヴァーヌを並べた。のちに「感傷的な散歩」は「月の光」に、パヴァーヌは「パスピエ」に改題された。どれもヴェルレーヌの詩に由来する題名である。組曲名の「ベルガマスク」は、詩集『艶なる宴』の詩「月の光」の冒頭にある「仮面とベルガモの踊り手」の語から取られた。ドビュッシーはこの同じ詩に歌曲も付けているが、組曲の「月の光」はそれとは全く別の音楽である。ヘンレ版の解説によると、原稿は1890年に出版社ショードンへ渡ったまま刊行されず、1905年にフロモン社から出た。ドビュッシーは校正刷に作曲年「1890」と書き入れ、初期作であることを明示した。出版前に改訂したことは確かだが、1890年の形と1905年の形で何がどれだけ違うのかは、現存資料からは分かっていない。",
+ pub:"1905年、パリのE.フロモン社（プレート番号 E.1404 F.）。1890年ごろ作曲、1905年に改訂のうえ出版（IMSLP、ヘンレ、英語版Wikipediaで一致）。初演は未確認。",
+ ded:"未確認（献呈先の記載は確認できなかった）。",
+ nameOrigin:"題名はヴェルレーヌ『艶なる宴』所収の詩「Clair de lune（月の光）」から。この曲の旧題は「感傷的な散歩（Promenade sentimentale）」で、これもヴェルレーヌの詩の題。組曲名「ベルガマスク」は同詩第1節の「masques et bergamasques」に由来する。",
+ structure:[
+  ["冒頭主題（A）","変ニ長調・9/8拍子、Andante très expressif。弱音で、柔らかい下降する旋律をゆるやかな和音で支える。調性感は穏やかにぼかされる。"],
+  ["中間部（B）","律動が流れ出し、アルペッジョ状の伴奏の上で旋律が次第に高まる。曲中で最も感情の振れ幅が大きい部分。"],
+  ["主題の再現（A'）と結び","冒頭の主題が戻り、音量を落として静かに閉じる。全体は緩-やや動く-緩の三部形式的な構成（小節番号までは未確認）。"]],
+ features:"変ニ長調、9/8拍子の複合3拍子で、全体の大半が弱音で奏される。和声は古典的な機能和声の連なりから距離を取り、旋法的で曖昧な響きを生む。前奏曲の部分には、同じヴェルレーヌ詩にフォーレが付けた歌曲の伴奏に似た音形が出るとの指摘もあり、先行作曲家の影響が見える初期作でもある。ピアノ書法は、内省と距離感の間を行き来する印象主義的な響きの扱いが核になる（細かな和声分析は、参照した解説では詳述されていない）。",
+ perf:"超絶技巧は少ないが、弱音の中で音色の層とペダルを制御し、9/8の揺らぎを自然に保つことが課題になる。",
+ recs:[["ヴァルター・ギーゼキング","1951〜1955年","EMI（現Warner Classics）『ベルガマスク組曲、アラベスク、ピアノのために、夢想』。内省的で慈しむような「月の光」と評される、ドビュッシー録音の基準盤。"]],
+ films:[
+  ["オーシャンズ11","2001","管弦楽編曲版が映画の結びに使われる。","https://fr.wikipedia.org/wiki/Suite_bergamasque"],
+  ["セブン・イヤーズ・イン・チベット","1997","ダライ・ラマがオルゴールを受け取る場面。","https://fr.wikipedia.org/wiki/Suite_bergamasque"],
+  ["TOKYO SONATA","2009","最後の場面で子どもがピアノで全曲を弾く。","https://fr.wikipedia.org/wiki/Suite_bergamasque"],
+  ["つぐない (Atonement)","2007","場面は未確認。","https://fr.wikipedia.org/wiki/Suite_bergamasque"],
+  ["トワイライト〜初恋〜","2008","場面は未確認。","https://fr.wikipedia.org/wiki/Suite_bergamasque"]],
+ cms:[["シャネル（ニコール・キッドマン出演、クレイグ・アームストロング編曲）","2006","https://fr.wikipedia.org/wiki/Suite_bergamasque"]],
+ textbooks:[],
+ related:["ベルガマスク組曲の他曲（前奏曲、メヌエット、パスピエ）","ドビュッシー歌曲「月の光」（ヴェルレーヌ詩）","フォーレ歌曲「月の光」と劇音楽『マスクとベルガマスク』","管弦楽編曲：カプレ、ストコフスキー、カイエ","冨田勲によるシンセサイザー編曲"],
+ imslp:"https://imslp.org/wiki/Suite_bergamasque_(Debussy,_Claude)",
+ trivia:["ディズニーは『ファンタジア』（1940）にこの曲を使ったサギの映像の場面を作る予定だったが、上映時間の都合で外された。その映像は1946年の『メイク・マイン・ミュージック』の別の場面に転用され、1992年に作業用プリントが見つかって復元された。","1971年にNHK『みんなのうた』で、この曲に中山知子の詞をつけた「月の光」が放送された（歌は芹洋子と東京トルベール）。","2013年にGoogleが、この曲を使った音楽つきアニメーションのDoodleを公開した。"],
+ sources:["https://en.wikipedia.org/wiki/Clair_de_lune_(Debussy)","https://fr.wikipedia.org/wiki/Suite_bergamasque","https://ja.wikipedia.org/wiki/ベルガマスク組曲","https://imslp.org/wiki/Suite_bergamasque_(Debussy,_Claude)","https://www.henle.de/en/Suite-bergamasque/HN-381","https://www.warnerclassics.com/release/debussy-suite-bergamasque-gieseking"],
+ yt:{id:"4fvo_iOuSck",who:"Paul Barton"}
+},
+{
+ id:"gymnopedie-1", title:"ジムノペディ 第1番", en:"Trois Gymnopédies — No.1",
+ composer:"サティ", era:"近代", year:"1888年", opus:"3つのジムノペディ 第1番", key:"二長調・3/4拍子", form:"ピアノ独奏", mood:["穏やか","眠り"],
+ summary:"左手の2つの和音の往復の上に、装飾を排した旋律が静かに乗る。速度表示は「ゆっくりと、苦しみをもって」。",
+ diff:"ヘンレ版（HN 1072）の難易度は 2（easy）。ABRSMグレードは未確認。",
+ story:"サティは1888年3月から4月にかけて、3曲のピアノ曲「ジムノペディ」を書き上げた。題名は古代スパルタで夏に行われた若者の踊りの祭り「ギュムノパイディア」に由来するが、典拠には諸説ある。サティ本人と友人ロラン＝マニュエルはフローベールの小説『サランボー』を挙げた。一方、詩人J.P.コンタミーヌ・ド・ラトゥールの詩『古代人たち』を源とする見方もある。第1番は1888年の夏、雑誌『家庭の音楽』にこの詩の一節とともに載った。ただし、詩と曲のどちらが先に書かれたかは分かっていない。第1番の献呈先は、1895年の版に記されたジャンヌ・ド・ブレ嬢で、1888年の自筆譜にはない。1897年2月には友人ドビュッシーが第3番と第1番を管弦楽に編曲し、2年後の出版時に番号を入れ替えた。",
+ pub:"1888年夏に雑誌『家庭の音楽』に第1番が掲載。1895年の版に献呈が付く。IMSLPには1896年E.ボードゥー版を底本とするとの注記もある。初演は未確認。",
+ ded:"第1番：ジャンヌ・ド・ブレ嬢（1895年の版。1888年の自筆譜にはなし）。",
+ nameOrigin:"古代スパルタの祭り「ギュムノパイディア」のフランス語形。gymnos（裸の・武器を持たない）が語源に含まれる。サティは『サランボー』から取ったと述べたが、詩人コンタミーヌ・ド・ラトゥールの詩に同じ語が出る点や、辞典の定義から得たとの説もある。ピュヴィ・ド・シャヴァンヌの絵の影響を推す見方もある。",
+ structure:[
+  ["導入","3/4拍子、Lent et douloureux。左手の低音と和音の反復で、Gmaj7とDmaj7の2つの和音が交互に現れる。"],
+  ["主題部","その上に、装飾を排した静かな旋律が乗る。旋律は伴奏と軽い不協和を作る。"],
+  ["反復と変化、結び","主題が繰り返され、和声が少しずつ動いたのち、静かに終わる（確かめられたのは和声進行と速度表示まで。小節数や各部の長さは未確認）。"]],
+ features:"3/4拍子の遅いテンポと、左手の「低音→和音」の反復が骨格をなす。冒頭は下属音上のGmaj7と主音上のDmaj7の交替で、長調とも短調ともつかない曖昧な色合いを出す。旋律は和声に対して穏やかな不協和を保ち、哀愁を生む。装飾を排した簡素な書法は、サティのいう「新しい単純さ」の最初の例とヘンレ版は解説している。後に環境音楽の先駆とも見なされる。",
+ perf:"技術は平易だが、左手の跳躍の中で低音と和音の音量差を整え、一定の歩みを保つのが要点。右手は歌わせつつ、テンポを前に押さないこと。",
+ recs:[
+  ["アルド・チッコリーニ","1967〜1971","仏EMI。サティ再評価のきっかけを作った録音。"],
+  ["パスカル・ロジェ","年未確認","Decca（458 1052）。軽やかで、洗練された演奏と評される。"],
+  ["ジャン＝イヴ・ティボーデ","年未確認","サティのピアノ全集（CD5枚）に収録。軽いタッチで自然に流れるテンポ。レーベルは未確認。"]],
+ films:[
+  ["鬼火 (Le Feu follet)","1963","全編を通じてジムノペディ1〜3番とグノシエンヌが断片的に流れる。演奏はクロード・エルフェル。","https://www.lostmediawiki.com/The_Fire_Within_(lost_film_soundtrack;_1963)"],
+  ["My Dinner with Andre","1981","場面は未確認。","https://en.wikipedia.org/wiki/Gymnop%C3%A9dies"],
+  ["Another Woman","1988","「マリオンのテーマ」として使用。","https://en.wikipedia.org/wiki/Gymnop%C3%A9dies"],
+  ["ロイヤル・テネンバウムズ","年未確認","場面は未確認。","https://en.wikipedia.org/wiki/Gymnop%C3%A9dies"],
+  ["マン・オン・ワイヤー","年未確認","場面は未確認。","https://en.wikipedia.org/wiki/Gymnop%C3%A9dies"],
+  ["涼宮ハルヒの消失","2010","ジムノペディ全3曲を使用。最後にもBGMとして流れる。","https://ja.wikipedia.org/wiki/ジムノペディ"]],
+ cms:[
+  ["スバル レガシィB4（efによるクラブミックス風アレンジ）","2003","https://ja.wikipedia.org/wiki/ジムノペディ"],
+  ["アース製薬 アース OH!ノーマット「撃退成分横澤」篇・「撃退成分横山」篇","年未確認","https://www.ragnet.co.jp/piano-commercial-songs/5"]],
+ textbooks:[],
+ related:["ジムノペディ第2番・第3番","ドビュッシー編曲の管弦楽版（第3番・第1番、発表時に番号が入れ替わる）","グノシエンヌ","ブラッド・スウェット＆ティアーズ「Variations on a Theme by Erik Satie」（1968）"],
+ imslp:"https://imslp.org/wiki/3_Gymnopédies_(Satie,_Erik)",
+ trivia:["ドビュッシーは、第2番を編曲しなかった理由を「第2番まで編曲して聞かせるには少し退屈だから」と答えたと伝えられる（伝聞）。","日本では、1963年の映画『鬼火』でこの曲が広まったとされる。1975年には池袋の西武美術館が館内の環境音楽として使い、さらに知られるようになった。","ブラッド・スウェット＆ティアーズが第1番と第2番を編曲した「Variations on a Theme by Erik Satie」は、1968年のアルバムに収録され、翌年のグラミー賞を受けた。"],
+ sources:["https://en.wikipedia.org/wiki/Gymnop%C3%A9dies","https://ja.wikipedia.org/wiki/ジムノペディ","https://imslp.org/wiki/3_Gymnopédies_(Satie,_Erik)","https://www.henle.de/en/Gymnopedies/HN-1072","https://www.ragnet.co.jp/piano-commercial-songs/5","https://interlude.hk/aldo-ciccolini-1925-2015/"],
+ yt:{id:"rOcWd2jRPJU",who:"Frédéric Bernachon"}
+},
+{
+ id:"traumerei", title:"トロイメライ（子供の情景 第7曲）", en:"Träumerei — Kinderszenen Op.15 No.7",
+ composer:"シューマン", era:"ロマン派", year:"1838年", opus:"Op.15-7", key:"ヘ長調・4/4拍子", form:"組曲の1曲（ピアノ独奏）", mood:["穏やか","眠り"],
+ summary:"「夢想」を意味する題名どおり、ゆるやかに上り下りする4小節の旋律が、和声を変えながら8回現れる短い曲。",
+ diff:"ヘンレ難易度・ABRSMグレードとも曲単位では未確認。技術的な難所は少ない。",
+ story:"1838年2月から3月にかけて、シューマンは短い小品を30曲ほど一気に書き進めた。日記によればトロイメライは2月24日に生まれている。3月中旬にはクララ宛の手紙で、彼女が「あなたは時々子供のようね」と言ったことが刺激になり、30ほどの「小さくて滑稽な曲」ができたと伝えている。そこから13曲を選んで『子供の情景』とした（日本語版Wikipediaは12曲と記す）。当時クララとは、彼女の父ヴィークの猛反対で結婚の見通しが立たない時期にあった。題名は完成後に添えられた「演奏のための繊細なヒント」にすぎず、元の題は『やさしい小品』や『子供の物語』だった。子供のために書かれたのではなく、大人が子供時代を回想するための作品という点を作曲者自身が語っている。選に漏れた曲は後に作品99と124に回された。曲そのものがクララへの献呈や直接の描写だと断言できる一次資料は、確認できていない。",
+ pub:"出版は1839年（日本語版Wikipediaは「1839年2月、ライプツィヒのブライトコプフ・ウント・ヘルテル社」と記すが、本文中に「翌年2月」とも書かれ、記述に揺れがある）。初演は未確認。完全な自筆譜は現存が知られていない。",
+ ded:"未確認（献呈先の記載を確認できなかった）。",
+ nameOrigin:"Träumereiはドイツ語で「夢想・白日夢」。曲集の各題は作曲後に付けられたもので、シューマンは「演奏と解釈への繊細なヒントにすぎない」と述べた。原題は『Leichte Stücke（やさしい小品）』、さらに『Kindergeschichten（子供の物語）』という案もあった。",
+ structure:[
+  ["全体の枠組み","ヘ長調、4/4拍子、約2分半。『子供の情景』第7曲で、前曲の活気から一転して静かな夢想的世界に入る。"],
+  ["主要素材","4小節の旋律が上昇・下降を描き、それが8回現れるが、そのたびに和声づけが変わる。中声部の動きが幻想的な響きを作る。"],
+  ["拍節感","1拍目に強いアクセントを置かず、4拍子の拍節を意図的にぼかして浮遊感を出している。"],
+  ["小節ごとの形式区分","A-B-A'といった区分は、参照した出典では確認できなかった（未確認）。"]],
+ features:"旋律は4度跳躍（ハ音からヘ音）で始まり、同じ4小節の旋律が繰り返されるたびに和声が塗り替えられる。中声部で複雑な和声進行を作り、幻想的な響きを得るのはシューマンの常套手段で、本曲が最も効果をあげた例とされる。拍頭の強調を避けて拍節を曖昧にし、夢のような質感を出している。第8曲「暖炉のそばで」も同じ4度跳躍で始まり、動機の共通性が指摘される。",
+ perf:"技術的難所は少ないが、8回の旋律反復をどう描き分けるかが、演奏者の力量の見せどころ。旋律線を歌わせつつ内声を濁らせずに動かし、拍節をぼかしても流れを失わない工夫が要る。",
+ recs:[
+  ["ウラディーミル・ホロヴィッツ","1960年代中頃（スタジオ）、1987年（ウィーン）","感傷に流れず客観的な解釈で知られ、アンコールでも名高い。レーベルは未確認。"],
+  ["マルタ・アルゲリッチ","1984（1983とする資料もあり）","Deutsche Grammophon『子供の情景』『クライスレリアーナ』。自在なテンポ感と集中力で評価される。"],
+  ["イェルク・デームス","1979","SKC。コンラート・グラーフ（約1835）のピアノを使用。ピリオド楽器による素朴で小さな響き。"],
+  ["アンドレアス・シュタイアー","2007","Harmonia Mundi。エラール（1837）を使用。作曲当時に近い楽器の音色を味わえる。"]],
+ films:[
+  ["Song of Love","1947","映画の冒頭と終わりの音楽主題として使用（キャサリン・ヘプバーンが演奏）。邦題は未確認。","https://en.wikipedia.org/wiki/Kinderszenen"],
+  ["Träumerei（トロイメライ）","1944","シューマン夫妻を描いたドイツの伝記映画で、題名に曲名を採用。劇中での使われ方は未確認。","https://en.wikipedia.org/wiki/Kinderszenen"],
+  ["転校生","公開年未確認","オープニングとエンディングのモノクロ場面で、オーケストラ編曲版（編曲：八田耕治、朝比奈隆指揮・大阪フィル）を使用。","https://ja.wikipedia.org/wiki/%E5%AD%90%E4%BE%9B%E3%81%AE%E6%83%85%E6%99%AF"],
+  ["かがみの孤城（アニメ映画）","公開年未確認","孤城の暖炉の間にある大型ディスクオルゴールの曲として使用。","https://ja.wikipedia.org/wiki/%E5%AD%90%E4%BE%9B%E3%81%AE%E6%83%85%E6%99%AF"]],
+ cms:[["Raymond（インドの衣料ブランド）の広告キャンペーン『The Complete Man』のテーマ音楽","年未確認","https://en.wikipedia.org/wiki/Kinderszenen"]],
+ textbooks:[],
+ related:["『子供の情景』Op.15（全13曲）","『色とりどりの小品』Op.99、『アルバムの綴り』Op.124（選に漏れた曲の一部を収録）","『子供のためのアルバム』Op.68","『ノヴェレッテ』Op.21（当初は『子供の情景』とセットでの出版を構想）"],
+ imslp:"https://imslp.org/wiki/Kinderszenen,_Op.15_(Schumann,_Robert)",
+ trivia:["30曲ほど書かれた中から13曲だけが選ばれ、残りは後に作品99と124として世に出た。","リストはこの曲集に感激し、「生涯最大の喜び」と手紙に書き、娘のために週に2、3回は弾いていると伝えた。","ロシアでは、この曲のハミング合唱版が戦勝記念日の黙祷の時間に流される追悼音楽として知られる。"],
+ sources:["https://en.wikipedia.org/wiki/Kinderszenen","https://ja.wikipedia.org/wiki/%E5%AD%90%E4%BE%9B%E3%81%AE%E6%83%85%E6%99%AF","https://enc.piano.or.jp/en/musics/21507","https://imslp.org/wiki/Kinderszenen,_Op.15_(Schumann,_Robert)","https://andantemoderato.com/schumann-kinderszenen-horowitz/"],
+ yt:{id:"hdceK0kYmLE",who:"Víkingur Ólafsson"}
+},
+{
+ id:"liebestraum-3", title:"愛の夢 第3番", en:"Liebesträume — Notturno No.3, S.541",
+ composer:"リスト", era:"ロマン派", year:"1850年出版（原曲の歌曲は1840年代）", opus:"S.541-3", key:"変イ長調", form:"夜想曲（ピアノ独奏）／歌曲からの改作", mood:["華やか","穏やか"],
+ summary:"歌曲を原曲とする、豊かな旋律と広い音域の伴奏の組み合わせ。2つのカデンツァが3つの部分を分ける。",
+ diff:"ヘンレ難易度・ABRSMグレードは、出典の信頼性が確かでなく未確認。上級者向けの曲目と位置づけられている点は、複数の紹介で一致。",
+ story:"『愛の夢』は、もとは別々に書かれた3つの歌曲を、リスト自身がピアノ独奏用に改作したもの。第1番は『高貴な愛』S.307、第2番は『私は死んだ』S.308（どちらもウーラント詩、1849年作曲）。第3番の原曲は、フライリヒラートが1829年に書いた詩『おお、愛しうる限り愛せ』に付けた歌曲S.298である。英語版Wikipediaによれば、リストは詩の最初の4節を1843年に曲にした。成立年は資料により1843年・1845年・1847年と揺れがあり、確定できていない。1850年、3曲は『3つの夜想曲』という副題のもとに、高声用の歌曲集と2手ピアノ版が同時に出版された。ウーラントの2編が聖なる愛と官能の愛を、フライリヒラートの詩が成熟した無条件の愛を描くという3曲組の構想が、この改作で示された。ショパンの夜想曲に触発されたとする解説もあるが、一次的裏付けは未確認。",
+ pub:"1850年にピアノ独奏版と高声歌曲版が同時に出版（IMSLPの出版社表記はKistner）。原曲の歌曲S.298は初版1847年とする記述もあり、年代に揺れがある。初演は未確認。",
+ ded:"未確認（献呈先の記載を確認できなかった）。",
+ nameOrigin:"Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身は各曲を「Notturno（夜想曲）」と呼んだ。3曲は愛の3つの形（高貴な愛、官能的な愛、無条件の成熟した愛）を描く。第3番の原詩の題『O lieb, so lang du lieben kannst』は「愛しうる限り愛せ」の意。",
+ structure:[
+  ["第1部（A-A'-B）","変イ長調で、長く保たれる旋律の周りを分散和音が囲む。単純な主旋律が6小節で提示され、2回目は動きが増す。続く部分はpoco crescendo ed agitatoで緊張を高める。"],
+  ["第1カデンツァ","上行して下行する速い走句で、夢への移行を表すと解説される。"],
+  ["第2部（クライマックス）","主旋律がロ長調に現れ、次いでハ長調へと進み、最後に変イ長調へ戻る。右手のオクターヴと分散和音で頂点に達する。"],
+  ["第2カデンツァ","鍵盤の高音域から下降して緊張が解け、夢から現実へ戻る場面とされる。"],
+  ["終結部（再現とコーダ）","変イ長調で主旋律が回帰。dolceで、哀愁を帯びて静かに消えてゆく。演奏時間は約4分50秒。"]],
+ features:"変イ長調、4つのフラット。1つの旋律が全曲を通して変奏されながら現れる。旋律は長音で保持され、逆向きの符尾の分散和音が周囲を流れるため、旋律を浮かび上がらせることが要となる。2つのカデンツァが3つの部分を分け、ロ長調やハ長調など遠隔調への転調が緊張を生む。第1番と同じ調で、第2番（ホ長調）は変イ長調と増5度の関係にあり、3曲組全体の対比が際立つ。",
+ perf:"旋律を内声や分散和音から浮かび上がらせるタッチの分離が最大の課題。カデンツァは高度な運指と技術を要する。",
+ recs:[
+  ["ジョルジュ・シフラ","1957および1977","EMI。華麗なヴィルトゥオジティと即興的な語り口。アルバム名は未確認。"],
+  ["エフゲニー・キーシン","録音年未確認","Revelation（RV 10031）。若き日の端正で伸びやかな演奏。"]],
+ films:[], cms:[], textbooks:[],
+ related:["歌曲『高貴な愛』S.307（ウーラント詩）","歌曲『私は死んだ（幸福な死）』S.308（ウーラント詩）","歌曲『おお、愛しうる限り愛せ』S.298（フライリヒラート詩）","愛の夢 S.541 の編曲（ギター、オーケストラ、ヴァイオリンなど多数がIMSLPに登録）"],
+ imslp:"https://imslp.org/wiki/Liebesträume,_S.541_(Liszt,_Franz)",
+ trivia:["同じ1850年に、歌曲版と独奏版の2種類が同時に出版された。","第1番と第3番は同じ変イ長調だが、第2番はホ長調で増5度離れており、この不安定な関係は意図的と解釈される。","原詩『O lieb, so lang du lieben kannst』は1829年の作で、墓前で悔やむ人を描く。曲はこの詩の反復句を旋律の核としている。"],
+ sources:["https://en.wikipedia.org/wiki/Liebestr%C3%A4ume","https://de.wikipedia.org/wiki/Liebestr%C3%A4ume","https://ja.wikipedia.org/wiki/%E6%84%9B%E3%81%AE%E5%A4%A2","https://en.wikipedia.org/wiki/O_lieb,_so_lang_du_lieben_kannst","https://www.pianotv.net/2016/08/liszt-liebestraume-musical-journey/","https://imslp.org/wiki/Liebesträume,_S.541_(Liszt,_Franz)","https://en.wikipedia.org/wiki/Gy%C3%B6rgy_Cziffra_discography"],
+ yt:{id:"DxNXyoQ38tE",who:"Evgeny Kissin"}
+}
+];
+
+const TBD = '<span class="pend">調査中・確認できず</span>';
+const $ = s => document.querySelector(s);
+const view = $('#view');
+let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
+if (location.protocol === 'file:') $('#banner').style.display = 'block';
+
+/* ---------- YouTube ---------- */
+const tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(tag);
+window.onYouTubeIframeAPIReady = function(){
+  const first = SONGS[Math.max(0, currentViewIdx())];
+  const opts = {
+    width:'100%', height:'100%', videoId:first.yt.id,
+    playerVars:{playsinline:1, rel:0, modestbranding:1},
+    events:{
+      onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); },
+      onStateChange:e=>{
+        playing = (e.data === 1);
+        if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }
+        if (e.data === 1) { errCount = 0; setStatus(''); }
+      },
+      onError:()=>{
+        setStatus('この動画は再生できません（埋め込み制限など）。');
+        errCount++;
+        if ($('#auto').checked && errCount < SONGS.length) setTimeout(()=>go(cur + 1), 1500);
+      }
+    }
+  };
+  if (location.protocol.startsWith('http')) opts.playerVars.origin = location.origin;
+  player = new YT.Player('yt', opts);
+};
+function setStatus(t){ $('#status').textContent = t; }
+function setNow(i, play){
+  const s = SONGS[i]; if (!s) return;
+  cur = i;
+  $('#nowTitle').textContent = s.title;
+  $('#nowSub').textContent = s.composer + (s.yt.who ? '／演奏：' + s.yt.who : '');
+  if (typeof SS !== 'undefined' && SS.on) ssSwap(i);
+  if (!ytReady) return;
+  if (play) player.loadVideoById(s.yt.id); else player.cueVideoById(s.yt.id);
+}
+function playSong(i){ setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
+function go(i){ const n = (i + SONGS.length) % SONGS.length; location.hash = '#/song/' + SONGS[n].id; }
+function currentViewIdx(){
+  const m = location.hash.match(/^#\/song\/(.+)$/);
+  return m ? SONGS.findIndex(s=>s.id === m[1]) : -1;
+}
+
+/* ---------- 画面 ---------- */
+const lnk = (u,t)=>'<a href="'+u+'" target="_blank" rel="noopener" style="color:var(--accent2)">'+t+'</a>';
+const sec = (t,h)=>'<h2>'+t+'</h2>'+h;
+function renderList(){
+  const moods = [...new Set(SONGS.flatMap(s=>s.mood))];
+  const list = SONGS.map((s,i)=>({s,i})).filter(({s})=>!activeFilter || s.mood.includes(activeFilter));
+  view.innerHTML =
+    '<h2 style="margin-top:0;border-top:0">SELECTION（メジャー順）</h2>' +
+    '<div class="chips"><button class="chip '+(!activeFilter?'on':'')+'" data-m="">すべて</button>' +
+    moods.map(m=>'<button class="chip '+(activeFilter===m?'on':'')+'" data-m="'+m+'">'+m+'</button>').join('') + '</div>' +
+    '<div class="grid">' + list.map(({s,i})=>
+      '<a class="card'+(cur===i&&started?' playing':'')+'" data-i="'+i+'" href="#/song/'+s.id+'">' +
+      '<div class="no">'+String(i+1).padStart(2,'0')+'</div><div class="tt">'+s.title+'</div>' +
+      '<div class="cc">'+s.composer+'／'+s.era+'</div><div class="tg">'+s.mood.join('・')+'</div></a>').join('') + '</div>';
+  view.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{ activeFilter = b.dataset.m || null; renderList(); });
+}
+function renderSong(i){
+  const s = SONGS[i], p = SONGS[(i-1+SONGS.length)%SONGS.length], n = SONGS[(i+1)%SONGS.length];
+  const q = encodeURIComponent(s.composer + ' ' + s.title.replace(/（.*?）/g,''));
+  const films = s.films.length ? '<ul class="plain">'+s.films.map(f=>'<li>'+lnk(f[3],f[0])+'（'+f[1]+'）<br><small>'+f[2]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const cms = s.cms.length ? '<ul class="plain">'+s.cms.map(c=>'<li>'+lnk(c[2],c[0])+'<br><small>'+c[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const cmNote = s.cmNote ? '<p class="note">'+s.cmNote+'</p>' : '';
+  const tbs = s.textbooks.length ? '<ul class="plain">'+s.textbooks.map(t=>'<li>'+lnk(t[2],t[0])+'<br><small>'+t[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">教科書・鑑賞教材での掲載を示す出典は確認できなかった</p>';
+  const recs = s.recs.length ? '<ul class="plain">'+s.recs.map(r=>'<li><b style="font-weight:500">'+r[0]+'</b>（'+r[1]+'）<br><small>'+r[2]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  view.innerHTML =
+    '<article class="song"><div class="note" style="letter-spacing:.2em">'+String(i+1).padStart(2,'0')+' / '+SONGS.length+'</div>' +
+    '<h1>'+s.title+'</h1><div class="en">'+s.en+'</div>' +
+    '<p class="lead">'+s.summary+'</p>' +
+    '<div class="meta">' +
+      '<div class="k">作曲者</div><div>'+s.composer+'（'+s.era+'）</div>' +
+      '<div class="k">作曲年</div><div>'+s.year+'</div>' +
+      '<div class="k">作品番号</div><div>'+s.opus+'</div>' +
+      '<div class="k">調性・拍子</div><div>'+s.key+'</div>' +
+      '<div class="k">形式</div><div>'+s.form+'</div>' +
+      '<div class="k">難易度</div><div>'+s.diff+'</div>' +
+      '<div class="k">献呈</div><div>'+s.ded+'</div>' +
+      '<div class="k">ムード</div><div>'+s.mood.join('・')+'</div>' +
+    '</div>' +
+    sec('作曲の経緯','<p>'+s.story+'</p>') +
+    sec('出版・初演','<p>'+s.pub+'</p>') +
+    sec('題名・通称の由来','<p>'+s.nameOrigin+'</p>') +
+    sec('構成分析','<ul class="steps">'+s.structure.map(x=>'<li><b>'+x[0]+'</b>'+x[1]+'</li>').join('')+'</ul>') +
+    sec('音楽的特徴','<p>'+s.features+'</p>') +
+    sec('演奏のポイント','<p>'+s.perf+'</p>') +
+    sec('録音','<p class="note">実在と年を出典で確認できたもののみ掲載しています。</p>'+recs) +
+    sec('映画・ドラマ・アニメ',films) +
+    sec('CM',cms+cmNote) +
+    sec('教科書・鑑賞教材',tbs) +
+    sec('関連作品','<ul class="plain">'+s.related.map(r=>'<li>'+r+'</li>').join('')+'</ul>') +
+    sec('トリビア','<ul class="plain">'+s.trivia.map(r=>'<li>'+r+'</li>').join('')+'</ul>') +
+    sec('楽譜・他のサービスで聴く','<div class="links">'+
+      '<a class="btn" target="_blank" rel="noopener" href="'+s.imslp+'">IMSLP（楽譜）</a>'+
+      '<a class="btn" target="_blank" rel="noopener" href="https://music.apple.com/jp/search?term='+q+'">Apple Musicで探す</a>' +
+      '<a class="btn" target="_blank" rel="noopener" href="https://open.spotify.com/search/'+q+'">Spotifyで探す</a></div>') +
+    sec('出典','<div class="src">'+s.sources.map(u=>'<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>').join('')+'</div>') +
+    '<div class="nav"><a class="btn" href="#/song/'+p.id+'">← '+p.title+'</a><a class="btn" href="#/song/'+n.id+'">'+n.title+' →</a></div></article>';
+}
+function route(){
+  const i = currentViewIdx();
+  document.title = (i>=0 ? SONGS[i].title + '｜' : '') + 'SUBURBIA CLASSICA — A Mellow Classical Selection';
+  if (i >= 0) {
+    renderSong(i);
+    if (started) { if (cur !== i) playSong(i); }
+    else if (ytReady) setNow(i, false);
+  } else {
+    renderList();
+    if (!started && ytReady && cur < 0) setNow(0, false);
+  }
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- 操作 ---------- */
+$('#overlay').onclick = () => {
+  if (!ytReady) { setStatus('プレイヤーを読み込み中です。少し待ってからもう一度。'); return; }
+  started = true;
+  $('#overlay').classList.add('hide');
+  const i = currentViewIdx();
+  if (i >= 0) playSong(i); else { go(0); }
+};
+$('#bPrev').onclick = () => go((cur < 0 ? 0 : cur) - 1);
+$('#bNext').onclick = () => go((cur < 0 ? 0 : cur) + 1);
+$('#bToggle').onclick = () => {
+  if (!ytReady) return;
+  if (!started) { $('#overlay').click(); return; }
+  const st = player.getPlayerState();
+  if (st === 1) player.pauseVideo(); else player.playVideo();
+};
+
+/* ================= スクリーンセーバー（楽曲ごとのジェネラティブ・アート） ================= */
+function mk(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const lg = (c,x0,y0,x1,y1,stops)=>{const g=c.createLinearGradient(x0,y0,x1,y1);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g};
+const rg = (c,x,y,r,col0,col1)=>{const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col0);g.addColorStop(1,col1);return g};
+const ART_BY_ID = {"fur-elise":"petals","moonlight":"moonwater","tristesse":"ribbons","fantaisie-impromptu":"flow","nocturne-9-2":"bokeh","raindrop":"rain","clair-de-lune":"clouds","gymnopedie-1":"minimal","traumerei":"dandelion","liebestraum-3":"aurora"};
+const ARTS = {
+ /* エリーゼのために：花びらがゆっくり舞う */
+ petals:{init(w,h,r){return{p:Array.from({length:90},()=>({x:r()*w,y:r()*(h+80),s:8+r()*26,v:9+r()*20,rot:r()*6.28,vr:(r()-.5)*.7,ph:r()*6.28,a:.3+r()*.5,hue:338+r()*28}))}},
+  draw(c,w,h,t,st){
+   c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#241420'],[1,'#3a1f2a']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,w*.72,h*.28,Math.max(w,h)*.5,'rgba(255,196,170,.20)','rgba(255,196,170,0)');c.fillRect(0,0,w,h);
+   st.p.forEach(q=>{const y=((q.y+q.v*t)%(h+80))-40,x=q.x+Math.sin(t*.35+q.ph)*46;
+    c.save();c.translate(x,y);c.rotate(q.rot+q.vr*t);
+    c.fillStyle=`hsla(${q.hue},62%,80%,${q.a})`;c.beginPath();c.ellipse(0,0,q.s,q.s*.48,0,0,6.283);c.fill();
+    c.fillStyle=`hsla(${q.hue},70%,92%,${q.a*.5})`;c.beginPath();c.ellipse(-q.s*.18,0,q.s*.5,q.s*.2,0,0,6.283);c.fill();c.restore();});
+  }},
+ /* 月光：静かな水面に映る月 */
+ moonwater:{init(w,h,r){return{s:Array.from({length:150},()=>({x:r()*w,y:r()*h*.55,r:.4+r()*1.2,ph:r()*6.28}))}},
+  draw(c,w,h,t,st){
+   const hz=h*.6,R=Math.min(w,h)*.075,mx=w*.5,my=h*.3;
+   c.fillStyle=lg(c,0,0,0,hz,[[0,'#04060d'],[1,'#12243a']]);c.fillRect(0,0,w,hz);
+   c.fillStyle=lg(c,0,hz,0,h,[[0,'#0c1a2c'],[1,'#03060c']]);c.fillRect(0,hz,w,h-hz);
+   st.s.forEach(s=>{c.fillStyle=`rgba(235,240,255,${.25+.45*(.5+.5*Math.sin(t*.9+s.ph))})`;c.beginPath();c.arc(s.x,s.y,s.r,0,6.283);c.fill();});
+   c.fillStyle=rg(c,mx,my,R*7,'rgba(210,225,255,.30)','rgba(210,225,255,0)');c.fillRect(mx-R*7,my-R*7,R*14,R*14);
+   c.fillStyle='#f1f4fb';c.beginPath();c.arc(mx,my,R,0,6.283);c.fill();
+   for(let k=0;k<46;k++){const yy=hz+4+k*k*.32,wd=R*(1.3+k*.07)*(.55+.45*Math.sin(t*.8+k)),xx=mx+Math.sin(t*.55+k*1.7)*(4+k*.9);
+    c.fillStyle=`rgba(225,235,255,${.55*(1-k/48)})`;c.fillRect(xx-wd/2,yy,wd,1.6);}
+   c.fillStyle='rgba(180,200,230,.25)';c.fillRect(0,hz,w,1);
+  }},
+ /* 別れの曲：夕景を横切る細い光の帯 */
+ ribbons:{init(){return{}},
+  draw(c,w,h,t){
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#10122e'],[.55,'#3a1a30'],[1,'#7a3a2c']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,w*.5,h*.66,Math.max(w,h)*.45,'rgba(255,170,110,.30)','rgba(255,170,110,0)');c.fillRect(0,0,w,h);
+   for(let i=0;i<9;i++){c.beginPath();
+    for(let x=0;x<=w+8;x+=8){const y=h*(.32+.052*i)+Math.sin(x*.0042+t*.16+i)*h*.07+Math.sin(x*.0014-t*.09+i*2)*h*.05;x?c.lineTo(x,y):c.moveTo(x,y);}
+    c.strokeStyle=`rgba(255,${200-i*8},${150-i*6},${.34-i*.025})`;c.lineWidth=1.3;c.stroke();
+    if(i%3===0){c.lineTo(w,h);c.lineTo(0,h);c.closePath();c.fillStyle='rgba(255,170,130,.03)';c.fill();}}
+  }},
+ /* 幻想即興曲：渦を巻く光の粒の流れ */
+ flow:{init(w,h,r){return{first:true,p:Array.from({length:650},()=>({x:r()*w,y:r()*h,l:r()*200,h:r()<.55?268:38}))}},
+  draw(c,w,h,t,st){
+   if(st.first){c.fillStyle='#0b0716';c.fillRect(0,0,w,h);st.first=false;}
+   c.fillStyle='rgba(11,7,22,.035)';c.fillRect(0,0,w,h);
+   st.p.forEach(p=>{const a=Math.sin(p.x*.0032+t*.11)*Math.cos(p.y*.0042-t*.08)*3.4+Math.sin((p.x+p.y)*.002+t*.05);
+    const nx=p.x+Math.cos(a)*1.9,ny=p.y+Math.sin(a)*1.9;
+    c.strokeStyle=`hsla(${p.h},78%,${p.h>100?74:76}%,.95)`;c.lineWidth=1.3;c.beginPath();c.moveTo(p.x,p.y);c.lineTo(nx,ny);c.stroke();
+    p.x=nx;p.y=ny;if(--p.l<0||nx<0||ny<0||nx>w||ny>h){p.x=Math.random()*w;p.y=Math.random()*h;p.l=120+Math.random()*180;}});
+  }},
+ /* ノクターン：夜の街のボケ */
+ bokeh:{init(w,h,r){return{b:Array.from({length:40},()=>({x:r()*w,y:r()*h,r:22+r()*80,v:4+r()*9,ph:r()*6.28,warm:r()<.62,a:.06+r()*.13}))}},
+  draw(c,w,h,t,st){
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#060a18'],[1,'#141c38']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,w*.5,h*1.05,Math.max(w,h)*.6,'rgba(255,190,110,.22)','rgba(255,190,110,0)');c.fillRect(0,0,w,h);
+   st.b.forEach(b=>{const y=((b.y-b.v*t)%(h+2*b.r)+(h+2*b.r))%(h+2*b.r)-b.r,x=b.x+Math.sin(t*.3+b.ph)*30;
+    const col=b.warm?'255,196,120':'130,170,255',al=b.a*(.75+.25*Math.sin(t*.7+b.ph));
+    c.fillStyle=rg(c,x,y,b.r,`rgba(${col},${al*1.6})`,`rgba(${col},0)`);c.beginPath();c.arc(x,y,b.r,0,6.283);c.fill();
+    c.strokeStyle=`rgba(${col},${al*.9})`;c.lineWidth=1;c.beginPath();c.arc(x,y,b.r*.78,0,6.283);c.stroke();});
+  }},
+ /* 雨だれ：水面に広がる波紋 */
+ rain:{init(w,h,r){return{rip:[],next:0,d:Array.from({length:34},()=>({x:r()*w,y:r()*h,v:260+r()*220,l:12+r()*16,a:.05+r()*.1}))}},
+  draw(c,w,h,t,st){
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#0a1217'],[1,'#17272e']]);c.fillRect(0,0,w,h);
+   if(t>st.next){st.rip.push({x:w*(.08+Math.random()*.84),y:h*(.35+Math.random()*.6),t0:t,R:45+Math.random()*95,d:3.8+Math.random()*2});st.next=t+.18+Math.random()*.5;}
+   st.rip=st.rip.filter(q=>t-q.t0<q.d);
+   st.rip.forEach(q=>{const a=(t-q.t0)/q.d;for(let k=0;k<3;k++){const rr=q.R*a*(1-k*.2);if(rr<1)continue;
+    c.strokeStyle=`rgba(170,205,215,${(1-a)*(.42-k*.1)})`;c.lineWidth=1.2;c.beginPath();c.ellipse(q.x,q.y,rr,rr*.32,0,0,6.283);c.stroke();}});
+   st.d.forEach(d=>{const y=(d.y+d.v*t)%(h+40)-20;c.strokeStyle=`rgba(190,220,230,${d.a})`;c.lineWidth=1;c.beginPath();c.moveTo(d.x,y);c.lineTo(d.x-1.5,y+d.l);c.stroke();});
+  }},
+ /* 月の光：薄雲を渡る月 */
+ clouds:{init(w,h,r){return{c:Array.from({length:9},(_,i)=>({y:h*(.18+.09*i)+r()*30,hh:50+r()*70,sp:5+r()*11,off:r()*(w+800),a:.07+r()*.09}))}},
+  draw(c,w,h,t,st){
+   const R=Math.min(w,h)*.07,mx=w*.7,my=h*.27;
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#050d19'],[1,'#12304a']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,mx,my,R*9,'rgba(200,225,255,.30)','rgba(200,225,255,0)');c.fillRect(0,0,w,h);
+   c.fillStyle='#eef4fb';c.beginPath();c.arc(mx,my,R,0,6.283);c.fill();
+   st.c.forEach(q=>{const x=((q.off+q.sp*t)%(w+800))-400;
+    for(let k=0;k<3;k++){const cx=x+k*160,cy=q.y+k*8;c.fillStyle=rg(c,cx,cy,q.hh*3,`rgba(205,225,245,${q.a})`,'rgba(205,225,245,0)');
+     c.save();c.translate(cx,cy);c.scale(2.6,1);c.translate(-cx,-cy);c.beginPath();c.arc(cx,cy,q.hh*2.2,0,6.283);c.fill();c.restore();}});
+  }},
+ /* ジムノペディ：紙の上のミニマルな円（明るい） */
+ minimal:{light:true,init(){return{}},
+  draw(c,w,h,t){
+   const u=Math.min(w,h),br=1+.03*Math.sin(t*.45);
+   c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,w,h,[[0,'#ece3d3'],[1,'#ddd1bd']]);c.fillRect(0,0,w,h);
+   c.globalCompositeOperation='multiply';
+   const cy=h*.5+Math.sin(t*.3)*6;
+   c.fillStyle='rgba(196,118,82,.88)';c.beginPath();c.arc(w*.4+Math.sin(t*.2)*8,cy,u*.22*br,0,6.283);c.fill();
+   c.fillStyle='rgba(120,148,128,.82)';c.beginPath();c.arc(w*.4+u*.2+Math.cos(t*.23)*8,cy+u*.04,u*.14*(2-br),0,6.283);c.fill();
+   c.fillStyle='rgba(50,48,54,.9)';c.beginPath();c.arc(w*.66+Math.sin(t*.27)*6,cy-u*.06,u*.045,0,6.283);c.fill();
+   c.globalCompositeOperation='source-over';
+   c.strokeStyle='rgba(43,38,34,.35)';c.lineWidth=1;c.beginPath();c.moveTo(w*.14,cy+u*.26);c.lineTo(w*.86,cy+u*.26);c.stroke();
+  }},
+ /* トロイメライ：夕暮れに漂う綿毛 */
+ dandelion:{init(w,h,r){return{s:Array.from({length:62},()=>({x:r()*(w+100),y:r()*h,sc:.6+r()*1.3,ph:r()*6.28,v:6+r()*10}))}},
+  draw(c,w,h,t,st){
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#1d2240'],[.55,'#64476a'],[1,'#dea48c']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,w*.3,h*.95,Math.max(w,h)*.55,'rgba(255,205,160,.35)','rgba(255,205,160,0)');c.fillRect(0,0,w,h);
+   st.s.forEach(s=>{const x=((s.x+s.v*t)%(w+100))-50,y=(((s.y-s.v*.45*t)%h)+h)%h+Math.sin(t*.5+s.ph)*24;
+    c.save();c.translate(x,y);c.rotate(Math.sin(t*.4+s.ph)*.4-.5);c.strokeStyle='rgba(255,246,236,.55)';c.fillStyle='rgba(255,250,244,.8)';c.lineWidth=.8;
+    for(let k=0;k<12;k++){const a=-Math.PI/2+(k-5.5)*.19,L=13*s.sc;c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(a)*L,Math.sin(a)*L);c.stroke();c.beginPath();c.arc(Math.cos(a)*L,Math.sin(a)*L,1.1*s.sc,0,6.283);c.fill();}
+    c.fillStyle='rgba(120,80,70,.6)';c.beginPath();c.ellipse(0,3*s.sc,1.2*s.sc,3*s.sc,0,0,6.283);c.fill();c.restore();});
+  }},
+ /* 愛の夢：オーロラのカーテン */
+ aurora:{init(){return{}},
+  draw(c,w,h,t){
+   c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#050711'],[1,'#120c1c']]);c.fillRect(0,0,w,h);
+   c.globalCompositeOperation='lighter';
+   const cols=[['255,105,150','255,200,120'],['255,160,80','190,100,220'],['90,200,225','255,130,170'],['255,120,100','255,215,130']];
+   for(let i=0;i<4;i++){const g=lg(c,0,h*.12,0,h*.8,[[0,`rgba(${cols[i][0]},0)`],[.3,`rgba(${cols[i][0]},.8)`],[.68,`rgba(${cols[i][1]},.35)`],[1,`rgba(${cols[i][1]},0)`]]);c.fillStyle=g;
+    c.globalAlpha=.36+.1*Math.sin(t*.25+i*1.7);
+    c.beginPath();c.moveTo(0,h);
+    for(let x=0;x<=w+10;x+=10){const top=h*(.16+.07*i)+Math.sin(x*.0032+t*.14+i*1.3)*h*.09+Math.sin(x*.0075-t*.2+i)*h*.03;c.lineTo(x,top);}
+    c.lineTo(w,h);c.closePath();c.fill();
+  }
+   c.globalAlpha=1;c.globalCompositeOperation='source-over';
+  }}
+};
+
+const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, W:0, H:0, idle:0, sw:0};
+const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
+function ssResize(){const d=Math.min(window.devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;}
+function ssSet(i){
+  const s=SONGS[i], a=ARTS[ART_BY_ID[s.id]]; SS.art=a;
+  cx.globalCompositeOperation='source-over';cx.globalAlpha=1;cx.clearRect(0,0,SS.W,SS.H);
+  SS.st=a.init(SS.W,SS.H,mk(i*97+13)); SS.t0=performance.now();
+  ssEl.classList.toggle('light',!!a.light);
+  $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
+}
+function ssLoop(now){ if(!SS.on) return; SS.art.draw(cx,SS.W,SS.H,(now-SS.t0)/1000,SS.st); SS.raf=requestAnimationFrame(ssLoop); }
+function ssShow(manual){
+  if(SS.on) return; SS.on=true; SS.manual=!!manual; SS.idle=0;
+  ssResize(); ssSet(cur<0?0:cur); ssEl.classList.add('on'); ssEl.setAttribute('aria-hidden','false');
+  SS.raf=requestAnimationFrame(ssLoop);
+  if(manual && ssEl.requestFullscreen) ssEl.requestFullscreen().catch(()=>{});
+}
+function ssHide(){
+  if(!SS.on) return; SS.on=false; cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);
+  ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true'); SS.idle=0;
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+}
+function ssSwap(i){ // 曲が変わったらアートをクロスフェード
+  clearTimeout(SS.sw); cv.style.opacity=0; $('#ssInfo').style.opacity=0;
+  SS.sw=setTimeout(()=>{ if(!SS.on) return; ssSet(i); cv.style.opacity=1; $('#ssInfo').style.opacity=1; },850);
+}
+let lx=-1,ly=-1;
+addEventListener('mousemove',e=>{
+  if(SS.on){ if(!SS.manual && lx>=0 && Math.hypot(e.clientX-lx,e.clientY-ly)>8) ssHide(); }
+  else SS.idle=0;
+  if(lx<0||!SS.on){lx=e.clientX;ly=e.clientY;}
+});
+['mousedown','touchstart','wheel'].forEach(ev=>addEventListener(ev,()=>{ if(SS.on) ssHide(); else SS.idle=0; },{passive:true}));
+addEventListener('keydown',()=>{ if(SS.on) ssHide(); else SS.idle=0; });
+document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement && SS.on && SS.manual) ssHide(); });
+addEventListener('resize',()=>{ if(SS.on){ ssResize(); ssSet(cur<0?0:cur); } });
+$('#bShow').onclick=()=>{ lx=-1; ssShow(true); };
+setInterval(()=>{ if(!SS.on && $('#saver').checked && started && playing){ if(++SS.idle>=20){ lx=-1; ssShow(false); } } else if(!playing) SS.idle=0; },1000);
+if(/[?&]display=1/.test(location.search)) setTimeout(()=>ssShow(true),300);
+
+route();
+</script>
+</body>
+</html>

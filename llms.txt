@@ -1,0 +1,81 @@
+# SUBURBIA CLASSICA — A Mellow Classical Selection
+
+> メロウ・ピアノ・クラシックの楽曲データベース（日本語）。教科書・映画・CMで親しまれる名曲56曲を、作曲の経緯、構成分析、録音エピソード、映画／CM／教科書での使用、出典つきで掲載。YouTube公式音源で無料再生でき、曲が終わると次の曲へ進むプレイリスト型サイト。
+
+## 引用・利用上の注意
+- 事実は各曲ページ末尾の出典に基づく。映画・CM・教科書の使用は出典URLを確認できたものだけを掲載。確認できなかった項目は「未確認」と明記している（推測で補っていない）。
+- 引用時は「SUBURBIA CLASSICA」とページURLを示してほしい。
+- 録音情報は「この音源について」の項で、確認済みと推定を区別して表記。
+- 年表は作曲者の出身国で分類（ベートーヴェンはドイツ、モーツァルト／シューベルトはオーストリア等）。
+
+## 主要ページ
+- [曲一覧](https://example.com/suburbia-classica/songs/index.html): 全56曲
+- [国横断年表](https://example.com/suburbia-classica/timeline.html): 作曲年×出身国
+- [このサイトについて](https://example.com/suburbia-classica/about.html): 方針・出典の扱い
+- [プレイヤー](https://example.com/suburbia-classica/): 再生・スクリーンセーバー表示
+- [全曲まとめ（Markdown）](https://example.com/suburbia-classica/llms-full.txt)
+
+## ピアノ独奏
+- [エリーゼのために](https://example.com/suburbia-classica/songs/fur-elise.md): ベートーヴェン／約3分のロンド形式の小品。冒頭の半音の揺れが、一度聴けば忘れられない主題を作っている。
+- [ピアノソナタ第14番「月光」第1楽章](https://example.com/suburbia-classica/songs/moonlight.md): ベートーヴェン／途切れない三連符の伴奏の上で、低い旋律がゆっくり語られる緩徐楽章。ソナタの一般的な配置を逆にし、緩い楽章から始まる。
+- [別れの曲（練習曲 Op.10-3）](https://example.com/suburbia-classica/songs/tristesse.md): ショパン／速さを競う練習曲とは正反対に、遅いテンポで旋律を歌わせる練習曲。右手が旋律・内声・伴奏の三層を受け持つ。
+- [幻想即興曲](https://example.com/suburbia-classica/songs/fantaisie-impromptu.md): ショパン／右手の16分音符と左手の三連符がぶつかる両端部と、中間部の甘い旋律の対比。ショパン自身は生前に出版しなかった。
+- [ノクターン第2番](https://example.com/suburbia-classica/songs/nocturne-9-2.md): ショパン／揺れる左手の伴奏の上で、同じ旋律が回帰するたびに装飾を増していく夜想曲。ショパンの夜想曲の中でも特に広く親しまれている。
+- [前奏曲 第15番「雨だれ」](https://example.com/suburbia-classica/songs/raindrop.md): ショパン／曲全体で鳴り続ける同じ音が、雨だれを思わせる。穏やかな主題と、暗く迫る中間部の対比。24曲の前奏曲で最長。
+- [月の光（ベルガマスク組曲 第3曲）](https://example.com/suburbia-classica/songs/clair-de-lune.md): ドビュッシー／弱音の和音と流れるアルペッジョで、月明かりの情景を描いた小品。ヴェルレーヌの詩に結びつく題名を持つ。
+- [ジムノペディ 第1番](https://example.com/suburbia-classica/songs/gymnopedie-1.md): サティ／左手の2つの和音の往復の上に、装飾を排した旋律が静かに乗る。速度表示は「ゆっくりと、苦しみをもって」。
+- [トロイメライ（子供の情景 第7曲）](https://example.com/suburbia-classica/songs/traumerei.md): シューマン／「夢想」を意味する題名どおり、ゆるやかに上り下りする4小節の旋律が、和声を変えながら8回現れる短い曲。
+- [愛の夢 第3番](https://example.com/suburbia-classica/songs/liebestraum-3.md): リスト／歌曲を原曲とする、豊かな旋律と広い音域の伴奏の組み合わせ。2つのカデンツァが3つの部分を分ける。
+- [亜麻色の髪の乙女（前奏曲集第1巻 第8曲）](https://example.com/suburbia-classica/songs/flaxen-hair.md): クロード・ドビュッシー／素朴な旋律と淡い響きで、詩の中の金髪の娘を描いた前奏曲集屈指の小品。
+- [アラベスク第1番（2つのアラベスクより）](https://example.com/suburbia-classica/songs/arabesque-1.md): クロード・ドビュッシー／流れる装飾的な音型と柔らかな和声が特徴の、若きドビュッシーによる初期ピアノ曲。
+- [平均律クラヴィーア曲集第1巻 第1番 前奏曲 ハ長調](https://example.com/suburbia-classica/songs/prelude-bwv846.md): ヨハン・ゼバスティアン・バッハ／分散和音だけで織られた、平均律第1巻の幕開けの前奏曲。グノーのアヴェ・マリアの土台としても知られる、静かで澄んだ名曲。
+- [亡き王女のためのパヴァーヌ（ピアノ原曲）](https://example.com/suburbia-classica/songs/pavane.md): モーリス・ラヴェル／古い舞曲の趣と静かな哀感を湛えた、ラヴェル初期の代表的ピアノ小品。
+- [ノクターン第20番 嬰ハ短調 遺作(レント・コン・グラン・エスプレッシオーネ)](https://example.com/suburbia-classica/songs/nocturne-20.md): フレデリック・ショパン／ウィーン到着直後の1830年、姉のために書かれたノクターン。協奏曲の断片を引用した回想的な小品で、映画『戦場のピアニスト』の冒頭でも流れる。
+- [ピアノソナタ第8番「悲愴」 第2楽章](https://example.com/suburbia-classica/songs/pathetique-2.md): ルートヴィヒ・ヴァン・ベートーヴェン／激しい両端楽章の間で、歌うような旋律が静かに広がる緩徐楽章。ベートーヴェンの優しさが最も親しまれた形で表れる一曲。
+- [ピアノ・ソナタ第11番 イ長調 K.331 第1楽章（主題と6つの変奏）](https://example.com/suburbia-classica/songs/k331-1.md): ヴォルフガング・アマデウス・モーツァルト／ソナタの幕開けに変奏曲を置いたモーツァルトの異色作。ゆれるシチリアーナ風の主題が6通りに姿を変え、第3楽章のトルコ行進曲へ続く。
+- [前奏曲第7番 イ長調 Op.28-7](https://example.com/suburbia-classica/songs/prelude-7.md): フレデリック・ショパン／24の前奏曲の第7番。集中最短で、約45秒の素朴なマズルカ風の小品。短いが、穏やかな表情に満ちた愛らしい曲。
+- [16のワルツ Op.39 第15番 変イ長調（ピアノ独奏版）](https://example.com/suburbia-classica/songs/brahms-waltz-15.md): ヨハネス・ブラームス／ブラームスの16のワルツの中でも最も愛される1曲。ゆるやかに揺れる旋律が、連弾から独奏に編まれて広く親しまれた。
+- [無言歌集 第5巻 Op.62-6「春の歌」](https://example.com/suburbia-classica/songs/mendelssohn-spring-song.md): フェリックス・メンデルスゾーン／歌詞のない歌をめざした無言歌集の中で最も親しまれる一曲。明るいイ長調の旋律に春のきざしを重ねた小品。
+- [ゴルトベルク変奏曲 アリア](https://example.com/suburbia-classica/songs/goldberg-aria.md): ヨハン・ゼバスティアン・バッハ／30の変奏の出発点となる、優美で静かなサラバンド風の主題。不眠の伯爵の逸話でも知られる、夜に寄り添う音楽。
+- [夢（Rêverie）](https://example.com/suburbia-classica/songs/reverie.md): クロード・ドビュッシー／ドビュッシー本人は軽視したが、素朴な旋律美で広く愛されるようになった初期の小品。
+- [グノシエンヌ 第1番](https://example.com/suburbia-classica/songs/gnossienne-1.md): エリック・サティ／拍子も小節線もない自由な時間の中で、物憂い旋律が揺れる。サティが神秘思想に近づいた時期の、夜に似合う一曲。
+- [ワルツ第7番 嬰ハ短調 Op.64-2](https://example.com/suburbia-classica/songs/waltz-64-2.md): フレデリック・ショパン／哀愁の短調主題と長調の歌がめぐる、後期ショパンの代表的なワルツ。ロスチャイルド夫人に献呈。
+- [ワルツ第9番 変イ長調 Op.69-1『別れのワルツ』](https://example.com/suburbia-classica/songs/waltz-69-1.md): フレデリック・ショパン／1835年、マリア・ヴォジンスカとの別れに際して書かれたとされるワルツ。ショパンの死後、友人フォンタナが出版した。
+- [四季 Op.37a 第10曲 10月「秋の歌」](https://example.com/suburbia-classica/songs/tchaikovsky-october.md): ピョートル・チャイコフスキー／チャイコフスキーが雑誌の依頼で書いた十二か月の小品のうち、ニ短調で秋の寂しさを歌う10月の曲。
+- [ピアノ・ソナタ第8番 イ短調 K.310 第2楽章 アンダンテ・カンタービレ・コン・エスプレッシオーネ](https://example.com/suburbia-classica/songs/k310-2.md): ヴォルフガング・アマデウス・モーツァルト／母の死の頃に書かれたイ短調ソナタの中央で、ヘ長調の歌が静かに流れる緩徐楽章。モーツァルトの数少ない短調ソナタの陰影を和らげる。
+- [4つの即興曲 Op.90 D.899 第3番 変ト長調](https://example.com/suburbia-classica/songs/schubert-impromptu-90-3.md): フランツ・シューベルト／変ト長調の長い旋律が、竪琴のような分散和音に乗って流れるシューベルト晩年の歌。映画でもおなじみの一曲。
+- [6つの小品 Op.118 第2番 間奏曲 イ長調](https://example.com/suburbia-classica/songs/brahms-op118-2.md): ヨハネス・ブラームス／晩年のブラームスが静かな休暇先で書いた小品集の中の最も有名な1曲。優しく内省的な旋律で、秘めた想いのようだと語られる。
+
+## 協奏曲・編曲
+- [カノン（パッヘルベルのカノン）](https://example.com/suburbia-classica/songs/canon.md): パッヘルベル／低音の同じ進行を繰り返し、3つの声が同じ旋律を追いかけて重なっていく、バロックの代表的なカノン。
+- [G線上のアリア](https://example.com/suburbia-classica/songs/air-g-string.md): バッハ／バッハの管弦楽組曲の緩徐楽章を、ウィルヘルミがG線だけで弾けるよう編曲した、静かに歌う名旋律。
+- [主よ人の望みの喜びよ](https://example.com/suburbia-classica/songs/jesu-joy.md): バッハ／バッハのカンタータのコラールを、マイラ・ヘスがピアノ用にまとめた、流れるような伴奏に旋律が歌う名編曲。
+- [ピアノ協奏曲第2番 第2楽章](https://example.com/suburbia-classica/songs/rach-pc2-2.md): ラフマニノフ／ダーリ医師の治療で立ち直ったラフマニノフが書いた、静かで抒情的な緩徐楽章。映画や歌にも転用された名旋律。
+- [アヴェ・マリア（エレンの歌 第3番）](https://example.com/suburbia-classica/songs/schubert-ave-maria.md): シューベルト／スコットの詩に付けられた祈りの歌を、リストがピアノ一台で歌わせた編曲。息の長い旋律が夜に寄り添う。
+- [愛のあいさつ](https://example.com/suburbia-classica/songs/liebesgruss.md): エルガー／エルガーが婚約者アリスへの贈り物として書いた小品。甘く温かな旋律で、ピアノ独奏版でも親しまれている。
+- [ヴォカリーズ](https://example.com/suburbia-classica/songs/vocalise.md): ラフマニノフ／歌詞を持たず母音だけで歌われるラフマニノフの歌曲。ピアノ独奏を含む多彩な編曲で親しまれている。
+- [ブラームスの子守歌](https://example.com/suburbia-classica/songs/brahms-lullaby.md): ブラームス／友人の子の誕生を祝って書かれた、世界で最も有名な子守歌のひとつ。揺れる伴奏に素朴な旋律が乗る。
+- [ピアノ協奏曲第21番 第2楽章](https://example.com/suburbia-classica/songs/mozart-pc21-2.md): モーツァルト／弱音器付きの弦と夢見るようなピアノが続く緩徐楽章。映画『みじかくも美しく燃え』で世界的に知られた。
+- [夢のあとに](https://example.com/suburbia-classica/songs/faure-apres-un-reve.md): フォーレ／フォーレがビュシーヌの詩に付けた1877年の歌曲。夢の余韻と喪失を歌い、チェロ版などでも愛される。
+- [パガニーニの主題による狂詩曲 第18変奏](https://example.com/suburbia-classica/songs/paganini-var18.md): ラフマニノフ／パガニーニの主題を反転させて生まれた、ラフマニノフ屈指の甘美な旋律。映画でも使われた名変奏。
+- [ソルヴェイグの歌](https://example.com/suburbia-classica/songs/solveigs-song.md): グリーグ／帰らぬ人を待ち続けるソルヴェイグの歌を、グリーグ自身がピアノ独奏に編曲。北欧の哀愁を静かにたたえた旋律。
+
+## 管弦楽・室内楽
+- [交響曲第5番 ハ短調 作品67「運命」第1楽章](https://example.com/suburbia-classica/songs/beethoven-5.md): ルートヴィヒ・ヴァン・ベートーヴェン／「ダダダダーン」の4音の動機を徹底的に展開した、ハ短調の緊迫したソナタ形式の楽章。ベートーヴェンの代名詞ともいえる冒頭で知られる。
+- [交響曲第9番 ニ短調 作品125「合唱付き」第4楽章「歓喜の歌」](https://example.com/suburbia-classica/songs/beethoven-9.md): ルートヴィヒ・ヴァン・ベートーヴェン／ベートーヴェン最後の交響曲の終楽章。シラーの詩に曲を付けた歓喜の主題が、低弦の静かな入りから独唱と合唱を伴う大合唱へ広がる。
+- [ヴァイオリン協奏曲集「四季」より 春 第1楽章 (協奏曲 ホ長調 作品8-1 RV269)](https://example.com/suburbia-classica/songs/vivaldi-spring.md): アントニオ・ヴィヴァルディ／ヴィヴァルディ「四季」の冒頭を飾る「春」の第1楽章。ソネットに基づき小鳥や嵐を描く明るいホ長調の協奏曲で、独奏ヴァイオリンの技巧と軽快な主題が魅力。
+- [交響曲第9番 ホ短調「新世界より」第2楽章 ラルゴ（「家路」）](https://example.com/suburbia-classica/songs/largo-new-world.md): アントニーン・ドヴォルザーク／コーラングレが歌う変ニ長調の主題で知られる『新世界より』の緩徐楽章。のち英語詞『Goin' Home』や堀内敬三の『家路』となり、日本でも広く愛される。
+- [ボレロ](https://example.com/suburbia-classica/songs/bolero.md): モーリス・ラヴェル／小太鼓の同じリズムに乗せ、2つの旋律を楽器を替えて繰り返し、約15分かけて音量を積み上げるラヴェルの代表作。1928年にバレエ曲として初演された。
+- [行進曲「威風堂々」第1番](https://example.com/suburbia-classica/songs/pomp-circumstance-1.md): エドワード・エルガー／エルガーが1901年に書いた行進曲。弱音で始まる『希望と栄光の国』のトリオが全管弦楽で堂々と再現され、英国の祝祭や各国の卒業式で親しまれる。
+- [アイネ・クライネ・ナハトムジーク K.525 第1楽章](https://example.com/suburbia-classica/songs/eine-kleine.md): ヴォルフガング・アマデウス・モーツァルト／モーツァルトが1787年に書いた弦楽のためのセレナード。上昇音型で始まる明快なソナタ形式の第1楽章で、最も親しまれたクラシック曲の一つ。
+- [ムソルグスキー作曲（ラヴェル編曲）組曲「展覧会の絵」](https://example.com/suburbia-classica/songs/pictures.md): モデスト・ムソルグスキー／ムソルグスキーがハルトマンの遺作展を歩く姿を描いたピアノ組曲を、ラヴェルが色彩豊かな管弦楽に編んだ名作。プロムナードとキエフの大門が特に有名。
+- [動物の謝肉祭 第13曲「白鳥」（チェロとピアノ版を中心に）](https://example.com/suburbia-classica/songs/le-cygne.md): カミーユ・サン＝サーンス／動物の謝肉祭の中で唯一、作曲者が生前の公開を許した曲。チェロが水面を滑る白鳥のように静かに歌い、後にバレエ『瀕死の白鳥』でも知られた。
+- [組曲「惑星」より 木星（快楽をもたらす者）](https://example.com/suburbia-classica/songs/jupiter.md): グスターヴ・ホルスト／活気ある舞曲風の主部と、中間部の広い旋律の対比が魅力。中間部は英国の賛歌と平原綾香『Jupiter』の原曲にもなった、ホルスト『惑星』の代表楽章。
+- [トッカータとフーガ ニ短調 BWV565](https://example.com/suburbia-classica/songs/toccata-fugue-dm.md): ヨハン・ゼバスティアン・バッハ／オルガン曲を代表する一曲で、劇的な冒頭と16分音符のフーガが続く。バッハ作とされてきたが、真作性には1981年以来異論もあり、結論は出ていない。
+- [ビゼー「アルルの女」第2組曲より ファランドール](https://example.com/suburbia-classica/songs/farandole.md): ジョルジュ・ビゼー／ビゼー「アルルの女」第2組曲の終曲。プロヴァンスの行進曲と舞曲の旋律が重なり、タンブランが響く熱狂的なクライマックスへ駆け上がる。
+- [歌劇「カルメン」前奏曲（第1幕への前奏曲）](https://example.com/suburbia-classica/songs/carmen-prelude.md): ジョルジュ・ビゼー／闘牛士の行進と歌の旋律が輝く幕開けのあと、運命の動機が弦のトレモロの上で不穏に響く。ビゼーが全曲の悲劇を先取りした前奏曲。
+- [歌劇「カヴァレリア・ルスティカーナ」間奏曲](https://example.com/suburbia-classica/songs/cavalleria-intermezzo.md): ピエトロ・マスカーニ／復讐の誓いの直後、無人の広場に流れるマスカーニの静かな間奏曲。弦の長い旋律が嵐の前の静けさを描き、映画『レイジング・ブル』でも知られる。
+- [弦楽のためのアダージョ 作品11](https://example.com/suburbia-classica/songs/barber-adagio.md): サミュエル・バーバー／弦楽四重奏曲の緩徐楽章を弦楽合奏に編曲した、静かに高まっていく名曲。1938年にトスカニーニが初演し、追悼の場でも多く演奏されてきた。
+
+## Optional
+- [sitemap.xml](https://example.com/suburbia-classica/sitemap.xml)

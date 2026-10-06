@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1877年
 - 作品番号: Op.7-1（歌曲集『3つのメロディ』第1曲）
-- ページ: https://example.com/suburbia-classica/songs/faure-apres-un-reve.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/faure-apres-un-reve.html
 
 フォーレがビュシーヌの詩に付けた1877年の歌曲。夢の余韻と喪失を歌い、チェロ版などでも愛される。
 

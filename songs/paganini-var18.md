@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1934年
 - 作品番号: Op.43
-- ページ: https://example.com/suburbia-classica/songs/paganini-var18.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/paganini-var18.html
 
 パガニーニの主題を反転させて生まれた、ラフマニノフ屈指の甘美な旋律。映画でも使われた名変奏。
 

@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1876（全曲は1875年12月〜1876年5月作曲）
 - 作品番号: Op.37a（Op.37bとも表記）/ TH 135
-- ページ: https://example.com/suburbia-classica/songs/tchaikovsky-october.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/tchaikovsky-october.html
 
 チャイコフスキーが雑誌の依頼で書いた十二か月の小品のうち、ニ短調で秋の寂しさを歌う10月の曲。
 

@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1704年頃〜1750年代（成立年は不明で諸説）
 - 作品番号: BWV 565
-- ページ: https://example.com/suburbia-classica/songs/toccata-fugue-dm.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/toccata-fugue-dm.html
 
 オルガン曲を代表する一曲で、劇的な冒頭と16分音符のフーガが続く。バッハ作とされてきたが、真作性には1981年以来異論もあり、結論は出ていない。
 

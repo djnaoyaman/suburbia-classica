@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1914（「木星」の作曲）／1917（管弦楽化の完成）
 - 作品番号: Op.32（H.125）第4曲
-- ページ: https://example.com/suburbia-classica/songs/jupiter.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/jupiter.html
 
 活気ある舞曲風の主部と、中間部の広い旋律の対比が魅力。中間部は英国の賛歌と平原綾香『Jupiter』の原曲にもなった、ホルスト『惑星』の代表楽章。
 

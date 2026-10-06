@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1835〜1839(24曲全体の作曲期間)
 - 作品番号: Op.28-7
-- ページ: https://example.com/suburbia-classica/songs/prelude-7.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/prelude-7.html
 
 24の前奏曲の第7番。集中最短で、約45秒の素朴なマズルカ風の小品。短いが、穏やかな表情に満ちた愛らしい曲。
 

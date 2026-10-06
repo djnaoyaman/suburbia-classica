@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1804–1808
 - 作品番号: 作品67
-- ページ: https://example.com/suburbia-classica/songs/beethoven-5.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/beethoven-5.html
 
 「ダダダダーン」の4音の動機を徹底的に展開した、ハ短調の緊迫したソナタ形式の楽章。ベートーヴェンの代名詞ともいえる冒頭で知られる。
 

@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1868年
 - 作品番号: Op.49-4
-- ページ: https://example.com/suburbia-classica/songs/brahms-lullaby.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-lullaby.html
 
 友人の子の誕生を祝って書かれた、世界で最も有名な子守歌のひとつ。揺れる伴奏に素朴な旋律が乗る。
 

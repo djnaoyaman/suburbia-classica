@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1810年（草稿）／1867年出版
 - 作品番号: WoO 59（バガテル第25番）
-- ページ: https://example.com/suburbia-classica/songs/fur-elise.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/fur-elise.html
 
 約3分のロンド形式の小品。冒頭の半音の揺れが、一度聴けば忘れられない主題を作っている。
 

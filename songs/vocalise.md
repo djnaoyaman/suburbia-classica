@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1915年
 - 作品番号: Op.34-14
-- ページ: https://example.com/suburbia-classica/songs/vocalise.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/vocalise.html
 
 歌詞を持たず母音だけで歌われるラフマニノフの歌曲。ピアノ独奏を含む多彩な編曲で親しまれている。
 

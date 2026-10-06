@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1835
 - 作品番号: Op.69-1(遺作)
-- ページ: https://example.com/suburbia-classica/songs/waltz-69-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/waltz-69-1.html
 
 1835年、マリア・ヴォジンスカとの別れに際して書かれたとされるワルツ。ショパンの死後、友人フォンタナが出版した。
 

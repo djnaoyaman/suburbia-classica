@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1787
 - 作品番号: K.525
-- ページ: https://example.com/suburbia-classica/songs/eine-kleine.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/eine-kleine.html
 
 モーツァルトが1787年に書いた弦楽のためのセレナード。上昇音型で始まる明快なソナタ形式の第1楽章で、最も親しまれたクラシック曲の一つ。
 

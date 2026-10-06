@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1827
 - 作品番号: Op.90 / D.899-3
-- ページ: https://example.com/suburbia-classica/songs/schubert-impromptu-90-3.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/schubert-impromptu-90-3.html
 
 変ト長調の長い旋律が、竪琴のような分散和音に乗って流れるシューベルト晩年の歌。映画でもおなじみの一曲。
 

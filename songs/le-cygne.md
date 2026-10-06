@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1886年（組曲の作曲）／1887年（チェロとピアノ1台版の出版）
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/le-cygne.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/le-cygne.html
 
 動物の謝肉祭の中で唯一、作曲者が生前の公開を許した曲。チェロが水面を滑る白鳥のように静かに歌い、後にバレエ『瀕死の白鳥』でも知られた。
 

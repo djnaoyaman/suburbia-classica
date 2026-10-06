@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1741(出版)
 - 作品番号: BWV 988
-- ページ: https://example.com/suburbia-classica/songs/goldberg-aria.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/goldberg-aria.html
 
 30の変奏の出発点となる、優美で静かなサラバンド風の主題。不眠の伯爵の逸話でも知られる、夜に寄り添う音楽。
 

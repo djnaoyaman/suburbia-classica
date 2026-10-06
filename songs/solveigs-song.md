@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1874〜75年（付随音楽Op.23）
 - 作品番号: Op.23（第4幕）、組曲第2番Op.55-4、ピアノ編曲Op.52-4
-- ページ: https://example.com/suburbia-classica/songs/solveigs-song.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/solveigs-song.html
 
 帰らぬ人を待ち続けるソルヴェイグの歌を、グリーグ自身がピアノ独奏に編曲。北欧の哀愁を静かにたたえた旋律。
 

@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1909末〜1910（完成は1910年1月15〜16日）
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/flaxen-hair.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/flaxen-hair.html
 
 素朴な旋律と淡い響きで、詩の中の金髪の娘を描いた前奏曲集屈指の小品。
 

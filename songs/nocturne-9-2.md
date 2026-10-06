@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1830〜31年頃
 - 作品番号: Op.9-2
-- ページ: https://example.com/suburbia-classica/songs/nocturne-9-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/nocturne-9-2.html
 
 揺れる左手の伴奏の上で、同じ旋律が回帰するたびに装飾を増していく夜想曲。ショパンの夜想曲の中でも特に広く親しまれている。
 

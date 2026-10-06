@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1899
 - 作品番号: M. 19
-- ページ: https://example.com/suburbia-classica/songs/pavane.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pavane.html
 
 古い舞曲の趣と静かな哀感を湛えた、ラヴェル初期の代表的ピアノ小品。
 

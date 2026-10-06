@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1893
 - 作品番号: Op.95, B.178
-- ページ: https://example.com/suburbia-classica/songs/largo-new-world.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/largo-new-world.html
 
 コーラングレが歌う変ニ長調の主題で知られる『新世界より』の緩徐楽章。のち英語詞『Goin' Home』や堀内敬三の『家路』となり、日本でも広く愛される。
 

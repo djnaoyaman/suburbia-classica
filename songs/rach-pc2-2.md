@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1900〜1901年
 - 作品番号: Op.18
-- ページ: https://example.com/suburbia-classica/songs/rach-pc2-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/rach-pc2-2.html
 
 ダーリ医師の治療で立ち直ったラフマニノフが書いた、静かで抒情的な緩徐楽章。映画や歌にも転用された名旋律。
 

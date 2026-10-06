@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1824
 - 作品番号: 作品125
-- ページ: https://example.com/suburbia-classica/songs/beethoven-9.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/beethoven-9.html
 
 ベートーヴェン最後の交響曲の終楽章。シラーの詩に曲を付けた歓喜の主題が、低弦の静かな入りから独唱と合唱を伴う大合唱へ広がる。
 

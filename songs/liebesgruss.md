@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1888年
 - 作品番号: Op.12
-- ページ: https://example.com/suburbia-classica/songs/liebesgruss.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/liebesgruss.html
 
 エルガーが婚約者アリスへの贈り物として書いた小品。甘く温かな旋律で、ピアノ独奏版でも親しまれている。
 

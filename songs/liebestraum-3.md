@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1850年出版（原曲の歌曲は1840年代）
 - 作品番号: S.541-3
-- ページ: https://example.com/suburbia-classica/songs/liebestraum-3.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/liebestraum-3.html
 
 歌曲を原曲とする、豊かな旋律と広い音域の伴奏の組み合わせ。2つのカデンツァが3つの部分を分ける。
 

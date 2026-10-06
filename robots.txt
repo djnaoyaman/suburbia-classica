@@ -55,4 +55,4 @@ Allow: /
 User-agent: MistralAI-User
 Allow: /
 
-Sitemap: https://example.com/suburbia-classica/sitemap.xml
+Sitemap: https://djnaoyaman.github.io/suburbia-classica/sitemap.xml

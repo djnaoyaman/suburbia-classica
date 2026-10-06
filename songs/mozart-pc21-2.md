@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1785年
 - 作品番号: K.467
-- ページ: https://example.com/suburbia-classica/songs/mozart-pc21-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/mozart-pc21-2.html
 
 弱音器付きの弦と夢見るようなピアノが続く緩徐楽章。映画『みじかくも美しく燃え』で世界的に知られた。
 

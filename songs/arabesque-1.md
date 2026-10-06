@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1888〜1891頃（2曲の作曲期間）
 - 作品番号: L. 66（第1番）
-- ページ: https://example.com/suburbia-classica/songs/arabesque-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/arabesque-1.html
 
 流れる装飾的な音型と柔らかな和声が特徴の、若きドビュッシーによる初期ピアノ曲。
 

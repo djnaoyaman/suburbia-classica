@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890
 - 作品番号: L. 68（L. 76 と表記する資料もある）
-- ページ: https://example.com/suburbia-classica/songs/reverie.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/reverie.html
 
 ドビュッシー本人は軽視したが、素朴な旋律美で広く愛されるようになった初期の小品。
 

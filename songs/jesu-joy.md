@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1723年／ヘス編曲1926年
 - 作品番号: BWV 147（第6曲・第10曲のコラール）
-- ページ: https://example.com/suburbia-classica/songs/jesu-joy.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/jesu-joy.html
 
 バッハのカンタータのコラールを、マイラ・ヘスがピアノ用にまとめた、流れるような伴奏に旋律が歌う名編曲。
 

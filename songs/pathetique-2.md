@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1798(出版は1799)
 - 作品番号: Op. 13
-- ページ: https://example.com/suburbia-classica/songs/pathetique-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pathetique-2.html
 
 激しい両端楽章の間で、歌うような旋律が静かに広がる緩徐楽章。ベートーヴェンの優しさが最も親しまれた形で表れる一曲。
 

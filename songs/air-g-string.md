@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1730年代初め頃／編曲1871年
 - 作品番号: BWV 1068-2
-- ページ: https://example.com/suburbia-classica/songs/air-g-string.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/air-g-string.html
 
 バッハの管弦楽組曲の緩徐楽章を、ウィルヘルミがG線だけで弾けるよう編曲した、静かに歌う名旋律。
 

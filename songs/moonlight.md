@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1801年
 - 作品番号: Op.27-2
-- ページ: https://example.com/suburbia-classica/songs/moonlight.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/moonlight.html
 
 途切れない三連符の伴奏の上で、低い旋律がゆっくり語られる緩徐楽章。ソナタの一般的な配置を逆にし、緩い楽章から始まる。
 

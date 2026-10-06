@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 第5巻の出版は1844年（作曲年は未確認）
 - 作品番号: Op.62-6 / MWV U 161
-- ページ: https://example.com/suburbia-classica/songs/mendelssohn-spring-song.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/mendelssohn-spring-song.html
 
 歌詞のない歌をめざした無言歌集の中で最も親しまれる一曲。明るいイ長調の旋律に春のきざしを重ねた小品。
 

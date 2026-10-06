@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1722
 - 作品番号: BWV 846
-- ページ: https://example.com/suburbia-classica/songs/prelude-bwv846.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/prelude-bwv846.html
 
 分散和音だけで織られた、平均律第1巻の幕開けの前奏曲。グノーのアヴェ・マリアの土台としても知られる、静かで澄んだ名曲。
 

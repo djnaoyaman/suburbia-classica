@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1865年作曲、1866年出版
 - 作品番号: Op.39-15
-- ページ: https://example.com/suburbia-classica/songs/brahms-waltz-15.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-waltz-15.html
 
 ブラームスの16のワルツの中でも最も愛される1曲。ゆるやかに揺れる旋律が、連弾から独奏に編まれて広く親しまれた。
 

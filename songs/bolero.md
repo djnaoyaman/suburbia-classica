@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1928
 - 作品番号: M.81（作品番号なし）
-- ページ: https://example.com/suburbia-classica/songs/bolero.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/bolero.html
 
 小太鼓の同じリズムに乗せ、2つの旋律を楽器を替えて繰り返し、約15分かけて音量を積み上げるラヴェルの代表作。1928年にバレエ曲として初演された。
 

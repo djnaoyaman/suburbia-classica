@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1846〜1847
 - 作品番号: Op.64-2
-- ページ: https://example.com/suburbia-classica/songs/waltz-64-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/waltz-64-2.html
 
 哀愁の短調主題と長調の歌がめぐる、後期ショパンの代表的なワルツ。ロスチャイルド夫人に献呈。
 

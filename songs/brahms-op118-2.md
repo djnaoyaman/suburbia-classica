@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1893
 - 作品番号: Op.118-2
-- ページ: https://example.com/suburbia-classica/songs/brahms-op118-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-op118-2.html
 
 晩年のブラームスが静かな休暇先で書いた小品集の中の最も有名な1曲。優しく内省的な旋律で、秘めた想いのようだと語られる。
 

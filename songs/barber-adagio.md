@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1936年（編曲）／1938年（初演）
 - 作品番号: Op. 11（弦楽四重奏曲 Op. 11 の第2楽章の編曲）
-- ページ: https://example.com/suburbia-classica/songs/barber-adagio.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/barber-adagio.html
 
 弦楽四重奏曲の緩徐楽章を弦楽合奏に編曲した、静かに高まっていく名曲。1938年にトスカニーニが初演し、追悼の場でも多く演奏されてきた。
 

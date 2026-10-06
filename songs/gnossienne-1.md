@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/gnossienne-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/gnossienne-1.html
 
 拍子も小節線もない自由な時間の中で、物憂い旋律が揺れる。サティが神秘思想に近づいた時期の、夜に似合う一曲。
 

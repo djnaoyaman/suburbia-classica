@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1834年
 - 作品番号: Op.66（遺作）
-- ページ: https://example.com/suburbia-classica/songs/fantaisie-impromptu.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/fantaisie-impromptu.html
 
 右手の16分音符と左手の三連符がぶつかる両端部と、中間部の甘い旋律の対比。ショパン自身は生前に出版しなかった。
 

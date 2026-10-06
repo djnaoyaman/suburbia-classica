@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1888年
 - 作品番号: 3つのジムノペディ 第1番
-- ページ: https://example.com/suburbia-classica/songs/gymnopedie-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/gymnopedie-1.html
 
 左手の2つの和音の往復の上に、装飾を排した旋律が静かに乗る。速度表示は「ゆっくりと、苦しみをもって」。
 

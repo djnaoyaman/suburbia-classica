@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890年頃（1905年出版）
 - 作品番号: ベルガマスク組曲 第3曲
-- ページ: https://example.com/suburbia-classica/songs/clair-de-lune.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/clair-de-lune.html
 
 弱音の和音と流れるアルペッジョで、月明かりの情景を描いた小品。ヴェルレーヌの詩に結びつく題名を持つ。
 

@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1875
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/carmen-prelude.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/carmen-prelude.html
 
 闘牛士の行進と歌の旋律が輝く幕開けのあと、運命の動機が弦のトレモロの上で不穏に響く。ビゼーが全曲の悲劇を先取りした前奏曲。
 

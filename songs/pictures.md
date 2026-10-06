@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: ピアノ組曲1874年／ラヴェル編曲1922年
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/pictures.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pictures.html
 
 ムソルグスキーがハルトマンの遺作展を歩く姿を描いたピアノ組曲を、ラヴェルが色彩豊かな管弦楽に編んだ名作。プロムナードとキエフの大門が特に有名。
 

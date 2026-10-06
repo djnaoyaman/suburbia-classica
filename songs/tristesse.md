@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1832年
 - 作品番号: Op.10-3
-- ページ: https://example.com/suburbia-classica/songs/tristesse.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/tristesse.html
 
 速さを競う練習曲とは正反対に、遅いテンポで旋律を歌わせる練習曲。右手が旋律・内声・伴奏の三層を受け持つ。
 

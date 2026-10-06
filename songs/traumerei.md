@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1838年
 - 作品番号: Op.15-7
-- ページ: https://example.com/suburbia-classica/songs/traumerei.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/traumerei.html
 
 「夢想」を意味する題名どおり、ゆるやかに上り下りする4小節の旋律が、和声を変えながら8回現れる短い曲。
 

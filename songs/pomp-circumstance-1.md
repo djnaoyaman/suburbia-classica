@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1901
 - 作品番号: Op.39-1
-- ページ: https://example.com/suburbia-classica/songs/pomp-circumstance-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pomp-circumstance-1.html
 
 エルガーが1901年に書いた行進曲。弱音で始まる『希望と栄光の国』のトリオが全管弦楽で堂々と再現され、英国の祝祭や各国の卒業式で親しまれる。
 

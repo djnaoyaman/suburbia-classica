@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1890（歌劇の初演年。間奏曲単独の作曲年は未確認）
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/cavalleria-intermezzo.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/cavalleria-intermezzo.html
 
 復讐の誓いの直後、無人の広場に流れるマスカーニの静かな間奏曲。弦の長い旋律が嵐の前の静けさを描き、映画『レイジング・ブル』でも知られる。
 

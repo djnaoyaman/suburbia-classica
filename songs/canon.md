@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 不明（1680〜1706の間で諸説）
 - 作品番号: P.37
-- ページ: https://example.com/suburbia-classica/songs/canon.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/canon.html
 
 低音の同じ進行を繰り返し、3つの声が同じ旋律を追いかけて重なっていく、バロックの代表的なカノン。
 

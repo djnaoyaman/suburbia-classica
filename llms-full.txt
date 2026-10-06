@@ -1,6 +1,6 @@
 # SUBURBIA CLASSICA — 全曲データ（Markdown）
 
-> 各曲のページ: https://example.com/suburbia-classica/songs/曲ID.html
+> 各曲のページ: https://djnaoyaman.github.io/suburbia-classica/songs/曲ID.html
 
 # エリーゼのために
 
@@ -9,7 +9,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1810年（草稿）／1867年出版
 - 作品番号: WoO 59（バガテル第25番）
-- ページ: https://example.com/suburbia-classica/songs/fur-elise.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/fur-elise.html
 
 約3分のロンド形式の小品。冒頭の半音の揺れが、一度聴けば忘れられない主題を作っている。
 
@@ -73,7 +73,7 @@ ABACA型の5部ロンド、イ短調、3/8拍子。冒頭の半音揺れ（E-D#�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1801年
 - 作品番号: Op.27-2
-- ページ: https://example.com/suburbia-classica/songs/moonlight.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/moonlight.html
 
 途切れない三連符の伴奏の上で、低い旋律がゆっくり語られる緩徐楽章。ソナタの一般的な配置を逆にし、緩い楽章から始まる。
 
@@ -137,7 +137,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1832年
 - 作品番号: Op.10-3
-- ページ: https://example.com/suburbia-classica/songs/tristesse.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/tristesse.html
 
 速さを競う練習曲とは正反対に、遅いテンポで旋律を歌わせる練習曲。右手が旋律・内声・伴奏の三層を受け持つ。
 
@@ -200,7 +200,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1834年
 - 作品番号: Op.66（遺作）
-- ページ: https://example.com/suburbia-classica/songs/fantaisie-impromptu.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/fantaisie-impromptu.html
 
 右手の16分音符と左手の三連符がぶつかる両端部と、中間部の甘い旋律の対比。ショパン自身は生前に出版しなかった。
 
@@ -257,7 +257,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1830〜31年頃
 - 作品番号: Op.9-2
-- ページ: https://example.com/suburbia-classica/songs/nocturne-9-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/nocturne-9-2.html
 
 揺れる左手の伴奏の上で、同じ旋律が回帰するたびに装飾を増していく夜想曲。ショパンの夜想曲の中でも特に広く親しまれている。
 
@@ -323,7 +323,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1838〜39年
 - 作品番号: Op.28-15
-- ページ: https://example.com/suburbia-classica/songs/raindrop.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/raindrop.html
 
 曲全体で鳴り続ける同じ音が、雨だれを思わせる。穏やかな主題と、暗く迫る中間部の対比。24曲の前奏曲で最長。
 
@@ -392,7 +392,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890年頃（1905年出版）
 - 作品番号: ベルガマスク組曲 第3曲
-- ページ: https://example.com/suburbia-classica/songs/clair-de-lune.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/clair-de-lune.html
 
 弱音の和音と流れるアルペッジョで、月明かりの情景を描いた小品。ヴェルレーヌの詩に結びつく題名を持つ。
 
@@ -460,7 +460,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1888年
 - 作品番号: 3つのジムノペディ 第1番
-- ページ: https://example.com/suburbia-classica/songs/gymnopedie-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/gymnopedie-1.html
 
 左手の2つの和音の往復の上に、装飾を排した旋律が静かに乗る。速度表示は「ゆっくりと、苦しみをもって」。
 
@@ -530,7 +530,7 @@ Sony ClassicalからDGへ移ってからの録音。The Classic Reviewによれ�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1838年
 - 作品番号: Op.15-7
-- ページ: https://example.com/suburbia-classica/songs/traumerei.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/traumerei.html
 
 「夢想」を意味する題名どおり、ゆるやかに上り下りする4小節の旋律が、和声を変えながら8回現れる短い曲。
 
@@ -597,7 +597,7 @@ Träumereiはドイツ語で「夢想・白日夢」。曲集の各題は作曲�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1850年出版（原曲の歌曲は1840年代）
 - 作品番号: S.541-3
-- ページ: https://example.com/suburbia-classica/songs/liebestraum-3.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/liebestraum-3.html
 
 歌曲を原曲とする、豊かな旋律と広い音域の伴奏の組み合わせ。2つのカデンツァが3つの部分を分ける。
 
@@ -658,7 +658,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1909末〜1910（完成は1910年1月15〜16日）
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/flaxen-hair.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/flaxen-hair.html
 
 素朴な旋律と淡い響きで、詩の中の金髪の娘を描いた前奏曲集屈指の小品。
 
@@ -713,7 +713,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1888〜1891頃（2曲の作曲期間）
 - 作品番号: L. 66（第1番）
-- ページ: https://example.com/suburbia-classica/songs/arabesque-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/arabesque-1.html
 
 流れる装飾的な音型と柔らかな和声が特徴の、若きドビュッシーによる初期ピアノ曲。
 
@@ -771,7 +771,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1722
 - 作品番号: BWV 846
-- ページ: https://example.com/suburbia-classica/songs/prelude-bwv846.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/prelude-bwv846.html
 
 分散和音だけで織られた、平均律第1巻の幕開けの前奏曲。グノーのアヴェ・マリアの土台としても知られる、静かで澄んだ名曲。
 
@@ -825,7 +825,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1899
 - 作品番号: M. 19
-- ページ: https://example.com/suburbia-classica/songs/pavane.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pavane.html
 
 古い舞曲の趣と静かな哀感を湛えた、ラヴェル初期の代表的ピアノ小品。
 
@@ -876,7 +876,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1830
 - 作品番号: 遺作(B.49 / KK IVa-16 / WN 37)
-- ページ: https://example.com/suburbia-classica/songs/nocturne-20.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/nocturne-20.html
 
 ウィーン到着直後の1830年、姉のために書かれたノクターン。協奏曲の断片を引用した回想的な小品で、映画『戦場のピアニスト』の冒頭でも流れる。
 
@@ -936,7 +936,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1798(出版は1799)
 - 作品番号: Op. 13
-- ページ: https://example.com/suburbia-classica/songs/pathetique-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pathetique-2.html
 
 激しい両端楽章の間で、歌うような旋律が静かに広がる緩徐楽章。ベートーヴェンの優しさが最も親しまれた形で表れる一曲。
 
@@ -990,7 +990,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1783年頃（1784年出版）
 - 作品番号: K.331 / 300i
-- ページ: https://example.com/suburbia-classica/songs/k331-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/k331-1.html
 
 ソナタの幕開けに変奏曲を置いたモーツァルトの異色作。ゆれるシチリアーナ風の主題が6通りに姿を変え、第3楽章のトルコ行進曲へ続く。
 
@@ -1047,7 +1047,7 @@ Liebesträumeはドイツ語で「愛の夢」（複数形）。リスト自身�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1835〜1839(24曲全体の作曲期間)
 - 作品番号: Op.28-7
-- ページ: https://example.com/suburbia-classica/songs/prelude-7.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/prelude-7.html
 
 24の前奏曲の第7番。集中最短で、約45秒の素朴なマズルカ風の小品。短いが、穏やかな表情に満ちた愛らしい曲。
 
@@ -1101,7 +1101,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1865年作曲、1866年出版
 - 作品番号: Op.39-15
-- ページ: https://example.com/suburbia-classica/songs/brahms-waltz-15.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-waltz-15.html
 
 ブラームスの16のワルツの中でも最も愛される1曲。ゆるやかに揺れる旋律が、連弾から独奏に編まれて広く親しまれた。
 
@@ -1156,7 +1156,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 第5巻の出版は1844年（作曲年は未確認）
 - 作品番号: Op.62-6 / MWV U 161
-- ページ: https://example.com/suburbia-classica/songs/mendelssohn-spring-song.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/mendelssohn-spring-song.html
 
 歌詞のない歌をめざした無言歌集の中で最も親しまれる一曲。明るいイ長調の旋律に春のきざしを重ねた小品。
 
@@ -1212,7 +1212,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1741(出版)
 - 作品番号: BWV 988
-- ページ: https://example.com/suburbia-classica/songs/goldberg-aria.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/goldberg-aria.html
 
 30の変奏の出発点となる、優美で静かなサラバンド風の主題。不眠の伯爵の逸話でも知られる、夜に寄り添う音楽。
 
@@ -1270,7 +1270,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890
 - 作品番号: L. 68（L. 76 と表記する資料もある）
-- ページ: https://example.com/suburbia-classica/songs/reverie.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/reverie.html
 
 ドビュッシー本人は軽視したが、素朴な旋律美で広く愛されるようになった初期の小品。
 
@@ -1324,7 +1324,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1890
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/gnossienne-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/gnossienne-1.html
 
 拍子も小節線もない自由な時間の中で、物憂い旋律が揺れる。サティが神秘思想に近づいた時期の、夜に似合う一曲。
 
@@ -1378,7 +1378,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1846〜1847
 - 作品番号: Op.64-2
-- ページ: https://example.com/suburbia-classica/songs/waltz-64-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/waltz-64-2.html
 
 哀愁の短調主題と長調の歌がめぐる、後期ショパンの代表的なワルツ。ロスチャイルド夫人に献呈。
 
@@ -1434,7 +1434,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1835
 - 作品番号: Op.69-1(遺作)
-- ページ: https://example.com/suburbia-classica/songs/waltz-69-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/waltz-69-1.html
 
 1835年、マリア・ヴォジンスカとの別れに際して書かれたとされるワルツ。ショパンの死後、友人フォンタナが出版した。
 
@@ -1490,7 +1490,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1876（全曲は1875年12月〜1876年5月作曲）
 - 作品番号: Op.37a（Op.37bとも表記）/ TH 135
-- ページ: https://example.com/suburbia-classica/songs/tchaikovsky-october.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/tchaikovsky-october.html
 
 チャイコフスキーが雑誌の依頼で書いた十二か月の小品のうち、ニ短調で秋の寂しさを歌う10月の曲。
 
@@ -1545,7 +1545,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1778
 - 作品番号: K.310 / 300d
-- ページ: https://example.com/suburbia-classica/songs/k310-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/k310-2.html
 
 母の死の頃に書かれたイ短調ソナタの中央で、ヘ長調の歌が静かに流れる緩徐楽章。モーツァルトの数少ない短調ソナタの陰影を和らげる。
 
@@ -1603,7 +1603,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1827
 - 作品番号: Op.90 / D.899-3
-- ページ: https://example.com/suburbia-classica/songs/schubert-impromptu-90-3.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/schubert-impromptu-90-3.html
 
 変ト長調の長い旋律が、竪琴のような分散和音に乗って流れるシューベルト晩年の歌。映画でもおなじみの一曲。
 
@@ -1663,7 +1663,7 @@ Op.90の第1・2番はシューベルト存命中に出版（出版社はハス�
 - カテゴリ: ピアノ独奏
 - 作曲年: 1893
 - 作品番号: Op.118-2
-- ページ: https://example.com/suburbia-classica/songs/brahms-op118-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-op118-2.html
 
 晩年のブラームスが静かな休暇先で書いた小品集の中の最も有名な1曲。優しく内省的な旋律で、秘めた想いのようだと語られる。
 
@@ -1721,7 +1721,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 不明（1680〜1706の間で諸説）
 - 作品番号: P.37
-- ページ: https://example.com/suburbia-classica/songs/canon.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/canon.html
 
 低音の同じ進行を繰り返し、3つの声が同じ旋律を追いかけて重なっていく、バロックの代表的なカノン。
 
@@ -1782,7 +1782,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1730年代初め頃／編曲1871年
 - 作品番号: BWV 1068-2
-- ページ: https://example.com/suburbia-classica/songs/air-g-string.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/air-g-string.html
 
 バッハの管弦楽組曲の緩徐楽章を、ウィルヘルミがG線だけで弾けるよう編曲した、静かに歌う名旋律。
 
@@ -1844,7 +1844,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1723年／ヘス編曲1926年
 - 作品番号: BWV 147（第6曲・第10曲のコラール）
-- ページ: https://example.com/suburbia-classica/songs/jesu-joy.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/jesu-joy.html
 
 バッハのカンタータのコラールを、マイラ・ヘスがピアノ用にまとめた、流れるような伴奏に旋律が歌う名編曲。
 
@@ -1899,7 +1899,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1900〜1901年
 - 作品番号: Op.18
-- ページ: https://example.com/suburbia-classica/songs/rach-pc2-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/rach-pc2-2.html
 
 ダーリ医師の治療で立ち直ったラフマニノフが書いた、静かで抒情的な緩徐楽章。映画や歌にも転用された名旋律。
 
@@ -1957,7 +1957,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1825年／リスト編曲1837〜38年（1876年改訂）
 - 作品番号: D.839, Op.52-6（リスト版 S.558/12）
-- ページ: https://example.com/suburbia-classica/songs/schubert-ave-maria.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/schubert-ave-maria.html
 
 スコットの詩に付けられた祈りの歌を、リストがピアノ一台で歌わせた編曲。息の長い旋律が夜に寄り添う。
 
@@ -2017,7 +2017,7 @@ Op.118のなかで最も知られる小品の一つで、晩年のブラーム�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1888年
 - 作品番号: Op.12
-- ページ: https://example.com/suburbia-classica/songs/liebesgruss.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/liebesgruss.html
 
 エルガーが婚約者アリスへの贈り物として書いた小品。甘く温かな旋律で、ピアノ独奏版でも親しまれている。
 
@@ -2074,7 +2074,7 @@ Apple Music Classicalの『The Perlman Sound』（41曲）では、エルガー�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1915年
 - 作品番号: Op.34-14
-- ページ: https://example.com/suburbia-classica/songs/vocalise.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/vocalise.html
 
 歌詞を持たず母音だけで歌われるラフマニノフの歌曲。ピアノ独奏を含む多彩な編曲で親しまれている。
 
@@ -2127,7 +2127,7 @@ Apple Music Classicalの『The Perlman Sound』（41曲）では、エルガー�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1868年
 - 作品番号: Op.49-4
-- ページ: https://example.com/suburbia-classica/songs/brahms-lullaby.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brahms-lullaby.html
 
 友人の子の誕生を祝って書かれた、世界で最も有名な子守歌のひとつ。揺れる伴奏に素朴な旋律が乗る。
 
@@ -2183,7 +2183,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1785年
 - 作品番号: K.467
-- ページ: https://example.com/suburbia-classica/songs/mozart-pc21-2.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/mozart-pc21-2.html
 
 弱音器付きの弦と夢見るようなピアノが続く緩徐楽章。映画『みじかくも美しく燃え』で世界的に知られた。
 
@@ -2241,7 +2241,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1877年
 - 作品番号: Op.7-1（歌曲集『3つのメロディ』第1曲）
-- ページ: https://example.com/suburbia-classica/songs/faure-apres-un-reve.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/faure-apres-un-reve.html
 
 フォーレがビュシーヌの詩に付けた1877年の歌曲。夢の余韻と喪失を歌い、チェロ版などでも愛される。
 
@@ -2296,7 +2296,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1934年
 - 作品番号: Op.43
-- ページ: https://example.com/suburbia-classica/songs/paganini-var18.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/paganini-var18.html
 
 パガニーニの主題を反転させて生まれた、ラフマニノフ屈指の甘美な旋律。映画でも使われた名変奏。
 
@@ -2353,7 +2353,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 1874〜75年（付随音楽Op.23）
 - 作品番号: Op.23（第4幕）、組曲第2番Op.55-4、ピアノ編曲Op.52-4
-- ページ: https://example.com/suburbia-classica/songs/solveigs-song.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/solveigs-song.html
 
 帰らぬ人を待ち続けるソルヴェイグの歌を、グリーグ自身がピアノ独奏に編曲。北欧の哀愁を静かにたたえた旋律。
 
@@ -2410,7 +2410,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1804–1808
 - 作品番号: 作品67
-- ページ: https://example.com/suburbia-classica/songs/beethoven-5.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/beethoven-5.html
 
 「ダダダダーン」の4音の動機を徹底的に展開した、ハ短調の緊迫したソナタ形式の楽章。ベートーヴェンの代名詞ともいえる冒頭で知られる。
 
@@ -2472,7 +2472,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1824
 - 作品番号: 作品125
-- ページ: https://example.com/suburbia-classica/songs/beethoven-9.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/beethoven-9.html
 
 ベートーヴェン最後の交響曲の終楽章。シラーの詩に曲を付けた歓喜の主題が、低弦の静かな入りから独唱と合唱を伴う大合唱へ広がる。
 
@@ -2539,7 +2539,7 @@ Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1725年頃（作品8の出版）
 - 作品番号: Op.8-1 / RV269
-- ページ: https://example.com/suburbia-classica/songs/vivaldi-spring.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/vivaldi-spring.html
 
 ヴィヴァルディ「四季」の冒頭を飾る「春」の第1楽章。ソネットに基づき小鳥や嵐を描く明るいホ長調の協奏曲で、独奏ヴァイオリンの技巧と軽快な主題が魅力。
 
@@ -2594,7 +2594,7 @@ La primavera（春）。各曲に付されたソネットが季節の情景を�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1893
 - 作品番号: Op.95, B.178
-- ページ: https://example.com/suburbia-classica/songs/largo-new-world.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/largo-new-world.html
 
 コーラングレが歌う変ニ長調の主題で知られる『新世界より』の緩徐楽章。のち英語詞『Goin' Home』や堀内敬三の『家路』となり、日本でも広く愛される。
 
@@ -2664,7 +2664,7 @@ La primavera（春）。各曲に付されたソネットが季節の情景を�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1928
 - 作品番号: M.81（作品番号なし）
-- ページ: https://example.com/suburbia-classica/songs/bolero.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/bolero.html
 
 小太鼓の同じリズムに乗せ、2つの旋律を楽器を替えて繰り返し、約15分かけて音量を積み上げるラヴェルの代表作。1928年にバレエ曲として初演された。
 
@@ -2736,7 +2736,7 @@ DGの表記ではボレロの録音は1985年、同じ盤の《展覧会の絵�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1901
 - 作品番号: Op.39-1
-- ページ: https://example.com/suburbia-classica/songs/pomp-circumstance-1.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pomp-circumstance-1.html
 
 エルガーが1901年に書いた行進曲。弱音で始まる『希望と栄光の国』のトリオが全管弦楽で堂々と再現され、英国の祝祭や各国の卒業式で親しまれる。
 
@@ -2793,7 +2793,7 @@ DGの表記ではボレロの録音は1985年、同じ盤の《展覧会の絵�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1787
 - 作品番号: K.525
-- ページ: https://example.com/suburbia-classica/songs/eine-kleine.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/eine-kleine.html
 
 モーツァルトが1787年に書いた弦楽のためのセレナード。上昇音型で始まる明快なソナタ形式の第1楽章で、最も親しまれたクラシック曲の一つ。
 
@@ -2849,7 +2849,7 @@ DGの表記ではボレロの録音は1985年、同じ盤の《展覧会の絵�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: ピアノ組曲1874年／ラヴェル編曲1922年
 - 作品番号: 未確認
-- ページ: https://example.com/suburbia-classica/songs/pictures.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/pictures.html
 
 ムソルグスキーがハルトマンの遺作展を歩く姿を描いたピアノ組曲を、ラヴェルが色彩豊かな管弦楽に編んだ名作。プロムナードとキエフの大門が特に有名。
 
@@ -2907,7 +2907,7 @@ DGの記事によると、カラヤンとベルリン・フィルは1966年3月�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1886年（組曲の作曲）／1887年（チェロとピアノ1台版の出版）
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/le-cygne.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/le-cygne.html
 
 動物の謝肉祭の中で唯一、作曲者が生前の公開を許した曲。チェロが水面を滑る白鳥のように静かに歌い、後にバレエ『瀕死の白鳥』でも知られた。
 
@@ -2963,7 +2963,7 @@ DGの記事によると、カラヤンとベルリン・フィルは1966年3月�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1914（「木星」の作曲）／1917（管弦楽化の完成）
 - 作品番号: Op.32（H.125）第4曲
-- ページ: https://example.com/suburbia-classica/songs/jupiter.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/jupiter.html
 
 活気ある舞曲風の主部と、中間部の広い旋律の対比が魅力。中間部は英国の賛歌と平原綾香『Jupiter』の原曲にもなった、ホルスト『惑星』の代表楽章。
 
@@ -3029,7 +3029,7 @@ DGの記事によると、カラヤンとベルリン・フィルは1966年3月�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1704年頃〜1750年代（成立年は不明で諸説）
 - 作品番号: BWV 565
-- ページ: https://example.com/suburbia-classica/songs/toccata-fugue-dm.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/toccata-fugue-dm.html
 
 オルガン曲を代表する一曲で、劇的な冒頭と16分音符のフーガが続く。バッハ作とされてきたが、真作性には1981年以来異論もあり、結論は出ていない。
 
@@ -3092,7 +3092,7 @@ BWV565の成立事情は実のところはっきりしない。バッハ自筆�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 付随音楽1872年／第2組曲1879年
 - 作品番号: 第2組曲（作品番号なし）
-- ページ: https://example.com/suburbia-classica/songs/farandole.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/farandole.html
 
 ビゼー「アルルの女」第2組曲の終曲。プロヴァンスの行進曲と舞曲の旋律が重なり、タンブランが響く熱狂的なクライマックスへ駆け上がる。
 
@@ -3147,7 +3147,7 @@ BWV565の成立事情は実のところはっきりしない。バッハ自筆�
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1875
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/carmen-prelude.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/carmen-prelude.html
 
 闘牛士の行進と歌の旋律が輝く幕開けのあと、運命の動機が弦のトレモロの上で不穏に響く。ビゼーが全曲の悲劇を先取りした前奏曲。
 
@@ -3207,7 +3207,7 @@ Prelude（前奏曲）は第1幕への導入曲。『カルメン』の題名は
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1890（歌劇の初演年。間奏曲単独の作曲年は未確認）
 - 作品番号: なし
-- ページ: https://example.com/suburbia-classica/songs/cavalleria-intermezzo.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/cavalleria-intermezzo.html
 
 復讐の誓いの直後、無人の広場に流れるマスカーニの静かな間奏曲。弦の長い旋律が嵐の前の静けさを描き、映画『レイジング・ブル』でも知られる。
 
@@ -3269,7 +3269,7 @@ Prelude（前奏曲）は第1幕への導入曲。『カルメン』の題名は
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 1936年（編曲）／1938年（初演）
 - 作品番号: Op. 11（弦楽四重奏曲 Op. 11 の第2楽章の編曲）
-- ページ: https://example.com/suburbia-classica/songs/barber-adagio.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/barber-adagio.html
 
 弦楽四重奏曲の緩徐楽章を弦楽合奏に編曲した、静かに高まっていく名曲。1938年にトスカニーニが初演し、追悼の場でも多く演奏されてきた。
 
@@ -3321,3 +3321,1068 @@ Prelude（前奏曲）は第1幕への導入曲。『カルメン』の題名は
 - https://ja.wikipedia.org/wiki/弦楽のためのアダージョ
 - https://www.loc.gov/programs/static/national-recording-preservation-board/documents/ADAGIO%20FOR%20STRINGS.pdf
 - https://gramophone.co.uk/feature/barber-adagio-for-strings-a-quick-guide-to-the-best-recordings
+
+
+---
+
+# 歌劇「トゥーランドット」より 誰も寝てはならぬ
+
+- 英題: Nessun dorma (from Turandot)
+- 作曲者: ジャコモ・プッチーニ（ロマン派（後期））
+- カテゴリ: オペラ
+- 作曲年: 1924年頃（未完のまま作曲者死去）／初演1926年
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/nessun-dorma.html
+
+プッチーニ最後の歌劇『トゥーランドット』第3幕で、王子カラフが夜明けの勝利を確信して歌う名アリア。静から高揚へ進む旋律が魅力です。
+
+## 作曲の経緯
+『トゥーランドット』はプッチーニ最後のオペラで、1924年の作曲者の死により未完のまま残され、終盤はフランコ・アルファーノが補筆した。台本はアダーミとシモーニ。冷酷な姫トゥーランドットは求婚者に三つの謎を課し、解けなければ処刑する。王子カラフは謎を解くが姫は結婚を拒み、そこで彼は夜明けまでに自分の名を当てられたら命を差し出すと申し出る。姫は国中に、名が分かるまで誰も眠ってはならぬと命じる。第3幕の冒頭、月明かりの宮殿の庭にひとり立つカラフが、遠くで響く触れ役の声を聞きながら、夜明けの勝利を確信して歌うのがこのアリアである。なおこの旋律は、アルファーノ版の終幕で凱旋的に再登場する。
+
+## 出版・初演
+歌劇『トゥーランドット』は1926年4月25日、ミラノ・スカラ座で初演（指揮トスカニーニ、カラフ役ミゲル・フレタ）。楽譜出版はリコルディ（声楽譜の版元として英Wikipedia脚注に記載）。
+
+## 題名・通称の由来
+歌い出しのイタリア語 Nessun dorma（誰も寝てはならぬ）に由来。日本でもこの和訳が通称。
+
+## 構成分析
+- 冒頭: 触れ役の声を受け、姫も眠れぬ夜を過ごしているだろうと語りかける
+- 中間部: 自分の名は胸の内に秘めたまま、夜明けに口づけで告げようと確信を示す
+- 女声合唱: 遠くから名は誰にも分からず、我々は死ぬのだと嘆く声が重なる
+- 結び: 夜よ去れ、星よ沈めと呼びかけ、夜明けの勝利を高らかに宣言する
+
+## 音楽的特徴
+最後の「勝利」を意味する語で高音が長く保たれる演奏慣習があるが、プッチーニの楽譜に明示された指示ではないと英Wikipediaは記す。
+
+## 演奏のポイント
+静かな歌い出しから、合唱を挟んで最後の高音に向けて一気に高揚する流れ。
+
+## この音源について
+- 演奏: ルチアーノ・パヴァロッティ（テノール）／ズービン・メータ指揮、ロンドン・フィルハーモニー管弦楽団（推定。YouTube上ではZubin Mehta - Topic）
+- アルバム: Puccini: Turandot（全曲盤）
+- レーベル: Decca
+- 録音: 1972
+- 録音場所: ロンドン、キングスウェイ・ホール
+
+この全曲盤は1972年にロンドンのキングスウェイ・ホールで録音された。録音は名エンジニア、ケネス・ウィルキンソンらのチームが手がけたマルチトラックのマスターテープに基づく。ガイド役のカラフにパヴァロッティ、トゥーランドットにサザーランド、リューにカバリエ、ティムールにギャウロフが配された。サザーランドの起用は当初意外とされたが、重厚な声が役に合うと評されている。グラモフォン誌の評者は、キングスウェイ・ホール録音の中でも屈指の実在感があると述べた。
+
+（音源の投稿元（Zubin Mehta - Topic）はoEmbedで確認済み。パヴァロッティ／メータ指揮の1972年デッカ全曲盤由来と推定されるが、トラックとの対応は未確認。）
+
+## 映画・ドラマ
+- Yes, Giorgio（1982）: 場面未確認 https://www.nytimes.com/1982/09/24/movies/pavarotti-in-giorgio.html
+- ミッション:インポッシブル／ローグ・ネイション（2015）: 場面未確認 https://www.independent.co.uk/arts-entertainment/films/reviews/mission-impossible--rogue-nation-movie-review-tom-cruise-50-is-still-like-a-puppy-in-this-relentless-action-soap-opera-10423721.html
+
+## CM
+- ラバッツァ（コーヒー）: 2009年のキャンペーンでアントニー・ヘガティ（アノーニ）が歌唱 https://www.theguardian.com/music/musicblog/2009/oct/22/antony-hegarty-opera-coffee
+
+## トリビア
+- 2006年トリノ冬季五輪開会式でパヴァロッティが歌ったが、寒さのため事前録音への口パクだったことが後に明かされた（英・日Wikipedia）。
+- 1998年グラミー賞では、体調不良で出演できなくなったパヴァロッティの代役としてアレサ・フランクリンがこのアリアを歌った。
+- 2019年にJR東日本が上野駅の発車メロディにこの曲を1か月間使用した（英Wikipedia）。
+
+## 出典
+- https://en.wikipedia.org/wiki/Nessun_dorma
+- https://ja.wikipedia.org/wiki/誰も寝てはならぬ
+- https://gramophone.co.uk/review/puccini-turandot-11
+- https://www.theaterbyte.com/puccini-turandot-london-philharmonic-zubin-mehta-decca-pure-audio-blu-ray-review/
+
+
+---
+
+# 歌劇「椿姫」より 乾杯の歌
+
+- 英題: Libiamo ne' lieti calici (Brindisi, La traviata)
+- 作曲者: ジュゼッペ・ヴェルディ（ロマン派）
+- カテゴリ: オペラ
+- 作曲年: 1853
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/brindisi.html
+
+ヴェルディ『椿姫』第1幕の夜会で歌われる、アルフレードとヴィオレッタの華やかな乾杯の二重唱。3拍子の軽快な旋律で親しまれています。
+
+## 作曲の経緯
+『椿姫』はデュマ・フィスの小説『椿を持つ女』に基づくヴェルディの歌劇で、1853年3月6日にヴェネツィアのフェニーチェ劇場で初演された。台本はピアーヴェ。この乾杯の歌は第1幕、高級娼婦ヴィオレッタ邸の夜会で歌われる。友人ガストーネや周囲にうながされた青年アルフレードが、歌を披露する形で始まる。彼は杯を掲げて美と愛の喜びを讃え、続いてヴィオレッタが加わり、人生の楽しみは束の間だから今を味わおうと応じる。合唱も加わって華やかに盛り上がり、二人が互いを意識し始める場面でもある。軽快な3拍子のワルツ風の旋律で、オペラの中でも特に親しまれている曲のひとつ。作曲の具体的な経緯は今回の調査では未確認。
+
+## 出版・初演
+歌劇全曲の初演：1853年3月6日、ヴェネツィア・フェニーチェ劇場。出版はリコルディ（1914年版声楽譜が英Wikipedia脚注に記載）。
+
+## 題名・通称の由来
+冒頭の歌詞 Libiamo ne' lieti calici（楽しい杯で飲もう）より。brindisi は乾杯・祝杯の歌を指す語。
+
+## 構成分析
+- アルフレードの独唱: 乾杯を呼びかけ、愛と快楽を讃える
+- 合唱: 全員がアルフレードの旋律を受けて繰り返す
+- ヴィオレッタの独唱: 人生の喜びは束の間と応じて、楽しもうと歌う
+- 全員の合唱: 二人の掛け合いを挟み、夜会の高揚で締めくくる
+
+## 音楽的特徴
+3拍子の軽快なワルツ風リズムで、独唱、掛け合い、合唱へと盛り上がっていく構成。
+
+## 演奏のポイント
+アルフレードの率直な歌い出しと、ヴィオレッタのやや華やかな応答の対比。
+
+## この音源について
+- 演奏: イレアナ・コトルバス（ソプラノ）、プラシド・ドミンゴ（テノール）／カルロス・クライバー指揮、バイエルン州立歌劇場管弦楽団・合唱団
+- アルバム: Verdi: La traviata（全曲盤）
+- レーベル: Deutsche Grammophon
+- 録音: 1976
+- 録音場所: 未確認
+
+この全曲盤は1976年にカルロス・クライバー指揮、バイエルン州立歌劇場の管弦楽団と合唱団により録音された。ヴィオレッタはイレアナ・コトルバス、アルフレードはプラシド・ドミンゴ、ジェルモンはシェリル・ミルンズ。ドイツ・グラモフォンから発売され、今日でも同曲の代表的な録音として挙げられる。録音会場や制作の逸話は、読んだ出典では確認できなかった。
+
+（音源の投稿元（Ileana Cotrubas - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- 歌詞はフランチェスコ・マリア・ピアーヴェによる（英Wikipedia）。
+- 三大テノールの1994年コンサートでも取り上げられている（YouTube上に公式映像が存在）。
+- 楽譜は英Wikipedia脚注によりリコルディ1914年版の声楽譜で確認できる。
+
+## 出典
+- https://en.wikipedia.org/wiki/Libiamo_ne%27_lieti_calici
+- https://en.wikipedia.org/wiki/La_traviata_discography
+
+
+---
+
+# 歌劇「カルメン」より ハバネラ（恋は野の鳥）
+
+- 英題: Habanera: L'amour est un oiseau rebelle (Carmen)
+- 作曲者: ジョルジュ・ビゼー（ロマン派）
+- カテゴリ: オペラ
+- 作曲年: 1875
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/habanera.html
+
+ビゼー『カルメン』第1幕、カルメンが登場して歌う挑発的なアリア。ハバネラのリズムに乗せ、恋は気まぐれな野の鳥だと歌います。
+
+## 作曲の経緯
+『カルメン』はビゼーの4幕のオペラ・コミックで、台本はメイヤックとアレヴィ。ハバネラは第1幕、主人公カルメンが登場して歌う曲である。旋律はスペインの作曲家セバスティアン・イラディエルの歌曲「エル・アレグリート」（1863年出版）に基づく。ビゼーはこれを民謡と思い込んでいたが、作曲者の存在を指摘され、声楽譜の初版に由来を注記したという。歌詞はビゼー自身によるものとされる。リハーサル中に最初の版の登場歌が外され、ビゼーは何度も書き直して、初演者の歌手ガリ＝マリエも満足する形に仕上げた。原曲の長い前奏や後半部分を省き、半音階的な動きや和声の工夫を加えて印象的な一曲にした。
+
+## 出版・初演
+初演：1875年3月3日、パリ・オペラ＝コミック座。ハバネラは初演でセレスティーヌ・ガリ＝マリエが歌った。
+
+## 題名・通称の由来
+ハバネラは『ハバナの（音楽・舞曲）』の意。原題は歌い出しの L'amour est un oiseau rebelle（恋は反抗的な鳥）。
+
+## 構成分析
+- レシタティフ: いつあなたを愛するかと問われ、たぶん永遠にない、明日かも、と軽くかわす
+- ハバネラ主部: 恋は誰にも飼いならせない野の鳥だと歌う
+- リフレイン（合唱を交えて）: 恋は掟を知らない、私を愛さないならこちらが愛する、気をつけなさいと迫る
+- 後半の節: 捕らえたつもりの鳥は逃げ、忘れた頃に戻ってくるとたたみかける
+
+## 音楽的特徴
+ニ音の持続低音が全体を通して保たれ、調は途中で転調せず短調から長調に変わる。低音域のフルートとハバネラのリズムが独特の気配を作る（英Wikipedia）。
+
+## 演奏のポイント
+誘うようで挑発的な語り口と、三連符を交えた旋律の揺らぎ。
+
+## この音源について
+- 演奏: マリア・カラス（メゾソプラノ／カルメン）、ジョルジュ・プレートル指揮、パリ・オペラ座管弦楽団、ルネ・デュクロ合唱団
+- アルバム: Bizet: Carmen（全曲盤）
+- レーベル: EMI Classics / Warner Classics
+- 録音: 1964
+- 録音場所: パリ、サル・ワグラム
+
+この録音は1964年、パリのサル・ワグラムで行われ、1965年の発売時には、カラスこそカルメンだ、という宣伝文句が使われた。レビューによると、パリ・オペラ座の合唱団は当時評判が芳しくなかったため、EMIはルネ・デュクロ合唱団を起用している。評者はカラスのフランス語の発音を高く評価し、ハバネラの「Et c'est l'autre que je préfère」の一句の陰影づけを特に挙げている。
+
+（音源の投稿元（Maria Callas - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- ニーチェは『カルメン』の熱烈な賛美者で、この曲を挑発的と評した（英Wikipedia）。
+- 第1幕の最後の場面で、カルメンがこのリフレインをハミングする。
+- ホセだけは、カルメンの歌の間ただ一人彼女に注意を向けない（英Wikipedia）。
+
+## 出典
+- https://en.wikipedia.org/wiki/Habanera_(aria)
+- https://musicwebinternational.com/2024/02/bizet-carmen-warner-classics/
+
+
+---
+
+# 喜歌劇「天国と地獄」序曲（カンカンを含む）
+
+- 英題: Orpheus in the Underworld: Overture (Orphée aux enfers)
+- 作曲者: ジャック・オッフェンバック（序曲の編纂：カール・ビンダー）（ロマン派（第二帝政期フランス））
+- カテゴリ: オペラ
+- 作曲年: 1858年（喜歌劇初演）／序曲は1860年（ウィーン上演用）
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/orpheus-overture.html
+
+オッフェンバックの喜歌劇の旋律をウィーンでビンダーがつないだ序曲。終盤の「地獄のギャロップ」は、カンカン踊りの定番曲として世界中で知られる。
+
+## 作曲の経緯
+オッフェンバックは1850年代半ば、パリの小劇場ブッフ・パリジャンで一幕物の喜歌劇を次々に上演していたが、上演規則により歌手は4人までに制限され、長い作品は書けなかった。1858年に規制が緩むと、かねて温めていた二幕物に取りかかる。以前コメディ＝フランセーズの音楽監督を務めた時期に、気取った神々や英雄の芝居に退屈し、仕返しをしたいと台本作家クレミューに語っていたという。台本はクレミューとアレヴィの構想から出発し、最終的にクレミュー名義となった。1858年10月21日の初演後、批評家ジャナンが「古代への冒涜」と激しく非難したことが逆に話題を呼び、観客が押し寄せて大入りとなった。なお、いま広く知られる序曲はオッフェンバック本人の作ではなく、1860年のウィーン上演のためにカール・ビンダーが劇中の旋律を集めて作ったものである。
+
+## 出版・初演
+喜歌劇は1858年10月21日、パリのブッフ・パリジャン座（サル・ショワズール）で初演（二幕版）。1874年2月7日にはガイテ座で四幕版を上演。広く演奏される序曲は、1860年のウィーン（アン・デア・ウィーン劇場）上演のためにビンダーが編曲。
+
+## 題名・通称の由来
+原題Orphée aux enfersは「地獄のオルフェ（オルフェウス）」の意。「Galop infernal」は「地獄の（猛烈な）ギャロップ」という意味の曲名。1890年代にパリのムーラン・ルージュやフォリー・ベルジェールがこの曲をカンカン踊りの伴奏に採用し、以後「カンカン」の名で親しまれた。日本語題「天国と地獄」の由来は未確認。
+
+## 構成分析
+- 序盤（ゆったりした導入）: 劇中の旋律を使った静かな部分から始まる（細部の曲名は未確認）
+- 中盤（劇中旋律のつなぎ）: ウィーン版序曲はオルフェのヴァイオリン独奏を前面に出し、劇中の旋律をメドレー風に並べる
+- 終盤（ギャロップ）: 劇の第2幕（1874年版では第4幕）の終幕場面に由来する「地獄のギャロップ」。神々が大騒ぎで踊る場面の曲で、序曲を締めくくる
+
+## 音楽的特徴
+オッフェンバックは「ギャロップ・アンフェルナル」のような速い曲で、同じ調を長く保ち楽器編成もほぼ一定にする簡潔な書き方をしている、と研究者が指摘している。原曲は、のちの上品なカンカンより遥かに自然発生的で乱痴気騒ぎ的だったとされる（ケック氏は現代のレイヴになぞらえている）。
+
+## 演奏のポイント
+オルフェを示すヴァイオリン独奏の語り口、そして終盤でテンポが一気に上がるギャロップの高揚感が聴きどころ。ギャロップは速度を上げすぎず、軽さと勢いのバランスをどう取るかで印象が変わる。
+
+## この音源について
+- 演奏: ヘルベルト・フォン・カラヤン指揮 ベルリン・フィルハーモニー管弦楽団（※指揮者名は検索結果の記述による。このIDと録音の紐づけは未確認）
+- アルバム: 未確認（DGのオッフェンバック序曲集の可能性があるが確認できず）
+- レーベル: Deutsche Grammophon の可能性（未確認）
+- 録音: 未確認
+- 録音場所: 未確認
+
+カラヤンはオッフェンバック没後100年にあたる1980年に、「天国と地獄」「青ひげ」「ジェロルスタン女大公殿下」「美しきエレーヌ」「ヴェール＝ヴェール」の各序曲を収めたオッフェンバック録音集を作った、とカラヤン研究所の記事に記されている。これに先立ち、カラヤンはフィルハーモニア管との最後の録音セッションでも「天国と地獄」序曲を録音しており、ヒュー・ビーンのヴァイオリン独奏が称賛された。ただし、このYouTube音源がどの録音か（ベルリン・フィルの1980年頃のものか）は確認できていない。
+
+（音源の投稿元（Berliner Philharmoniker - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- 現在よく演奏される序曲はオッフェンバックの作ではなく、1860年にウィーンでカール・ビンダーが編んだもの。
+- 初演版は228回上演（初演の公演は1859年6月に、出演者が疲れ切ったため打ち切られたとされる）。当時は100回で成功と言われた。
+- 1890年代にムーラン・ルージュとフォリー・ベルジェールがこの曲をカンカンに使い、曲と踊りが結びついた。
+
+## 出典
+- https://en.wikipedia.org/wiki/Orpheus_in_the_Underworld
+- https://imslp.org/wiki/Overture_to_Offenbach's_opera_'Orph%C3%A9e_aux_Enfers'_(Binder,_Carl)
+- https://karajan.org/stories/spotlight-offenbach/
+- https://www.musicweb-international.com/classrev/2019/Dec/Offenbach_Neptune_5553012.htm
+
+
+---
+
+# 歌劇「ウィリアム・テル」序曲（終曲：スイス兵の行進）
+
+- 英題: William Tell Overture (Guillaume Tell) - Finale: March of the Swiss Soldiers
+- 作曲者: ジョアキーノ・ロッシーニ（ロマン派（初期））
+- カテゴリ: オペラ
+- 作曲年: 1829年（歌劇の初演）
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/william-tell-overture.html
+
+ロッシーニ最後のオペラの序曲。夜明けと嵐と牧歌を経て、トランペットの合図で一気に駆け出す終曲は、『ローン・レンジャー』などで世界的に知られる。
+
+## 作曲の経緯
+ロッシーニは1828年に歌劇「ギヨーム・テル」の作曲を始めた。この作品は1829年にパリで初演され、彼が書いた39作目、そして最後のオペラとなった。以後ロッシーニは半ば引退し、カンタータや宗教曲、世俗声楽曲を書くにとどまる。序曲はスイス・アルプスの情景を描いた約12分の作品で、ベルリオーズが（ロッシーニの作品はたいてい嫌っていたにもかかわらず）「4部からなる交響曲」と評したことで知られる。交響曲と違って各部は切れ目なく続き、静かなチェロの夜明けから嵐、牧歌を経て、終曲の騒がしい行進に至る。終曲は最終幕でスイス人たちがオーストリアの圧政から祖国を解放する勝利を暗示する。リストは1838年にピアノ編曲（S.552）を作り、自分の演奏会の定番にした。
+
+## 出版・初演
+歌劇は1829年にパリで初演（Wikipedia英語版による。上演日・劇場は今回は未確認）。リストのピアノ編曲は1838年。
+
+## 題名・通称の由来
+英語名の終曲「March of the Swiss Soldiers」は「スイス兵の行進」の意。実際は行進曲というより「ギャロップ」で、馬が駆けるイメージから米国ラジオ・テレビ番組『ローン・レンジャー』の主題曲として定着した。
+
+## 構成分析
+- 第1部 前奏（夜明け）: ホ短調で始まる約3分。独奏チェロ5本をコントラバスが支える。遠雷を思わせるティンパニが嵐を予告する
+- 第2部 嵐: ホ短調。全管弦楽が加わる約3分の激しい部分。ピッコロ、フルート、オーボエ、クラリネット、ファゴットの短い応答、続いて金管と大太鼓が嵐を爆発させ、徐々に静まる
+- 第3部 牧歌（ランツ・デ・ヴァッシュ）: ト長調。嵐の後の静けさ。イングリッシュ・ホルンがスイスの牛追い歌を吹き、フルートと掛け合う
+- 第4部 終曲（スイス兵の行進）: ホ長調。トランペットのファンファーレに始まり、全管弦楽で駆け抜けるギャロップ。約3分
+
+## 音楽的特徴
+ロッシーニの曲を象徴するクレッシェンドは本稿の調査では未確認のため言及を控える。確認できた点は、前奏がチェロ5本というユニークな編成であること、終曲はトランペットで告げられる「ギャロップ」で、馬の疾走や救援のイメージとして広く使われること。
+
+## 演奏のポイント
+終曲（約3分）。トランペットのファンファーレに続いて弦が一気に駆け出す瞬間と、コーダに向かって高まる高揚感が聴きどころ。前の牧歌との対比（イングリッシュ・ホルンとフルートの静かな対話）が、終曲の勢いをいっそう際立たせる。
+
+## この音源について
+- 演奏: ベルリン・フィルハーモニー管弦楽団（指揮者は未確認）
+- アルバム: 未確認
+- レーベル: 未確認（公式Topicチャンネル）
+- 録音: 未確認
+- 録音場所: 未確認
+
+この音源の収録エピソードは、出典で確認できなかった。
+
+（音源の投稿元（Berliner Philharmoniker - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- 時計じかけのオレンジ（1971年）: ウェンディ・カルロスによる電子編曲の終曲が、早回し映像の場面で流れる https://en.wikipedia.org/wiki/William_Tell_Overture
+- プリティ・プリンセス（2001年）: ジョーのリムジンが雨の中のミアを助けに来る場面 https://en.wikipedia.org/wiki/William_Tell_Overture
+- プリティ・プリンセス2（2004年）: ニコラスが自転車や馬でミアの結婚式を止めに向かう場面 https://en.wikipedia.org/wiki/William_Tell_Overture
+
+## CM
+- リーボック「Defy Convention」キャンペーン: 2001年、DJシャドウによるヒップホップ版 https://en.wikipedia.org/wiki/William_Tell_Overture
+- ホンダ・シビック: 2008年、電子音楽版のキャンペーン https://en.wikipedia.org/wiki/William_Tell_Overture
+
+## トリビア
+- ベルリオーズは、普段ロッシーニを嫌っていたにもかかわらず、この序曲を「4部からなる交響曲」と評した。
+- 『ローン・レンジャー』に結びつきすぎたため、「ウィリアム・テル序曲を聴いてローン・レンジャーを思い出さない男が知識人だ」という冗談が生まれた。
+- 歌劇には馬も騎兵の突撃も登場しないが、終曲は競馬や馬の疾走を示す音楽として広く使われる。
+
+## 出典
+- https://en.wikipedia.org/wiki/William_Tell_Overture
+- https://imslp.org/wiki/Guillaume_Tell_(Rossini,_Gioacchino)
+
+
+---
+
+# 歌劇「魔笛」より 夜の女王のアリア「復讐の心は地獄のように我が胸に燃え」
+
+- 英題: Der Hölle Rache kocht in meinem Herzen (Queen of the Night aria), from Die Zauberflöte
+- 作曲者: ヴォルフガング・アマデウス・モーツァルト（古典派）
+- カテゴリ: オペラ
+- 作曲年: 1791年
+- 作品番号: K.620（第2幕・第14番）
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/queen-of-night.html
+
+復讐に燃える夜の女王が娘にナイフを握らせる、『魔笛』第2幕の怒りのアリア。高音のスタッカートと変ロ音の叫びが、ソプラノの技巧の頂点として知られる。
+
+## 作曲の経緯
+『魔笛』の台本はエマヌエル・シカネーダーが書き、彼の劇団が1791年9月30日にウィーンのヴィーデン劇場で初演した（シカネーダー自身がパパゲーノ役）。夜の女王が第2幕で歌うこのアリアでは、女王が娘パミーナにナイフを握らせ、宿敵ザラストロを殺すよう迫る。従わなければ母娘の縁を切り、呪うと宣言する激しい場面である。初演で歌ったのは、モーツァルトの義妹ヨゼファ・ホーファー（当時32歳）。非常に高い声域と敏捷な技巧に恵まれた歌手で、モーツァルトは彼女の力量を知ったうえで2つの大アリアを書いたとされる。曲の音域は2オクターブ（F4からF6）で、高い音域が続く。シカネーダーの詩はこのアリアで例外的に長めの韻律（5脚）を用いる。
+
+## 出版・初演
+1791年9月30日、ウィーンのヴィーデン劇場で歌劇『魔笛』初演（モーツァルト自身が指揮したとIMSLP検索結果に記載）。出版は1793年・1814年のジムロック社（IMSLP記載）。
+
+## 題名・通称の由来
+歌い出しの「Der Hölle Rache kocht in meinem Herzen」（地獄の復讐が私の胸に煮えたぎる）にちなむ通称。夜の女王には前半に別のアリア「おののくな、わが息子よ」があるため、こちらは「夜の女王の第2のアリア」とも呼ばれる。
+
+## 構成分析
+- 怒りの導入: 短調の力強い管弦楽とともに、女王が復讐の怒りを歌い始める
+- コロラトゥーラの技巧: 高音のスタッカートを含む華やかな上行・下行パッセージ（最高音F6）が続く
+- 最後の呪い: 「ヒョルト（聞け）」が3回繰り返され、ニ、ヘと来て予想された（イ）ではなく変ロ音に達する。ナポリの和音を伴い、アリアの頂点となる
+
+## 音楽的特徴
+ある研究者は、頂点の「聞け」でニ・ヘと上がった後に、予想されるイ音（主和音の完成）ではなく変ロ音へ進むモーツァルトの「名人芸」を称賛している。管弦楽には全ヴァイオリンがG線の高音域をユニゾンで弾く瞬間がある。
+
+## 演奏のポイント
+怒りの感情と技巧を両立できるかがすべて。高音スタッカートの正確さ、そして「聞け」の変ロ音に宿る恐ろしさに注目。MusicWebのレビューは、モーザーの演奏を、女王の悪役としての迫力と正確な高音を両立した例として評価している。
+
+## この音源について
+- 演奏: エッダ・モーザー（ソプラノ）、ヴォルフガング・ザヴァリッシュ指揮 バイエルン国立歌劇場管弦楽団・合唱団
+- アルバム: モーツァルト：歌劇「魔笛」全曲（スタジオ録音）
+- レーベル: EMI Electrola（現在はWarner Classics系。MusicWebは再発盤Classics for Pleasure 3932662を取り上げている）
+- 録音: 1972
+- 録音場所: ミュンヘン、ビュルガーブロイ（1972年8月8日〜16日）
+
+この全曲録音は1972年8月8〜16日にミュンヘンのビュルガーブロイで行われ、ザヴァリッシュ指揮のバイエルン国立歌劇場管弦楽団・合唱団、夜の女王にエッダ・モーザー、タミーノにペーター・シュライアー、ザラストロにクルト・モルらが参加した。会話を含めドイツ語話者のキャストをそろえた点が長所とされ、英国の評者はモーザーの夜の女王を「非常に劇的で傑出している」と評した。この録音からの「地獄の復讐は」（1972年8月ミュンヘン録音）は、NASAのボイジャー探査機に積まれたゴールデンレコードにも収録されている。
+
+（音源の投稿元（Wolfgang Sawallisch - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- アマデウス（1984年）: ジューン・アンダーソンがこのアリアを歌う（Wikipedia英語版・シカゴ交響楽団ページ参照） https://en.wikipedia.org/wiki/Queen_of_the_Night_aria
+
+## トリビア
+- エッダ・モーザーが歌ったこのアリアの録音は、NASAのボイジャー1号・2号に積まれたゴールデンレコードに収められている。
+- 1840年のザイフリートの手紙によれば、死の前夜（1791年12月4日）のモーツァルトは、いま義妹ホーファーが高いFを歌っているところだ、と妻に囁いたという。
+- 自分の歌唱力を過信した「史上最悪の歌手」フローレンス・フォスター・ジェンキンスの愛唱曲でもあった。
+
+## 出典
+- https://en.wikipedia.org/wiki/Queen_of_the_Night_aria
+- https://en.wikipedia.org/wiki/Der_H%C3%B6lle_Rache_kocht_in_meinem_Herzen
+- https://en.wikipedia.org/wiki/Contents_of_the_Voyager_Golden_Record
+- https://en.wikipedia.org/wiki/Edda_Moser
+- https://www.musicweb-international.com/classrev/2007/dec07/Mozart_flute_3932662.htm
+- https://imslp.org/wiki/Die_Zauberfl%C3%B6te,_K.620_(Mozart,_Wolfgang_Amadeus)
+
+
+---
+
+# 歌劇「カルメン」より 闘牛士の歌（諸君の乾杯を受けよう）
+
+- 英題: Toreador Song (Votre toast, je peux vous le rendre) from Carmen
+- 作曲者: ジョルジュ・ビゼー（台本：アンリ・メイヤック、リュドヴィク・アレヴィ）（ロマン派（19世紀フランス））
+- カテゴリ: オペラ
+- 作曲年: 1873-74年作曲／1875年初演
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/toreador.html
+
+オペラ『カルメン』第2幕で闘牛士エスカミーリョが歌う有名なクプレ。闘牛場の熱狂と愛を歌い、合唱が加わるリフレインの高揚で知られる。
+
+## 作曲の経緯
+『カルメン』は、メリメの小説を下敷きに台本作家メイヤックとアレヴィが組み立て、ビゼーが1873〜74年に作曲した全4幕のオペラ・コミックである。闘牛士エスカミーリョは第2幕で登場し、この歌で酒場の一同に自己紹介する。初演でこの役を歌ったのは、ベルギー生まれの若いバリトン、ジャック・ブーイだった。ビゼーはこの曲を「ひどく通俗的」と見ていたと伝えられ、『皆が下品なものを求めたからそうしてやった』という趣旨の発言が残るとされる（伝聞）。ただし研究者は、通俗的なのは音楽ではなく人物像のほうだと評している。リフレイン「トレアドール、構えよ」の旋律は第1幕への前奏曲の中間部にも現れ、歌の登場前から作品の顔として観客に印象づけられる仕掛けになっている。
+
+## 出版・初演
+オペラ全曲は1875年3月3日、パリのオペラ＝コミック座で初演。楽譜出版の詳細は未確認。
+
+## 題名・通称の由来
+フランス語の冒頭句「Votre toast, je peux vous le rendre」（あなたの乾杯にお返ししよう）に由来。英語圏では『Toreador Song』『Toreador March』の通称で知られ、日本では「闘牛士の歌」と呼ばれる。
+
+## 構成分析
+- 管弦楽の導入: きびきびと華やかな主題。ハバネラと同じく半音階的に下降する動きで作られている。
+- 第1クプレ: 闘牛場の祭りの熱気と、観衆が熱狂する様子を歌う。
+- リフレイン（合唱）: 「闘牛士よ、構えよ」と呼びかけ、愛が待っていると歌う。カルメンたちと合唱が加わって反復される。
+- 第2クプレ: 牛が飛び出す緊迫の瞬間を描写し、勇気を称える。
+- 終結のリフレイン: 合唱とともに高揚して閉じる。
+
+## 音楽的特徴
+バス・バリトンのための曲で、音域は B♭2〜F4、よく使われる音域（テッシトゥーラ）は C3〜E♭4。短調のクプレと長調のリフレインが対照をなし、合唱が加わると一気に祝祭的な性格に変わる。
+
+## 演奏のポイント
+低音域で朗々と歌いつつ、リズムを締めた行進調で運ぶ点が聴きどころ。クプレの語り口と、リフレインの合唱が加わる瞬間の高揚の対比に注目したい。
+
+## この音源について
+- 演奏: ヘルベルト・フォン・カラヤン指揮 ウィーン・フィル（エスカミーリョ役はロベルト・メリルと思われるが、トラック単位の歌手は未確認）
+- アルバム: Carmen (Remastered)（1963年録音、2008年SACD復刻とされる）
+- レーベル: RCA Red Seal（初出）／復刻盤は Sony 系とされる（未確認）
+- 録音: 1963
+- 録音場所: ウィーン、ゾフィエンザール（検索結果の記載。直接読んだ一次資料では未確認）
+
+検索結果で確認できた範囲では、この録音は1963年11月にウィーンのゾフィエンザールで行われた。指揮はカラヤン、オーケストラはウィーン・フィルで、レオンティン・プライス、フランコ・コレッリ、ロベルト・メリル、ミレッラ・フレーニらが参加し、1965年のグラミー賞オペラ録音部門を受けたとされる。収録中の具体的な逸話は、今回の調査では確認できなかった。
+
+（音源の投稿元（Herbert von Karajan - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- The Bad News Bears（がんばれ！ベアーズ）（1976）: テーマ曲として使用（Wikipedia記載） https://en.wikipedia.org/wiki/Toreador_Song
+- テルマエ・ロマエ ノヴァエ（アニメ）（2022）: パオロ・アンドレア・ディ・ピエトロが日本語詞で編曲した版を使用（Wikipedia記載） https://www.animenewsnetwork.com/news/2022-03-15/thermae-romae-novae-anime-posts-title-sequence-with-opening-song/.183601
+
+## トリビア
+- リフレイン「トレアドール、構えよ」の旋律は、第1幕前奏曲の中間部にも使われている。
+- 初演でエスカミーリョを歌ったのはベルギー出身のバリトン、ジャック・ブーイ。
+- オスカー・ハマースタインの英語版『Stand Up and Fight』（『カルメン・ジョーンズ』）は、アイルランドのマンスター・ラグビーの応援歌として親しまれている。
+
+## 出典
+- https://en.wikipedia.org/wiki/Toreador_Song
+- https://en.wikipedia.org/wiki/Carmen
+- https://ja.wikipedia.org/wiki/カルメン_(オペラ)
+- https://imslp.org/wiki/Carmen_(Bizet,_Georges)
+
+
+---
+
+# 歌劇「フィガロの結婚」より 手紙の二重唱（そよ風によせて）
+
+- 英題: Letter Duet (Sull'aria... Che soave zeffiretto) from Le nozze di Figaro
+- 作曲者: ヴォルフガング・アマデウス・モーツァルト（台本：ロレンツォ・ダ・ポンテ）（古典派（18世紀））
+- カテゴリ: オペラ
+- 作曲年: 1786年（オペラの初演年）
+- 作品番号: K.492（オペラ全体）
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/figaro-letter-duet.html
+
+『フィガロの結婚』第3幕で、伯爵夫人とスザンナが偽の恋文を書く二重唱。『ショーシャンクの空に』での使用で広く知られる。
+
+## 作曲の経緯
+『フィガロの結婚』はボーマルシェの戯曲を原作にダ・ポンテがイタリア語台本を書き、モーツァルトが30歳の1786年に完成させたオペラ・ブッファである。手紙の二重唱は第3幕の一場面で、伯爵夫人が口述し、侍女スザンナが書き取る形で進む。二人は浮気心のある伯爵を懲らしめるため、夜の逢い引きを約束する偽の手紙をしたためる。喜劇の筋を進める場面でありながら、2人のソプラノが声を絡ませる音楽は、物語を離れても独立した美しさを持つ。作曲の詳しい経緯や日付はこの調査では確認できなかったが、初演はウィーンのブルク劇場で行われ、一定の好評を得たもののその後ウィーンでは別のオペラに押された。一方でプラハでは大成功を収めたと伝えられる。
+
+## 出版・初演
+オペラ初演は1786年5月1日、ウィーンのブルク劇場。楽譜の初版情報は未確認。
+
+## 題名・通称の由来
+イタリア語の冒頭句「Sull'aria... Che soave zeffiretto」（そよ風に乗せて…なんと優しい西風よ）に由来。劇中で手紙を書く場面であることから「手紙の二重唱」と呼ばれる。
+
+## 構成分析
+- 導入: 伯爵夫人が口述し、スザンナが書き取る形で始まる。
+- 手紙の口述: 伯爵を夜の庭に誘う文面を二人で書き進める。
+- 反復と終結: 二人の声が絡み合い、手紙を仕上げる。
+
+## 音楽的特徴
+2人のソプラノ（伯爵夫人とスザンナ）による短い二重唱。穏やかな旋律が、策略を進める場面でもあるという二重性を持つ。
+
+## 演奏のポイント
+声質の異なる2人のソプラノが、旋律を追いかけ合い、最後に溶け合う部分が聴きどころ。ささやくような弱音の美しさに注目したい。
+
+## この音源について
+- 演奏: エディット・マティス（スザンナ）、ギュンドゥラ・ヤノヴィッツ（伯爵夫人）、カール・ベーム指揮 ドイツ・オペラ・ベルリン管弦楽団・合唱団
+- アルバム: Mozart: Le nozze di Figaro（ベーム全曲盤）
+- レーベル: Deutsche Grammophon
+- 録音: 1968
+- 録音場所: ベルリン、イエス・キリスト教会
+
+この全曲録音は1968年3月、ベルリンのイエス・キリスト教会で行われた。ベームは伯爵夫人にヤノヴィッツ、スザンナにマティス、伯爵にフィッシャー＝ディースカウ、フィガロにプライを揃えた。DGは2023年にオリジナルのアナログ・テープから24bit/96kHzでリマスターし、3CDとブルーレイ・オーディオ、未公開のセッション写真入りブックレットを付けたデラックス盤を発売した。ベームは録音当時73歳だった。
+
+（音源の投稿元（Edith Mathis - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- ショーシャンクの空に（1994）: 主人公アンディが刑務所の拡声器でこのレコードを流し、受刑者たちが立ち止まって聴く場面。 https://operawire.com/opera-meets-film-what-the-iconic-scene-from-the-shawshank-redemption-says-about-operas-greatest-power/
+
+## トリビア
+- 『ショーシャンクの空に』では、レッドが「あの2人のイタリア人女性が何を歌っていたか今も知らない。知りたくもない」と語る。
+- 同作で、アンディはこの放送のため独房に入れられる。
+- 同作の出演者はほぼ男性で、女声二重唱の登場が場面の印象を際立たせていると OperaWire は指摘している。
+
+## 出典
+- https://ja.wikipedia.org/wiki/フィガロの結婚
+- https://wno.org.uk/news/the-marriage-of-figaros-music-in-popular-culture
+- https://operawire.com/opera-meets-film-what-the-iconic-scene-from-the-shawshank-redemption-says-about-operas-greatest-power/
+- https://www.deutschegrammophon.com/de/kuenstler-innen/diverse-kuenstler/pressestimmen/mozart-herangezoomt-karl-boehms-legendaere-einspielung-des-figaro-in-einer-audiophil-remasterten-edition-269264
+- https://imslp.org/wiki/Le_nozze_di_Figaro,_K.492_(Mozart,_Wolfgang_Amadeus)
+
+
+---
+
+# 歌劇「ラクメ」より 花の二重唱
+
+- 英題: Flower Duet (Dôme épais le jasmin) from Lakmé
+- 作曲者: レオ・ドリーブ（台本：エドモン・ゴンディネ、フィリップ・ジル）（ロマン派（19世紀フランス））
+- カテゴリ: オペラ
+- 作曲年: 1881-82年作曲／1883年初演
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/flower-duet.html
+
+オペラ『ラクメ』第1幕、ラクメと侍女マリカが川辺で花を摘みに向かう場面の二重唱。英国航空のCMでも知られる。
+
+## 作曲の経緯
+『ラクメ』は、ドリーブが1881年から82年にかけて書いた全3幕のオペラで、台本はゴンディネとジル。テオドール・パヴィの短編とピエール・ロティの小説に基づき、19世紀半ばの英領インドを舞台にしている。ゴンディネは、アメリカ出身のソプラノ、マリー・ヴァン・ザントのための作品として提案したとされる。花の二重唱は第1幕、ブラフマンの司祭の娘ラクメと侍女マリカが、花を摘みに川辺へ向かう場面で歌われる。二人はジャスミンの茂みや川の流れを描きながら、朝の情景を歌う。途中、ラクメは父の身を案じる不安をのぞかせ、そのあと青い蓮を摘みに行こうと再び明るい主題に戻る。1883年4月14日にパリのオペラ＝コミック座で初演され、異国趣味を好む当時の聴衆に迎えられた。
+
+## 出版・初演
+オペラ全曲は1883年4月14日、パリのオペラ＝コミック座（第2サル・ファヴァール）で初演。指揮はジュール・ダンベ。
+
+## 題名・通称の由来
+冒頭句「Dôme épais le jasmin」（茂るジャスミンの天蓋）に由来し、英語圏では『Flower Duet』と呼ばれる。なお題名の「ラクメ」は、サンスクリットの女神ラクシュミーのフランス語形とされる。
+
+## 構成分析
+- 導入の対話: ラクメがマリカを誘い、マリカが主人の心を読みたいと応じる。
+- 主部「Dôme épais le jasmin」: 二人が三度の歌い交わしで、川辺の花々と舟遊びを描く。
+- 中間部（ト長調）: ラクメが父への不安を語り、マリカが神の加護を願って蓮を摘みに行こうと誘う。
+- 主部の再現: 冒頭の旋律に戻り、二声が寄り添って終わる。
+
+## 音楽的特徴
+ソプラノとメゾソプラノが三度・六度で重なる。6/8拍子の舟歌風のゆれる動きが、川面の揺れを思わせる。
+
+## 演奏のポイント
+高声と低声が溶け合う並行進行と、冒頭主題の再現の美しさが聴きどころ。中間部の短い転調で見せる影の表情も注目したい。
+
+## この音源について
+- 演奏: ジョーン・サザーランド（ラクメ）、ジェーン・ベルビエ（マリカ）、リチャード・ボニング指揮 モンテカルロ国立歌劇場管弦楽団
+- アルバム: Delibes: Lakmé（全曲盤またはハイライト盤からのトラック）
+- レーベル: Decca
+- 録音: 1967
+- 録音場所: モンテカルロ、アルカザール（検索結果の記載。直接読んだ出典では未確認）
+
+この録音は1967年にサザーランドとボニングらがモンテカルロで行った。マリカ役はジェーン・ベルビエ、ジェラール役はアラン・ヴァンゾ、ニラカンタ役はガブリエル・バキエ。ハイライト盤のレビューは、この録音のサザーランドを、母音を滑らかにつなぐ歌い口が目立つ時期のものと評し、花の二重唱でのボニングのテンポは粘りがあると指摘している。
+
+（音源の投稿元（Joan Sutherland - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- The Hunger（ハンガー）（1983）: 使用された作品としてWikipediaに記載。場面は未確認 https://en.wikipedia.org/wiki/D%C3%B4me_%C3%A9pais_le_jasmin
+
+## CM
+- 英国航空（British Airways）: 1989年の「Face」広告で、この二重唱をもとにしたヤニーとマルコム・マクラーレンの編曲「Aria」が使われたとされる。のちも同社の広告や機内の搭乗音楽に用いられる。 https://en.wikipedia.org/wiki/D%C3%B4me_%C3%A9pais_le_jasmin
+
+## トリビア
+- 題名のラクメは、ヒンドゥーの女神ラクシュミーのフランス語形。
+- 『ラクメ』はオペラ＝コミック座で1909年に500回、1931年に1000回上演に達した。
+- この二重唱は『セックス・アンド・ザ・シティ』『ザ・シンプソンズ』などのテレビ番組でも使われたとされる（Wikipedia記載）。
+
+## 出典
+- https://en.wikipedia.org/wiki/D%C3%B4me_%C3%A9pais_le_jasmin
+- https://en.wikipedia.org/wiki/Lakm%C3%A9
+- https://www.musicweb-international.com/classrev/2001/jan01/lakme.htm
+- https://imslp.org/work/28148
+
+
+---
+
+# 私のお父さん（歌劇「ジャンニ・スキッキ」より）
+
+- 英題: O mio babbino caro (from Gianni Schicchi)
+- 作曲者: ジャコモ・プッチーニ（20世紀初頭（後期ロマン派／ヴェリズモ以後））
+- カテゴリ: オペラ
+- 作曲年: 1918（ニューヨーク初演）
+- 作品番号: SC 88（作品全体の整理番号。Opus番号はなし）
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/o-mio-babbino.html
+
+プッチーニの喜歌劇でラウレッタが父に結婚の許しを乞うアリア。わずか32小節の短さながら、甘く切実な旋律で愛され、映画やコンサートでも親しまれている。
+
+## 作曲の経緯
+「私のお父さん」は、プッチーニの一幕物の喜歌劇「ジャンニ・スキッキ」の中でヒロインのラウレッタが歌うアリアです。台本はジョヴァッキーノ・フォルツァーノが担当しました。物語の舞台は中世のフィレンツェで、遺産をめぐる親族たちの欲と策略が渦巻きます。その中で、スキッキの娘ラウレッタは恋人リヌッチョとの仲を引き裂かれそうになり、父に結婚を許してほしいと訴えます。Wikipediaによれば、この曲は偽善や嫉妬、駆け引きに満ちた喜劇の空気から離れ、素朴な抒情と愛を表す一種の幕あいの役割を果たしており、全曲を通して作曲された（通作形式の）この歌劇の中で唯一、独立した聴かせどころの曲だと説明されています。短いながらも旋律の美しさでオペラ全体から切り離して愛され、演奏会やアンコールの定番になりました。
+
+## 出版・初演
+1918年12月14日、ニューヨークのメトロポリタン歌劇場で歌劇「ジャンニ・スキッキ」が初演され、ラウレッタはフロレンス・イーストンが歌った。（出版情報は未確認）
+
+## 題名・通称の由来
+歌い出しのイタリア語の句「O mio babbino caro」に由来する。意味は「ああ、愛しいお父さん」（babbinoは「パパ」にあたる親しみのある呼び方）。
+
+## 構成分析
+- 導入と主部: ラウレッタが父に呼びかけ、恋人への思いを訴える柔らかな旋律が中心
+- 中間部: 結婚を許してほしいという願いが高まり、感情が盛り上がる
+- 結び: 父への最後の懇願として、静かな余韻のなかで締めくくる
+
+## 音楽的特徴
+全32小節と非常に短く、変イ長調・8分の6拍子の流れるような旋律で歌われる。喜劇の中で唯一といえる抒情的なアリアで、素朴さと切実さの対比が魅力。
+
+## 演奏のポイント
+息の長い旋律を途切れさせずに歌うレガート、ささやくような弱音から最後の訴えへ向かう感情の増幅、短い曲の中での表情の変化に注目。
+
+## この音源について
+- 演奏: マリア・カラス（ソプラノ）／推定：トゥッリオ・セラフィン指揮 フィルハーモニア管弦楽団
+- アルバム: 未確認（1954年9月のEMIセッション＝プッチーニ・アリア集の可能性が高いが、YouTube側のアルバム名は確認できず）
+- レーベル: 未確認（Maria Callas - Topic。EMI/Warner系の推定）
+- 録音: 1954（推定。同曲の1954年録音は確認、YouTubeの音源との対応は未確認）
+- 録音場所: ワトフォード・タウン・ホール（ロンドン近郊）※1954年セッションの会場
+
+カラスの「私のお父さん」は、1954年9月15〜16日にワトフォード・タウン・ホールで、フィルハーモニア管弦楽団とトゥッリオ・セラフィンの指揮により録音されたと、検索結果の資料に記されている。プロデューサーはウォルター・ジェリネックとウォルター・レッグ、バランス・エンジニアはロバート・ベケットとされる。同じ1954年9月のセッションは、プッチーニ・アリア集と、後に名盤として知られる「コロラトゥーラ・リリック・アリア集」の二つのアルバムに分けて発表されたと、Naxos Historical盤の解説にある。ただしYouTube音源がこの録音そのものかは公式のアルバム情報で確認できていない。
+
+（音源の投稿元（Maria Callas - Topic）はoEmbedで確認済み。1954年セラフィン盤との対応は未確認。）
+
+## 映画・ドラマ
+- 眺めのいい部屋（A Room with a View）（1985）: 映画のテーマ曲として使用（フィレンツェが舞台の一部であることと結びつけて紹介されている） https://interlude.hk/the-best-performances-o-mio-babbino-caro-by-giacomo-puccini/
+
+## トリビア
+- 全曲が通作形式のこの歌劇で、独立した聴かせどころのアリアはこの一曲だけだとWikipediaは述べている。
+- 1918年の初演でラウレッタを歌ったのは、イギリス出身のソプラノ、フロレンス・イーストンだった。
+- アリアはわずか32小節で、演奏時間は2分半から3分ほどにすぎない。
+
+## 出典
+- https://en.wikipedia.org/wiki/O_mio_babbino_caro
+- https://www.europadisc.co.uk/classical/55834/Maria_Callas:_Puccini_Heroines_and_Lyric_Arias.htm
+- https://interlude.hk/the-best-performances-o-mio-babbino-caro-by-giacomo-puccini/
+
+
+---
+
+# 私を泣かせてください（歌劇「リナルド」より）
+
+- 英題: Lascia ch'io pianga (from Rinaldo)
+- 作曲者: ゲオルク・フリードリヒ・ヘンデル（バロック）
+- カテゴリ: オペラ
+- 作曲年: 1711（ロンドン）
+- 作品番号: HWV 7（歌劇「リナルド」。1711年初演版はHWV 7a）
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/lascia-ch-io-pianga.html
+
+ヘンデルが1711年の歌劇「リナルド」で、囚われのアルミレーナの嘆きとして歌わせたアリア。過去の自作を転用した旋律が、悲しみと自由への願いを静かに歌う。
+
+## 作曲の経緯
+この旋律は、実はヘンデルが何度も使い回したものです。最初は1705年の歌劇「アルミーラ」第3幕にサラバンドとして登場し、1707年のオラトリオ「時と悟りの勝利」では、枢機卿ベネデット・パンフィーリの詞による「棘を捨て、バラを摘め」というアリアに転用されました。その4年後の1711年、ロンドンで上演された歌劇「リナルド」第2幕で、現在知られる「私を泣かせてください」の形になります。歌うのはヒロインのアルミレーナで、彼女を捕らえたサラセンの王アルガンテに向けて、自由を奪われた悲しみを訴える場面です。リブレットはジャコモ・ロッシが、アーロン・ヒルの構想をもとに書きました。「リナルド」は大成功を収め、このアリアもこの作品の曲として広く知られるようになりました。
+
+## 出版・初演
+1711年、ロンドンで歌劇「リナルド」の一曲として初演。ジョン・ウォルシュによる初版では管弦楽の指定がなく、歌の旋律と通奏低音のみが記されている（Wikipedia）。
+
+## 題名・通称の由来
+歌い出しのイタリア語「Lascia ch'io pianga」に由来し、意味は「私に泣かせてください」。元の旋律が使われた1707年のアリアは「Lascia la spina, cogli la rosa」（棘を捨て、バラを摘め）という別の詞だった。
+
+## 構成分析
+- 導入（約8小節）: 現代の版では、歌の前に器楽による導入が置かれる
+- 前半: ヘ長調のゆったりしたサラバンド風のリズムで、運命を嘆き自由を求める歌
+- 後半: 同じ旋律を繰り返し、憐れみを願う結びへ向かう
+
+## 音楽的特徴
+サラバンドの重く落ち着いた3拍子と、長い音符で紡がれる旋律が特徴。1つの旋律が器楽曲、オラトリオ、歌劇へと姿を変えて使い回された点もバロック期ならでは。
+
+## 演奏のポイント
+装飾音を加えて繰り返す際の歌い手ごとの工夫、ラルゴの遅いテンポの中での息の長い歌い回し、弱音の美しさに注目。
+
+## この音源について
+- 演奏: チェチーリア・バルトリ（メゾ・ソプラノ）／クリストファー・ホグウッド指揮 アカデミー・オブ・エンシェント・ミュージック
+- アルバム: 未確認（同録音を収めるアルバムとして、Decca「The Art of Cecilia Bartoli」473 380-2DHおよび2020年の「Queen of Baroque」が確認できたが、YouTube音源がどれかは未確認）
+- レーベル: Decca（検索結果での配信元はUniversal Music Group／Decca）
+- 録音: 1999
+- 録音場所: ヘンリー・ウッド・ホール（ロンドン）
+
+バルトリが歌うこのアリアは、1999年11月27日にロンドンのヘンリー・ウッド・ホールで、クリストファー・ホグウッド指揮のアカデミー・オブ・エンシェント・ミュージックと録音された。同じセッションで、同じ「リナルド」第3幕のアリア「Bel piacere」も録られている。後に2020年11月発売のDecca盤「Queen of Baroque」に収録され、BBC Music Magazineは、ささやくような美しいフレージングと丁寧な装飾を評価した。Gramophoneも別の編集盤の評で、他の多くの歌手と違い彼女はこの曲を言葉どおりの意味で歌わせていると述べている。
+
+（音源の投稿元（Cecilia Bartoli - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- ファリネッリ（Farinelli）（1994）: 作中でこのアリアが使用される（Wikipedia記載） https://en.wikipedia.org/wiki/Lascia_ch%27io_pianga
+- アンチクライスト／ニンフォマニアック（ラース・フォン・トリアー監督）（2009／2013）: どちらの作品でも使用（Wikipedia記載） https://en.wikipedia.org/wiki/Lascia_ch%27io_pianga
+
+## トリビア
+- この旋律は1705年のサラバンド、1707年のオラトリオ、1711年の歌劇と、3回も形を変えて使われている。
+- 初版（ウォルシュ版）には管弦楽の指定がなく、現在よく聴く弦楽の伴奏はクリュザンダーの校訂版に基づくところが大きい。
+- オリジナルの自筆譜は失われたとされるが、RISMによれば大英図書館に53小節が欠けた断片が所蔵されている。
+
+## 出典
+- https://en.wikipedia.org/wiki/Lascia_ch%27io_pianga
+- https://www.prestomusic.com/classical/products/8813980--queen-of-baroque
+
+
+---
+
+# 荒城の月
+
+- 英題: Kōjō no Tsuki (The Moon over the Ruined Castle)
+- 作曲者: 滝廉太郎（作詞：土井晩翠）（明治（日本の近代歌曲））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1901（明治34）発表
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/rojo-no-tsuki.html
+
+土井晩翠の詩に滝廉太郎が曲を付けた1901年の唱歌。栄枯盛衰を映す荒城の月を歌い、山田耕筰の編曲版とともに国内外で親しまれている。
+
+## 作曲の経緯
+1898年、東京音楽学校が懸賞用の唱歌のため、東京大学にいた土井晩翠に詩を依頼した。原題は『荒城月』。これに同校の滝廉太郎が曲を付け、1901年3月に『中学唱歌』に収録された。原曲は伴奏のない歌で、西洋音楽の旋律を広く大衆に広めた日本最初期の本格的な歌曲とされる。詩のモデルには、晩翠の故郷仙台の青葉城跡、会津若松の鶴ヶ城跡などが挙げられ、廉太郎の側では少年期に過ごした富山城や、大分県竹田の岡城跡から着想を得たと伝えられる（ただし諸説あり）。廉太郎は1903年に23歳で亡くなり、1917年に山田耕筰が移調してピアノ伴奏を補い、旋律にも改変を加えた。詩は、栄華を誇った城が荒れ果てた今も、変わらず照らす月を歌った。
+
+## 出版・初演
+1901年3月『中学唱歌』（東京音楽学校編）に収録／山田耕筰編曲の独唱版は1918年セノオ音楽出版社から出版
+
+## 題名・通称の由来
+土井晩翠の詩の原題『荒城月』を改めて『荒城の月』とした。荒れた城（荒城）と夜の月を詠む題。
+
+## 構成分析
+- 第1節（春）: 高楼での花見の宴と、かつての栄光はどこへ行ったかという問い。
+- 第2節（秋）: 陣営の霜と雁、剣を照らした往時の光はいまいずこ、という問い。
+- 第3節: いま荒城の夜半の月は、誰のために変わらぬ光を放つのか。垣に残るのは蔓草、松に吹くのは風の音のみ。
+- 第4節: 天上の月は変わらないが、栄枯は移ろう世の姿をいまも映し続ける。
+
+## 音楽的特徴
+七五調の詩と西洋風の短調旋律を結びつけた作品。旋律は短音階第4音が上がる部分（原曲）を含み、橋本国彦は欧州に紹介するなら山田版が適すると語ったとされる（原曲の音型がジプシー音階やハンガリー民謡を連想させるため）。山田版は旋律の半音下げとピアノ伴奏の追加で、歌曲としての性格を強めた。
+
+## 演奏のポイント
+静かな冒頭のロ短調（または山田版のニ短調）の旋律線、同じ旋律で4節の情景を歌い分ける表現、山田版のピアノ伴奏の響き。
+
+## この音源について
+- 演奏: 錦織健（テノール）
+- アルバム: Autumn Moon（検索結果の要約に『2008年発売』とあるのみで、アルバムページは未確認）
+- レーベル: 未確認
+- 録音: 未確認
+- 録音場所: 未確認
+
+この音源の収録エピソードは、出典で確認できなかった。
+
+（音源の投稿元（Ken Nishikiori - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- わが愛の譜 滝廉太郎物語（1993）: 廉太郎のドイツ留学送別演奏会で『荒城の月』が歌われる。劇中の歌は山田耕筰の編曲版（日本語版Wikipedia記載） https://eiga.com/movie/40187/
+
+## トリビア
+- 1989年のNHK全国アンケート『あなたが選ぶ日本のうた・ふるさとのうた』で第7位、2006年に文化庁とPTAが選ぶ『日本の歌百選』に選ばれた（日本語版Wikipedia）。
+- ベルギーの修道院で山田耕筰版が聖歌として歌われているとされる（同）。
+- 大分県竹田市のJR豊後竹田駅では、列車の接近メロディにこの曲が流れる（同）。
+
+## 出典
+- https://ja.wikipedia.org/wiki/%E8%8D%92%E5%9F%8E%E3%81%AE%E6%9C%88
+- https://eiga.com/movie/40187/
+
+
+---
+
+# 野ばら
+
+- 英題: Heidenröslein
+- 作曲者: フランツ・シューベルト（ロマン派（初期））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1815（8月19日作曲）
+- 作品番号: 作品3-3 / D.257
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/heidenroslein.html
+
+ゲーテの詩に付けた1815年の有節歌曲。3節が同じ旋律で歌われる素朴な作品で、ウェルナー版と並んで『野ばら』の名で親しまれる。
+
+## 作曲の経緯
+ゲーテが1771年頃、シュトラスブルク留学中に書いた詩（ゼーゼンハイムの牧師の娘フリーデリケ・ブリオンとの恋が背景とされる）に、シューベルトが1815年8月19日に付けた歌曲。詩は、野に咲く赤い薔薇を少年が摘もうとし、薔薇は棘で刺すと警告するが、結局少年は摘んでしまう、という内容で、解釈には多様な見方がある。シューベルトは3つの節すべてに同じ旋律を当て、民謡に近い素朴な旋律に仕上げた。英語版Wikipediaによれば、この旋律はモーツァルト《魔笛》第1幕終わりのパミーナとパパゲーノの二重唱（Könnte jeder brave Mann）を部分的に下敷きにしている。ドイツ語版Wikipediaは、ドイツ語圏で『魔王』と並ぶ、あるいは『菩提樹』と並ぶ最も有名なシューベルト作品の一つとしている。
+
+## 出版・初演
+作品3-3として出版（初出版の年・出版社は未確認）
+
+## 題名・通称の由来
+ゲーテの詩の題『Heidenröslein』（荒野＝Heideに咲く野ばら）。-nは連結音。『Heideröslein』とも書かれる（ドイツ語版Wikipedia）。
+
+## 構成分析
+- 第1節: 少年が朝の露のように若い薔薇を見つけ、駆け寄って見とれる。
+- 第2節: 少年が摘むと言い、薔薇は棘で刺して自分を忘れさせないと警告する。
+- 第3節: 少年は結局摘み、薔薇は刺して抵抗するが、嘆いても無駄でそれに耐えるしかない。
+- 後奏: 短い後奏が付く（ドイツ語版Wikipedia）。
+
+## 音楽的特徴
+3節が同一の旋律と伴奏で歌われる有節歌曲。各節の終わり2行は詩の側で繰り返される。声楽曲として簡潔で、民謡風の親しみやすさが特徴。ヴェルナー版（1829）の素朴な旋律は19世紀の歌集を通じて広まり、日本でもこの曲が『野ばら』として歌われてきた。
+
+## 演奏のポイント
+節ごとに声の表情をどう変えるか（無邪気さ、警告、諦め）。同じ旋律をどう歌い分けるかが聴きどころ。
+
+## この音源について
+- 演奏: ディートリヒ・フィッシャー＝ディースカウ（バリトン）／ジェラルド・ムーア（ピアノ）
+- アルバム: 未確認
+- レーベル: 未確認
+- 録音: 未確認
+- 録音場所: 未確認
+
+この音源の収録エピソードは、出典で確認できなかった。
+
+（音源の投稿元（Dietrich Fischer-Dieskau - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- ウェルナー版は1829年1月20日、作曲者が指揮するブラウンシュヴァイクのリーダーターフェルの演奏会で初演された（ドイツ語版Wikipedia）。
+- ヴェルナーの旋律は、検閲を風刺した替え歌『Sah ein Fürst ein Büchlein stehn』にも使われた（同）。
+- 詩の最後の節には初版（1789年ゲッシェン版）と1827年決定版で語形の異同がある（英語版Wikipedia）。
+
+## 出典
+- https://en.wikipedia.org/wiki/Heidenr%C3%B6slein
+- https://de.wikipedia.org/wiki/Heidenr%C3%B6slein
+- https://www.discogs.com/release/5708490-Schubert-Goethe-Dietrich-Fischer-Dieskau-J%C3%B6rg-Demus-Gerald-Moore-Goethe-Lieder
+- https://www.musicweb-international.com/classrev/2003/May03/Dieskau.htm
+
+
+---
+
+# アヴェ・ヴェルム・コルプス K.618
+
+- 英題: Ave verum corpus, K. 618
+- 作曲者: ヴォルフガング・アマデウス・モーツァルト（古典派）
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1791
+- 作品番号: K.618
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/ave-verum-corpus.html
+
+1791年、バーデンの教会音楽家シュトルのために書かれた全46小節の聖体モテット。合唱と弦、オルガンだけの簡素さの中に、深い祈りが宿る。
+
+## 作曲の経緯
+1791年6月、モーツァルトは身重の妻コンスタンツェが湯治をしていたウィーン近郊の保養地バーデンを訪れました。彼はそこで、聖シュテファン教会の音楽責任者だった友人アントン・シュトルのために、この小さなモテットを書きます。キリスト聖体の祝日（この年は6月23日）のための曲で、自筆譜の日付は6月17日です。当時のモーツァルトは歌劇「魔笛」の作曲のさなかにありました。中世ラテン語の聖体讃歌の主要部分に曲を付けていて、最後の3行は省かれています。全46小節、編成も合唱と弦、オルガンのみと簡素で、小さな町の教会合唱団が歌えるように書かれています。完成から半年足らずでモーツァルトは亡くなるため、レクイエムに通じる要素を先取りした作品とも評されます。
+
+## 出版・初演
+1791年6月23日（聖体の祝日）、バーデンの聖シュテファン教会（市の司教区教会）で初演されたと検索結果の資料にある。出版については未確認。
+
+## 題名・通称の由来
+ラテン語の聖体讃歌の冒頭句「Ave verum corpus」（めでたし、まことの御体よ）から。13世紀ごろの聖体の賛歌が基になっている。
+
+## 構成分析
+- 前半（導入から中間）: 静かな弦の動きに乗って、合唱が聖体への賛美を和声的に歌う
+- 中間部: 半音階的な和声で受難と死への思いが深まる
+- 結び: 穏やかなニ長調に戻り、祈りの余韻で終わる
+
+## 音楽的特徴
+全46小節という短さ、合唱・弦・オルガンだけの簡素な編成。自筆譜には曲頭にsotto voce（声を抑えて）の指示があるのみ。半音階的な和声が、死や救い、聖体拝領という宗教的な主題を表現する（Wikipediaの記述）。
+
+## 演奏のポイント
+全体を通した静かな弱音の保ち方、合唱の和声の溶け合い、半音階的な箇所での緊張と解放に注目。
+
+## この音源について
+- 演奏: ケンブリッジ・キングス・カレッジ合唱団（指揮者は未確認）
+- アルバム: 未確認（2019年のStephen Cleobury指揮『The Music of King's』にも本曲が収録されるが、YouTube音源との対応は未確認）
+- レーベル: 未確認（検索結果ではUniversal Music Group配信と記載）
+- 録音: 未確認
+- 録音場所: 未確認
+
+この音源の収録エピソードは、出典で確認できなかった。
+
+（音源の投稿元（The Choir of King’s College, Cambridge - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- 作曲時のモーツァルトは歌劇「魔笛」を書いている最中で、バーデンで妻に会うために訪れていた。
+- 聖体の祝日は三位一体の主日の次の木曜日で、1791年は6月23日だった。
+- リストがピアノ・オルガン用に編曲し、チャイコフスキーはそれを自作の「モーツァルティアーナ」に取り入れた。
+
+## 出典
+- https://en.wikipedia.org/wiki/Ave_verum_corpus_(Mozart)
+- https://imslp.org/wiki/Ave%20verum%20corpus,%20K.618%20(Mozart,%20Wolfgang%20Amadeus)
+
+
+---
+
+# 魔王
+
+- 英題: Erlkönig
+- 作曲者: フランツ・シューベルト（ロマン派（初期））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1815（第4稿を1821年出版）
+- 作品番号: 作品1 / D.328
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/erlkonig.html
+
+ゲーテの詩による物語歌曲。夜道を駆ける父子と魔王を、一人の歌手と疾走するピアノの三連符で描く、18歳シューベルトの出世作。
+
+## 作曲の経緯
+1815年、18歳のシューベルトがゲーテの同名バラードに付けた歌曲。友人シュパウンの証言では、ある日の午後の数時間で書き上げられたという。作曲者は計4回書き直し、第4稿を1821年に作品1として出版した。語り手・父・息子・魔王の4役を一人の歌手が歌い分け、ピアノは馬の疾走を思わせる三連符をほぼ最後まで刻み続ける。1820年12月1日にウィーンの私的な集まりで演奏された後、1821年3月7日にケルントナートーア劇場でヴォーグル（バリトン）とヒュッテンブレンナー（ピアノ）により公開初演され、大成功を収めて若い作曲家の名を広めた。ゲーテ本人は通作形式を好まず、送られた楽譜に返事をしなかったが、1830年にシュレーダー＝デフリエントの歌を聴いて印象を改めたと伝えられる。
+
+## 出版・初演
+私的初演1820年12月1日（ウィーン）／公開初演1821年3月7日 ケルントナートーア劇場（J.M.ヴォーグル、A.ヒュッテンブレンナー）／1821年ディアベッリ社から作品1として出版
+
+## 題名・通称の由来
+ゲーテのバラード『Erlkönig』（魔王＝Erlking、子どもを連れ去る超自然的存在）の題をそのまま用いたもの。語源の詳細は今回の資料では未確認。
+
+## 構成分析
+- 序奏（1〜15小節）: ト短調。右手の三連符の連打で疾走する馬を描き、左手が不吉な上行音階と下行アルペジョの動機を示す。
+- 語り手・父と子（〜57小節）: ト短調から変ロ長調へ。語り手は中音域、父は低音域、子は高音域で歌われる。
+- 魔王の誘い（58〜72小節ほか）: 変ロ長調の甘く媚びる旋律。伴奏の三連符は残るが音型が変わり、第2・第3の誘いでは調が上がっていく。
+- 子の三度の叫び: 『お父さん』の呼びかけが半音ずつ上がって繰り返され、間隔も次第に詰まる。
+- 終結（132小節〜）: ト短調に戻り、三連符が止まって無伴奏のレチタティーヴォで子の死が語られる。
+
+## 音楽的特徴
+一人の歌手が4役（語り手・父・息子・魔王）を音域・調性・リズムで描き分ける。魔王の旋律だけが長調で、伴奏の低音三連符から一時的に解放される。半音上行の音型が悪魔的な力を象徴し、子の叫びは毎回半音ずつ高くなる。歌手にも伴奏者にも高い技巧が求められる難曲として知られる。
+
+## 演奏のポイント
+冒頭の連打の緊迫感、魔王の猫なで声と父の低い声の対比、三度目の子の叫び（フォルティッシモ）、そして三連符が止まって語られる最後の一節の静けさ。
+
+## この音源について
+- 演奏: ディートリヒ・フィッシャー＝ディースカウ（バリトン）／ジェラルド・ムーア（ピアノ）
+- アルバム: 未確認
+- レーベル: Deutsche Grammophon（想定。このYouTube IDと下記DG録音との同一性は未確認）
+- 録音: 1966-1968（DGセッション。Erlkönigは1968年2月とIDAGIO記載）
+- 録音場所: UFA-Tonスタジオ（ベルリン）
+
+DGによるフィッシャー＝ディースカウとムーアのシューベルト歌曲録音は、ベルリンのUFA-Tonスタジオで1966年12月から行われた。IDAGIOは『魔王』の収録を1968年2月、同スタジオと記している。Discogsによれば『Goethe-Lieder』所収のムーア参加分（魔王を含む）は1970年にDG 2720 006として発売され、魔王の演奏時間は4分19秒。プロデューサーはライナー・ブロック。なお、このYouTube ID（Topic配信）が上記セッションの音源であることは、メタデータ上では確認できていない。
+
+（音源の投稿元（Dietrich Fischer-Dieskau - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- 作曲は数時間の出来事だったとシュパウンが伝えている（Wikipedia引用の伝聞）。
+- ゲーテは当初、楽譜を受け取っても無言で送り返したとされる。
+- リストはこの編曲を1840〜45年のドイツ演奏旅行で65回演奏した（Wikipedia記載）。
+
+## 出典
+- https://en.wikipedia.org/wiki/Erlk%C3%B6nig_(Schubert)
+- https://archive.org/details/erlkonig-dfd-gm-66-68
+- https://app.idagio.com/recordings/20597320
+- https://www.discogs.com/release/5708490-Schubert-Goethe-Dietrich-Fischer-Dieskau-J%C3%B6rg-Demus-Gerald-Moore-Goethe-Lieder
+- https://www.musicweb-international.com/classrev/2003/May03/Dieskau.htm
+
+
+---
+
+# カッチーニのアヴェ・マリア
+
+- 英題: Ave Maria (Vavilov, long misattributed to Caccini)
+- 作曲者: ウラディーミル・ヴァヴィロフ（長くジュリオ・カッチーニ作と伝えられた）（20世紀（ソ連・1970年頃。バロック風に書かれた偽作））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1970年頃（同年メロディア盤に『作者不詳』で収録）
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/caccini-ave-maria.html
+
+ソ連のリュート奏者ヴァヴィロフが1970年頃に書いたアリアで、のちにカッチーニ作として世界に広まった偽作。ヴォカリーズ的な長い旋律で、今も多くの歌手が歌う。
+
+## 作曲の経緯
+この曲は、ソ連のギタリスト兼リュート奏者で作曲も学んだウラディーミル・ヴァヴィロフが1970年ごろに書いたアリアである。ヴァヴィロフはレニングラードの音楽学校で学び、国立楽譜出版社の校訂者も務めた人物で、自作をルネサンスやバロックの作曲家の名義で世に出すことが多かった。この「アヴェ・マリア」も1970年にメロディア・レーベルのリュート音楽LPへ「作者不詳」として収められた。彼は1973年に亡くなり、その後に曲がジュリオ・カッチーニ作として流通し始める。名義が替わった経緯は確定しておらず、共演したオルガン奏者マルク・シャヒンが付け替えたとする説も、シャヒンの没年が1970年とされるため時期が合わないと指摘されている。1987〜88年にオレグ・ヤンチェンコ編曲、イリーナ・アルヒーポワ歌唱の録音が出て注目され、ソ連崩壊後の1990年代にイネッサ・ガランテらの録音を通じて世界へ広まった。現在はヴァヴィロフ作とみなされるが、慣用的にカッチーニの名で呼ばれ続けている。
+
+## 出版・初演
+1970年、メロディア盤『リュート音楽 16-17世紀』にヴァヴィロフ自身らの演奏で『作者不詳』名義で録音・発売。カッチーニ名義での流通は1970年代半ば以降（1975年のボガチェワ盤で既にカッチーニ作と表記）。楽譜出版の初版は未確認。
+
+## 題名・通称の由来
+「カッチーニの」という通称は、ヴァヴィロフ没後に付いた誤った帰属に由来する。歌詞は典礼で広く用いられる聖母への祈り「アヴェ・マリア」の冒頭部分。
+
+## 構成分析
+- 概要: 独唱とそれを支える伴奏からなる短いアリア。版や編曲ごとに調・伴奏が異なり、楽曲内部の詳細な構成は一次資料で確認できていない。
+- 編曲の系譜: オルガン版（ガランテ）、管弦楽編曲（ニック・イングマン、スティーヴン・マーキュリオ等）、器楽独奏版など多数の版がある。
+
+## 音楽的特徴
+和声が古い時代には存在しないもので、専門家が聴けば20世紀以降の音楽と判断できる、と日本の解説記事は述べる。また同種の曲なら3拍子が自然なのに4拍子で書かれている点も偽作とされる根拠として紹介されている。
+
+## 演奏のポイント
+同じ旋律でも、オルガン伴奏の簡素な版、オーケストラを伴う大編成版、チェロなどの器楽版で表情が大きく変わる。複数の編曲を聴き比べると、息の長い旋律の魅力がよく分かる。
+
+## この音源について
+- 演奏: アンドレア・ボチェッリ（テノール）、チョン・ミョンフン指揮 サンタ・チェチーリア国立アカデミー管弦楽団
+- アルバム: Sacred Arias（Arie Sacre）
+- レーベル: Philips（Wikipediaの表記。Universal系のDecca/Philips）
+- 録音: 1999
+- 録音場所: 未確認
+
+1999年11月発売のアルバム『サクレッド・アリア』に収録された。伴奏はチョン・ミョンフン指揮のサンタ・チェチーリア国立アカデミー管弦楽団。アルバムは500万枚超を売り、ソロ歌手のクラシック盤として史上最大のセールスとされる。2000年にはクラシカルBRIT賞のアルバム・オブ・ザ・イヤーなどを受けた。1999年にはローマのサンタ・マリア・ソプラ・ミネルヴァ教会で撮影した映像作品も出ているが、音盤の録音会場や日付は確認できていない。
+
+（音源の投稿元（Andrea Bocelli - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- ドニー・ダーコ（2001）: 使用場面は未確認（Wikipediaの使用作品一覧による） https://en.wikipedia.org/wiki/Ave_Maria_(Vavilov)
+- 天国の階段（韓国ドラマ）（2003）: 使用場面は未確認（同上） https://en.wikipedia.org/wiki/Ave_Maria_(Vavilov)
+
+## トリビア
+- ヴァヴィロフは自作を古い作曲家の名義で出す常習者で、「黄金の都市」の旋律も彼の作とされる。
+- アルヒーポワ盤は1987年とも1988年とも記され、資料により年が分かれる。
+- 日本語版Wikipediaはガランテの国際デビュー盤の収録で曲が注目されたと記し、ボチェッリやチャーチも歌ったとする。
+
+## 出典
+- https://en.wikipedia.org/wiki/Ave_Maria_(Vavilov)
+- https://en.wikipedia.org/wiki/Vladimir_Vavilov_(composer)
+- https://ja.wikipedia.org/wiki/ウラディーミル・ヴァヴィロフ
+- https://www.j-cast.com/trend/2019/07/19362946.html?p=all
+- https://en.wikipedia.org/wiki/Sacred_Arias_(Andrea_Bocelli_album)
+
+
+---
+
+# ピエ・イェズ（フォーレ《レクイエム》作品48 第4曲）
+
+- 英題: Pie Jesu, from Requiem in D minor, Op. 48
+- 作曲者: ガブリエル・フォーレ（ロマン派後期（フランス））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1887〜88年（初稿）。現行の管弦楽版は1899〜1900年
+- 作品番号: 作品48
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/faure-pie-jesu.html
+
+フォーレ《レクイエム》の中心に置かれたソプラノ独唱の短い祈り。変ロ長調の簡素な旋律が三度繰り返され、安息への願いを静かに深めていく。
+
+## 作曲の経緯
+フォーレのレクイエムは1887年から作曲が始まった。両親の死と結びつけて語られがちだが、母の死の時点で既に着手していたとされ、本人は「特別な目的のためでなく、いわば楽しみのために書いた」旨を手紙に記している。1888年1月16日、パリのマドレーヌ教会で建築家ジョゼフ・ルスファシェの葬儀の際に、5曲構成の初稿が作曲者の指揮で演奏された。ピエ・イェズはこの初稿に既に含まれ、独唱は少年ソプラノのルイ・オーベールが務めた。日本語版Wikipediaは、残されたスケッチの最も早い段階からこの曲が現れ、全曲の核と見られると記す。マドレーヌ寺院は女声を認めず、曲は少年の声域を意識して書かれたが、演奏会ではフォーレ自身が女声ソプラノを好んだ。その後バリトン独唱の「奉献唱」と「リベラ・メ」が加わって7曲となり、出版社アメルの提案で1900年に大編成の管弦楽版が作られた。
+
+## 出版・初演
+初演：1888年1月16日マドレーヌ教会（初稿・5曲）。第2稿初演：1893年1月21日同教会。現行の管弦楽版：1900年7月12日パリ万博のトロカデロ（指揮ポール・タファネル）。出版：1901年（アメル社）。なお日本語版Wikipediaは1900年5月のリール初演とする。
+
+## 題名・通称の由来
+ラテン語の呼格「Pie Iesu」（慈悲深きイエスよ）に由来する。『怒りの日』続唱の最後の二行にあたる祈りの詩句で、レクイエムの多くの作曲家が独立楽章として扱ってきた。
+
+## 構成分析
+- 第1の呼びかけ: 変ロ長調、6小節のモード的な旋律。
+- 第2の呼びかけ: 似た旋律がより高い音域に届く。
+- 第3の呼びかけ: 最初の形で始まり、より低い音域で二音を行き来しつつ、最後の「requiem」は穏やかに上行して終わる。
+- 伴奏: オルガンと弦、ハープ。最終版ではフルートとクラリネットがこの楽章でのみ加わる。
+
+## 音楽的特徴
+フォーレは伝統的な「怒りの日」続唱を全曲では置かず、この一節だけを残した。恐怖より安らぎを前面に出す全曲の性格を、中央のこの楽章が象徴する。サン＝サーンスは「モーツァルトの『アヴェ・ヴェルム・コルプス』が唯一であるように、これが唯一のピエ・イェズだ」と評したと伝わる。
+
+## 演奏のポイント
+長い息と弱音の安定が求められ、少年には難しい面もあるため女声が歌う例が多い。装飾を排した旋律が、二音の往復で収まっていく終結部（requiem sempiternam）の静けさを聴きたい。
+
+## この音源について
+- 演奏: キャスリーン・バトル（ソプラノ）、カルロ・マリア・ジュリーニ指揮 フィルハーモニア管弦楽団・合唱団（バリトンはアンドレアス・シュミット）
+- アルバム: Fauré: Requiem / Ravel: Pavane pour une infante défunte
+- レーベル: Deutsche Grammophon
+- 録音: 1986
+- 録音場所: 未確認
+
+ジュリーニ指揮、フィルハーモニア管弦楽団・合唱団、ソプラノのキャスリーン・バトル、バリトンのアンドレアス・シュミットによるDG盤。DGのカタログ上の日付は1986年11月12日（録音日か発売日かは未確認）。ラヴェルの《亡き王女のためのパヴァーヌ》との組み合わせで出た。米紙クリスチャン・サイエンス・モニターは1988年12月の評で、同管が求められた澄んだ音色と軽やかな質感を出したことと、バトルがピエ・イェズの独唱に理想的だったことを称賛した。録音会場は確認できていない。
+
+（音源の投稿元（Kathleen Battle - Topic）はoEmbedで確認済み。）
+
+## トリビア
+- 1888年の初演後、司祭から「こんな新機軸は要らない、マドレーヌの典礼曲は十分豊かだ」と言われたと伝わる。
+- 全曲は1924年のフォーレ自身の葬儀で演奏された。
+- 最初の全曲録音は1931年（フランスのグスタフ・ブレ指揮）。
+
+## 出典
+- https://en.wikipedia.org/wiki/Requiem_(Fauré)
+- https://en.wikipedia.org/wiki/Pie_Jesu
+- https://ja.wikipedia.org/wiki/レクイエム_(フォーレ)
+- https://www.deutschegrammophon.com/en/catalogue/products/faure-requiem-ravel-giulini-3020
+- https://www.csmonitor.com/1988/1219/lcarlo.html
+- https://imslp.org/wiki/Requiem,_Op.48_(Fauré,_Gabriel)
+
+
+---
+
+# 怒りの日（ディエス・イレ）（ヴェルディ《レクイエム》第2曲の冒頭）
+
+- 英題: Dies irae, from Messa da Requiem
+- 作曲者: ジュゼッペ・ヴェルディ（ロマン派（イタリア））
+- カテゴリ: 宗教曲・声楽
+- 作曲年: 1873〜74年
+- 作品番号: なし
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/verdi-dies-irae.html
+
+ヴェルディのレクイエムで最後の審判を描く合唱の爆発。大太鼓と金管が炸裂する冒頭は終曲でも再現され、映画やテレビでも多用される。
+
+## 作曲の経緯
+ロッシーニが1868年に亡くなると、ヴェルディは複数のイタリア人作曲家による追悼ミサを提案し、自らは終曲「リベラ・メ」を書いた。この企画は1869年に頓挫し、楽譜は長く演奏されなかった。1873年5月22日に敬愛した作家アレッサンドロ・マンゾーニが亡くなると、ヴェルディは今度は自分ひとりで追悼のレクイエムを書く決意を固める。同年夏にパリで大半を作曲し、先のリベラ・メも改作して取り込んだ。1874年5月22日、ミラノのサン・マルコ教会でマンゾーニの一周忌に初演され、作曲者が指揮した。その3日後にはスカラ座でも同じ顔ぶれで演奏されている。「怒りの日」は第2曲の冒頭で、最後の審判を描く最も有名な部分である。オペラ的すぎて教会向きでないとの批判を初演当時から受けたが、現在は演奏会の定番となっている。
+
+## 出版・初演
+初演：1874年5月22日、ミラノのサン・マルコ教会（ヴェルディ指揮）。同年5月25日にスカラ座で再演。楽譜初版はリコルディ社（1874年）。1875年のロンドン公演を前に「リーベル・スクリプトゥス」が改訂された。
+
+## 題名・通称の由来
+「Dies irae」はラテン語で「怒りの日」。中世の続唱の冒頭句で、最後の審判の日を指す。曲名は典礼文の冒頭に由来し、ヴェルディはこの続唱を全体の中心に据えた。
+
+## 構成分析
+- 冒頭: 衝撃的な和音の連打、跳躍する上行句、大太鼓の裏拍の強打、木管の駆け上がり、弦のトレモロ、トランペットの細かな動きなどが重なる（D.ケアンズの解説）。
+- 再現: 「Quid sum miser」の前、「Lacrymosa」の前、そして終曲リベラ・メの後でも再現される（日本語版Wikipedia）。
+- 続く曲: 「Tuba mirum」では舞台上のトランペットに舞台裏の4本が加わり、審判のラッパを表す。
+
+## 音楽的特徴
+オペラで培った劇的な対比と力強いリズムを宗教曲に持ち込んだ。大太鼓は通常のほか、極弱音の不気味なロール用に大型の「ヴェルディ・バスドラム」を使う指揮者もいる。教会より劇場向きという批判と、ブラームスが楽譜を見て「天才の作品」と評したという逸話が対照的である。
+
+## 演奏のポイント
+冒頭の和音と大太鼓の鋭い打撃が生む一瞬の緊張、シンコペーションを際立たせるタイミング、弱音で響く再現部との落差を聴きたい。続く「Tuba mirum」の舞台裏トランペットの空間効果も見どころ。
+
+## この音源について
+- 演奏: ゲオルク・ショルティ指揮 ウィーン・フィルハーモニー管弦楽団、ウィーン国立歌劇場合唱団（独唱：サザーランド、ホーン、パヴァロッティ、タルヴェラ）と推定
+- アルバム: Verdi: Requiem（Decca、1968年LP発売のショルティ盤と推定）
+- レーベル: Decca
+- 録音: 1967
+- 録音場所: ウィーン、ゾフィエンザール
+
+1967年10月、ウィーンのゾフィエンザールでデッカが収録した。ショルティがウィーン・フィルとウィーン国立歌劇場合唱団を指揮し、ソプラノはジョーン・サザーランド、メゾはマリリン・ホーン、テノールはルチアーノ・パヴァロッティ、バスはマルッティ・タルヴェラ。制作はジョン・カルショーとクリストファー・レイバーン、録音技師はゴードン・パリー（Discogsのクレジット）。1968年にLP（SET 374-5）で発売された。2008年の再発評は、シンコペーションを際立たせるタイミングの妙で〈怒りの日〉が威圧的な情景になったと評している。
+
+（音源の投稿元（Wiener Staatsopernchor - Topic）はoEmbedで確認済み。）
+
+## 映画・ドラマ
+- ジャンゴ 繋がれざる者（2012）: 白人至上主義者の一団がシュルツ博士の馬車に迫る場面で使用（OperaWireの記述） https://operawire.com/?p=14827
+- マッドマックス 怒りのデス・ロード（2015）: 夜の追跡で、盲目となった「弾薬畑」が乱射する場面で使用（Roger Ebert.comの記述） https://www.rogerebert.com/far-flung-correspondents/mad-max-day-of-wrath
+
+## トリビア
+- ヴェルディは当時の教会が女性歌手を認めないことを承知で、女声の参加を望む旨をロッシーニ追悼計画の頃から書簡で述べている。
+- 1943〜44年、テレージエンシュタット収容所でラファエル・シェヒターの指揮によりこの曲が約16回演奏されたとされる。
+- 「ラクリモーサ」は『ドン・カルロ』パリ初演でカットされた部分の転用である。
+
+## 出典
+- https://en.wikipedia.org/wiki/Requiem_(Verdi)
+- https://ja.wikipedia.org/wiki/レクイエム_(ヴェルディ)
+- https://www.discogs.com/release/11263870
+- https://operatoday.com/2008/10/verdi_requiem_quattro_pezzi_sacri/
+- https://www.classicfm.com/composers/verdi/dies-irae-requiem-lyrics-translation-which-films/
+- https://imslp.org/wiki/Requiem_(Verdi,_Giuseppe)

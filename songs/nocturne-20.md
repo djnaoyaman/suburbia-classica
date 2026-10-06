@@ -5,7 +5,7 @@
 - カテゴリ: ピアノ独奏
 - 作曲年: 1830
 - 作品番号: 遺作(B.49 / KK IVa-16 / WN 37)
-- ページ: https://example.com/suburbia-classica/songs/nocturne-20.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/nocturne-20.html
 
 ウィーン到着直後の1830年、姉のために書かれたノクターン。協奏曲の断片を引用した回想的な小品で、映画『戦場のピアニスト』の冒頭でも流れる。
 

@@ -5,7 +5,7 @@
 - カテゴリ: 管弦楽・室内楽
 - 作曲年: 付随音楽1872年／第2組曲1879年
 - 作品番号: 第2組曲（作品番号なし）
-- ページ: https://example.com/suburbia-classica/songs/farandole.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/farandole.html
 
 ビゼー「アルルの女」第2組曲の終曲。プロヴァンスの行進曲と舞曲の旋律が重なり、タンブランが響く熱狂的なクライマックスへ駆け上がる。
 

@@ -5,7 +5,7 @@
 - カテゴリ: 協奏曲・編曲
 - 作曲年: 原曲1825年／リスト編曲1837〜38年（1876年改訂）
 - 作品番号: D.839, Op.52-6（リスト版 S.558/12）
-- ページ: https://example.com/suburbia-classica/songs/schubert-ave-maria.html
+- ページ: https://djnaoyaman.github.io/suburbia-classica/songs/schubert-ave-maria.html
 
 スコットの詩に付けられた祈りの歌を、リストがピアノ一台で歌わせた編曲。息の長い旋律が夜に寄り添う。
 

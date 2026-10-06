@@ -22,6 +22,8 @@
 
 
 
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -214,7 +216,7 @@ footer.site .lab{color:var(--vm);font-weight:600;font-size:13px}
 footer.site .share{margin:0 0 30px}
 footer.site .share .btn,footer.site .share button{color:#fff;border-color:#4a4a4a}
 footer.site .share .btn:hover,footer.site .share button:hover{background:#fff;color:var(--ink)}
-footer.site p{color:#a5a29b;font-size:11.5px;max-width:720px;margin:0 0 30px}
+footer.site p{color:#a5a29b;font-size:11.5px;max-width:720px;margin:0 0 56px}
 .player{top:68px}footer.site svg{display:block;width:100%;height:auto}
 
 /* ===== RESPONSIVE ===== */
@@ -279,6 +281,67 @@ header.top nav a{white-space:nowrap}
 @media(pointer:coarse){button,.btn{min-height:40px;display:inline-flex;align-items:center;justify-content:center}.chip{padding:6px 14px}#ss{cursor:auto}}
 @media(max-height:520px) and (orientation:landscape){header.top{position:static}#hero{padding-bottom:20px}.player{position:static!important}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== MOTION & ABOUT FIX ===== */
+:root{--ease:cubic-bezier(.2,.75,.2,1);--hp:28px}
+@media(max-width:640px){:root{--hp:14px}}
+#hero{padding-bottom:0}
+#hero .sub{margin-bottom:46px}
+.mq2{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;margin:0 calc(-1*var(--hp));padding:13px 0;font-weight:600;font-size:12px;letter-spacing:.2em}
+.mq2 div{display:inline-block;padding-left:0;animation:mq2 38s linear infinite}
+.mq2 span{display:inline-block;padding:0 22px}
+.mq2 i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--vm);margin:0 6px 1px}
+@keyframes mq2{to{transform:translateX(-50%)}}
+/* about band: square + circle */
+.philo{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,6vw,96px);align-items:start}
+.philo .sq{order:-1;width:100%;max-width:440px;aspect-ratio:1;justify-self:start;align-self:start;margin-top:30px;overflow:hidden;position:relative}
+.philo .sq i{width:64%;transition:transform .1s linear}
+.philo>div:not(.sq) .big{font-size:clamp(34px,5.6vw,80px)}
+.philo .big{font-size:clamp(34px,5.6vw,80px);margin:0 0 24px;line-height:1.02}
+.philo p:not(.big){font-size:14px;line-height:2;max-width:560px}
+@media(max-width:700px){.philo{grid-template-columns:1fr}.philo .sq{max-width:200px;order:2;margin-top:8px}}
+/* hero entrance */
+@keyframes wmin{from{clip-path:inset(108% 0 -12% 0);transform:translateY(26%)}to{clip-path:inset(-12% 0 -12% 0);transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes mkin{from{opacity:0;transform:rotate(-120deg) scale(.6)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,58,0,.55)}100%{box-shadow:0 0 0 22px rgba(255,58,0,0)}}
+#hero .wm1{animation:wmin 1.15s var(--ease) both}
+#hero .wm2{animation-delay:.14s}
+#hero .caps>div{animation:up .9s var(--ease) both}
+#hero .caps>div:nth-child(1){animation-delay:.55s}#hero .caps>div:nth-child(2){animation-delay:.68s}#hero .caps>div:nth-child(3){animation-delay:.81s}
+#hero .sub p{animation:up .9s var(--ease) .95s both}
+#hero .mk{animation:mkin 1.4s var(--ease) 1s both}
+#hero .mk path{transform-origin:50px 50px;animation:rot 18s linear 2.4s infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+header.top{animation:up .7s var(--ease) both}
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.rvd{opacity:1;transform:none}
+/* view enter */
+#view.enter{animation:up .55s var(--ease) both}
+/* progress */
+#prog{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);z-index:200;pointer-events:none}
+/* list rows */
+.card{position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--vm);transition:width .35s var(--ease)}
+.card:hover::before{width:4px}
+.card::after{transition:transform .3s var(--ease)}
+.card:hover::after{transform:translateX(6px);color:var(--vm)}
+.card.playing::before{width:4px;animation:eq 1.2s ease-in-out infinite}
+@keyframes eq{0%,100%{opacity:1}50%{opacity:.35}}
+.overlay span{animation:pulse 2.2s ease-out infinite}
+.btn,button{transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
+.btn:active,button:active{transform:scale(.96)}
+.cards3 a{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.cards3 a:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.cards3 a::after{transition:transform .35s var(--ease)}
+.cards3 a:hover::after{transform:translate(6px,-2px)}
+.chip{transition:background .2s,color .2s}
+footer.site svg text{transition:fill .4s}
+footer.site svg:hover text{fill:var(--vm)}
+a.ilink{background:linear-gradient(var(--vm),var(--vm)) 0 100%/0 2px no-repeat;border-bottom:0;transition:background-size .35s var(--ease),color .2s;padding-bottom:1px}
+a.ilink:hover{background-size:100% 2px}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}#hero .wm1,#hero .caps>div,#hero .sub p,#hero .mk,header.top,#view.enter,.mq2 div,.overlay span{animation:none!important}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -293,8 +356,8 @@ header.top nav a{white-space:nowrap}
 </script>
 </head>
 <body>
-<header class="top"><a class="lg" href="#/">SUBURBIA CLASSICA</a><nav aria-label="メインメニュー"><a href="#/">Songs</a><a href="#/timeline">Timeline</a><a href="songs/index.html">Index</a><a href="about.html">About</a><a href="profile.html">Editor</a></nav></header>
-<section id="hero" aria-label="SUBURBIA CLASSICA"><svg class="wm1" viewBox="0 -14 1000 232" style="overflow:visible" role="img" aria-label="SUBURBIA" preserveAspectRatio="none"><text x="0" y="200" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="286" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#0a0a0a">SUBURBIA</text></svg><svg class="wm1 wm2" viewBox="0 -14 1000 232" style="overflow:visible" role="img" aria-label="CLASSICA" preserveAspectRatio="none"><text x="0" y="200" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="286" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#0a0a0a">CLASSICA</text></svg><div class="caps"><div>Mellow classics,<br>straight from the textbook.</div><div><span id="heroN">74</span> pieces, each with<br>sources and recording stories.</div><div>Press play.<br>It moves on by itself.</div></div><div class="sub"><p>教科書・映画・CMで親しまれた名曲を、作曲の経緯から録音のエピソードまで、出典つきで読めるデータベース。音源はYouTubeの公式・スタジオ録音を中心に、無料で再生できます。</p><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#0a0a0a"/><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#ff3a00"/></svg></div></section>
+<div id="prog" aria-hidden="true"></div><header class="top"><a class="lg" href="#/">SUBURBIA CLASSICA</a><nav aria-label="メインメニュー"><a href="#/">Songs</a><a href="#/timeline">Timeline</a><a href="songs/index.html">Index</a><a href="about.html">About</a><a href="profile.html">Editor</a></nav></header>
+<section id="hero" aria-label="SUBURBIA CLASSICA"><svg class="wm1" viewBox="0 -14 1000 232" style="overflow:visible" role="img" aria-label="SUBURBIA" preserveAspectRatio="none"><text x="0" y="200" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="286" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#0a0a0a">SUBURBIA</text></svg><svg class="wm1 wm2" viewBox="0 -14 1000 232" style="overflow:visible" role="img" aria-label="CLASSICA" preserveAspectRatio="none"><text x="0" y="200" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="286" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#0a0a0a">CLASSICA</text></svg><div class="caps"><div>Mellow classics,<br>straight from the textbook.</div><div><span id="heroN">74</span> pieces, each with<br>sources and recording stories.</div><div>Press play.<br>It moves on by itself.</div></div><div class="sub"><p>教科書・映画・CMで親しまれた名曲を、作曲の経緯から録音のエピソードまで、出典つきで読めるデータベース。音源はYouTubeの公式・スタジオ録音を中心に、無料で再生できます。</p><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#0a0a0a"/><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#ff3a00"/></svg></div><div class="mq2" aria-hidden="true"><div><span>MELLOW</span><i></i><span>PIANO</span><i></i><span>CLASSICAL</span><i></i><span>TEXTBOOK MAJOR</span><i></i><span>FILM &amp; CM</span><i></i><span>OPERA</span><i></i><span>SACRED &amp; VOCAL</span><i></i><span>MELLOW</span><i></i><span>PIANO</span><i></i><span>CLASSICAL</span><i></i><span>TEXTBOOK MAJOR</span><i></i><span>FILM &amp; CM</span><i></i><span>OPERA</span><i></i><span>SACRED &amp; VOCAL</span><i></i></div></div></section>
 <div id="banner">このファイルを直接開く方法（file://）では、YouTube側の制限で再生できないことがあります。サーバー（localhostや無料ホスティング）経由で開いてください。</div>
 
 <div class="layout">
@@ -320,7 +383,7 @@ header.top nav a{white-space:nowrap}
     </div>
     <div class="status" id="status"></div>
   </aside>
-                              <noscript id="seo-ns"><main style="max-width:860px;margin:0 auto;padding:20px;color:#e8e4dc"><h1>SUBURBIA CLASSICA — A Mellow Classical Selection</h1><p>メロウ・ピアノ・クラシック。教科書・映画・CMで親しまれる名曲を、作曲の経緯・構成分析・録音エピソード・出典つきで詳しく紹介する楽曲データベース。YouTubeで無料再生、曲が終わると次の曲へ。</p><p>再生・スクリーンセーバー表示にはJavaScriptが必要です。曲の詳細は以下の静的ページでも読めます。</p><ul><li><a href="songs/fur-elise.html">エリーゼのために／ベートーヴェン</a></li><li><a href="songs/moonlight.html">ピアノソナタ第14番「月光」第1楽章／ベートーヴェン</a></li><li><a href="songs/tristesse.html">別れの曲（練習曲 Op.10-3）／ショパン</a></li><li><a href="songs/fantaisie-impromptu.html">幻想即興曲／ショパン</a></li><li><a href="songs/nocturne-9-2.html">ノクターン第2番／ショパン</a></li><li><a href="songs/raindrop.html">前奏曲 第15番「雨だれ」／ショパン</a></li><li><a href="songs/clair-de-lune.html">月の光（ベルガマスク組曲 第3曲）／ドビュッシー</a></li><li><a href="songs/gymnopedie-1.html">ジムノペディ 第1番／サティ</a></li><li><a href="songs/traumerei.html">トロイメライ（子供の情景 第7曲）／シューマン</a></li><li><a href="songs/liebestraum-3.html">愛の夢 第3番／リスト</a></li><li><a href="songs/flaxen-hair.html">亜麻色の髪の乙女（前奏曲集第1巻 第8曲）／クロード・ドビュッシー</a></li><li><a href="songs/arabesque-1.html">アラベスク第1番（2つのアラベスクより）／クロード・ドビュッシー</a></li><li><a href="songs/prelude-bwv846.html">平均律クラヴィーア曲集第1巻 第1番 前奏曲 ハ長調／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/pavane.html">亡き王女のためのパヴァーヌ（ピアノ原曲）／モーリス・ラヴェル</a></li><li><a href="songs/nocturne-20.html">ノクターン第20番 嬰ハ短調 遺作(レント・コン・グラン・エスプレッシオーネ)／フレデリック・ショパン</a></li><li><a href="songs/pathetique-2.html">ピアノソナタ第8番「悲愴」 第2楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/k331-1.html">ピアノ・ソナタ第11番 イ長調 K.331 第1楽章（主題と6つの変奏）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/prelude-7.html">前奏曲第7番 イ長調 Op.28-7／フレデリック・ショパン</a></li><li><a href="songs/brahms-waltz-15.html">16のワルツ Op.39 第15番 変イ長調（ピアノ独奏版）／ヨハネス・ブラームス</a></li><li><a href="songs/mendelssohn-spring-song.html">無言歌集 第5巻 Op.62-6「春の歌」／フェリックス・メンデルスゾーン</a></li><li><a href="songs/goldberg-aria.html">ゴルトベルク変奏曲 アリア／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/reverie.html">夢（Rêverie）／クロード・ドビュッシー</a></li><li><a href="songs/gnossienne-1.html">グノシエンヌ 第1番／エリック・サティ</a></li><li><a href="songs/waltz-64-2.html">ワルツ第7番 嬰ハ短調 Op.64-2／フレデリック・ショパン</a></li><li><a href="songs/waltz-69-1.html">ワルツ第9番 変イ長調 Op.69-1『別れのワルツ』／フレデリック・ショパン</a></li><li><a href="songs/tchaikovsky-october.html">四季 Op.37a 第10曲 10月「秋の歌」／ピョートル・チャイコフスキー</a></li><li><a href="songs/k310-2.html">ピアノ・ソナタ第8番 イ短調 K.310 第2楽章 アンダンテ・カンタービレ・コン・エスプレッシオーネ／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/schubert-impromptu-90-3.html">4つの即興曲 Op.90 D.899 第3番 変ト長調／フランツ・シューベルト</a></li><li><a href="songs/brahms-op118-2.html">6つの小品 Op.118 第2番 間奏曲 イ長調／ヨハネス・ブラームス</a></li><li><a href="songs/canon.html">カノン（パッヘルベルのカノン）／パッヘルベル</a></li><li><a href="songs/air-g-string.html">G線上のアリア／バッハ</a></li><li><a href="songs/jesu-joy.html">主よ人の望みの喜びよ／バッハ</a></li><li><a href="songs/rach-pc2-2.html">ピアノ協奏曲第2番 第2楽章／ラフマニノフ</a></li><li><a href="songs/schubert-ave-maria.html">アヴェ・マリア（エレンの歌 第3番）／シューベルト</a></li><li><a href="songs/liebesgruss.html">愛のあいさつ／エルガー</a></li><li><a href="songs/vocalise.html">ヴォカリーズ／ラフマニノフ</a></li><li><a href="songs/brahms-lullaby.html">ブラームスの子守歌／ブラームス</a></li><li><a href="songs/mozart-pc21-2.html">ピアノ協奏曲第21番 第2楽章／モーツァルト</a></li><li><a href="songs/faure-apres-un-reve.html">夢のあとに／フォーレ</a></li><li><a href="songs/paganini-var18.html">パガニーニの主題による狂詩曲 第18変奏／ラフマニノフ</a></li><li><a href="songs/solveigs-song.html">ソルヴェイグの歌／グリーグ</a></li><li><a href="songs/beethoven-5.html">交響曲第5番 ハ短調 作品67「運命」第1楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/beethoven-9.html">交響曲第9番 ニ短調 作品125「合唱付き」第4楽章「歓喜の歌」／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/vivaldi-spring.html">ヴァイオリン協奏曲集「四季」より 春 第1楽章 (協奏曲 ホ長調 作品8-1 RV269)／アントニオ・ヴィヴァルディ</a></li><li><a href="songs/largo-new-world.html">交響曲第9番 ホ短調「新世界より」第2楽章 ラルゴ（「家路」）／アントニーン・ドヴォルザーク</a></li><li><a href="songs/bolero.html">ボレロ／モーリス・ラヴェル</a></li><li><a href="songs/pomp-circumstance-1.html">行進曲「威風堂々」第1番／エドワード・エルガー</a></li><li><a href="songs/eine-kleine.html">アイネ・クライネ・ナハトムジーク K.525 第1楽章／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/pictures.html">ムソルグスキー作曲（ラヴェル編曲）組曲「展覧会の絵」／モデスト・ムソルグスキー</a></li><li><a href="songs/le-cygne.html">動物の謝肉祭 第13曲「白鳥」（チェロとピアノ版を中心に）／カミーユ・サン＝サーンス</a></li><li><a href="songs/jupiter.html">組曲「惑星」より 木星（快楽をもたらす者）／グスターヴ・ホルスト</a></li><li><a href="songs/toccata-fugue-dm.html">トッカータとフーガ ニ短調 BWV565／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/farandole.html">ビゼー「アルルの女」第2組曲より ファランドール／ジョルジュ・ビゼー</a></li><li><a href="songs/carmen-prelude.html">歌劇「カルメン」前奏曲（第1幕への前奏曲）／ジョルジュ・ビゼー</a></li><li><a href="songs/cavalleria-intermezzo.html">歌劇「カヴァレリア・ルスティカーナ」間奏曲／ピエトロ・マスカーニ</a></li><li><a href="songs/barber-adagio.html">弦楽のためのアダージョ 作品11／サミュエル・バーバー</a></li><li><a href="songs/nessun-dorma.html">歌劇「トゥーランドット」より 誰も寝てはならぬ／ジャコモ・プッチーニ</a></li><li><a href="songs/brindisi.html">歌劇「椿姫」より 乾杯の歌／ジュゼッペ・ヴェルディ</a></li><li><a href="songs/habanera.html">歌劇「カルメン」より ハバネラ（恋は野の鳥）／ジョルジュ・ビゼー</a></li><li><a href="songs/orpheus-overture.html">喜歌劇「天国と地獄」序曲（カンカンを含む）／ジャック・オッフェンバック</a></li><li><a href="songs/william-tell-overture.html">歌劇「ウィリアム・テル」序曲（終曲：スイス兵の行進）／ジョアキーノ・ロッシーニ</a></li><li><a href="songs/queen-of-night.html">歌劇「魔笛」より 夜の女王のアリア「復讐の心は地獄のように我が胸に燃え」／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/toreador.html">歌劇「カルメン」より 闘牛士の歌（諸君の乾杯を受けよう）／ジョルジュ・ビゼー</a></li><li><a href="songs/figaro-letter-duet.html">歌劇「フィガロの結婚」より 手紙の二重唱（そよ風によせて）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/flower-duet.html">歌劇「ラクメ」より 花の二重唱／レオ・ドリーブ</a></li><li><a href="songs/o-mio-babbino.html">私のお父さん（歌劇「ジャンニ・スキッキ」より）／ジャコモ・プッチーニ</a></li><li><a href="songs/lascia-ch-io-pianga.html">私を泣かせてください（歌劇「リナルド」より）／ゲオルク・フリードリヒ・ヘンデル</a></li><li><a href="songs/rojo-no-tsuki.html">荒城の月／滝廉太郎</a></li><li><a href="songs/heidenroslein.html">野ばら／フランツ・シューベルト</a></li><li><a href="songs/ave-verum-corpus.html">アヴェ・ヴェルム・コルプス K.618／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/erlkonig.html">魔王／フランツ・シューベルト</a></li><li><a href="songs/caccini-ave-maria.html">カッチーニのアヴェ・マリア／ウラディーミル・ヴァヴィロフ</a></li><li><a href="songs/faure-pie-jesu.html">ピエ・イェズ（フォーレ《レクイエム》作品48 第4曲）／ガブリエル・フォーレ</a></li><li><a href="songs/verdi-dies-irae.html">怒りの日（ディエス・イレ）（ヴェルディ《レクイエム》第2曲の冒頭）／ジュゼッペ・ヴェルディ</a></li></ul><p><a href="timeline.html">国横断年表</a>｜<a href="about.html">このサイトについて</a></p></main></noscript>
+                                  <noscript id="seo-ns"><main style="max-width:860px;margin:0 auto;padding:20px;color:#e8e4dc"><h1>SUBURBIA CLASSICA — A Mellow Classical Selection</h1><p>メロウ・ピアノ・クラシック。教科書・映画・CMで親しまれる名曲を、作曲の経緯・構成分析・録音エピソード・出典つきで詳しく紹介する楽曲データベース。YouTubeで無料再生、曲が終わると次の曲へ。</p><p>再生・スクリーンセーバー表示にはJavaScriptが必要です。曲の詳細は以下のページでも読めます。</p><ul><li><a href="songs/fur-elise.html">エリーゼのために／ベートーヴェン</a></li><li><a href="songs/moonlight.html">ピアノソナタ第14番「月光」第1楽章／ベートーヴェン</a></li><li><a href="songs/tristesse.html">別れの曲（練習曲 Op.10-3）／ショパン</a></li><li><a href="songs/fantaisie-impromptu.html">幻想即興曲／ショパン</a></li><li><a href="songs/nocturne-9-2.html">ノクターン第2番／ショパン</a></li><li><a href="songs/raindrop.html">前奏曲 第15番「雨だれ」／ショパン</a></li><li><a href="songs/clair-de-lune.html">月の光（ベルガマスク組曲 第3曲）／ドビュッシー</a></li><li><a href="songs/gymnopedie-1.html">ジムノペディ 第1番／サティ</a></li><li><a href="songs/traumerei.html">トロイメライ（子供の情景 第7曲）／シューマン</a></li><li><a href="songs/liebestraum-3.html">愛の夢 第3番／リスト</a></li><li><a href="songs/flaxen-hair.html">亜麻色の髪の乙女（前奏曲集第1巻 第8曲）／クロード・ドビュッシー</a></li><li><a href="songs/arabesque-1.html">アラベスク第1番（2つのアラベスクより）／クロード・ドビュッシー</a></li><li><a href="songs/prelude-bwv846.html">平均律クラヴィーア曲集第1巻 第1番 前奏曲 ハ長調／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/pavane.html">亡き王女のためのパヴァーヌ（ピアノ原曲）／モーリス・ラヴェル</a></li><li><a href="songs/nocturne-20.html">ノクターン第20番 嬰ハ短調 遺作(レント・コン・グラン・エスプレッシオーネ)／フレデリック・ショパン</a></li><li><a href="songs/pathetique-2.html">ピアノソナタ第8番「悲愴」 第2楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/k331-1.html">ピアノ・ソナタ第11番 イ長調 K.331 第1楽章（主題と6つの変奏）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/prelude-7.html">前奏曲第7番 イ長調 Op.28-7／フレデリック・ショパン</a></li><li><a href="songs/brahms-waltz-15.html">16のワルツ Op.39 第15番 変イ長調（ピアノ独奏版）／ヨハネス・ブラームス</a></li><li><a href="songs/mendelssohn-spring-song.html">無言歌集 第5巻 Op.62-6「春の歌」／フェリックス・メンデルスゾーン</a></li><li><a href="songs/goldberg-aria.html">ゴルトベルク変奏曲 アリア／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/reverie.html">夢（Rêverie）／クロード・ドビュッシー</a></li><li><a href="songs/gnossienne-1.html">グノシエンヌ 第1番／エリック・サティ</a></li><li><a href="songs/waltz-64-2.html">ワルツ第7番 嬰ハ短調 Op.64-2／フレデリック・ショパン</a></li><li><a href="songs/waltz-69-1.html">ワルツ第9番 変イ長調 Op.69-1『別れのワルツ』／フレデリック・ショパン</a></li><li><a href="songs/tchaikovsky-october.html">四季 Op.37a 第10曲 10月「秋の歌」／ピョートル・チャイコフスキー</a></li><li><a href="songs/k310-2.html">ピアノ・ソナタ第8番 イ短調 K.310 第2楽章 アンダンテ・カンタービレ・コン・エスプレッシオーネ／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/schubert-impromptu-90-3.html">4つの即興曲 Op.90 D.899 第3番 変ト長調／フランツ・シューベルト</a></li><li><a href="songs/brahms-op118-2.html">6つの小品 Op.118 第2番 間奏曲 イ長調／ヨハネス・ブラームス</a></li><li><a href="songs/canon.html">カノン（パッヘルベルのカノン）／パッヘルベル</a></li><li><a href="songs/air-g-string.html">G線上のアリア／バッハ</a></li><li><a href="songs/jesu-joy.html">主よ人の望みの喜びよ／バッハ</a></li><li><a href="songs/rach-pc2-2.html">ピアノ協奏曲第2番 第2楽章／ラフマニノフ</a></li><li><a href="songs/schubert-ave-maria.html">アヴェ・マリア（エレンの歌 第3番）／シューベルト</a></li><li><a href="songs/liebesgruss.html">愛のあいさつ／エルガー</a></li><li><a href="songs/vocalise.html">ヴォカリーズ／ラフマニノフ</a></li><li><a href="songs/brahms-lullaby.html">ブラームスの子守歌／ブラームス</a></li><li><a href="songs/mozart-pc21-2.html">ピアノ協奏曲第21番 第2楽章／モーツァルト</a></li><li><a href="songs/faure-apres-un-reve.html">夢のあとに／フォーレ</a></li><li><a href="songs/paganini-var18.html">パガニーニの主題による狂詩曲 第18変奏／ラフマニノフ</a></li><li><a href="songs/solveigs-song.html">ソルヴェイグの歌／グリーグ</a></li><li><a href="songs/beethoven-5.html">交響曲第5番 ハ短調 作品67「運命」第1楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/beethoven-9.html">交響曲第9番 ニ短調 作品125「合唱付き」第4楽章「歓喜の歌」／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/vivaldi-spring.html">ヴァイオリン協奏曲集「四季」より 春 第1楽章 (協奏曲 ホ長調 作品8-1 RV269)／アントニオ・ヴィヴァルディ</a></li><li><a href="songs/largo-new-world.html">交響曲第9番 ホ短調「新世界より」第2楽章 ラルゴ（「家路」）／アントニーン・ドヴォルザーク</a></li><li><a href="songs/bolero.html">ボレロ／モーリス・ラヴェル</a></li><li><a href="songs/pomp-circumstance-1.html">行進曲「威風堂々」第1番／エドワード・エルガー</a></li><li><a href="songs/eine-kleine.html">アイネ・クライネ・ナハトムジーク K.525 第1楽章／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/pictures.html">ムソルグスキー作曲（ラヴェル編曲）組曲「展覧会の絵」／モデスト・ムソルグスキー</a></li><li><a href="songs/le-cygne.html">動物の謝肉祭 第13曲「白鳥」（チェロとピアノ版を中心に）／カミーユ・サン＝サーンス</a></li><li><a href="songs/jupiter.html">組曲「惑星」より 木星（快楽をもたらす者）／グスターヴ・ホルスト</a></li><li><a href="songs/toccata-fugue-dm.html">トッカータとフーガ ニ短調 BWV565／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/farandole.html">ビゼー「アルルの女」第2組曲より ファランドール／ジョルジュ・ビゼー</a></li><li><a href="songs/carmen-prelude.html">歌劇「カルメン」前奏曲（第1幕への前奏曲）／ジョルジュ・ビゼー</a></li><li><a href="songs/cavalleria-intermezzo.html">歌劇「カヴァレリア・ルスティカーナ」間奏曲／ピエトロ・マスカーニ</a></li><li><a href="songs/barber-adagio.html">弦楽のためのアダージョ 作品11／サミュエル・バーバー</a></li><li><a href="songs/nessun-dorma.html">歌劇「トゥーランドット」より 誰も寝てはならぬ／ジャコモ・プッチーニ</a></li><li><a href="songs/brindisi.html">歌劇「椿姫」より 乾杯の歌／ジュゼッペ・ヴェルディ</a></li><li><a href="songs/habanera.html">歌劇「カルメン」より ハバネラ（恋は野の鳥）／ジョルジュ・ビゼー</a></li><li><a href="songs/orpheus-overture.html">喜歌劇「天国と地獄」序曲（カンカンを含む）／ジャック・オッフェンバック</a></li><li><a href="songs/william-tell-overture.html">歌劇「ウィリアム・テル」序曲（終曲：スイス兵の行進）／ジョアキーノ・ロッシーニ</a></li><li><a href="songs/queen-of-night.html">歌劇「魔笛」より 夜の女王のアリア「復讐の心は地獄のように我が胸に燃え」／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/toreador.html">歌劇「カルメン」より 闘牛士の歌（諸君の乾杯を受けよう）／ジョルジュ・ビゼー</a></li><li><a href="songs/figaro-letter-duet.html">歌劇「フィガロの結婚」より 手紙の二重唱（そよ風によせて）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/flower-duet.html">歌劇「ラクメ」より 花の二重唱／レオ・ドリーブ</a></li><li><a href="songs/o-mio-babbino.html">私のお父さん（歌劇「ジャンニ・スキッキ」より）／ジャコモ・プッチーニ</a></li><li><a href="songs/lascia-ch-io-pianga.html">私を泣かせてください（歌劇「リナルド」より）／ゲオルク・フリードリヒ・ヘンデル</a></li><li><a href="songs/rojo-no-tsuki.html">荒城の月／滝廉太郎</a></li><li><a href="songs/heidenroslein.html">野ばら／フランツ・シューベルト</a></li><li><a href="songs/ave-verum-corpus.html">アヴェ・ヴェルム・コルプス K.618／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/erlkonig.html">魔王／フランツ・シューベルト</a></li><li><a href="songs/caccini-ave-maria.html">カッチーニのアヴェ・マリア／ウラディーミル・ヴァヴィロフ</a></li><li><a href="songs/faure-pie-jesu.html">ピエ・イェズ（フォーレ《レクイエム》作品48 第4曲）／ガブリエル・フォーレ</a></li><li><a href="songs/verdi-dies-irae.html">怒りの日（ディエス・イレ）（ヴェルディ《レクイエム》第2曲の冒頭）／ジュゼッペ・ヴェルディ</a></li></ul><p><a href="timeline.html">国横断年表</a>｜<a href="about.html">このサイトについて</a></p></main></noscript>
   <main id="view"></main>
 </div>
 <div id="ss" aria-hidden="true">
@@ -334,7 +397,7 @@ header.top nav a{white-space:nowrap}
     <div class="tc"><i></i><span id="ssTc"></span></div>
   </div>
 </div>
-<section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェに流れていてほしい曲を、4つの軸で集めています。ひとつ、穏やか・切ない・夜・眠りといった「メロウ」であること。ふたつ、ピアノ独奏を起点に、協奏曲、管弦楽・室内楽、オペラ、宗教曲・声楽へ広げたクラシックの名曲であること。みっつ、教科書・映画・CMで耳にした経験のある、広く親しまれた曲であること。よっつ、作曲の経緯から録音のエピソードまで、出典をたどって詳しく書けること。各カテゴリの中は知名度の高い順に並べています。確認できなかった情報は「未確認」と明記し、出典のあるものだけを掲載しています。</p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（DJ歴32年）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Top</a><a href="songs/index.html">曲一覧（静的ページ）</a><a href="llms.txt">llms.txt</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a><a href="sitemap.xml">Sitemap</a><a href="https://note.com/djnaoyaman" rel="noopener">note</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで本サイトが独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
+<section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェに流れていてほしい曲を、4つの軸で集めています。ひとつ、穏やか・切ない・夜・眠りといった「メロウ」であること。ふたつ、ピアノ独奏を起点に、協奏曲、管弦楽・室内楽、オペラ、宗教曲・声楽へ広げたクラシックの名曲であること。みっつ、教科書・映画・CMで耳にした経験のある、広く親しまれた曲であること。よっつ、作曲の経緯から録音のエピソードまで、出典をたどって詳しく書けること。各カテゴリの中は知名度の高い順に並べています。確認できなかった情報は「未確認」と明記し、出典のあるものだけを掲載しています。</p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（DJ歴32年）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Top</a><a href="songs/index.html">曲一覧</a><a href="llms.txt">llms.txt</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a><a href="sitemap.xml">Sitemap</a><a href="https://note.com/djnaoyaman" rel="noopener">note</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで本サイトが独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
 <script>
 const SONGS = [
@@ -1121,7 +1184,7 @@ function shareBar(url,title){
    '<a class="btn" target="_blank" rel="noopener" href="https://b.hatena.ne.jp/add?mode=confirm&url='+u+'&title='+ti+'">はてブ</a>'+
    '<button type="button" data-copy="'+url+'" onclick="copyLink(this)">リンクをコピー</button></div>';
 }
-document.addEventListener('DOMContentLoaded',()=>{const e=document.getElementById('siteShare'); if(e) e.innerHTML=shareBar(SITE_URL,'SUBURBIA CLASSICA — A Mellow Classical Selection');});
+document.addEventListener('DOMContentLoaded',()=>{ try{countUp();}catch(e){} const e=document.getElementById('siteShare'); if(e) e.innerHTML=shareBar(SITE_URL,'SUBURBIA CLASSICA — A Mellow Classical Selection');});
 function copyLink(b){ const v=b.getAttribute('data-copy'); const done=()=>{ b.textContent='コピーしました'; setTimeout(()=>{b.textContent='リンクをコピー'},1800); };
   try{ navigator.clipboard.writeText(v).then(done,()=>{}); }catch(e){} }
 function renderSong(i){
@@ -1247,10 +1310,25 @@ function seoRoute(i){
     if(i>=0){ const s=SONGS[i]; const h=B.getAttribute('data-home'); if(B) B.href=h+'songs/'+s.id+'.html'; if(D) D.content=s.summary; }
     else if(B){ B.href=B.getAttribute('data-home'); } }catch(e){}
 }
+
+/* ===== motion js ===== */
+const REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+let _io=null;
+function initReveal(){
+  if (REDUCED || typeof IntersectionObserver==='undefined' || !document.querySelectorAll) return;
+  if(!_io){ _io=new IntersectionObserver(es=>{ let k=0; es.forEach(e=>{ if(e.isIntersecting){ e.target.style.setProperty('--d',(Math.min(k,8)*0.06)+'s'); e.target.classList.add('rvd'); _io.unobserve(e.target); k++; } }); },{threshold:.08,rootMargin:'0px 0px -6% 0px'}); }
+  document.querySelectorAll('#view > *, #view .grid > .card, .band .in > *, .cards3 > a, footer.site .in > *').forEach(el=>{ if(el.classList && !el.classList.contains('rv')){ el.classList.add('rv'); _io.observe(el); } });
+}
+function countUp(){ const n=document.getElementById('heroN'); if(!n||REDUCED) return; const to=SONGS.length; let s=null; const f=ts=>{ if(s===null)s=ts; const p=Math.min(1,(ts-s)/1200); n.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
+(function(){
+  const pg=document.getElementById('prog'); if(!pg||!window.addEventListener) return;
+  let tk=false; const up=()=>{ tk=false; const h=document.documentElement; const m=h.scrollHeight-h.clientHeight; pg.style.transform='scaleX('+(m>0?Math.min(1,(window.scrollY||h.scrollTop)/m):0)+')'; const c=document.querySelector('.philo .sq i'); if(c&&c.getBoundingClientRect&&!REDUCED){ const r=c.parentElement.getBoundingClientRect(); const p=(r.top/window.innerHeight)-.5; c.style.transform='translateY('+(p*-26)+'px) scale('+(1+Math.abs(p)*.05)+')'; } };
+  window.addEventListener('scroll',()=>{ if(!tk){ tk=true; requestAnimationFrame(up); } },{passive:true}); window.addEventListener('resize',up);
+})();
 function route(){
   { const h=document.getElementById('hero'); if(h&&h.style){ const home=(location.hash===''||location.hash==='#/'||location.hash==='#'); h.style.display=home?'':'none'; const n=document.getElementById('heroN'); if(n) n.textContent=SONGS.length; } }
   const i = currentViewIdx(); seoRoute(i);
-  if (location.hash==='#/timeline'){ document.title='国横断年表｜SUBURBIA CLASSICA'; renderTimeline(); if(!started&&ytReady&&cur<0) setNow(0,false); window.scrollTo(0,0); return; }
+  if (location.hash==='#/timeline'){ document.title='国横断年表｜SUBURBIA CLASSICA'; renderTimeline(); if(!started&&ytReady&&cur<0) setNow(0,false); window.scrollTo(0,0); try{ view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); }catch(e){} initReveal(); return; }
   document.title = (i>=0 ? SONGS[i].title + '｜' : '') + 'SUBURBIA CLASSICA — A Mellow Classical Selection';
   if (i >= 0) {
     renderSong(i);
@@ -1262,6 +1340,8 @@ function route(){
     if (!started && ytReady && cur < 0) setNow(0, false);
   }
   window.scrollTo(0, 0);
+  try{ if(view&&view.classList){ view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); } }catch(e){}
+  initReveal();
 }
 window.addEventListener('hashchange', route);
 

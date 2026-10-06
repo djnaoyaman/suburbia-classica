@@ -64,6 +64,12 @@ h2{font-family:var(--serif);font-weight:600;font-size:15px;letter-spacing:.12em;
 ul.plain{margin:0;padding-left:1.2em;font-size:14px}
 ul.plain li{margin-bottom:8px}
 ul.plain small,.note{color:var(--sub);font-size:12px}
+a.ilink{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(127,155,191,.4)}
+a.ilink:hover{color:var(--accent);border-color:var(--accent)}
+a.chip{text-decoration:none;display:inline-block}
+a.chip.dim{opacity:.55}
+.cath{display:flex;align-items:baseline;gap:10px}
+.cath span{font-family:var(--en);font-size:22px;color:var(--text);letter-spacing:.1em}
 .nav{display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap}
 .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .src a{display:block;font-size:12px;color:var(--sub);word-break:break-all;margin-bottom:2px}
@@ -438,8 +444,302 @@ const SONGS = [
  yt:{id:"DxNXyoQ38tE",who:"Evgeny Kissin"}
 }
 ];
+SONGS.forEach(s=>{ s.cat = s.cat || "ピアノ独奏"; });
 
-const TBD = '<span class="pend">調査中・確認できず</span>';
+/* ===== カテゴリB：協奏曲・編曲 ===== */
+SONGS.push(
+{
+ cat:"協奏曲・編曲", id:"canon", title:"カノン（パッヘルベルのカノン）", en:"Canon and Gigue in D major, P.37",
+ composer:"パッヘルベル", era:"バロック", year:"不明（1680〜1706の間で諸説）", opus:"P.37", key:"ニ長調・4/4拍子（ジーグは12/8）", form:"3声のカノン＋通奏低音（原曲は3つのヴァイオリンと通奏低音）", mood:["穏やか","華やか"],
+ summary:"低音の同じ進行を繰り返し、3つの声が同じ旋律を追いかけて重なっていく、バロックの代表的なカノン。",
+ diff:"未確認（ピアノ編曲版は版により異なる）",
+ story:"作曲の年も事情も記録がなく、1680年ごろから1706年までさまざまな説がある。シュルツェは、1694年に行われたJ.S.バッハの兄ヨハン・クリストフの結婚式のために書かれたと推測したが、パッヘルベル研究者のウェルターはこれを憶測と退けている。ビーバーの曲集（1696年刊）への応答とする説もある。原曲は3本のヴァイオリンと通奏低音のための作品で、ジーグと対で伝わる。現存最古の写本は1838〜42年頃のもので、カノンだけが1919年にベックマンにより出版された。広く知られるようになったのは、1968年のパイヤール室内管弦楽団による録音（パイヤール自身の補筆つき編曲）以降である。",
+ pub:"カノン単独は1919年にG.ベックマンの論文で初出版。1929年にザイフェルトが編曲版（Organum叢書）を刊行した。",
+ ded:"未確認（結婚式のための作品とする説はあるが推測）。",
+ nameOrigin:"正式名は「3つのヴァイオリンと通奏低音のためのカノンとジーグ」。一般には「パッヘルベルのカノン」「Canon in D」と呼ばれる。",
+ structure:[["カノン","同じ旋律を2小節ずらして3つのヴァイオリンが追う。低音は8つの和音（D-A-Bm-F#m-G-D-G-A）を繰り返す。"],["変奏","低音の28回の反復の上で、4分音符、8分音符、16分音符と音価が細かくなり、付点やシンコペーションも現れる。"],["ジーグ","12/8拍子、各10小節の2部分。カノンと違い固定低音はなく、模倣的な書法で進む。"]],
+ features:"ほぼ同じ低音進行を繰り返し、その上に3声が同じ旋律を時間差で重ねる。厳格な模倣であるカノンと、低音が固定された変奏曲（シャコンヌ的）の二つの形式が一曲に重なる点が特色。和声進行はロマネスカ型とされ、のちのポップスにも多く転用された。上声が少しずつ細かく動いて曲が盛り上がるので、同じ和音の繰り返しでも飽きずに聴ける。",
+ perf:"低音の4分音符を一定に保ち、上声の音価が細かくなっても速さを変えないことが大切。声部の入りは均等に、先に入った声部を邪魔せず歌い継ぐ。ピアノ編曲では各声部の受け渡しを聴き分けて弾く。",
+ recs:[["パイヤール室内管弦楽団（指揮：ジャン＝フランソワ・パイヤール）","1968","ロマン的で遅めのテンポ。この曲が広く知られるきっかけとなった録音（英語版Wikipedia）。"],["ヘルマン・ディーナーと彼の音楽大学","1938","最初の録音とされる。"],["クリストファー・ホグウッド指揮 エンシェント室内管弦楽団","年未確認","1982年にBillboard古典アルバム首位をパイヤール盤から奪った盤に収録（英語版Wikipedia）。"]],
+ films:[["普通の人々 (Ordinary People)","1980","サウンドトラックでパイヤール版が目立って使われた（場面は未確認）。","https://en.wikipedia.org/wiki/Pachelbel%27s_Canon"],["Cosmos: A Personal Voyage（TVシリーズ）","1980","サウンドトラックに採用（場面は未確認）。","https://en.wikipedia.org/wiki/Pachelbel%27s_Canon"]],
+ cms:[["Woolmark（Pure New Wool）英国TV広告","1975年頃から","https://en.wikipedia.org/wiki/Pachelbel%27s_Canon"]],
+ textbooks:[],
+ related:["パッヘルベル「Musikalische Ergötzung」","ビーバー「Harmonia artificioso-ariosa」第3番","ジョージ・ウィンストン「Variations on the Kanon」","Aphrodite's Child「Rain and Tears」","G線上のアリア（同じバロックの人気編曲曲）"],
+ imslp:"https://imslp.org/wiki/Canon%20and%20Gigue%20in%20D%20major,%20P.37%20(Pachelbel,%20Johann)",
+ trivia:["1981年のThe New Yorker誌に、館内放送でこの曲が流れ続ける囚人を描いた風刺漫画「Prisoner of Pachelbel」が載った。","1968年、Aphrodite's Childの「Rain and Tears」とPop-Topsの「Oh Lord, Why Lord」が、いずれもこの曲を土台にしたヒットとなった。","2012年の英国の葬儀調査（約3万件）で、クラシック部門の2位だった（1位はエルガー「ニムロッド」）。"],
+ sources:["https://en.wikipedia.org/wiki/Pachelbel%27s_Canon","https://imslp.org/wiki/Canon%20and%20Gigue%20in%20D%20major,%20P.37%20(Pachelbel,%20Johann)"],
+ yt:{id:"gRUPa-ugzEY",who:"Gamazda（ピアノ）"}
+},
+{
+ cat:"協奏曲・編曲", id:"air-g-string", title:"G線上のアリア", en:"Air on the G String — Orchestral Suite No.3, BWV 1068 (arr. Wilhelmj)",
+ composer:"バッハ（編曲：ウィルヘルミ）", era:"バロック（編曲はロマン派期）", year:"原曲1730年代初め頃／編曲1871年", opus:"BWV 1068-2", key:"ハ長調（ウィルヘルミ版。原曲はニ長調）", form:"アリア（原曲は弦楽と通奏低音のみ）", mood:["穏やか","夜"],
+ summary:"バッハの管弦楽組曲の緩徐楽章を、ウィルヘルミがG線だけで弾けるよう編曲した、静かに歌う名旋律。",
+ diff:"未確認",
+ story:"原曲はバッハの管弦楽組曲第3番ニ長調BWV1068の第2曲「エア」で、1730年代初めにケーテン時代の作とされる（作曲地には異論の余地あり）。組曲の他の楽章がトランペットやティンパニを含む中、この楽章だけが弦楽と通奏低音で演奏される。1871年、ヴァイオリニストのアウグスト・ウィルヘルミが、ヴァイオリン独奏と弦楽（またはピアノ、オルガン）のために編曲した。ハ長調に移調し、第1ヴァイオリンの旋律をさらに1オクターブ下げて、G線だけで弾けるようにした。譜面に「auf der G-Saite（G線で）」と書き込んだことが通称の由来で、他の声部は弱音で控えめにされた。",
+ pub:"ウィルヘルミ編曲版は1871年（出版社・詳細は未確認）。IMSLPに掲載。",
+ ded:"未確認。",
+ nameOrigin:"ウィルヘルミが譜面に「G線で」と書いたことに由来する。のちに「原曲からG線だけで弾く曲だった」という誤った話も流れた。",
+ structure:[["旋律","高音弦の絡み合う旋律が、ゆったりとした長い息で歌われる。"],["低音","原曲では低音が規則的に歩み、曲に推進力を与える。"],["ウィルヘルミ版","旋律をG線の低音域に移し、伴奏は弱音器や弱いピツィカートに抑える。"]],
+ features:"原曲は、重なり合う高音の旋律線と、歩むように進む低音との対比が魅力。ウィルヘルミ版は旋律を低音域の独奏に任せ、他を弱くしたため、原曲の対位法的な織り込みや低音の推進力は薄れ、よりロマン派的な甘く暗い響きになった。ヨアヒムは「バッハ作品の恥知らずな改竄」と批判し、トーヴィーも原曲のニ長調で演奏すべきだとした。それでも編曲の名は、さまざまな楽器の版で通称として定着している。",
+ perf:"長い旋律を途切れさせず、弓の流れを一定に保つ。ウィルヘルミ版は低い音域で音量が出にくいので、伴奏は弱く抑えて独奏を支える。ピアノ編曲では旋律の歌わせ方と低音の歩みを分けて弾く。",
+ recs:[["フリッツ・クライスラー","1904","最初期のウィルヘルミ版録音の一つ（英語版Wikipedia）。"],["ミッシャ・エルマン（ピアノ：パーシー・B・カーン）","1911","「Air for G string」の題での録音。"],["ヘンリー・ウッド指揮 ブリティッシュ交響楽団","1932","G線のパートを多数のヴァイオリンが弾く管弦楽版。"],["ブロニスワフ・フーベルマン（ピアノ：ジークフリート・シュルツェ）","1930","Columbia WAX5007。"]],
+ films:[["セブン (Se7en)","1995","ミルズとサマセット刑事が犯罪現場の写真を調べる場面。","https://en.wikipedia.org/wiki/Air_on_the_G_String"],["007 私を愛したスパイ","1977","悪役ストロンバーグが部下をサメに与える場面。","https://en.wikipedia.org/wiki/Air_on_the_G_String"],["新世紀エヴァンゲリオン劇場版 Air／まごころを、君に","1997","前半の終わり近く。","https://en.wikipedia.org/wiki/Air_on_the_G_String"]],
+ cms:[["Hamlet（英国の葉巻）TV広告（ジャズ編曲）","1966〜1991","https://en.wikipedia.org/wiki/Air_on_the_G_String"]],
+ textbooks:[],
+ related:["バッハ 管弦楽組曲第3番 BWV1068","主よ人の望みの喜びよ（同じバッハの人気曲）","Procol Harum「A Whiter Shade of Pale」","Ekseption「Air」"],
+ imslp:"https://imslp.org/wiki/Orchestral%20Suite%20No.3%20in%20D%20major,%20BWV%201068%20(Bach,%20Johann%20Sebastian)",
+ trivia:["1905年から約30年にわたり、ヘンリー・ウッドがロンドンのプロムスでウィルヘルミ版を取り上げ続けた。","1967年の「A Whiter Shade of Pale」は、作者ゲイリー・ブルッカーによれば、この曲の1〜2小節が出発点だった。","ウィルヘルミ版の録音は1900年代初頭から残っており、1902年のレオポルト・ハルトマンなどが早い例。"],
+ sources:["https://en.wikipedia.org/wiki/Air_on_the_G_String","https://imslp.org/wiki/Orchestral%20Suite%20No.3%20in%20D%20major,%20BWV%201068%20(Bach,%20Johann%20Sebastian)"],
+ yt:{id:"lPgjWdq7Hfc",who:"Max Strelchenko（ヴァイオリン）／Milena Zalevskaya（ピアノ）"}
+},
+{
+ cat:"協奏曲・編曲", id:"jesu-joy", title:"主よ人の望みの喜びよ", en:"Jesu, Joy of Man's Desiring — Cantata BWV 147 (arr. Myra Hess)",
+ composer:"バッハ（ピアノ編曲：マイラ・ヘス）", era:"バロック（編曲は20世紀）", year:"原曲1723年／ヘス編曲1926年", opus:"BWV 147（第6曲・第10曲のコラール）", key:"未確認", form:"コラール（原曲は管弦楽伴奏つきの合唱）", mood:["穏やか","眠り"],
+ summary:"バッハのカンタータのコラールを、マイラ・ヘスがピアノ用にまとめた、流れるような伴奏に旋律が歌う名編曲。",
+ diff:"未確認",
+ story:"原曲は、1723年のカンタータ「心と口と行いと生活で」BWV147（全10曲、2部構成）のコラールで、各部の終わり（第6曲と第10曲）に置かれている。ヨハン・シェープの旋律に、マルティン・ヤーヌスの賛美歌の2つの節を当て、独立した管弦楽の伴奏がつく。第6曲の歌詞は「Wohl mir, dass ich Jesum habe」、第10曲は「Jesus bleibet meine Freude」である。ピアニストのマイラ・ヘスがこれをピアノ用に編曲し、1926年にピアノ独奏版を、1934年に連弾版をオックスフォード大学出版局から刊行した。英語題はこのヘス版に由来し、現在よく知られる姿は主にこの編曲による。",
+ pub:"ヘス編曲：1926年にピアノ独奏版、1934年に連弾版（オックスフォード大学出版局）。",
+ ded:"未確認。",
+ nameOrigin:"英語題「Jesu, Joy of Man's Desiring」はヘス版に付いた題で、原曲のどちらの歌詞とも一致しない。日本語題はそれに基づく。",
+ structure:[["主旋律","ピアノ右手の旋律がコラールを歌う。"],["伴奏","絶え間なく流れる三連系の動きが、曲全体を支える。"],["原曲との関係","原曲は合唱＋トランペット・ヴァイオリン・通奏低音（オーボエ・ヴィオラは任意）。"]],
+ features:"原曲では、コラール旋律の合唱に、独立した器楽の流れる旋律がからむ。ヘス編曲はその両方を一台のピアノにまとめ、「素朴に、流れるように」と指示されている。弾きやすそうに聞こえて、内声の流れと旋律を同時に整えるのは容易でない。結婚式やアドベント、クリスマス、イースターなどでよく演奏される。",
+ perf:"伴奏の流れを均一に保ちつつ、旋律を歌わせる。英語版歌詞ではゆったりとしたテンポが慣例だが、原曲のドイツ語の賛美歌は活気ある性格とされる。ヘス自身は「素朴に、流れるように」と記している。",
+ recs:[["マイラ・ヘス","1928","ニューヨークで1928年1月17日に初録音（YouTubeの説明による）。"],["マイラ・ヘス","1940","編曲者自身の演奏（英語版Wikipediaが言及）。"]],
+ films:[], cms:[], textbooks:[],
+ related:["バッハ カンタータ第147番「心と口と行いと生活で」","ヨハン・シェープ「Werde munter, mein Gemüthe」","G線上のアリア（同じバッハの人気編曲曲）","ジョージ・ウィンストン「Joy」（アルバム『December』）"],
+ imslp:"https://imslp.org/wiki/Herz%20und%20Mund%20und%20Tat%20und%20Leben,%20BWV%20147%20(Bach,%20Johann%20Sebastian)",
+ trivia:["アポロ100の1972年のインストゥルメンタル「Joy」が米Billboard Hot 100で6位になった。","ヘスはバッハを深く尊敬し、このコラールをピアノで即興的に弾くことも多かったという。","日本のビジュアルノベル『Wonderful Everyday』（2010年）で、ピアノ編曲が全編にわたり使われた。"],
+ sources:["https://en.wikipedia.org/wiki/Jesu,_Joy_of_Man%27s_Desiring","https://imslp.org/wiki/Herz%20und%20Mund%20und%20Tat%20und%20Leben,%20BWV%20147%20(Bach,%20Johann%20Sebastian)","https://www.classicalconnect.com/music/11691"],
+ yt:{id:"qdSaziLUOh8",who:"Myra Hess（ピアノ、1928年録音）"}
+},
+{
+ cat:"協奏曲・編曲", id:"rach-pc2-2", title:"ピアノ協奏曲第2番 第2楽章", en:"Piano Concerto No.2 in C minor, Op.18 — II. Adagio sostenuto",
+ composer:"ラフマニノフ", era:"後期ロマン派", year:"1900〜1901年", opus:"Op.18", key:"ホ長調", form:"協奏曲の緩徐楽章（ピアノと管弦楽）", mood:["切ない","夜"],
+ summary:"ダーリ医師の治療で立ち直ったラフマニノフが書いた、静かで抒情的な緩徐楽章。映画や歌にも転用された名旋律。",
+ diff:"未確認",
+ story:"1897年の交響曲第1番の初演失敗で、ラフマニノフは作曲できなくなった。親族の勧めで神経科医ニコライ・ダーリの催眠療法を1900年1〜4月に受けて自信を取り戻し、同年夏にイタリアでシャリアピンの家に滞在しつつ、第2・第3楽章から書き始めた。この2楽章は1900年12月に、従兄のシロティの指揮、本人のピアノで先行初演された。第1楽章は後から完成し、全曲は1901年11月（新暦）にモスクワで同じ二人により初演されて大成功を収めた。",
+ pub:"グチェイリ社から1901年に出版されたとされる（出版年の記述に揺れあり）。作曲者自身による2台ピアノ版も同時に出版された。1900年12月の先行初演はモスクワ貴族会館で、シロティにとって指揮デビューだった。",
+ ded:"ニコライ・ダーリ（治療への感謝）。",
+ nameOrigin:"楽章名はAdagio sostenuto（ゆっくりと音を保って）。楽章名以外の通称は未確認。",
+ structure:[["導入","弦楽器の遅い和音が、ハ短調からホ長調へ転調して始まる。"],["A部","ピアノが静かな伴奏音型を奏で、木管が旋律を歌う。"],["中間部","Più animato。ピアノの動きが活発になり盛り上がる。"],["再現","テンポが戻り、主題が回帰して静かに終わる。"]],
+ features:"第1楽章のハ短調から、遠隔のホ長調へ移り、弦の和音で静かに幕を開ける。ピアノは旋律をオーケストラ（特にフルートやクラリネットなどの木管）と受け渡しながら、細やかな音型で支える役割も担う。協奏曲全体の中で最も抒情的で、のちにポピュラー音楽にも転用された旋律をもつ。",
+ perf:"ピアノは目立つ主役というより、木管の旋律に寄り添う対話の姿勢が大切。分散和音の粒をそろえ、音量を抑えて息の長いフレーズを保つ。中間部では高揚しすぎず、テンポの流れを保つことが重要。",
+ recs:[["ユジャ・ワン（指揮：グスターボ・ドゥダメル、ロサンゼルス・フィル）","年未確認","ドイツ・グラモフォンによる第2楽章の映像が公式ページで確認できる。"]],
+ films:[["逢びき (Brief Encounter)","1945","場面は未確認。","https://en.wikipedia.org/wiki/Brief_Encounter"],["七年目の浮気 (The Seven Year Itch)","1955","場面は未確認。","https://en.wikipedia.org/wiki/The_Seven_Year_Itch"]],
+ cms:[], textbooks:[],
+ related:["フランク・シナトラ「Full Moon and Empty Arms」（第3楽章主題）","エリック・カルメン「All by Myself」（第2楽章に基づく）","クライスラー編 ヴァイオリンとピアノ用「Preghiera」（1940年）","ヴォカリーズ（同じラフマニノフの抒情曲）","パガニーニの主題による狂詩曲 第18変奏（同じラフマニノフの名旋律）"],
+ imslp:"https://imslp.org/wiki/Piano_Concerto_No.2,_Op.18_(Rachmaninoff,_Sergei)",
+ trivia:["作曲者自身がこの協奏曲を生涯で計143回ソリストとして演奏した。","1900年12月の先行初演で指揮を務めたシロティにとって、これが指揮デビューだった。","エリック・カルメンのヒット曲「All by Myself」（1975年）は、この第2楽章に基づく。"],
+ sources:["https://en.wikipedia.org/wiki/Piano_Concerto_No._2_(Rachmaninoff)"],
+ yt:{id:"HfPE3cgYyco",who:"Krystian Zimerman（ピアノ）"}
+},
+{
+ cat:"協奏曲・編曲", id:"schubert-ave-maria", title:"アヴェ・マリア（エレンの歌 第3番）", en:"Ave Maria — Ellens dritter Gesang, D.839 (arr. Liszt, S.558/12)",
+ composer:"シューベルト（ピアノ編曲：リスト）", era:"ロマン派（初期）", year:"原曲1825年／リスト編曲1837〜38年（1876年改訂）", opus:"D.839, Op.52-6（リスト版 S.558/12）", key:"変ロ長調", form:"有節歌曲（原曲）／ピアノ独奏への歌曲編曲（リスト版）", mood:["穏やか","夜"],
+ summary:"スコットの詩に付けられた祈りの歌を、リストがピアノ一台で歌わせた編曲。息の長い旋律が夜に寄り添う。",
+ diff:"Piano Street表記でレベル8+（リスト編曲版）。",
+ story:"1825年、シューベルトはウォルター・スコットの叙事詩『湖上の美人』のドイツ語訳から7曲を作曲し、その第6曲がこの歌である。作品52として1826年に出版された。ヒロインのエレンが聖母に庇護を祈る場面の歌で、各連の始めと終わりに現れる「Ave Maria」という呼びかけが通称の由来になった。のちにこの旋律へラテン語の祈祷文を当てて歌う習慣が広まったが、シューベルトが典礼文に曲を付けたわけではない。ピアノ独奏版はリストが1837〜38年に作った『シューベルトの12の歌曲』S.558の第12曲（1876年改訂）で、旋律を中音域に置き、上下の和音で包み込む。",
+ pub:"原曲は1826年出版（作品52）。リスト編曲は『12 Lieder von Franz Schubert』S.558に収録（1838年刊とする資料あり）。",
+ ded:"原曲は、初演先のゾフィー・ヴァイセンヴォルフ伯爵夫人に献呈されたと伝わる。リスト編曲の献呈は未確認。",
+ nameOrigin:"歌詞冒頭と各連末の呼びかけ「Ave Maria」から。『湖上の美人』ゆえ、初演先の伯爵夫人自身も「湖上の美人」と呼ばれたとされる。",
+ structure:[["第1連","穏やかな分散和音に乗り、祈りの旋律が始まる。"],["第2〜3連","同じ旋律を保ちつつ、詩の内容に応じて表情が変わる。"],["リスト版の中間部","和音の伴奏が分散和音に替わり、高音域で静かに輝く。"],["リスト版の頂点と結び","感情が最も高まったのち、再び静けさに戻る。"]],
+ features:"原曲は変ロ長調で、持続低音と六連符の伴奏に息の長い旋律が乗る簡素な歌。リストの独奏版は原曲の構成にほぼ忠実で、旋律を中音域に置き、上下の音域を和音や分散和音で囲むため、三本の手で弾くような響きになる。派手な技巧曲ではないが、多層の音色と分散和音の処理に、高度な技術と音楽性が求められる。",
+ perf:"旋律を中音域でレガート・カンタービレに歌わせ、伴奏の分散和音は音量を抑えて旋律の下に溶かす。ペダルは濁らないよう細かく踏み替え、頂点でも音を割らず、結びは息を整えて静かに閉じる。",
+ recs:[["マルク＝アンドレ・アムラン","年未確認","リスト編曲版（S.558/12）の演奏がYouTubeで確認できる。"],["ヴァレリー・トライオン","年未確認","ナクソスのリスト・ピアノ作品全集第17巻収録とされる。"],["レスリー・ハワード","年未確認","初稿版の初録音と紹介されている。"]],
+ films:[["ファンタジア","1940","「禿山の一夜」に続く終結部。ストコフスキー編曲の声楽・弦楽版（ピアノ版ではない）。","https://en.wikipedia.org/wiki/Ave_Maria_(Schubert)"]],
+ cms:[], textbooks:[],
+ related:["シューベルト「湖上の美人」歌曲集 D.835〜846（Op.52）","リスト「シューベルトの12の歌曲」S.558","愛の夢 第3番（同じリストの歌曲からの編曲）","シューマン「ミルテの花」第1曲「献呈」（後奏にこの旋律を引用）","シューベルト「野ばら」"],
+ imslp:"https://imslp.org/wiki/12_Lieder_von_Franz_Schubert,_S.558_(Liszt,_Franz)",
+ trivia:["シューマンは「ミルテの花」第1曲「献呈」の後奏で、この旋律を引用している。","映画『ファンタジア』は、ムソルグスキー「禿山の一夜」の終わりにこの曲を続け、鐘の音が夜明けではなく礼拝の始まりに聞こえるようにした。","IMSLPの作品ページには、リスト版の演奏録音が登録されている。"],
+ sources:["https://en.wikipedia.org/wiki/Ave_Maria_(Schubert)","https://ja.wikipedia.org/wiki/エレンの歌第3番","https://imslp.org/wiki/12_Lieder_von_Franz_Schubert,_S.558_(Liszt,_Franz)","https://www.pianostreet.com/liszt-sheet-music/transcriptions/schubert-ave-maria-b-flat-major.htm"],
+ yt:{id:"UjVRwPNxVqk",who:"Marc-André Hamelin（タイトル表記）"}
+},
+{
+ cat:"協奏曲・編曲", id:"liebesgruss", title:"愛のあいさつ", en:"Salut d'Amour (Liebesgruss), Op.12",
+ composer:"エルガー", era:"後期ロマン派", year:"1888年", opus:"Op.12", key:"ホ長調（原曲）", form:"小品（原曲はヴァイオリンとピアノ。ピアノ独奏版あり）", mood:["穏やか","華やか"],
+ summary:"エルガーが婚約者アリスへの贈り物として書いた小品。甘く温かな旋律で、ピアノ独奏版でも親しまれている。",
+ diff:"未確認",
+ story:"エルガーは1888年7月にこの曲を書き上げた。当時の彼は、ピアノの教え子でもあったキャロライン・アリス・ロバーツと婚約した直後だった。彼女がドイツ語に堪能だったことから、題を「Liebesgruss（愛のあいさつ）」とした。休暇先のセトルからロンドンへ戻った9月22日、婚約の贈り物として彼女に手渡している。原曲はヴァイオリンとピアノのための作品で、自筆譜が残る公認の編曲は、チェロとピアノ版とピアノ独奏版の2つ。のちに小編成の管弦楽版も出版された。編曲者名と編曲年は、確認した出典には記載がなかった。",
+ pub:"1889年、ショット社（マインツ）。ヴァイオリンとピアノ、ピアノ独奏、チェロとピアノ、小管弦楽の各版が初版で刊行された。管弦楽版の初演は1889年11月11日、水晶宮（指揮：オーガスト・マンズ）。",
+ ded:"「à Carice（カリスへ）」。カリスはキャロライン・アリスを合わせた愛称で、後に生まれた娘の名にもなった。",
+ nameOrigin:"最初の題は独語のLiebesgruss。出版時に、欧州各国で売りやすいよう仏語題Salut d'Amourが主題となり、Liebesgrussは副題に回った。",
+ structure:[["原曲の編成","ヴァイオリンとピアノ。ピアノ独奏版は、エルガー自身の自筆譜に基づく公認版の一つ。"],["管弦楽版初演","1889年11月11日、水晶宮でのオーケストラ版。"],["版の展開","ヴァイオリン、ピアノ独奏、チェロ、小管弦楽の各版が初版時に出た。"]],
+ features:"確認できた出典では、旋律構成や和声の分析は得られなかった。分かっているのは、原曲がヴァイオリンとピアノのための小品で、ホ長調で書かれたことである。婚約者への贈り物として作られた個人的な作品でありながら、のちに多くの楽器編成へ編曲され、エルガーの代表作の一つとなった。",
+ perf:"未確認。",
+ recs:[["ジャック・ジェイコブス（ヴァイオリン）","1901","ヴァイオリンとピアノ版の最初期録音（英語版Wikipedia）。"],["エルガー自身の指揮","1915","管弦楽版の最初の録音。"],["オーギュスト・ファン・ビーネ（チェロ）","1907","チェロ編曲の録音。"]],
+ films:[["グレイストーク ターザンの伝説","1984（年はページ上で未確認）","ベルギー人探検家ダルノが蓄音機でこの曲を流す場面（Wikipedia英語版の記述）。","https://en.wikipedia.org/wiki/Salut_d%27Amour"]],
+ cms:[], textbooks:[],
+ related:["エルガー「威風堂々」","エルガー「朝の歌」「夜の歌」","夢のあとに（同じ小品系の人気曲）"],
+ imslp:"https://imslp.org/wiki/Salut_d'amour,_Op.12_(Elgar,_Edward)",
+ trivia:["贈られたのは婚約の際で、ロバーツ嬢はエルガーのピアノの教え子だった。","初版ではほとんど売れず、題を仏語のSalut d'Amourに改めてから売れ行きが伸びた。","歌詞付き版に「Woo thou, Sweet Music」（A.C.バンテン詞）やスウェーデン語の「Violer」がある。"],
+ sources:["https://en.wikipedia.org/wiki/Salut_d%27Amour","https://imslp.org/wiki/Salut_d'amour,_Op.12_(Elgar,_Edward)"],
+ yt:{id:"qyNLM3KVFhU",who:"Riccardo Caramella（作曲者自身のピアノ独奏版）"}
+},
+{
+ cat:"協奏曲・編曲", id:"vocalise", title:"ヴォカリーズ", en:"Vocalise, Op.34 No.14",
+ composer:"ラフマニノフ", era:"後期ロマン派", year:"1915年", opus:"Op.34-14", key:"嬰ハ短調（原曲。移調して歌われることも多い）", form:"歌詞のない歌曲（原曲は声とピアノ）", mood:["切ない","夜"],
+ summary:"歌詞を持たず母音だけで歌われるラフマニノフの歌曲。ピアノ独奏を含む多彩な編曲で親しまれている。",
+ diff:"未確認（編曲者により音の配置が異なる）。",
+ story:"1915年に作曲・出版された、14の歌曲Op.34の最後の曲。高声（ソプラノまたはテノール）とピアノのために書かれ、歌詞はなく一つの母音だけで歌う。原曲の声楽版よりも器楽編曲で演奏される機会のほうが多いとされる。ピアノ独奏版にはシロティ、アラン・リチャードソン（1951年）、コチシュ、アール・ワイルド、フィオレンティーノなど多くの編曲者がいる。ラフマニノフ自身も管弦楽版およびソプラノと管弦楽版を作った（年は未確認）。",
+ pub:"1915年（Op.34全体の出版。出版社は未確認）。",
+ ded:"ソプラノ歌手アントニーナ・ネジダーノワ。",
+ nameOrigin:"ヴォカリーズとは、歌詞を持たず母音だけで歌う歌唱法・曲種のこと。",
+ structure:[["旋律","息の長い主旋律が、低めの伴奏の上で歌われる。"],["展開","旋律が高まりながら音域を広げる。"],["終結","静かに収束する。"]],
+ features:"歌詞の代わりに一つの母音で歌う、語らない歌曲である。そのため旋律の力だけで聴かせる曲となり、管弦楽、弦楽器、管楽器、ギターなど非常に多くの楽器に編曲されている。ピアノ独奏版では旋律と伴奏を一人で弾き分ける必要がある（構造欄は、詳細な出典を確認できず概略のみ）。",
+ perf:"ピアノ独奏では旋律線を歌手のように途切れさせず、内声や伴奏は控えめに保つ。編曲者により音の配置が異なるため、楽譜ごとに旋律の受け渡しを確認するとよい。",
+ recs:[["グレプ・イワノフ（ピアノ独奏）","年未確認","イザベラ・スチュワート・ガードナー美術館による演奏音源。"]],
+ films:[], cms:[], textbooks:[],
+ related:["ラフマニノフ自身による管弦楽版","ハイフェッツ編（ヴァイオリンとピアノ）","ペット・ショップ・ボーイズ「Happiness Is an Option」（旋律を引用）","ピアノ協奏曲第2番 第2楽章（同じラフマニノフの抒情曲）"],
+ imslp:"https://imslp.org/wiki/14%20Romances,%20Op.34%20(Rachmaninoff,%20Sergei)",
+ trivia:["声の高さを選べるよう、ソプラノまたはテノールのどちらでも歌えると初版に記されている。","原曲は嬰ハ短調だが、歌手の声域に合わせて移調されることがある。","チェロとヴォーカルのために、ボビー・マクファーリンとヨーヨー・マーが編曲した版もある。"],
+ sources:["https://en.wikipedia.org/wiki/Vocalise_(Rachmaninoff)"],
+ yt:{id:"PxEiGs-LZfo",who:"Lang Lang（コチシュ編曲、タイトル表記）"}
+},
+{
+ cat:"協奏曲・編曲", id:"brahms-lullaby", title:"ブラームスの子守歌", en:"Wiegenlied, Op.49 No.4",
+ composer:"ブラームス", era:"ロマン派", year:"1868年", opus:"Op.49-4", key:"変ホ長調・3/4拍子", form:"有節歌曲（原曲は声とピアノ）", mood:["眠り","穏やか"],
+ summary:"友人の子の誕生を祝って書かれた、世界で最も有名な子守歌のひとつ。揺れる伴奏に素朴な旋律が乗る。",
+ diff:"未確認",
+ story:"1868年7月、ボンで作曲された。友人ベルタ・ファーバーに次男が生まれたのを祝う贈り物で、ブラームスはハンブルクで彼女が所属した女声合唱団を指導していた。旋律にはアレクサンダー・バウマンのレントラーの引用が含まれるとされる。同年『5つの歌曲』Op.49の一曲としてジムロックから出版され、初演は1869年12月22日ウィーンで、ドゥストマンの歌とクララ・シューマンのピアノで行われた。ピアノ独奏版は出版直後から多数作られた。著名な例に、パーシー・グレインジャーが1922年に「お気に入りの旋律の自由な編曲」の一つとして作った独奏編曲がある。",
+ pub:"1868年にジムロックから出版（Op.49）。第2連（シェーラーの詩）は後に追加（日本語版Wikipediaは1874年とする）。",
+ ded:"ベルタ・ファーバー（次男誕生を祝って）。",
+ nameOrigin:"Wiegenliedはドイツ語で「子守歌」。日本では「ブラームスの子守歌」と呼ばれ、歌い出しから「Guten Abend, gut' Nacht」とも呼ばれる。",
+ structure:[["伴奏型","ゆりかごを思わせるシンコペーションの音形が全曲を支える。"],["低音","変ホ音が持続して、落ち着きを表す。"],["第1連","『少年の魔法の角笛』の詩（Guten Abend, gut' Nacht）。"],["第2連","ゲオルク・シェーラーの詩を、後から追加。"]],
+ features:"素朴な旋律と、ゆりかごを揺らすようなシンコペーションの伴奏が一体となった短い歌。低音に変ホ音が保たれ、安らぎを生む。一見とても簡素だが、旋律に別の歌を隠し重ねた工夫があるとされる。1877年には交響曲第2番第1楽章の第2主題にも、この旋律の形が使われた。",
+ perf:"旋律は揺れる伴奏の上に浮かべるように、拍を数えすぎず柔らかく歌う。伴奏の左手は音量を抑え、シンコペーションが旋律を押し出さないよう注意する。",
+ recs:[["ピアーズ・レーン（グレインジャー編曲、ピアノ独奏）","2001（録音）","Hyperion、2002年6月発売。"]],
+ films:[], cms:[], textbooks:[],
+ related:["ブラームス「眠りの精」WoO.31-4","ブラームス「聖なる子守唄」Op.91-2","ブラームス 交響曲第2番 第1楽章","グレインジャー「お気に入りの旋律の自由な編曲」","ソルヴェイグの歌（北欧の歌曲編曲）"],
+ imslp:"https://imslp.org/wiki/Wiegenlied_(Brahms,_Johannes)",
+ trivia:["ブラームスは出版社ジムロックに、病気の子や悪童向けに短調版を作ってはどうか、と皮肉まじりに書き送っている。","1877年、交響曲第2番の第1楽章第2主題にこの旋律の形が用いられた。","第1連の詩は民謡詩集『少年の魔法の角笛』から。"],
+ sources:["https://en.wikipedia.org/wiki/Wiegenlied_(Brahms)","https://ja.wikipedia.org/wiki/子守歌_(ブラームス)","https://imslp.org/wiki/5_Lieder%2C_Op.49_(Brahms%2C_Johannes)"],
+ yt:{id:"XHxu6xCfkso",who:"Svetlana Navasardyan（ピアノ独奏編曲、タイトル表記）"}
+},
+{
+ cat:"協奏曲・編曲", id:"mozart-pc21-2", title:"ピアノ協奏曲第21番 第2楽章", en:"Piano Concerto No.21 in C major, K.467 — II. Andante",
+ composer:"モーツァルト", era:"古典派", year:"1785年", opus:"K.467", key:"ヘ長調（第2楽章）", form:"協奏曲の緩徐楽章（3部構成）", mood:["穏やか","眠り"],
+ summary:"弱音器付きの弦と夢見るようなピアノが続く緩徐楽章。映画『みじかくも美しく燃え』で世界的に知られた。",
+ diff:"未確認",
+ story:"この協奏曲は1785年3月9日にウィーンで完成した。直前の二短調協奏曲K.466の完成から4週間後のことである。自筆譜はニューヨークのモルガン・ライブラリー＆ミュージアムに所蔵されている。第2楽章は、主調ハ長調の下属調であるヘ長調のアンダンテ。弱音器付きの弦楽器が夢見るような旋律を奏でる。映画との関係では、1967年のボー・ヴィダーベリ監督作『みじかくも美しく燃え』（原題Elvira Madigan）でこの楽章が使われ、独奏はゲザ・アンダの録音だった。この映画をきっかけに、曲は「エルヴィラ・マディガン」の通称で広く知られるようになった。",
+ pub:"未確認。",
+ ded:"未確認。",
+ nameOrigin:"通称「エルヴィラ・マディガン」は、1967年のスウェーデン映画『みじかくも美しく燃え』（原題Elvira Madigan）でこの楽章が使われたことによる。",
+ structure:[["第1部","管弦楽のみ。弱音器付きの弦。第1ヴァイオリンの夢見るような旋律に、第2ヴァイオリンとヴィオラの三連符の反復、チェロとバスのピツィカート。楽章の主要な旋律素材はすべてここで提示される。"],["第2部","ピアノが加わりヘ長調で始まる。単純な反復ではなく、新しい素材が挟まり転調していく（ハ短調・ハ長調、ト短調、変ロ長調を経てヘ短調へ）。"],["第3部","同じ旋律が変イ長調で再現される。その後ヘ短調からヘ長調へ戻り、短いコーダで閉じる。"]],
+ features:"この楽章は3つの部分から成り、冒頭の管弦楽部分に楽章の主要な旋律素材がすべて含まれている。弱音器付き弦の上で、夢を見るような旋律が三連符の反復音とピツィカートに支えられて進む。ピアノが入ってからは、ヘ長調やヘ短調など調を巡る展開があり、変イ長調での再現を経て静かに終わる。",
+ perf:"未確認。",
+ recs:[["ゲザ・アンダ（ピアノ）","年未確認","映画『みじかくも美しく燃え』で使われた録音の独奏者（英語版Wikipedia）。"]],
+ films:[["みじかくも美しく燃え (Elvira Madigan)","1967","第2楽章が使われた。ゲザ・アンダの録音。具体的な場面は未確認。","https://en.wikipedia.org/wiki/Piano_Concerto_No._21_(Mozart)"],["007 私を愛したスパイ","1977","悪役ストロンバーグが水中の居城アトランティスを浮上させる場面で、この協奏曲を演奏（楽章は未確認）。","https://en.wikipedia.org/wiki/Piano_Concerto_No._21_(Mozart)"]],
+ cms:[], textbooks:[],
+ related:["ピアノ協奏曲第20番 K.466","ニール・ダイアモンド「Song Sung Blue」（1972年、この楽章の主題が元になっている）","ピアノ協奏曲第2番 第2楽章（同じ協奏曲の緩徐楽章）"],
+ imslp:"https://imslp.org/wiki/Piano%20Concerto%20No.21%20in%20C%20major,%20K.467%20(Mozart,%20Wolfgang%20Amadeus)",
+ trivia:["自筆譜はモルガン・ライブラリー＆ミュージアム（ニューヨーク）が所蔵している。","ニール・ダイアモンドの1972年の曲「Song Sung Blue」は、この楽章の主題に基づくとされる。","チリ国営テレビの天気番組TV Tiempoの主題にこの楽章が使われている。"],
+ sources:["https://en.wikipedia.org/wiki/Piano_Concerto_No._21_(Mozart)","https://imslp.org/wiki/Piano%20Concerto%20No.21%20in%20C%20major,%20K.467%20(Mozart,%20Wolfgang%20Amadeus)"],
+ yt:{id:"PqR1MS5E9Po",who:"Dinu Lipatti／Herbert von Karajan（タイトル表記）"}
+},
+{
+ cat:"協奏曲・編曲", id:"faure-apres-un-reve", title:"夢のあとに", en:"Après un rêve, Op.7 No.1",
+ composer:"フォーレ", era:"後期ロマン派（フランス）", year:"1877年", opus:"Op.7-1（歌曲集『3つのメロディ』第1曲）", key:"未確認", form:"フランス歌曲（メロディ）", mood:["切ない","夜"],
+ summary:"フォーレがビュシーヌの詩に付けた1877年の歌曲。夢の余韻と喪失を歌い、チェロ版などでも愛される。",
+ diff:"未確認",
+ story:"「夢のあとに」は、フォーレが1877年に作曲した歌曲で、1878年に出版された。『3つのメロディ』Op.7の第1曲にあたる。詞はロマン・ビュシーヌ（1830〜1899）によるもので、彼は歌手でパリ音楽院の教授でもあり、フォーレの友人だった。詩はイタリア語の詩に基づくとされ、情熱的な逢瀬の夢と、そこへ戻りたいと願う気持ちを歌う。器楽編曲では、リュッター編のチェロとピアノ版がIMSLPに載っている。チェロ2本の編曲もあるが、編曲者名と編曲年は確認できなかった。ピアノ編曲版は未確認。",
+ pub:"1878年に出版（IMSLP『3つのメロディOp.7』）。出版社は未確認。",
+ ded:"未確認。",
+ nameOrigin:"題は詩の内容、つまり夢から覚めたあとの喪失感に由来する。",
+ structure:[["歌曲集での位置づけ","『3つのメロディ』Op.7の第1曲。IMSLPによる作曲年は第1曲1877年、第2曲1870年頃、第3曲1873年。"],["詞","ロマン・ビュシーヌ作。イタリア語の詩に基づく。夢の中の逢瀬と、そこへ戻りたいという願いを語る独白。"],["器楽版","IMSLPに、チェロとピアノ版（リュッター編、コウロン編、プラティチェッリ編）が掲載されている。"]],
+ features:"この曲は歌曲として書かれたが、器楽曲としても広く演奏される。詩は夢から覚めた者の独白で、情熱的な夢と、それが消えたあとの喪失感を扱う。IMSLPにはテノールまたはチェロとピアノのための版があり、旋律を歌う声部をチェロが担う編曲として演奏される。調性、拍子、旋律の具体的な分析は、出典から確認できなかった。",
+ perf:"未確認。",
+ recs:[], films:[], cms:[], textbooks:[],
+ related:["フォーレ『3つのメロディ』Op.7 第2曲・第3曲","フォーレ ピアノ四重奏曲","愛のあいさつ（同じ小品系の人気曲）"],
+ imslp:"https://imslp.org/wiki/3_Songs,_Op.7_(Fauré,_Gabriel)",
+ trivia:["詞を書いたビュシーヌは歌手・声楽教師で、フォーレの友人だった。","日本語版Wikipediaでは、歌曲として書かれたが器楽曲としても演奏されると説明されている。","詩の原型はイタリア語の詩だとされる。"],
+ sources:["https://imslp.org/wiki/3_Songs,_Op.7_(Fauré,_Gabriel)","https://oxfordsong.org/poet/romain-bussine","https://ja.wikipedia.org/wiki/夢のあとに"],
+ yt:{id:"6CuixSI-4RY",who:"ピアノ独奏編曲（タイトル表記。演奏者は要確認）"}
+},
+{
+ cat:"協奏曲・編曲", id:"paganini-var18", title:"パガニーニの主題による狂詩曲 第18変奏", en:"Rhapsody on a Theme of Paganini, Op.43 — Variation 18",
+ composer:"ラフマニノフ", era:"後期ロマン派", year:"1934年", opus:"Op.43", key:"変ニ長調", form:"ピアノと管弦楽のための変奏曲形式の狂詩曲（単一楽章）の一変奏", mood:["切ない","華やか"],
+ summary:"パガニーニの主題を反転させて生まれた、ラフマニノフ屈指の甘美な旋律。映画でも使われた名変奏。",
+ diff:"未確認",
+ story:"この狂詩曲は、スイスの別荘ヴィラ・セナールで1934年7月3日から8月18日にかけて書かれた。主題はパガニーニの無伴奏ヴァイオリンのための奇想曲第24番で、全24の変奏からなる。1934年11月7日にボルチモアで、作曲者自身のピアノ、ストコフスキー指揮フィラデルフィア管弦楽団により初演された。第18変奏は、主題の旋律を反転させた形に基づく。ラフマニノフ自身がこの変奏の魅力を認め、「これは私のエージェントのためだ」と述べたと伝わる。",
+ pub:"未確認。",
+ ded:"未確認。",
+ nameOrigin:"パガニーニの奇想曲第24番の主題に基づくことから。",
+ structure:[["全体の位置","全体を協奏曲の3楽章に見立てると、第11〜18変奏が緩徐楽章に相当する。"],["第18変奏","主題を反転させた旋律が、イ短調から変ニ長調で歌われる。"],["直後","第19変奏以降は終楽章に相当し、速い変奏が続く。"]],
+ features:"全曲の中で最も有名な変奏で、単独で名曲集に収録されることが多い。パガニーニの主題をいわば逆さにした旋律を、変ニ長調の甘美な響きで歌う。全体が速い変奏で構成される中で、この変奏だけが穏やかな抒情を担い、全曲のハイライトとなっている。",
+ perf:"旋律をピアノとオーケストラで受け渡しながら歌い上げる。ピアノは旋律に豊かな響きを与えつつ、オーケストラとの音量バランスを保ち、クライマックスで音を濁らせないことが大切。",
+ recs:[["ラフマニノフ自身／ストコフスキー、フィラデルフィア管","1934","初録音（1934年12月24日）。"],["アルトゥール・ルービンシュタイン／ライナー、シカゴ響","1956","RCA。"],["ウラディーミル・アシュケナージ／プレヴィン、ロンドン響","1971","ロンドン・レコード。"],["ダニール・トリフォノフ／ネゼ＝セガン、フィラデルフィア管","2015","ドイツ・グラモフォン。"]],
+ films:[["ある日どこかで (Somewhere in Time)","1980","場面は未確認。","https://en.wikipedia.org/wiki/Somewhere_in_Time_(film)"]],
+ cms:[], textbooks:[],
+ related:["パガニーニ 奇想曲第24番","フォーキン振付のバレエ「パガニーニ」（1939年）","フリートウッド・マック「Everywhere」のコーダ（旋律の一部を使用）","ピアノ協奏曲第2番 第2楽章（同じラフマニノフの名旋律）"],
+ imslp:"https://imslp.org/wiki/Rhapsody_on_a_Theme_of_Paganini,_Op.43_(Rachmaninoff,_Sergei)",
+ trivia:["ウィニフレッド・アトウェルが録音した第18変奏（映画「Story of Three Loves」の主題として）は、英国チャートで9位を記録した。","ゲーム「グランツーリスモ6」のイントロ曲に、ラン・ランの演奏で使われた。","フォーキンのバレエ化の際、第18変奏の調を作曲者が変ニ長調でなくニ長調で、と提案した。"],
+ sources:["https://en.wikipedia.org/wiki/Rhapsody_on_a_Theme_of_Paganini","https://imslp.org/wiki/Rhapsody_on_a_Theme_of_Paganini,_Op.43_(Rachmaninoff,_Sergei)"],
+ yt:{id:"pGiFVbEWC40",who:"Vladimir Ashkenazy／Philharmonia Orchestra（タイトル表記）"}
+},
+{
+ cat:"協奏曲・編曲", id:"solveigs-song", title:"ソルヴェイグの歌", en:"Solveig's Song — Peer Gynt (arr. Grieg, Op.52 No.4)",
+ composer:"グリーグ", era:"ロマン派（国民楽派）", year:"1874〜75年（付随音楽Op.23）", opus:"Op.23（第4幕）、組曲第2番Op.55-4、ピアノ編曲Op.52-4", key:"イ短調（Op.52-4はPoco Andante）", form:"歌曲（劇付随音楽）／グリーグ自身によるピアノ独奏への歌曲編曲", mood:["切ない","穏やか"],
+ summary:"帰らぬ人を待ち続けるソルヴェイグの歌を、グリーグ自身がピアノ独奏に編曲。北欧の哀愁を静かにたたえた旋律。",
+ diff:"Piano Street表記でレベル6（Op.52-4）。",
+ story:"1874〜75年、グリーグはイプセンの戯曲『ペール・ギュント』（1867）の付随音楽Op.23を作曲した。上演は1876年2月24日にクリスティアニア（現オスロ）で行われた。ソルヴェイグの歌は第4幕に置かれ、故郷でペールの帰りを待つ娘ソルヴェイグの心情を歌う。のちにグリーグは付随音楽から8曲を選んで二つの組曲にまとめ、この曲は組曲第2番Op.55（1893年出版）の第4曲になった。ピアノ独奏版はグリーグ自身の歌曲編曲集Op.52の第4曲で、同集全6曲の編曲者もグリーグである。Piano Streetは編曲の年を1890年とするが、未確認。",
+ pub:"付随音楽の総譜は1908年にヨハン・ハルヴォルセンが出版。組曲第2番Op.55は1893年。Op.52は作曲者校訂版がC.F.Petersから刊行（初版年は未確認）。",
+ ded:"未確認。",
+ nameOrigin:"ヒロインであるソルヴェイグ（Solveig/Solvejg）の名から。故郷でペールを待ち続ける女性の歌である。",
+ structure:[["全体","イプセン劇第4幕で歌われる、待ち続ける女性の歌。"],["Op.52-4","イ短調、Poco Andanteのピアノ独奏編曲。"],["組曲版","組曲第2番Op.55の第4曲に収録。"],["関連曲","第5幕の「ソルヴェイグの子守歌」。"]],
+ features:"待ち続ける女性の心を歌う、哀愁を帯びた短調の旋律が核。グリーグ自身がピアノ独奏に編曲したOp.52-4は、歌の旋律と伴奏をピアノ一台に収める。同じ劇の第5幕には「ソルヴェイグの子守歌」もあり、組曲にはこの歌の方が採られた。",
+ perf:"旋律を歌うように弾き、伴奏は音量を抑えて支えに徹する。ゆるやかな揺れを保ちつつ、悲しみを強調しすぎず、静かに祈るような表情を保つ。",
+ recs:[["エヴァ・クナルダール","年未確認","グリーグのピアノ作品全集（BIS）にOp.52が収録されたとの記述あり。"],["アイナル・ステーン＝ノクレベルグ","年未確認","Naxosのグリーグ・ピアノ作品録音でOp.52を録音（曲目詳細は未確認）。"]],
+ films:[], cms:[], textbooks:[],
+ related:["グリーグ「ペール・ギュント」第1組曲Op.46","グリーグ「ペール・ギュント」第2組曲Op.55","ソルヴェイグの子守歌","グリーグ「ピアノのための歌曲編曲集」Op.52","ブラームスの子守歌（同じ歌曲からのピアノ編曲）"],
+ imslp:"https://imslp.org/wiki/Piano_Transcriptions_of_Songs,_Op.52_(Grieg,_Edvard)",
+ trivia:["グリーグは劇場側から各曲の長さや順番を指定され、継ぎはぎの仕事を強いられたと不満を述べている。","1999年のヴァンダルハーツ2の曲に、旋律が使われた（英語版Wikipedia）。","パワーメタルバンドKamelotの曲「Forever」は、この旋律を基にしている（英語版Wikipedia）。"],
+ sources:["https://en.wikipedia.org/wiki/Peer_Gynt_(Grieg)","https://imslp.org/wiki/Peer_Gynt,_Op.23_(Grieg,_Edvard)","https://imslp.org/wiki/Piano_Transcriptions_of_Songs,_Op.52_(Grieg,_Edvard)","https://www.pianostreet.com/grieg-sheet-music/piano-transcriptions-of-songs/solvejgs-song-op-52-4-a-minor.htm"],
+ yt:{id:"PbA_nlB7RN0",who:"Nikolai Kuznetsov（ピアノ）"}
+}
+);
+/* メジャー順に並べ替え（B） */
+(function(){ const order=["canon","air-g-string","jesu-joy","rach-pc2-2","schubert-ave-maria","liebesgruss","vocalise","brahms-lullaby","mozart-pc21-2","faure-apres-un-reve","paganini-var18","solveigs-song"];
+  const A=SONGS.filter(s=>s.cat==="ピアノ独奏"), B=SONGS.filter(s=>s.cat!=="ピアノ独奏").sort((x,y)=>order.indexOf(x.id)-order.indexOf(y.id));
+  SONGS.length=0; A.concat(B).forEach(s=>SONGS.push(s)); })();
+const CATS = [{name:"ピアノ独奏",key:"A"},{name:"協奏曲・編曲",key:"B"},{name:"管弦楽・室内楽",key:"C"},{name:"オペラ",key:"D"},{name:"宗教曲・声楽",key:"E"}];
+
+/* ===== 内部リンク：本文中の曲名を自動でリンク ===== */
+const ALIASES = {
+ "fur-elise":["エリーゼのために"],
+ "moonlight":["「月光」ソナタ","月光ソナタ","ピアノソナタ第14番","「月光」"],
+ "tristesse":["別れの曲","練習曲Op.10-3"],
+ "fantaisie-impromptu":["幻想即興曲"],
+ "nocturne-9-2":["ノクターン第2番","夜想曲第2番"],
+ "raindrop":["雨だれ","前奏曲第15番"],
+ "clair-de-lune":["月の光"],
+ "gymnopedie-1":["ジムノペディ第1番","ジムノペディ 第1番"],
+ "traumerei":["トロイメライ"],
+ "liebestraum-3":["愛の夢 第3番","愛の夢第3番"],
+ "canon":["パッヘルベルのカノン","カノンとジーグ","カノン"],
+ "air-g-string":["G線上のアリア"],
+ "jesu-joy":["主よ人の望みの喜びよ","主よ、人の望みの喜びよ"],
+ "rach-pc2-2":["ラフマニノフ ピアノ協奏曲第2番","ピアノ協奏曲第2番"],
+ "schubert-ave-maria":["エレンの歌第3番","シューベルト「アヴェ・マリア」"],
+ "liebesgruss":["愛のあいさつ"],
+ "vocalise":["ヴォカリーズ"],
+ "brahms-lullaby":["ブラームスの子守歌","ブラームス「子守歌」"],
+ "mozart-pc21-2":["ピアノ協奏曲第21番"],
+ "faure-apres-un-reve":["夢のあとに"],
+ "paganini-var18":["パガニーニの主題による狂詩曲","第18変奏"],
+ "solveigs-song":["ソルヴェイグの歌"]
+};
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function autolink(text, selfId){
+  if (!text) return text;
+  const pairs = [];
+  SONGS.forEach(s=>{ if (s.id===selfId) return; (ALIASES[s.id]||[]).forEach(k=>pairs.push([k,s.id])); });
+  pairs.sort((a,b)=>b[0].length-a[0].length);
+  const map = {}; pairs.forEach(p=>{ if(!map[p[0]]) map[p[0]]=p[1]; });
+  const re = new RegExp(Object.keys(map).map(esc).join('|'),'g');
+  return text.replace(re, m=>'<a class="ilink" href="#/song/'+map[m]+'">'+m+'</a>');
+}
+
+const TBD ='<span class="pend">調査中・確認できず</span>';
 const $ = s => document.querySelector(s);
 const view = $('#view');
 let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
@@ -491,53 +791,69 @@ function currentViewIdx(){
 /* ---------- 画面 ---------- */
 const lnk = (u,t)=>'<a href="'+u+'" target="_blank" rel="noopener" style="color:var(--accent2)">'+t+'</a>';
 const sec = (t,h)=>'<h2>'+t+'</h2>'+h;
-function renderList(){
-  const moods = [...new Set(SONGS.flatMap(s=>s.mood))];
-  const list = SONGS.map((s,i)=>({s,i})).filter(({s})=>!activeFilter || s.mood.includes(activeFilter));
+const compKey = c => c.replace(/（.*?）/g,'');
+const card = (s,i)=>'<a class="card'+(cur===i&&started?' playing':'')+'" data-i="'+i+'" href="#/song/'+s.id+'">' +
+  '<div class="no">'+String(i+1).padStart(2,'0')+'</div><div class="tt">'+s.title+'</div>' +
+  '<div class="cc">'+compKey(s.composer)+'／'+s.era+'</div><div class="tg">'+s.mood.join('・')+'</div></a>';
+function catNav(active){
+  return '<div class="chips">' + '<a class="chip '+(!active?'on':'')+'" href="#/">すべて</a>' +
+    CATS.map(c=>{ const n=SONGS.filter(s=>s.cat===c.name).length; return '<a class="chip '+(active===c.name?'on':'')+(n?'':' dim')+'" href="#/cat/'+encodeURIComponent(c.name)+'">'+c.name+'（'+(n||'準備中')+'）</a>'; }).join('') + '</div>';
+}
+function renderList(mode,val){
+  let title='SELECTION', body='';
+  const idx = s => SONGS.indexOf(s);
+  if (mode==='composer'){ title='COMPOSER — '+val; const l=SONGS.filter(s=>compKey(s.composer)===val); body='<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>'; }
+  else if (mode==='mood'){ title='MOOD — '+val; const l=SONGS.filter(s=>s.mood.includes(val)); body='<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>'; }
+  else {
+    const cats = mode==='cat' ? CATS.filter(c=>c.name===val) : CATS;
+    body = cats.map(c=>{ const l=SONGS.filter(s=>s.cat===c.name);
+      return '<h2 class="cath"><span>'+c.key+'</span> '+c.name+'</h2>' + (l.length ? '<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>' : '<p class="pend">準備中</p>'); }).join('');
+    if (mode==='cat') title='CATEGORY — '+val;
+  }
+  const comps=[...new Set(SONGS.map(s=>compKey(s.composer)))], moods=[...new Set(SONGS.flatMap(s=>s.mood))];
   view.innerHTML =
-    '<h2 style="margin-top:0;border-top:0">SELECTION（メジャー順）</h2>' +
-    '<div class="chips"><button class="chip '+(!activeFilter?'on':'')+'" data-m="">すべて</button>' +
-    moods.map(m=>'<button class="chip '+(activeFilter===m?'on':'')+'" data-m="'+m+'">'+m+'</button>').join('') + '</div>' +
-    '<div class="grid">' + list.map(({s,i})=>
-      '<a class="card'+(cur===i&&started?' playing':'')+'" data-i="'+i+'" href="#/song/'+s.id+'">' +
-      '<div class="no">'+String(i+1).padStart(2,'0')+'</div><div class="tt">'+s.title+'</div>' +
-      '<div class="cc">'+s.composer+'／'+s.era+'</div><div class="tg">'+s.mood.join('・')+'</div></a>').join('') + '</div>';
-  view.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{ activeFilter = b.dataset.m || null; renderList(); });
+    '<h2 style="margin-top:0;border-top:0">'+title+'</h2>' + catNav(mode==='cat'?val:null) + body +
+    '<h2>作曲者から探す</h2><div class="chips">'+comps.map(c=>'<a class="chip" href="#/composer/'+encodeURIComponent(c)+'">'+c+'（'+SONGS.filter(s=>compKey(s.composer)===c).length+'）</a>').join('')+'</div>' +
+    '<h2>ムードから探す</h2><div class="chips">'+moods.map(m=>'<a class="chip" href="#/mood/'+encodeURIComponent(m)+'">'+m+'</a>').join('')+'</div>';
 }
 function renderSong(i){
   const s = SONGS[i], p = SONGS[(i-1+SONGS.length)%SONGS.length], n = SONGS[(i+1)%SONGS.length];
-  const q = encodeURIComponent(s.composer + ' ' + s.title.replace(/（.*?）/g,''));
-  const films = s.films.length ? '<ul class="plain">'+s.films.map(f=>'<li>'+lnk(f[3],f[0])+'（'+f[1]+'）<br><small>'+f[2]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const al = t => autolink(t, s.id);
+  const q = encodeURIComponent(compKey(s.composer) + ' ' + s.title.replace(/（.*?）/g,''));
+  const films = s.films.length ? '<ul class="plain">'+s.films.map(f=>'<li>'+lnk(f[3],f[0])+'（'+f[1]+'）<br><small>'+al(f[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
   const cms = s.cms.length ? '<ul class="plain">'+s.cms.map(c=>'<li>'+lnk(c[2],c[0])+'<br><small>'+c[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
   const cmNote = s.cmNote ? '<p class="note">'+s.cmNote+'</p>' : '';
   const tbs = s.textbooks.length ? '<ul class="plain">'+s.textbooks.map(t=>'<li>'+lnk(t[2],t[0])+'<br><small>'+t[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">教科書・鑑賞教材での掲載を示す出典は確認できなかった</p>';
-  const recs = s.recs.length ? '<ul class="plain">'+s.recs.map(r=>'<li><b style="font-weight:500">'+r[0]+'</b>（'+r[1]+'）<br><small>'+r[2]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const recs = s.recs.length ? '<ul class="plain">'+s.recs.map(r=>'<li><b style="font-weight:500">'+r[0]+'</b>（'+r[1]+'）<br><small>'+al(r[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const ck = compKey(s.composer), others = SONGS.filter(o=>compKey(o.composer)===ck && o.id!==s.id);
+  const sameComp = others.length ? sec('同じ作曲者の曲','<div class="links">'+others.map(o=>'<a class="btn" href="#/song/'+o.id+'">'+o.title+'</a>').join('')+'</div>') : '';
   view.innerHTML =
-    '<article class="song"><div class="note" style="letter-spacing:.2em">'+String(i+1).padStart(2,'0')+' / '+SONGS.length+'</div>' +
+    '<article class="song"><div class="note" style="letter-spacing:.2em"><a class="ilink" href="#/cat/'+encodeURIComponent(s.cat)+'">'+s.cat+'</a>　'+String(i+1).padStart(2,'0')+' / '+SONGS.length+'</div>' +
     '<h1>'+s.title+'</h1><div class="en">'+s.en+'</div>' +
-    '<p class="lead">'+s.summary+'</p>' +
+    '<p class="lead">'+al(s.summary)+'</p>' +
     '<div class="meta">' +
-      '<div class="k">作曲者</div><div>'+s.composer+'（'+s.era+'）</div>' +
+      '<div class="k">作曲者</div><div><a class="ilink" href="#/composer/'+encodeURIComponent(ck)+'">'+s.composer+'</a>（'+s.era+'）</div>' +
+      '<div class="k">カテゴリ</div><div><a class="ilink" href="#/cat/'+encodeURIComponent(s.cat)+'">'+s.cat+'</a></div>' +
       '<div class="k">作曲年</div><div>'+s.year+'</div>' +
       '<div class="k">作品番号</div><div>'+s.opus+'</div>' +
       '<div class="k">調性・拍子</div><div>'+s.key+'</div>' +
       '<div class="k">形式</div><div>'+s.form+'</div>' +
       '<div class="k">難易度</div><div>'+s.diff+'</div>' +
-      '<div class="k">献呈</div><div>'+s.ded+'</div>' +
-      '<div class="k">ムード</div><div>'+s.mood.join('・')+'</div>' +
+      '<div class="k">献呈</div><div>'+al(s.ded)+'</div>' +
+      '<div class="k">ムード</div><div>'+s.mood.map(m=>'<a class="ilink" href="#/mood/'+encodeURIComponent(m)+'">'+m+'</a>').join('・')+'</div>' +
     '</div>' +
-    sec('作曲の経緯','<p>'+s.story+'</p>') +
-    sec('出版・初演','<p>'+s.pub+'</p>') +
-    sec('題名・通称の由来','<p>'+s.nameOrigin+'</p>') +
-    sec('構成分析','<ul class="steps">'+s.structure.map(x=>'<li><b>'+x[0]+'</b>'+x[1]+'</li>').join('')+'</ul>') +
-    sec('音楽的特徴','<p>'+s.features+'</p>') +
-    sec('演奏のポイント','<p>'+s.perf+'</p>') +
+    sec('作曲の経緯','<p>'+al(s.story)+'</p>') +
+    sec('出版・初演','<p>'+al(s.pub)+'</p>') +
+    sec('題名・通称の由来','<p>'+al(s.nameOrigin)+'</p>') +
+    sec('構成分析','<ul class="steps">'+s.structure.map(x=>'<li><b>'+x[0]+'</b>'+al(x[1])+'</li>').join('')+'</ul>') +
+    sec('音楽的特徴','<p>'+al(s.features)+'</p>') +
+    sec('演奏のポイント','<p>'+al(s.perf)+'</p>') +
     sec('録音','<p class="note">実在と年を出典で確認できたもののみ掲載しています。</p>'+recs) +
     sec('映画・ドラマ・アニメ',films) +
     sec('CM',cms+cmNote) +
     sec('教科書・鑑賞教材',tbs) +
-    sec('関連作品','<ul class="plain">'+s.related.map(r=>'<li>'+r+'</li>').join('')+'</ul>') +
-    sec('トリビア','<ul class="plain">'+s.trivia.map(r=>'<li>'+r+'</li>').join('')+'</ul>') +
+    sec('関連作品','<ul class="plain">'+s.related.map(r=>'<li>'+al(r)+'</li>').join('')+'</ul>') + sameComp +
+    sec('トリビア','<ul class="plain">'+s.trivia.map(r=>'<li>'+al(r)+'</li>').join('')+'</ul>') +
     sec('楽譜・他のサービスで聴く','<div class="links">'+
       '<a class="btn" target="_blank" rel="noopener" href="'+s.imslp+'">IMSLP（楽譜）</a>'+
       '<a class="btn" target="_blank" rel="noopener" href="https://music.apple.com/jp/search?term='+q+'">Apple Musicで探す</a>' +
@@ -553,7 +869,8 @@ function route(){
     if (started) { if (cur !== i) playSong(i); }
     else if (ytReady) setNow(i, false);
   } else {
-    renderList();
+    const m = location.hash.match(/^#\/(composer|mood|cat)\/(.+)$/);
+    if (m) renderList(m[1], decodeURIComponent(m[2])); else renderList();
     if (!started && ytReady && cur < 0) setNow(0, false);
   }
   window.scrollTo(0, 0);
@@ -581,7 +898,17 @@ $('#bToggle').onclick = () => {
 function mk(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const lg = (c,x0,y0,x1,y1,stops)=>{const g=c.createLinearGradient(x0,y0,x1,y1);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g};
 const rg = (c,x,y,r,col0,col1)=>{const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col0);g.addColorStop(1,col1);return g};
-const ART_BY_ID = {"fur-elise":"petals","moonlight":"moonwater","tristesse":"ribbons","fantaisie-impromptu":"flow","nocturne-9-2":"bokeh","raindrop":"rain","clair-de-lune":"clouds","gymnopedie-1":"minimal","traumerei":"dandelion","liebestraum-3":"aurora"};
+const ART_BY_ID = {"fur-elise":"petals","moonlight":"moonwater","tristesse":"ribbons","fantaisie-impromptu":"flow","nocturne-9-2":"bokeh","raindrop":"rain","clair-de-lune":"clouds","gymnopedie-1":"minimal","traumerei":"dandelion","liebestraum-3":"aurora",
+ "canon":"canonwave","air-g-string":"string","jesu-joy":"rays",
+ "rach-pc2-2":{art:"mesh",pal:{bg:['#070b1c','#1a1230'],c:['40,70,170','190,60,70','90,60,150'],a:.55,rings:true,ring:'200,210,255'}},
+ "schubert-ave-maria":{art:"mesh",pal:{bg:['#0b1226','#243a5a'],c:['120,150,210','230,200,150','170,150,220'],a:.5,stars:true}},
+ "liebesgruss":{art:"mesh",pal:{light:true,bg:['#f4e6d8','#e8cdb8'],c:['240,170,150','250,210,160','220,150,170'],a:.55}},
+ "vocalise":{art:"mesh",pal:{bg:['#0d1220','#1f2a3e'],c:['150,170,210','100,150,160','200,170,200'],a:.45,rings:true,ring:'220,225,245'}},
+ "brahms-lullaby":{art:"mesh",pal:{bg:['#0a0f24','#1b1f44'],c:['70,80,170','170,130,200','230,190,130'],a:.4,stars:true,moon:true}},
+ "mozart-pc21-2":{art:"mesh",pal:{light:true,bg:['#e8f0f2','#cfe0e4'],c:['150,200,220','200,225,200','230,215,200'],a:.55,rings:true,ring:'60,90,110'}},
+ "faure-apres-un-reve":{art:"mesh",pal:{bg:['#10101e','#2a2540'],c:['110,100,170','170,130,160','80,110,140'],a:.45}},
+ "paganini-var18":{art:"mesh",pal:{bg:['#150c10','#2e1a1a'],c:['230,160,80','160,60,90','250,200,130'],a:.5,rings:true,ring:'255,220,170'}},
+ "solveigs-song":{art:"mesh",pal:{bg:['#050b14','#0e2a34'],c:['60,170,170','90,200,150','80,110,190'],a:.4,stars:true}}};
 const ARTS = {
  /* エリーゼのために：花びらがゆっくり舞う */
  petals:{init(w,h,r){return{p:Array.from({length:90},()=>({x:r()*w,y:r()*(h+80),s:8+r()*26,v:9+r()*20,rot:r()*6.28,vr:(r()-.5)*.7,ph:r()*6.28,a:.3+r()*.5,hue:338+r()*28}))}},
@@ -696,6 +1023,56 @@ const ARTS = {
     c.lineTo(w,h);c.closePath();c.fill();
   }
    c.globalAlpha=1;c.globalCompositeOperation='source-over';
+  }},
+ /* カノン：同じ旋律が遅れて重なる3本の線 */
+ canonwave:{init(w,h,r){return{d:Array.from({length:70},()=>({x:r()*w,y:r()*h,r:.6+r()*1.6,ph:r()*6.28}))}},
+  draw(c,w,h,t,st){
+   c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#06141a'],[1,'#0e2a30']]);c.fillRect(0,0,w,h);
+   st.d.forEach(p=>{c.fillStyle=`rgba(240,220,170,${.08+.1*Math.sin(t*.6+p.ph)})`;c.beginPath();c.arc(p.x,p.y,p.r,0,6.283);c.fill();});
+   const f=x=>Math.sin(x*.0062)*.55+Math.sin(x*.0021+1.2)*.45, A=h*.11, sh=w*.16;
+   for(let i=0;i<3;i++){
+    const cy=h*(.36+.14*i);
+    c.beginPath();for(let x=0;x<=w;x+=6){const y=cy+f(x-t*40-i*sh)*A;x?c.lineTo(x,y):c.moveTo(x,y);}
+    c.strokeStyle=`rgba(240,206,140,${.55-i*.12})`;c.lineWidth=1.5;c.stroke();
+    const dx=((t*70-i*sh*.9)%(w+200)+(w+200))%(w+200)-100, dy=cy+f(dx-t*40-i*sh)*A;
+    c.fillStyle=rg(c,dx,dy,26,'rgba(255,230,170,.9)','rgba(255,230,170,0)');c.beginPath();c.arc(dx,dy,26,0,6.283);c.fill();
+   }
+  }},
+ /* G線上のアリア：一本の弦の振動 */
+ string:{init(w,h,r){return{d:Array.from({length:60},()=>({x:r()*w,y:r()*h,r:.5+r()*1.8,v:3+r()*8,ph:r()*6.28}))}},
+  draw(c,w,h,t,st){
+   c.fillStyle=lg(c,0,0,0,h,[[0,'#120b07'],[1,'#26170f']]);c.fillRect(0,0,w,h);
+   c.fillStyle=rg(c,w*.5,h*.5,Math.max(w,h)*.55,'rgba(255,170,90,.22)','rgba(255,170,90,0)');c.fillRect(0,0,w,h);
+   st.d.forEach(p=>{const y=((p.y-p.v*t)%h+h)%h;c.fillStyle=`rgba(255,215,160,${.12+.14*Math.sin(t+p.ph)})`;c.beginPath();c.arc(p.x+Math.sin(t*.3+p.ph)*14,y,p.r,0,6.283);c.fill();});
+   const x0=w*.08,L=w*.84,cy=h*.5,A=h*.055*Math.exp(-((t%10))/4.2);
+   [[0,.5,10],[.012,.3,4],[.024,.15,2]].forEach((o,k)=>{const tt=t-o[0];
+    c.beginPath();for(let x=0;x<=L;x+=6){const u=x/L,y=cy+A*(Math.sin(Math.PI*u)*Math.sin(tt*2.2)*.8+Math.sin(2*Math.PI*u)*Math.sin(tt*4.4)*.28+Math.sin(3*Math.PI*u)*Math.sin(tt*6.6)*.12);x?c.lineTo(x0+x,y):c.moveTo(x0+x,y);}
+    c.strokeStyle=k===0?`rgba(255,226,176,${.95})`:`rgba(255,190,120,${o[1]*.4})`;c.lineWidth=k===0?1.4:o[2];c.stroke();});
+   c.fillStyle='rgba(255,226,176,.55)';[x0,x0+L].forEach(x=>{c.beginPath();c.arc(x,cy,4,0,6.283);c.fill();});
+  }},
+ /* 主よ人の望みの喜びよ：窓から差す朝の光 */
+ rays:{init(w,h,r){return{m:Array.from({length:80},()=>({x:r()*w,y:r()*h,r:.8+r()*3,v:3+r()*7,ph:r()*6.28}))}},
+  draw(c,w,h,t,st){
+   c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,w,h,[[0,'#3a2414'],[1,'#7a4f2c']]);c.fillRect(0,0,w,h);
+   const ox=w*.12,oy=-h*.12;
+   for(let i=0;i<8;i++){const a=.55+i*.11+Math.sin(t*.08+i)*.02,wd=.035+.02*Math.sin(t*.2+i*2);
+    c.fillStyle=lg(c,ox,oy,ox+Math.cos(a)*h*1.4,oy+Math.sin(a)*h*1.4,[[0,`rgba(255,238,200,${.20+.08*Math.sin(t*.3+i)})`],[1,'rgba(255,238,200,0)']]);
+    c.beginPath();c.moveTo(ox,oy);c.lineTo(ox+Math.cos(a-wd)*h*1.8,oy+Math.sin(a-wd)*h*1.8);c.lineTo(ox+Math.cos(a+wd)*h*1.8,oy+Math.sin(a+wd)*h*1.8);c.closePath();c.fill();}
+   st.m.forEach(p=>{const y=((p.y-p.v*t)%h+h)%h,x=p.x+Math.sin(t*.25+p.ph)*30;c.fillStyle=rg(c,x,y,p.r*3,`rgba(255,244,214,${.5+.4*Math.sin(t*.8+p.ph)})`,'rgba(255,244,214,0)');c.beginPath();c.arc(x,y,p.r*3,0,6.283);c.fill();});
+  }},
+ /* 汎用：ゆっくり動く色の塊（パレット指定） */
+ mesh:{init(w,h,r,pal){return{pal,s:Array.from({length:120},()=>({x:r()*w,y:r()*h*.7,r:.4+r()*1.2,ph:r()*6.28}))}},
+  draw(c,w,h,t,st){
+   const P=st.pal;c.globalCompositeOperation='source-over';
+   c.fillStyle=lg(c,0,0,0,h,[[0,P.bg[0]],[1,P.bg[1]]]);c.fillRect(0,0,w,h);
+   const M=Math.max(w,h);
+   P.c.forEach((col,i)=>{const x=w*(.15+.7*((i*.37)%1))+Math.sin(t*.06*(1+i*.35)+i*2)*w*.2,y=h*(.2+.6*((i*.53)%1))+Math.cos(t*.05*(1+i*.3)+i)*h*.18,R=M*(.34+.08*Math.sin(t*.1+i));
+    c.fillStyle=rg(c,x,y,R,`rgba(${col},${P.a||.5})`,`rgba(${col},0)`);c.fillRect(0,0,w,h);});
+   if(P.rings){c.strokeStyle=`rgba(${P.ring||'255,255,255'},.09)`;c.lineWidth=1;for(let k=0;k<5;k++){const rr=Math.min(w,h)*(.12+.09*k)*(1+.02*Math.sin(t*.3+k));c.beginPath();c.arc(w*.5,h*.5,rr,0,6.283);c.stroke();}}
+   if(P.stars){st.s.forEach(p=>{c.fillStyle=`rgba(255,250,235,${.2+.5*(.5+.5*Math.sin(t*.9+p.ph))})`;c.beginPath();c.arc(p.x,p.y,p.r,0,6.283);c.fill();});}
+   if(P.moon){const R=Math.min(w,h)*.045;c.fillStyle=rg(c,w*.74,h*.2,R*6,'rgba(255,240,200,.28)','rgba(255,240,200,0)');c.fillRect(0,0,w,h);c.fillStyle='#fff2cf';c.beginPath();c.arc(w*.74,h*.2,R,0,6.283);c.fill();c.fillStyle=P.bg[0];c.beginPath();c.arc(w*.74+R*.5,h*.2-R*.15,R*.92,0,6.283);c.fill();}
   }}
 };
 
@@ -703,10 +1080,10 @@ const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, W:0, H:0, id
 const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
 function ssResize(){const d=Math.min(window.devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;}
 function ssSet(i){
-  const s=SONGS[i], a=ARTS[ART_BY_ID[s.id]]; SS.art=a;
+  const s=SONGS[i], spec=ART_BY_ID[s.id]||'bokeh', name=typeof spec==='string'?spec:spec.art, a=ARTS[name]; SS.art=a;
   cx.globalCompositeOperation='source-over';cx.globalAlpha=1;cx.clearRect(0,0,SS.W,SS.H);
-  SS.st=a.init(SS.W,SS.H,mk(i*97+13)); SS.t0=performance.now();
-  ssEl.classList.toggle('light',!!a.light);
+  SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now();
+  ssEl.classList.toggle('light',!!(a.light||(spec.pal&&spec.pal.light)));
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
 }
 function ssLoop(now){ if(!SS.on) return; SS.art.draw(cx,SS.W,SS.H,(now-SS.t0)/1000,SS.st); SS.raf=requestAnimationFrame(ssLoop); }

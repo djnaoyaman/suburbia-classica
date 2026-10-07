@@ -24,6 +24,7 @@
 
 
 
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -295,7 +296,7 @@ header.top nav a{white-space:nowrap}
 /* about band: square + circle */
 .philo{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,6vw,96px);align-items:start}
 .philo .sq{order:-1;width:100%;max-width:440px;aspect-ratio:1;justify-self:start;align-self:start;margin-top:30px;overflow:hidden;position:relative}
-.philo .sq i{width:64%;transition:transform .1s linear}
+.philo .sq i{width:64%;display:block;animation:breathe 6s ease-in-out infinite}@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
 .philo>div:not(.sq) .big{font-size:clamp(34px,5.6vw,80px)}
 .philo .big{font-size:clamp(34px,5.6vw,80px);margin:0 0 24px;line-height:1.02}
 .philo p:not(.big){font-size:14px;line-height:2;max-width:560px}
@@ -342,6 +343,65 @@ footer.site svg:hover text{fill:var(--vm)}
 a.ilink{background:linear-gradient(var(--vm),var(--vm)) 0 100%/0 2px no-repeat;border-bottom:0;transition:background-size .35s var(--ease),color .2s;padding-bottom:1px}
 a.ilink:hover{background-size:100% 2px}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}#hero .wm1,#hero .caps>div,#hero .sub p,#hero .mk,header.top,#view.enter,.mq2 div,.overlay span{animation:none!important}}
+
+/* ===== FILTER ===== */
+.fl{margin:0 0 8px}
+.fl-top{display:flex;gap:10px;position:sticky;top:52px;z-index:30;background:#fff;padding:10px 0 12px;margin-top:-6px}
+.fl-s{flex:1;display:flex;align-items:center;gap:10px;height:52px;padding:0 20px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;transition:box-shadow .25s,border-color .25s;min-width:0}
+.fl-s:focus-within{box-shadow:0 0 0 4px rgba(255,58,0,.25);border-color:var(--vm)}
+.fl-s input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:var(--ink)}
+.fl-s input::placeholder{color:#8a867f}
+.fl-s input::-webkit-search-cancel-button{cursor:pointer}
+#ftog{height:52px;padding:0 22px;border-radius:999px;font-weight:600;white-space:nowrap}
+#ftog.on{background:var(--ink);color:#fff}
+.badge{display:inline-block;min-width:20px;height:20px;line-height:20px;margin-left:8px;border-radius:10px;background:var(--vm);color:#fff;font-size:11px;text-align:center;padding:0 5px}
+.fl-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .45s var(--ease),opacity .35s;overflow:hidden}
+.fl-panel>*{min-height:0}
+.fl-panel.open{grid-template-rows:1fr;opacity:1;overflow:visible}
+.fl-panel .fg{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:start;padding:11px 0;border-top:1px solid var(--line);overflow:hidden}
+.fl-panel:not(.open) .fg{display:none}
+.fl-panel.open{padding-top:0}
+.fgt{font-size:12px;font-weight:600;color:var(--vm);padding-top:7px;letter-spacing:.04em}
+.fgb{display:flex;flex-wrap:wrap;gap:6px}
+.fc{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 13px;border:1px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;transition:background .2s,color .2s,transform .2s,opacity .2s}
+.fc i{font-style:normal;font-size:11px;opacity:.55;font-variant-numeric:tabular-nums}
+.fc:hover{background:#f4f2ee}
+.fc.on{background:var(--ink);color:#fff}.fc.on i{opacity:.8;color:var(--vm)}
+.fc.zero{opacity:.3;border-style:dashed}
+.fc:active{transform:scale(.95)}
+.fcomp{flex:1;min-width:0}
+.fcomp summary{list-style:none;display:inline-flex;align-items:center;gap:10px;min-height:34px;padding:0 15px;border:1px solid var(--ink);border-radius:999px;cursor:pointer;font-size:13px}
+.fcomp summary::-webkit-details-marker{display:none}
+.fcomp summary::after{content:"▾";font-size:11px}
+.fcomp[open] summary{background:var(--ink);color:#fff}
+.fcomp summary i{font-style:normal;font-size:11px;opacity:.6}
+.fcl{margin-top:10px;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;box-shadow:0 14px 36px rgba(0,0,0,.08)}
+.fcl input{width:100%;height:38px;border:1px solid var(--line);border-radius:999px;padding:0 14px;font:inherit;font-size:13px;margin-bottom:10px}
+.fcb{display:flex;flex-wrap:wrap;gap:6px;max-height:210px;overflow:auto}
+.fl-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:12px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin-top:6px;font-size:13px}
+#fcount b{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 11px;border:0;border-radius:999px;background:var(--vm);color:#fff;font:inherit;font-size:12px;cursor:pointer;animation:up .3s var(--ease) both}
+.pill b{font-weight:600;opacity:.85}
+.pill:hover{background:var(--ink)}
+.fl-bar .sp{flex:1}
+.fl-sort select{font:inherit;font-size:13px;border:1px solid var(--ink);border-radius:999px;padding:5px 12px;background:#fff;margin-left:4px}
+.lnkb{border:0;background:none;color:var(--ink);text-decoration:underline;text-decoration-color:var(--vm);text-underline-offset:3px;font-size:13px;padding:0;cursor:pointer;min-height:0}
+.lnkb:hover{background:none;color:var(--vm)}
+.fl-act{display:flex;flex-wrap:wrap;gap:8px;padding:14px 0 0}
+.b.k{background:var(--ink);color:#fff}.b.k:hover{background:var(--vm);border-color:var(--vm)}
+.fres.fade{animation:up .4s var(--ease) both}
+.grid.flat{margin-top:6px}
+.fempty{padding:48px 0;text-align:center}
+.fempty .big2{font-size:clamp(22px,3vw,32px);font-weight:500;letter-spacing:-.02em;margin:0 0 8px}
+@media(max-width:860px){.fl-top{top:48px}}
+@media(max-width:640px){
+ .fl-top{gap:8px}.fl-s{height:48px;padding:0 14px}#ftog{height:48px;padding:0 16px}
+ .fl-panel .fg{grid-template-columns:1fr;gap:6px}.fgt{padding-top:0}
+ .fl-bar .sp{display:none}.fl-sort{margin-left:auto}
+ .fl-act .b{flex:1 1 100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.fl-panel{transition:none}.pill,.fres.fade{animation:none}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -383,7 +443,7 @@ a.ilink:hover{background-size:100% 2px}
     </div>
     <div class="status" id="status"></div>
   </aside>
-                                  <noscript id="seo-ns"><main style="max-width:860px;margin:0 auto;padding:20px;color:#e8e4dc"><h1>SUBURBIA CLASSICA — A Mellow Classical Selection</h1><p>メロウ・ピアノ・クラシック。教科書・映画・CMで親しまれる名曲を、作曲の経緯・構成分析・録音エピソード・出典つきで詳しく紹介する楽曲データベース。YouTubeで無料再生、曲が終わると次の曲へ。</p><p>再生・スクリーンセーバー表示にはJavaScriptが必要です。曲の詳細は以下のページでも読めます。</p><ul><li><a href="songs/fur-elise.html">エリーゼのために／ベートーヴェン</a></li><li><a href="songs/moonlight.html">ピアノソナタ第14番「月光」第1楽章／ベートーヴェン</a></li><li><a href="songs/tristesse.html">別れの曲（練習曲 Op.10-3）／ショパン</a></li><li><a href="songs/fantaisie-impromptu.html">幻想即興曲／ショパン</a></li><li><a href="songs/nocturne-9-2.html">ノクターン第2番／ショパン</a></li><li><a href="songs/raindrop.html">前奏曲 第15番「雨だれ」／ショパン</a></li><li><a href="songs/clair-de-lune.html">月の光（ベルガマスク組曲 第3曲）／ドビュッシー</a></li><li><a href="songs/gymnopedie-1.html">ジムノペディ 第1番／サティ</a></li><li><a href="songs/traumerei.html">トロイメライ（子供の情景 第7曲）／シューマン</a></li><li><a href="songs/liebestraum-3.html">愛の夢 第3番／リスト</a></li><li><a href="songs/flaxen-hair.html">亜麻色の髪の乙女（前奏曲集第1巻 第8曲）／クロード・ドビュッシー</a></li><li><a href="songs/arabesque-1.html">アラベスク第1番（2つのアラベスクより）／クロード・ドビュッシー</a></li><li><a href="songs/prelude-bwv846.html">平均律クラヴィーア曲集第1巻 第1番 前奏曲 ハ長調／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/pavane.html">亡き王女のためのパヴァーヌ（ピアノ原曲）／モーリス・ラヴェル</a></li><li><a href="songs/nocturne-20.html">ノクターン第20番 嬰ハ短調 遺作(レント・コン・グラン・エスプレッシオーネ)／フレデリック・ショパン</a></li><li><a href="songs/pathetique-2.html">ピアノソナタ第8番「悲愴」 第2楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/k331-1.html">ピアノ・ソナタ第11番 イ長調 K.331 第1楽章（主題と6つの変奏）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/prelude-7.html">前奏曲第7番 イ長調 Op.28-7／フレデリック・ショパン</a></li><li><a href="songs/brahms-waltz-15.html">16のワルツ Op.39 第15番 変イ長調（ピアノ独奏版）／ヨハネス・ブラームス</a></li><li><a href="songs/mendelssohn-spring-song.html">無言歌集 第5巻 Op.62-6「春の歌」／フェリックス・メンデルスゾーン</a></li><li><a href="songs/goldberg-aria.html">ゴルトベルク変奏曲 アリア／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/reverie.html">夢（Rêverie）／クロード・ドビュッシー</a></li><li><a href="songs/gnossienne-1.html">グノシエンヌ 第1番／エリック・サティ</a></li><li><a href="songs/waltz-64-2.html">ワルツ第7番 嬰ハ短調 Op.64-2／フレデリック・ショパン</a></li><li><a href="songs/waltz-69-1.html">ワルツ第9番 変イ長調 Op.69-1『別れのワルツ』／フレデリック・ショパン</a></li><li><a href="songs/tchaikovsky-october.html">四季 Op.37a 第10曲 10月「秋の歌」／ピョートル・チャイコフスキー</a></li><li><a href="songs/k310-2.html">ピアノ・ソナタ第8番 イ短調 K.310 第2楽章 アンダンテ・カンタービレ・コン・エスプレッシオーネ／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/schubert-impromptu-90-3.html">4つの即興曲 Op.90 D.899 第3番 変ト長調／フランツ・シューベルト</a></li><li><a href="songs/brahms-op118-2.html">6つの小品 Op.118 第2番 間奏曲 イ長調／ヨハネス・ブラームス</a></li><li><a href="songs/canon.html">カノン（パッヘルベルのカノン）／パッヘルベル</a></li><li><a href="songs/air-g-string.html">G線上のアリア／バッハ</a></li><li><a href="songs/jesu-joy.html">主よ人の望みの喜びよ／バッハ</a></li><li><a href="songs/rach-pc2-2.html">ピアノ協奏曲第2番 第2楽章／ラフマニノフ</a></li><li><a href="songs/schubert-ave-maria.html">アヴェ・マリア（エレンの歌 第3番）／シューベルト</a></li><li><a href="songs/liebesgruss.html">愛のあいさつ／エルガー</a></li><li><a href="songs/vocalise.html">ヴォカリーズ／ラフマニノフ</a></li><li><a href="songs/brahms-lullaby.html">ブラームスの子守歌／ブラームス</a></li><li><a href="songs/mozart-pc21-2.html">ピアノ協奏曲第21番 第2楽章／モーツァルト</a></li><li><a href="songs/faure-apres-un-reve.html">夢のあとに／フォーレ</a></li><li><a href="songs/paganini-var18.html">パガニーニの主題による狂詩曲 第18変奏／ラフマニノフ</a></li><li><a href="songs/solveigs-song.html">ソルヴェイグの歌／グリーグ</a></li><li><a href="songs/beethoven-5.html">交響曲第5番 ハ短調 作品67「運命」第1楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/beethoven-9.html">交響曲第9番 ニ短調 作品125「合唱付き」第4楽章「歓喜の歌」／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/vivaldi-spring.html">ヴァイオリン協奏曲集「四季」より 春 第1楽章 (協奏曲 ホ長調 作品8-1 RV269)／アントニオ・ヴィヴァルディ</a></li><li><a href="songs/largo-new-world.html">交響曲第9番 ホ短調「新世界より」第2楽章 ラルゴ（「家路」）／アントニーン・ドヴォルザーク</a></li><li><a href="songs/bolero.html">ボレロ／モーリス・ラヴェル</a></li><li><a href="songs/pomp-circumstance-1.html">行進曲「威風堂々」第1番／エドワード・エルガー</a></li><li><a href="songs/eine-kleine.html">アイネ・クライネ・ナハトムジーク K.525 第1楽章／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/pictures.html">ムソルグスキー作曲（ラヴェル編曲）組曲「展覧会の絵」／モデスト・ムソルグスキー</a></li><li><a href="songs/le-cygne.html">動物の謝肉祭 第13曲「白鳥」（チェロとピアノ版を中心に）／カミーユ・サン＝サーンス</a></li><li><a href="songs/jupiter.html">組曲「惑星」より 木星（快楽をもたらす者）／グスターヴ・ホルスト</a></li><li><a href="songs/toccata-fugue-dm.html">トッカータとフーガ ニ短調 BWV565／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/farandole.html">ビゼー「アルルの女」第2組曲より ファランドール／ジョルジュ・ビゼー</a></li><li><a href="songs/carmen-prelude.html">歌劇「カルメン」前奏曲（第1幕への前奏曲）／ジョルジュ・ビゼー</a></li><li><a href="songs/cavalleria-intermezzo.html">歌劇「カヴァレリア・ルスティカーナ」間奏曲／ピエトロ・マスカーニ</a></li><li><a href="songs/barber-adagio.html">弦楽のためのアダージョ 作品11／サミュエル・バーバー</a></li><li><a href="songs/nessun-dorma.html">歌劇「トゥーランドット」より 誰も寝てはならぬ／ジャコモ・プッチーニ</a></li><li><a href="songs/brindisi.html">歌劇「椿姫」より 乾杯の歌／ジュゼッペ・ヴェルディ</a></li><li><a href="songs/habanera.html">歌劇「カルメン」より ハバネラ（恋は野の鳥）／ジョルジュ・ビゼー</a></li><li><a href="songs/orpheus-overture.html">喜歌劇「天国と地獄」序曲（カンカンを含む）／ジャック・オッフェンバック</a></li><li><a href="songs/william-tell-overture.html">歌劇「ウィリアム・テル」序曲（終曲：スイス兵の行進）／ジョアキーノ・ロッシーニ</a></li><li><a href="songs/queen-of-night.html">歌劇「魔笛」より 夜の女王のアリア「復讐の心は地獄のように我が胸に燃え」／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/toreador.html">歌劇「カルメン」より 闘牛士の歌（諸君の乾杯を受けよう）／ジョルジュ・ビゼー</a></li><li><a href="songs/figaro-letter-duet.html">歌劇「フィガロの結婚」より 手紙の二重唱（そよ風によせて）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/flower-duet.html">歌劇「ラクメ」より 花の二重唱／レオ・ドリーブ</a></li><li><a href="songs/o-mio-babbino.html">私のお父さん（歌劇「ジャンニ・スキッキ」より）／ジャコモ・プッチーニ</a></li><li><a href="songs/lascia-ch-io-pianga.html">私を泣かせてください（歌劇「リナルド」より）／ゲオルク・フリードリヒ・ヘンデル</a></li><li><a href="songs/rojo-no-tsuki.html">荒城の月／滝廉太郎</a></li><li><a href="songs/heidenroslein.html">野ばら／フランツ・シューベルト</a></li><li><a href="songs/ave-verum-corpus.html">アヴェ・ヴェルム・コルプス K.618／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/erlkonig.html">魔王／フランツ・シューベルト</a></li><li><a href="songs/caccini-ave-maria.html">カッチーニのアヴェ・マリア／ウラディーミル・ヴァヴィロフ</a></li><li><a href="songs/faure-pie-jesu.html">ピエ・イェズ（フォーレ《レクイエム》作品48 第4曲）／ガブリエル・フォーレ</a></li><li><a href="songs/verdi-dies-irae.html">怒りの日（ディエス・イレ）（ヴェルディ《レクイエム》第2曲の冒頭）／ジュゼッペ・ヴェルディ</a></li></ul><p><a href="timeline.html">国横断年表</a>｜<a href="about.html">このサイトについて</a></p></main></noscript>
+                                    <noscript id="seo-ns"><main style="max-width:860px;margin:0 auto;padding:20px;color:#e8e4dc"><h1>SUBURBIA CLASSICA — A Mellow Classical Selection</h1><p>メロウ・ピアノ・クラシック。教科書・映画・CMで親しまれる名曲を、作曲の経緯・構成分析・録音エピソード・出典つきで詳しく紹介する楽曲データベース。YouTubeで無料再生、曲が終わると次の曲へ。</p><p>再生・スクリーンセーバー表示にはJavaScriptが必要です。曲の詳細は以下のページでも読めます。</p><ul><li><a href="songs/fur-elise.html">エリーゼのために／ベートーヴェン</a></li><li><a href="songs/moonlight.html">ピアノソナタ第14番「月光」第1楽章／ベートーヴェン</a></li><li><a href="songs/tristesse.html">別れの曲（練習曲 Op.10-3）／ショパン</a></li><li><a href="songs/fantaisie-impromptu.html">幻想即興曲／ショパン</a></li><li><a href="songs/nocturne-9-2.html">ノクターン第2番／ショパン</a></li><li><a href="songs/raindrop.html">前奏曲 第15番「雨だれ」／ショパン</a></li><li><a href="songs/clair-de-lune.html">月の光（ベルガマスク組曲 第3曲）／ドビュッシー</a></li><li><a href="songs/gymnopedie-1.html">ジムノペディ 第1番／サティ</a></li><li><a href="songs/traumerei.html">トロイメライ（子供の情景 第7曲）／シューマン</a></li><li><a href="songs/liebestraum-3.html">愛の夢 第3番／リスト</a></li><li><a href="songs/flaxen-hair.html">亜麻色の髪の乙女（前奏曲集第1巻 第8曲）／クロード・ドビュッシー</a></li><li><a href="songs/arabesque-1.html">アラベスク第1番（2つのアラベスクより）／クロード・ドビュッシー</a></li><li><a href="songs/prelude-bwv846.html">平均律クラヴィーア曲集第1巻 第1番 前奏曲 ハ長調／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/pavane.html">亡き王女のためのパヴァーヌ（ピアノ原曲）／モーリス・ラヴェル</a></li><li><a href="songs/nocturne-20.html">ノクターン第20番 嬰ハ短調 遺作(レント・コン・グラン・エスプレッシオーネ)／フレデリック・ショパン</a></li><li><a href="songs/pathetique-2.html">ピアノソナタ第8番「悲愴」 第2楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/k331-1.html">ピアノ・ソナタ第11番 イ長調 K.331 第1楽章（主題と6つの変奏）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/prelude-7.html">前奏曲第7番 イ長調 Op.28-7／フレデリック・ショパン</a></li><li><a href="songs/brahms-waltz-15.html">16のワルツ Op.39 第15番 変イ長調（ピアノ独奏版）／ヨハネス・ブラームス</a></li><li><a href="songs/mendelssohn-spring-song.html">無言歌集 第5巻 Op.62-6「春の歌」／フェリックス・メンデルスゾーン</a></li><li><a href="songs/goldberg-aria.html">ゴルトベルク変奏曲 アリア／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/reverie.html">夢（Rêverie）／クロード・ドビュッシー</a></li><li><a href="songs/gnossienne-1.html">グノシエンヌ 第1番／エリック・サティ</a></li><li><a href="songs/waltz-64-2.html">ワルツ第7番 嬰ハ短調 Op.64-2／フレデリック・ショパン</a></li><li><a href="songs/waltz-69-1.html">ワルツ第9番 変イ長調 Op.69-1『別れのワルツ』／フレデリック・ショパン</a></li><li><a href="songs/tchaikovsky-october.html">四季 Op.37a 第10曲 10月「秋の歌」／ピョートル・チャイコフスキー</a></li><li><a href="songs/k310-2.html">ピアノ・ソナタ第8番 イ短調 K.310 第2楽章 アンダンテ・カンタービレ・コン・エスプレッシオーネ／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/schubert-impromptu-90-3.html">4つの即興曲 Op.90 D.899 第3番 変ト長調／フランツ・シューベルト</a></li><li><a href="songs/brahms-op118-2.html">6つの小品 Op.118 第2番 間奏曲 イ長調／ヨハネス・ブラームス</a></li><li><a href="songs/canon.html">カノン（パッヘルベルのカノン）／パッヘルベル</a></li><li><a href="songs/air-g-string.html">G線上のアリア／バッハ</a></li><li><a href="songs/jesu-joy.html">主よ人の望みの喜びよ／バッハ</a></li><li><a href="songs/rach-pc2-2.html">ピアノ協奏曲第2番 第2楽章／ラフマニノフ</a></li><li><a href="songs/schubert-ave-maria.html">アヴェ・マリア（エレンの歌 第3番）／シューベルト</a></li><li><a href="songs/liebesgruss.html">愛のあいさつ／エルガー</a></li><li><a href="songs/vocalise.html">ヴォカリーズ／ラフマニノフ</a></li><li><a href="songs/brahms-lullaby.html">ブラームスの子守歌／ブラームス</a></li><li><a href="songs/mozart-pc21-2.html">ピアノ協奏曲第21番 第2楽章／モーツァルト</a></li><li><a href="songs/faure-apres-un-reve.html">夢のあとに／フォーレ</a></li><li><a href="songs/paganini-var18.html">パガニーニの主題による狂詩曲 第18変奏／ラフマニノフ</a></li><li><a href="songs/solveigs-song.html">ソルヴェイグの歌／グリーグ</a></li><li><a href="songs/beethoven-5.html">交響曲第5番 ハ短調 作品67「運命」第1楽章／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/beethoven-9.html">交響曲第9番 ニ短調 作品125「合唱付き」第4楽章「歓喜の歌」／ルートヴィヒ・ヴァン・ベートーヴェン</a></li><li><a href="songs/vivaldi-spring.html">ヴァイオリン協奏曲集「四季」より 春 第1楽章 (協奏曲 ホ長調 作品8-1 RV269)／アントニオ・ヴィヴァルディ</a></li><li><a href="songs/largo-new-world.html">交響曲第9番 ホ短調「新世界より」第2楽章 ラルゴ（「家路」）／アントニーン・ドヴォルザーク</a></li><li><a href="songs/bolero.html">ボレロ／モーリス・ラヴェル</a></li><li><a href="songs/pomp-circumstance-1.html">行進曲「威風堂々」第1番／エドワード・エルガー</a></li><li><a href="songs/eine-kleine.html">アイネ・クライネ・ナハトムジーク K.525 第1楽章／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/pictures.html">ムソルグスキー作曲（ラヴェル編曲）組曲「展覧会の絵」／モデスト・ムソルグスキー</a></li><li><a href="songs/le-cygne.html">動物の謝肉祭 第13曲「白鳥」（チェロとピアノ版を中心に）／カミーユ・サン＝サーンス</a></li><li><a href="songs/jupiter.html">組曲「惑星」より 木星（快楽をもたらす者）／グスターヴ・ホルスト</a></li><li><a href="songs/toccata-fugue-dm.html">トッカータとフーガ ニ短調 BWV565／ヨハン・ゼバスティアン・バッハ</a></li><li><a href="songs/farandole.html">ビゼー「アルルの女」第2組曲より ファランドール／ジョルジュ・ビゼー</a></li><li><a href="songs/carmen-prelude.html">歌劇「カルメン」前奏曲（第1幕への前奏曲）／ジョルジュ・ビゼー</a></li><li><a href="songs/cavalleria-intermezzo.html">歌劇「カヴァレリア・ルスティカーナ」間奏曲／ピエトロ・マスカーニ</a></li><li><a href="songs/barber-adagio.html">弦楽のためのアダージョ 作品11／サミュエル・バーバー</a></li><li><a href="songs/nessun-dorma.html">歌劇「トゥーランドット」より 誰も寝てはならぬ／ジャコモ・プッチーニ</a></li><li><a href="songs/brindisi.html">歌劇「椿姫」より 乾杯の歌／ジュゼッペ・ヴェルディ</a></li><li><a href="songs/habanera.html">歌劇「カルメン」より ハバネラ（恋は野の鳥）／ジョルジュ・ビゼー</a></li><li><a href="songs/orpheus-overture.html">喜歌劇「天国と地獄」序曲（カンカンを含む）／ジャック・オッフェンバック</a></li><li><a href="songs/william-tell-overture.html">歌劇「ウィリアム・テル」序曲（終曲：スイス兵の行進）／ジョアキーノ・ロッシーニ</a></li><li><a href="songs/queen-of-night.html">歌劇「魔笛」より 夜の女王のアリア「復讐の心は地獄のように我が胸に燃え」／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/toreador.html">歌劇「カルメン」より 闘牛士の歌（諸君の乾杯を受けよう）／ジョルジュ・ビゼー</a></li><li><a href="songs/figaro-letter-duet.html">歌劇「フィガロの結婚」より 手紙の二重唱（そよ風によせて）／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/flower-duet.html">歌劇「ラクメ」より 花の二重唱／レオ・ドリーブ</a></li><li><a href="songs/o-mio-babbino.html">私のお父さん（歌劇「ジャンニ・スキッキ」より）／ジャコモ・プッチーニ</a></li><li><a href="songs/lascia-ch-io-pianga.html">私を泣かせてください（歌劇「リナルド」より）／ゲオルク・フリードリヒ・ヘンデル</a></li><li><a href="songs/rojo-no-tsuki.html">荒城の月／滝廉太郎</a></li><li><a href="songs/heidenroslein.html">野ばら／フランツ・シューベルト</a></li><li><a href="songs/ave-verum-corpus.html">アヴェ・ヴェルム・コルプス K.618／ヴォルフガング・アマデウス・モーツァルト</a></li><li><a href="songs/erlkonig.html">魔王／フランツ・シューベルト</a></li><li><a href="songs/caccini-ave-maria.html">カッチーニのアヴェ・マリア／ウラディーミル・ヴァヴィロフ</a></li><li><a href="songs/faure-pie-jesu.html">ピエ・イェズ（フォーレ《レクイエム》作品48 第4曲）／ガブリエル・フォーレ</a></li><li><a href="songs/verdi-dies-irae.html">怒りの日（ディエス・イレ）（ヴェルディ《レクイエム》第2曲の冒頭）／ジュゼッペ・ヴェルディ</a></li></ul><p><a href="timeline.html">国横断年表</a>｜<a href="about.html">このサイトについて</a></p></main></noscript>
   <main id="view"></main>
 </div>
 <div id="ss" aria-hidden="true">
@@ -1131,7 +1191,12 @@ function setNow(i, play){
   if (play) player.loadVideoById(s.yt.id); else player.cueVideoById(s.yt.id);
 }
 function playSong(i){ setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
-function go(i){ const n = (i + SONGS.length) % SONGS.length; location.hash = '#/song/' + SONGS[n].id; }
+let QUEUE=null;
+function go(i){
+  let n = (i + SONGS.length) % SONGS.length;
+  if (QUEUE && QUEUE.length && cur >= 0) { const d = i - cur; if (d === 1 || d === -1) { const pos = QUEUE.indexOf(SONGS[cur].id); if (pos >= 0) n = SONGS.findIndex(s=>s.id === QUEUE[(pos + d + QUEUE.length) % QUEUE.length]); } }
+  location.hash = '#/song/' + SONGS[n].id;
+}
 function currentViewIdx(){
   const m = location.hash.match(/^#\/song\/(.+)$/);
   return m ? SONGS.findIndex(s=>s.id === m[1]) : -1;
@@ -1140,30 +1205,134 @@ function currentViewIdx(){
 /* ---------- 画面 ---------- */
 const lnk = (u,t)=>'<a href="'+u+'" target="_blank" rel="noopener" style="color:var(--accent2)">'+t+'</a>';
 const sec = (t,h)=>'<h2>'+t+'</h2>'+h;
-const compKey = c => c.replace(/（.*?）/g,'');
+const COMP_CANON=['ヴァヴィロフ','ベートーヴェン','ショパン','ドビュッシー','サティ','シューマン','リスト','バッハ','ラヴェル','モーツァルト','ブラームス','メンデルスゾーン','チャイコフスキー','シューベルト','パッヘルベル','ラフマニノフ','エルガー','フォーレ','グリーグ','ヴィヴァルディ','ドヴォルザーク','ムソルグスキー','サン＝サーンス','ホルスト','ビゼー','マスカーニ','バーバー','プッチーニ','ヴェルディ','オッフェンバック','ロッシーニ','ドリーブ','ヘンデル','滝廉太郎'];
+const compKey = c => { const b=c.replace(/（.*?）/g,''); for(const k of COMP_CANON){ if(b.indexOf(k)>=0) return k; } return b; };
 const card = (s,i)=>'<a class="card'+(cur===i&&started?' playing':'')+'" data-i="'+i+'" href="#/song/'+s.id+'">' +
   '<div class="no">'+String(i+1).padStart(2,'0')+'</div><div class="tt">'+s.title+'</div>' +
   '<div class="cc">'+compKey(s.composer)+'／'+s.era+'</div><div class="tg">'+s.mood.join('・')+'</div></a>';
-function catNav(active){
-  return '<div class="chips">' + '<a class="chip '+(!active?'on':'')+'" href="#/">すべて</a>' +
-    CATS.map(c=>{ const n=SONGS.filter(s=>s.cat===c.name).length; return '<a class="chip '+(active===c.name?'on':'')+(n?'':' dim')+'" href="#/cat/'+encodeURIComponent(c.name)+'">'+c.name+'（'+(n||'準備中')+'）</a>'; }).join('') + '</div>';
+/* ===== 絞り込みシステム ===== */
+const FS={q:'',cats:new Set(),moods:new Set(),eras:new Set(),ctry:new Set(),uses:new Set(),comp:'',sort:'major'};
+const ERAS=['バロック','古典派','ロマン派','近代・20世紀'];
+const USES=[['film','映画・ドラマ',s=>s.films.length>0],['cm','CM',s=>s.cms.length>0],['tb','教科書・鑑賞教材',s=>s.textbooks.length>0]];
+const eraOf=s=>{const y=(TL[s.id]||[1800])[0];return y<1750?ERAS[0]:y<1820?ERAS[1]:y<1900?ERAS[2]:ERAS[3];};
+const ctryOf=s=>(TL[s.id]||[0,'その他'])[1];
+const yearOf=s=>(TL[s.id]||[9999])[0];
+const fnorm=x=>(x||'').normalize('NFKC').toLowerCase().replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/[\s・=\-]/g,'');
+function ixOf(s){ if(!s._ix){ s._ix=fnorm([s.title,s.en,s.composer,compKey(s.composer),s.era,s.form,s.key,s.mood.join(' '),(ALIASES[s.id]||[]).join(' '),s.films.map(f=>f[0]).join(' '),s.cms.map(c=>c[0]).join(' '),s.textbooks.map(x=>x[0]).join(' '),s.related.join(' '),s.summary].join(' ')); } return s._ix; }
+function fmatch(s,skip){
+  if(skip!=='q'&&FS.q){ const ix=ixOf(s); const toks=FS.q.split(/\s+/).filter(Boolean); for(let i=0;i<toks.length;i++){ if(ix.indexOf(fnorm(toks[i]))<0) return false; } }
+  if(skip!=='cats'&&FS.cats.size&&!FS.cats.has(s.cat)) return false;
+  if(skip!=='moods'&&FS.moods.size&&!s.mood.some(m=>FS.moods.has(m))) return false;
+  if(skip!=='eras'&&FS.eras.size&&!FS.eras.has(eraOf(s))) return false;
+  if(skip!=='ctry'&&FS.ctry.size&&!FS.ctry.has(ctryOf(s))) return false;
+  if(skip!=='uses'&&FS.uses.size){ for(const u of USES){ if(FS.uses.has(u[0])&&!u[2](s)) return false; } }
+  if(skip!=='comp'&&FS.comp&&compKey(s.composer)!==FS.comp) return false;
+  return true;
+}
+const fActive=()=>FS.q.trim()!==''||FS.cats.size||FS.moods.size||FS.eras.size||FS.ctry.size||FS.uses.size||FS.comp;
+function fReset(){ FS.q='';FS.cats.clear();FS.moods.clear();FS.eras.clear();FS.ctry.clear();FS.uses.clear();FS.comp='';FS.sort='major'; }
+function fFromHash(h){
+  fReset(); const m=h.match(/^#\/\?(.*)$/); if(!m) return;
+  m[1].split('&').forEach(kv=>{ const i=kv.indexOf('='); if(i<0) return; const k=kv.slice(0,i); let v=''; try{ v=decodeURIComponent(kv.slice(i+1)); }catch(e){} const list=v?v.split(','):[];
+    if(k==='q') FS.q=v; else if(k==='c') list.forEach(x=>FS.cats.add(x)); else if(k==='m') list.forEach(x=>FS.moods.add(x)); else if(k==='e') list.forEach(x=>FS.eras.add(x)); else if(k==='k') list.forEach(x=>FS.ctry.add(x)); else if(k==='u') list.forEach(x=>FS.uses.add(x)); else if(k==='p') FS.comp=v; else if(k==='s') FS.sort=v||'major'; });
+}
+function fToHash(){
+  const p=[]; const E=encodeURIComponent;
+  if(FS.q.trim()) p.push('q='+E(FS.q.trim())); if(FS.cats.size) p.push('c='+[...FS.cats].map(E).join(',')); if(FS.moods.size) p.push('m='+[...FS.moods].map(E).join(','));
+  if(FS.eras.size) p.push('e='+[...FS.eras].map(E).join(',')); if(FS.ctry.size) p.push('k='+[...FS.ctry].map(E).join(',')); if(FS.uses.size) p.push('u='+[...FS.uses].join(','));
+  if(FS.comp) p.push('p='+E(FS.comp)); if(FS.sort!=='major') p.push('s='+FS.sort);
+  return p.length?'#/?'+p.join('&'):'#/';
+}
+function fSorted(l){
+  const a=l.slice();
+  if(FS.sort==='year') a.sort((x,y)=>yearOf(x)-yearOf(y)); else if(FS.sort==='comp') a.sort((x,y)=>compKey(x.composer).localeCompare(compKey(y.composer),'ja')||yearOf(x)-yearOf(y)); else if(FS.sort==='title') a.sort((x,y)=>x.title.localeCompare(y.title,'ja'));
+  return a;
+}
+function fOpt(f,val,label,count,on,extra){
+  return '<button type="button" class="fc'+(on?' on':'')+(count===0&&!on?' zero':'')+'" data-f="'+f+'" data-v="'+val+'" aria-pressed="'+(on?'true':'false')+'">'+label+'<i>'+count+'</i></button>';
+}
+function fFacets(){
+  const cnt=(skip,pred)=>SONGS.filter(s=>fmatch(s,skip)&&pred(s)).length;
+  const g=(title,body)=>'<div class="fg"><div class="fgt">'+title+'</div><div class="fgb">'+body+'</div></div>';
+  const cats=CATS.map(c=>fOpt('cats',c.name,c.name,cnt('cats',s=>s.cat===c.name),FS.cats.has(c.name))).join('');
+  const moods=[...new Set(SONGS.flatMap(s=>s.mood))].map(m=>fOpt('moods',m,m,cnt('moods',s=>s.mood.includes(m)),FS.moods.has(m))).join('');
+  const eras=ERAS.map(e=>fOpt('eras',e,e,cnt('eras',s=>eraOf(s)===e),FS.eras.has(e))).join('');
+  const ct=[...new Set(SONGS.map(ctryOf))].sort((a,b)=>cnt('ctry',s=>ctryOf(s)===b)-cnt('ctry',s=>ctryOf(s)===a)).map(c=>fOpt('ctry',c,c,cnt('ctry',s=>ctryOf(s)===c),FS.ctry.has(c))).join('');
+  const uses=USES.map(u=>fOpt('uses',u[0],u[1],cnt('uses',x=>u[2](x)),FS.uses.has(u[0]))).join('');
+  const comps=[...new Set(SONGS.map(s=>compKey(s.composer)))].map(c=>({c,n:cnt('comp',s=>compKey(s.composer)===c)})).sort((a,b)=>b.n-a.n||a.c.localeCompare(b.c,'ja'));
+  const comp='<details class="fcomp"'+(FS.comp?' open':'')+'><summary>'+(FS.comp?FS.comp:'作曲者を選ぶ')+'<i>'+comps.filter(x=>x.n>0).length+'人</i></summary><div class="fcl"><input type="search" id="fcq" placeholder="作曲者を検索" aria-label="作曲者を検索" autocomplete="off"><div class="fcb">'+comps.map(x=>'<button type="button" class="fc'+(FS.comp===x.c?' on':'')+(x.n===0&&FS.comp!==x.c?' zero':'')+'" data-f="comp" data-v="'+x.c+'" data-k="'+fnorm(x.c)+'">'+x.c+'<i>'+x.n+'</i></button>').join('')+'</div></div></details>';
+  return g('カテゴリ',cats)+g('ムード',moods)+g('時代',eras)+g('国',ct)+g('使われ方',uses)+g('作曲者',comp);
+}
+function fPills(){
+  const P=[]; const add=(f,v,l)=>P.push('<button type="button" class="pill" data-f="'+f+'" data-v="'+v+'" data-rm="1">'+l+' <b>×</b></button>');
+  if(FS.q.trim()) P.push('<button type="button" class="pill" data-rm="q">“'+FS.q.trim().replace(/</g,'&lt;')+'” <b>×</b></button>');
+  FS.cats.forEach(v=>add('cats',v,v)); FS.moods.forEach(v=>add('moods',v,v)); FS.eras.forEach(v=>add('eras',v,v)); FS.ctry.forEach(v=>add('ctry',v,v));
+  USES.forEach(u=>{ if(FS.uses.has(u[0])) add('uses',u[0],u[1]); }); if(FS.comp) add('comp',FS.comp,FS.comp);
+  return P.join('');
+}
+function fResults(){
+  const l=SONGS.filter(s=>fmatch(s)); const idx=s=>SONGS.indexOf(s);
+  let body='';
+  if(!l.length){
+    body='<div class="fempty"><p class="big2">該当する曲がありません</p><p>条件を少しゆるめると見つかるかもしれません。</p><button type="button" class="b k" data-act="reset">条件をリセット</button></div>';
+  } else if(!fActive()&&FS.sort==='major'){
+    body=CATS.map(c=>{ const x=SONGS.filter(s=>s.cat===c.name); return '<h2 class="cath"><span>'+c.key+'</span> '+c.name+'</h2>'+(x.length?'<div class="grid">'+x.map(s=>card(s,idx(s))).join('')+'</div>':'<p class="pend">準備中</p>'); }).join('');
+  } else {
+    body='<div class="grid flat">'+fSorted(l).map(s=>card(s,idx(s))).join('')+'</div>';
+  }
+  return {n:l.length,html:body,list:l};
+}
+let _fraf=0;
+function fApply(skipFacets){
+  const r=fResults();
+  const res=document.getElementById('fres'); if(!res) return;
+  res.innerHTML=r.html; res.classList.remove('fade'); void res.offsetWidth; res.classList.add('fade');
+  const cEl=document.getElementById('fcount'); if(cEl) cEl.innerHTML='<b>'+r.n+'</b> / '+SONGS.length+' 曲';
+  const pl=document.getElementById('fpills'); if(pl) pl.innerHTML=fPills();
+  const act=document.getElementById('fact'); if(act) act.style.display=(r.n&&(fActive()))?'':'none';
+  const rs=document.getElementById('freset'); if(rs) rs.style.visibility=fActive()||FS.sort!=='major'?'visible':'hidden';
+  const bd=document.getElementById('fbadge'); if(bd){ const n=FS.cats.size+FS.moods.size+FS.eras.size+FS.ctry.size+FS.uses.size+(FS.comp?1:0); bd.textContent=n?n:''; bd.style.display=n?'':'none'; }
+  if(!skipFacets){ const pn=document.getElementById('fpanel'); if(pn){ const open=pn.querySelector('.fcomp')&&pn.querySelector('.fcomp').open; const ss=pn.querySelector('.fcl input')?pn.querySelector('.fcl input').value:''; pn.innerHTML=fFacets(); const d=pn.querySelector('.fcomp'); if(d&&open) d.open=true; const si=pn.querySelector('.fcl input'); if(si&&ss){ si.value=ss; fCompFilter(ss); } } }
+  try{ history.replaceState(null,'',fToHash()); }catch(e){}
+  QUEUE_PREVIEW=r.list.map(s=>s.id);
+  if(typeof initReveal==='function') initReveal();
+}
+let QUEUE_PREVIEW=[];
+function fCompFilter(v){ const k=fnorm(v); document.querySelectorAll('#fpanel .fcb .fc').forEach(b=>{ b.style.display=(!k||(b.dataset.k||'').indexOf(k)>=0)?'':'none'; }); }
+function fToggle(f,v){
+  if(f==='comp'){ FS.comp=(FS.comp===v)?'':v; return; }
+  const S=FS[f]; if(!S) return; if(S.has(v)) S.delete(v); else S.add(v);
+}
+function fBind(){
+  const root=document.getElementById('fl'); if(!root||typeof root.addEventListener!=='function') return;
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('[data-f],[data-act],[data-rm],#ftog'); if(!b) return;
+    if(b.id==='ftog'){ document.getElementById('fpanel').classList.toggle('open'); b.classList.toggle('on'); return; }
+    if(b.dataset.act==='reset'||b.id==='freset'){ fReset(); const q=document.getElementById('fq'); if(q) q.value=''; const s=document.getElementById('fsort'); if(s) s.value='major'; fApply(); return; }
+    if(b.dataset.rm==='q'){ FS.q=''; const q=document.getElementById('fq'); if(q) q.value=''; fApply(); return; }
+    if(b.dataset.f){ fToggle(b.dataset.f,b.dataset.v); if(b.dataset.f==='comp'){ const d=document.querySelector('#fpanel .fcomp'); if(d) d.open=false; } fApply(); }
+  });
+  const q=document.getElementById('fq'); if(q){ q.addEventListener('input',()=>{ FS.q=q.value; cancelAnimationFrame(_fraf); _fraf=requestAnimationFrame(()=>fApply(false)); }); }
+  const so=document.getElementById('fsort'); if(so) so.addEventListener('change',()=>{ FS.sort=so.value; fApply(true); });
+  if(!window._fcqBound){ window._fcqBound=1; document.addEventListener('input',e=>{ if(e.target&&e.target.id==='fcq') fCompFilter(e.target.value); }); }
+  const res=document.getElementById('fres'); if(res){ res.addEventListener('click',e=>{ const b=e.target.closest('[data-act]'); if(b&&b.dataset.act==='reset'){ fReset(); const q=document.getElementById('fq'); if(q) q.value=''; fApply(); } }); }
+  const pl=document.getElementById('fplay'); if(pl) pl.onclick=()=>{ if(!QUEUE_PREVIEW.length) return; if(!ytReady){ setStatus('プレイヤーを読み込み中です。少し待ってからもう一度。'); return; } QUEUE=QUEUE_PREVIEW.slice(); started=true; $('#overlay').classList.add('hide'); setStatus('絞り込んだ'+QUEUE.length+'曲を連続再生します。'); const i=SONGS.findIndex(s=>s.id===QUEUE[0]); if(cur===i) playSong(i); location.hash='#/song/'+QUEUE[0]; };
+  const rd=document.getElementById('frand'); if(rd) rd.onclick=()=>{ if(!QUEUE_PREVIEW.length) return; const id=QUEUE_PREVIEW[Math.floor(Math.random()*QUEUE_PREVIEW.length)]; location.hash='#/song/'+id; };
 }
 function renderList(mode,val){
-  let title='SELECTION', body='';
-  const idx = s => SONGS.indexOf(s);
-  if (mode==='composer'){ title='COMPOSER — '+val; const l=SONGS.filter(s=>compKey(s.composer)===val); body='<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>'; }
-  else if (mode==='mood'){ title='MOOD — '+val; const l=SONGS.filter(s=>s.mood.includes(val)); body='<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>'; }
-  else {
-    const cats = mode==='cat' ? CATS.filter(c=>c.name===val) : CATS;
-    body = cats.map(c=>{ const l=SONGS.filter(s=>s.cat===c.name);
-      return '<h2 class="cath"><span>'+c.key+'</span> '+c.name+'</h2>' + (l.length ? '<div class="grid">'+l.map(s=>card(s,idx(s))).join('')+'</div>' : '<p class="pend">準備中</p>'); }).join('');
-    if (mode==='cat') title='CATEGORY — '+val;
-  }
-  const comps=[...new Set(SONGS.map(s=>compKey(s.composer)))], moods=[...new Set(SONGS.flatMap(s=>s.mood))];
-  view.innerHTML =
-    '<h2 style="margin-top:0;border-top:0">'+title+'</h2>' + catNav(mode==='cat'?val:null) + body +
-    '<h2>作曲者から探す</h2><div class="chips">'+comps.map(c=>'<a class="chip" href="#/composer/'+encodeURIComponent(c)+'">'+c+'（'+SONGS.filter(s=>compKey(s.composer)===c).length+'）</a>').join('')+'</div>' +
-    '<h2>ムードから探す</h2><div class="chips">'+moods.map(m=>'<a class="chip" href="#/mood/'+encodeURIComponent(m)+'">'+m+'</a>').join('')+'</div>';
+  if(mode==='f') fFromHash(location.hash);
+  else { fReset(); if(mode==='cat') FS.cats.add(val); else if(mode==='composer') FS.comp=val; else if(mode==='mood') FS.moods.add(val); }
+  const wide=window.matchMedia&&matchMedia('(min-width:861px)').matches;
+  const title=mode==='composer'?'COMPOSER — '+val:mode==='mood'?'MOOD — '+val:mode==='cat'?'CATEGORY — '+val:'SELECTION';
+  view.innerHTML=
+   '<h2 style="margin-top:0;border-top:0">'+title+'</h2>'+
+   '<div id="fl" class="fl"><div class="fl-top"><label class="fl-s"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="fq" type="search" placeholder="曲名・作曲者・映画／CM名・ムードで検索（例：月光、ショパン、夜）" aria-label="曲を検索" autocomplete="off" value="'+FS.q.replace(/"/g,'&quot;')+'"></label><button type="button" id="ftog" class="b'+(wide?' on':'')+'" aria-controls="fpanel">絞り込み<span id="fbadge" class="badge"></span></button></div>'+
+   '<div id="fpanel" class="fl-panel'+(wide||fActive()?' open':'')+'">'+fFacets()+'</div>'+
+   '<div class="fl-bar"><span id="fcount" aria-live="polite"></span><span id="fpills" class="pills"></span><span class="sp"></span><label class="fl-sort">並び順 <select id="fsort"><option value="major">メジャー順</option><option value="year">年代順</option><option value="comp">作曲者順</option><option value="title">曲名順</option></select></label><button type="button" id="freset" class="lnkb">リセット</button></div>'+
+   '<div id="fact" class="fl-act"><button type="button" class="b k" id="fplay">&#9654; この条件で連続再生</button><button type="button" class="b" id="frand">&#8635; ランダムに1曲</button></div></div>'+
+   '<div id="fres" class="fres"></div>';
+  document.getElementById('fsort').value=FS.sort;
+  fBind(); fApply(true);
 }
 function recSec(s){
   const r=s.rec; if(!r) return '';
@@ -1322,7 +1491,7 @@ function initReveal(){
 function countUp(){ const n=document.getElementById('heroN'); if(!n||REDUCED) return; const to=SONGS.length; let s=null; const f=ts=>{ if(s===null)s=ts; const p=Math.min(1,(ts-s)/1200); n.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
 (function(){
   const pg=document.getElementById('prog'); if(!pg||!window.addEventListener) return;
-  let tk=false; const up=()=>{ tk=false; const h=document.documentElement; const m=h.scrollHeight-h.clientHeight; pg.style.transform='scaleX('+(m>0?Math.min(1,(window.scrollY||h.scrollTop)/m):0)+')'; const c=document.querySelector('.philo .sq i'); if(c&&c.getBoundingClientRect&&!REDUCED){ const r=c.parentElement.getBoundingClientRect(); const p=(r.top/window.innerHeight)-.5; c.style.transform='translateY('+(p*-26)+'px) scale('+(1+Math.abs(p)*.05)+')'; } };
+  let tk=false; const up=()=>{ tk=false; const h=document.documentElement; const m=h.scrollHeight-h.clientHeight; pg.style.transform='scaleX('+(m>0?Math.min(1,(window.scrollY||h.scrollTop)/m):0)+')';  };
   window.addEventListener('scroll',()=>{ if(!tk){ tk=true; requestAnimationFrame(up); } },{passive:true}); window.addEventListener('resize',up);
 })();
 function route(){
@@ -1336,7 +1505,7 @@ function route(){
     else if (ytReady) setNow(i, false);
   } else {
     const m = location.hash.match(/^#\/(composer|mood|cat)\/(.+)$/);
-    if (m) renderList(m[1], decodeURIComponent(m[2])); else renderList();
+    if (m) renderList(m[1], decodeURIComponent(m[2])); else if (/^#\/\?/.test(location.hash)) renderList('f'); else renderList();
     if (!started && ytReady && cur < 0) setNow(0, false);
   }
   window.scrollTo(0, 0);

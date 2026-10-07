@@ -15,7 +15,7 @@
 - 年表は作曲者の出身国で分類（ベートーヴェンはドイツ、モーツァルト／シューベルトはオーストリア等）。
 
 ## 主要ページ
-- [曲一覧](https://djnaoyaman.github.io/suburbia-classica/songs/index.html): 全74曲
+- [Songs](https://djnaoyaman.github.io/suburbia-classica/songs/index.html): 全74曲
 - [国横断年表](https://djnaoyaman.github.io/suburbia-classica/timeline.html): 作曲年×出身国
 - [このサイトについて](https://djnaoyaman.github.io/suburbia-classica/about.html): 方針・出典の扱い
 - [編者プロフィール](https://djnaoyaman.github.io/suburbia-classica/profile.html): 編者DJ Naoyamanの経歴・名義・関連プロジェクト

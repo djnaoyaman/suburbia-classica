@@ -492,11 +492,11 @@ a.ilink:hover{background-size:100% 2px}
     <div class="art-settings" aria-label="アートの設定">
       <span class="art-label">再生中のアート</span>
       <div class="art-switch" role="group" aria-label="アートのスタイル">
-        <button type="button" data-art-mode="original" aria-pressed="true">オリジナル</button>
-        <button type="button" data-art-mode="realism" aria-pressed="false">リアリズム</button>
+        <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
+        <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
       </div>
       <p class="art-note" id="artNote" role="status"></p>
-      <p class="art-available">リアリズム対応：<a href="#/song/moonlight">月光</a>・<a href="#/song/clair-de-lune">月の光</a>・<a href="#/song/raindrop">雨だれ</a></p>
+      <p class="art-available">全74曲で、曲ごとの情景を楽しめます。</p>
     </div>
     <div class="status" id="status"></div>
   </aside>
@@ -508,8 +508,8 @@ a.ilink:hover{background-size:100% 2px}
   <canvas id="ssPrevious" aria-hidden="true"></canvas>
   <div class="ss-tools" id="ssTools">
     <div class="art-switch" role="group" aria-label="アートのスタイル">
-      <button type="button" data-art-mode="original" aria-pressed="true">オリジナル</button>
-      <button type="button" data-art-mode="realism" aria-pressed="false">リアリズム</button>
+      <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
+      <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
     </div>
     <button type="button" id="ssClose" aria-label="アート表示を閉じる">閉じる ×</button>
     <p id="ssArtNote" class="art-note" role="status"></p>
@@ -525,7 +525,7 @@ a.ilink:hover{background-size:100% 2px}
 </div>
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
-<script src="realism.js?v=20261023"></script>
+<script src="realism.js?v=20261023-all74"></script>
 <script>
 const SONGS = [
 {
@@ -1849,6 +1849,7 @@ function ssArtNote(i,unavailable=false){
   if(artMode==='realism') {
     if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。オリジナルを表示します。';
     else if(unavailable) note='この端末ではリアリズムを利用できないため、オリジナルを表示します。';
+    else if(real.describe) note=real.describe(id);
   }
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;
 }
@@ -1868,7 +1869,7 @@ function ssSet(i){
   SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now();
   const real=window.ClassicaRealism;
   const wantsReal=artMode==='realism'&&real&&real.has(s.id);
-  SS.real=!!(wantsReal&&real.available());
+  SS.real=!!(wantsReal&&real.available(s.id));
   SS.realState=SS.real?real.init(s.id):null;
   ssArtNote(i,wantsReal&&!SS.real);
   ssEl.classList.toggle('light',!SS.real&&!!(a.light||(spec.pal&&spec.pal.light)));

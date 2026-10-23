@@ -462,6 +462,7 @@ a.ilink:hover{background-size:100% 2px}
   window.addEventListener('load',function(){ setTimeout(gaView,0); });
   window.addEventListener('hashchange',function(){ setTimeout(gaView,50); });
 </script>
+<script>(function(){'use strict';if(window.NaoyamanAnalytics)return;var schemas={creator_site_visit:['target_site'],quiz_start:['quiz_mode'],quiz_answer:[],quiz_timeout:[],quiz_complete:[],quiz_restart:[],encyclopedia_expand:[],reading_mode_select:['reading_mode'],encyclopedia_navigate:['content_group'],walk_filter:['filter_group'],video_open:[],video_seek_request:['position_seconds'],catalog_filter:['filter_group'],music_play:['item_id'],music_pause:['item_id'],music_complete:['item_id'],music_filter:['filter_group'],art_display_open:[],share:['method','content_type']};window.NaoyamanAnalytics={track:function(name,values){try{if(location.hostname!=='djnaoyaman.github.io'||typeof window.gtag!=='function'||!schemas[name])return;var p={send_to:'G-FM0LBF65WC',transport_type:'beacon',page_location:location.origin+location.pathname,page_referrer:document.referrer.split(/[?#]/)[0]};schemas[name].forEach(function(k){var v=(values||{})[k];if(typeof v==='number'&&Number.isFinite(v))p[k]=v;else if(typeof v==='string'&&/^[a-zA-Z0-9_-]{1,80}$/.test(v))p[k]=v;});window.gtag('event',name,p);}catch(_){}}};document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-creator-site]');if(a)window.NaoyamanAnalytics.track('creator_site_visit',{target_site:a.dataset.creatorSite});});})();</script>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div><header class="top"><a class="lg" href="#/">SUBURBIA CLASSICA</a><nav aria-label="メインメニュー"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></nav></header>
@@ -1233,6 +1234,7 @@ window.onYouTubeIframeAPIReady = function(){
     events:{
       onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); },
       onStateChange:e=>{
+        if([0,1,2].includes(e.data)&&window.__suburbiaAnalyticsState!==e.data){window.__suburbiaAnalyticsState=e.data;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
         { const b=document.getElementById('bToggle'); if(b&&b.innerHTML!==undefined) b.innerHTML = playing ? '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>' : '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg>'; }
         if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }
@@ -1368,6 +1370,7 @@ function fApply(skipFacets){
 let QUEUE_PREVIEW=[];
 function fCompFilter(v){ const k=fnorm(v); document.querySelectorAll('#fpanel .fcb .fc').forEach(b=>{ b.style.display=(!k||(b.dataset.k||'').indexOf(k)>=0)?'':'none'; }); }
 function fToggle(f,v){
+  window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track('music_filter',{filter_group:f});
   if(f==='comp'){ FS.comp=(FS.comp===v)?'':v; return; }
   const S=FS[f]; if(!S) return; if(S.has(v)) S.delete(v); else S.add(v);
 }
@@ -1422,7 +1425,7 @@ function shareBar(url,title){
    '<button type="button" data-copy="'+url+'" onclick="copyLink(this)">リンクをコピー</button></div>';
 }
 document.addEventListener('DOMContentLoaded',()=>{ try{countUp();}catch(e){} const e=document.getElementById('siteShare'); if(e) e.innerHTML=shareBar(SITE_URL,'SUBURBIA CLASSICA — A Mellow Classical Selection');});
-function copyLink(b){ const v=b.getAttribute('data-copy'); const done=()=>{ b.textContent='コピーしました'; setTimeout(()=>{b.textContent='リンクをコピー'},1800); };
+function copyLink(b){ const v=b.getAttribute('data-copy'); const done=()=>{ window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track('share',{method:'copy',content_type:'music_guide'}); b.textContent='コピーしました'; setTimeout(()=>{b.textContent='リンクをコピー'},1800); };
   try{ navigator.clipboard.writeText(v).then(done,()=>{}); }catch(e){} }
 function renderSong(i){
   const s = SONGS[i], p = SONGS[(i-1+SONGS.length)%SONGS.length], n = SONGS[(i+1)%SONGS.length];
@@ -1888,7 +1891,7 @@ function ssLoop(now){
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
 }
 function ssShow(manual){
-  if(SS.on) return; SS.on=true; SS.manual=!!manual; SS.idle=0;SS.focusBefore=document.activeElement;
+  if(SS.on) return; if(manual){window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track('art_display_open',{});} SS.on=true; SS.manual=!!manual; SS.idle=0;SS.focusBefore=document.activeElement;
   ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;cv.style.opacity=1;$('#ssInfo').style.opacity=1; ssEl.classList.add('on'); ssEl.setAttribute('aria-hidden','false');ssEl.inert=false;
   $('#ssTools [aria-pressed="true"]').focus({preventScroll:true});
   SS.raf=requestAnimationFrame(ssLoop);
@@ -1932,5 +1935,25 @@ if(/[?&]display=1/.test(location.search)) setTimeout(()=>ssShow(true),300);
 
 route();
 </script>
+<!-- CREATOR_SITES_START -->
+<style>#creator-sites-network{box-sizing:border-box;position:relative;clear:both;width:100%;max-width:1120px;margin:32px auto;padding:28px clamp(16px,4vw,36px);background:#f5f3ee;color:#252724;text-align:left;font:400 14px/1.8 system-ui,-apple-system,"Noto Sans JP",sans-serif;letter-spacing:normal;isolation:isolate}#creator-sites-network *{box-sizing:border-box}#creator-sites-network h2{margin:0 0 8px;padding:0;border:0;color:#252724;font:600 20px/1.5 system-ui,sans-serif;letter-spacing:normal}#creator-sites-network p{margin:0;color:#454942;font:400 13px/1.85 system-ui,sans-serif}#creator-sites-network summary{cursor:pointer;min-height:44px;padding:12px 0;color:#252724;font-weight:600}#creator-sites-network ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;list-style:none;margin:0;padding:0}#creator-sites-network li{margin:0;padding:16px 0;border-top:1px solid #cfcec5;min-width:0}#creator-sites-network a{display:inline-block;min-height:32px;max-width:100%;padding:2px 0;color:#1e463e;font:600 15px/1.7 system-ui,sans-serif;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}#creator-sites-network a:focus-visible,#creator-sites-network summary:focus-visible{outline:3px solid #1e655a;outline-offset:4px}#creator-sites-network small{margin-left:8px;color:#5b625b;font:400 11px/1.5 system-ui,sans-serif}@media(max-width:600px){#creator-sites-network ul{grid-template-columns:1fr}}@media print{#creator-sites-network details>ul{display:grid!important}}</style>
+<section id="creator-sites-network" aria-labelledby="creator-sites-heading">
+<h2 id="creator-sites-heading">作者がつくっているサイト</h2>
+<p>宮崎直哉 / DJ Naoyamanが、それぞれの関心を調べ、編集し、公開しているWebサイトです。</p>
+<details><summary>10のサイトを見る</summary><ul>
+<li><a href="https://djnaoyaman.github.io/ppp/" data-creator-site="ppp" target="_blank" rel="noopener noreferrer">掌蹠膿疱症.com ↗</a><p>個人の体験と公開資料をもとに、掌蹠膿疱症の症状や治療の選択肢を整理する情報サイト。</p></li>
+<li><a href="https://djnaoyaman.github.io/youkai/" data-creator-site="youkai" target="_blank" rel="noopener noreferrer">一見坊の【日本妖怪学体系】 ↗</a><p>日本各地の妖怪と伝承を、出典・信頼度・地域のつながりから読み解く妖怪図鑑。</p></li>
+<li><a href="https://djnaoyaman.github.io/sakanamushi/" data-creator-site="sakanamushi" target="_blank" rel="noopener noreferrer">花鳥風月、そして魚と虫。 ↗</a><p>魚・虫・鳥・植物にまつわる漢字を、大きな文字と読み方クイズで楽しむ図鑑。</p></li>
+<li><a href="https://djnaoyaman.github.io/kuranpo/" data-creator-site="kuranpo" target="_blank" rel="noopener noreferrer">鎌・くらんぽ ↗</a><p>鎌倉の社寺と歴史を、出発点から解散点までの散歩コースで案内する街歩きガイド。</p></li>
+<li><a href="https://djnaoyaman.github.io/chems/" data-creator-site="chems" target="_blank" rel="noopener noreferrer">my Chems ↗</a><p>The Chemical Brothersの作品・人物・歴史を、出典つきの記録と私見でたどる日英の非公式アーカイブ。</p></li>
+<li><a href="https://djnaoyaman.github.io/suburbia-classica/" data-creator-site="suburbia-classica" target="_blank" rel="noopener noreferrer">SUBURBIA CLASSICA ↗</a><small>このサイト</small><p>クラシックの名曲を、制作背景・構成・録音エピソードとともに聴く音楽ガイド。</p></li>
+<li><a href="https://djnaoyaman.github.io/cratediggin/" data-creator-site="cratediggin" target="_blank" rel="noopener noreferrer">CRATE DIGGIN’ ↗</a><p>Hip Hopの楽曲からサンプル、プロデューサー、街や時代をたどる音楽アーカイブ。</p></li>
+<li><a href="https://djnaoyaman.github.io/sanreikotaiyoku/" data-creator-site="sanreikotaiyoku" target="_blank" rel="noopener noreferrer">酸冷交代浴のススメ ↗</a><p>炭酸泉と水風呂の楽しみ方を、体験・施設情報・文献から編集する入浴ガイド。</p></li>
+<li><a href="https://djnaoyaman.github.io/gooooooooood_expression/" data-creator-site="gooooooooood_expression" target="_blank" rel="noopener noreferrer">gooooooooood* expression ↗</a><p>Webの動き・文字・音・インタラクションを、実例と解説から学び、試せる表現図鑑。</p></li>
+<li><a href="https://djnaoyaman.github.io/bookkeeping/" data-creator-site="bookkeeping" target="_blank" rel="noopener noreferrer">Book Keeping ↗</a><p>日商簿記・全経簿記・USCPAの仕訳や計算を反復演習し、学習記録と復習につなげる学習サイト。</p></li>
+</ul></details></section>
+<script>(function(){'use strict';if(window.NaoyamanAnalytics)return;var schemas={creator_site_visit:['target_site'],quiz_start:['quiz_mode'],quiz_answer:[],quiz_timeout:[],quiz_complete:[],quiz_restart:[],encyclopedia_expand:[],reading_mode_select:['reading_mode'],encyclopedia_navigate:['content_group'],walk_filter:['filter_group'],video_open:[],video_seek_request:['position_seconds'],catalog_filter:['filter_group'],music_play:['item_id'],music_pause:['item_id'],music_complete:['item_id'],music_filter:['filter_group'],art_display_open:[],share:['method','content_type']};window.NaoyamanAnalytics={track:function(name,values){try{if(location.hostname!=='djnaoyaman.github.io'||typeof window.gtag!=='function'||!schemas[name])return;var p={send_to:'G-FM0LBF65WC',transport_type:'beacon',page_location:location.origin+location.pathname,page_referrer:document.referrer.split(/[?#]/)[0]};schemas[name].forEach(function(k){var v=(values||{})[k];if(typeof v==='number'&&Number.isFinite(v))p[k]=v;else if(typeof v==='string'&&/^[a-zA-Z0-9_-]{1,80}$/.test(v))p[k]=v;});window.gtag('event',name,p);}catch(_){}}};document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-creator-site]');if(a)window.NaoyamanAnalytics.track('creator_site_visit',{target_site:a.dataset.creatorSite});});})();</script>
+<!-- CREATOR_SITES_END -->
 </body>
 </html>
+

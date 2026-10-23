@@ -1234,7 +1234,7 @@ window.onYouTubeIframeAPIReady = function(){
     events:{
       onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); },
       onStateChange:e=>{
-        if([0,1,2].includes(e.data)&&window.__suburbiaAnalyticsState!==e.data){window.__suburbiaAnalyticsState=e.data;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
+        if([0,1,2].includes(e.data)&&(window.__suburbiaAnalyticsState!==e.data||window.__suburbiaAnalyticsItem!==SONGS[cur]?.id)){window.__suburbiaAnalyticsState=e.data;window.__suburbiaAnalyticsItem=SONGS[cur]?.id;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
         { const b=document.getElementById('bToggle'); if(b&&b.innerHTML!==undefined) b.innerHTML = playing ? '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>' : '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg>'; }
         if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }

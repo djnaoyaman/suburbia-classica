@@ -5,6 +5,10 @@
   'use strict';
   const fallback=window.ClassicaRealism;
   const catalog={
+    'nocturne-9-2':{src:'assets/realism/nocturne-9-2.webp',effect:'water',waterStart:.56,description:'夜の湖畔に映る街の灯 — 写真アートと水面のループ演出'},
+    'raindrop':{src:'assets/realism/raindrop.webp',effect:'rain',description:'雨粒が水面に残す波紋 — 写真アートと波紋のループ演出'},
+    'clair-de-lune':{src:'assets/realism/clair-de-lune.webp',effect:'water',waterStart:.52,description:'薄雲を透かす月と水面 — 写真アートと水面のループ演出'},
+    'gymnopedie-1':{src:'assets/realism/gymnopedie-1.webp',effect:'light',description:'石壁に落ちる静かな午後の光 — 写真アートと光のループ演出'},
     'fur-elise':{src:'assets/realism/fur-elise.webp',effect:'light',description:'窓辺の手紙と一輪の花 — 写真アートと光のループ演出'},
     'moonlight':{src:'assets/realism/moonlight.webp',effect:'water',description:'月明かりの湖 — 写真アートと水面のループ演出'},
     'tristesse':{src:'assets/realism/tristesse.webp',effect:'mist',description:'夕暮れの湖 — 写真アートと霞のループ演出'},
@@ -50,6 +54,14 @@
       const light=c.createRadialGradient(cx,cy,0,cx,cy,iw*.7);
       light.addColorStop(0,warm?'rgba(255,231,184,.10)':'rgba(245,218,191,.07)');light.addColorStop(1,'rgba(255,255,255,0)');
       c.fillStyle=light;c.fillRect(x,y,iw,ih);
+    }else if(spec.effect==='rain'){
+      // Light-only concentric ripples, without deforming the photographed drop.
+      for(let k=0;k<3;k++){
+        const p=((t%18)/6+k/3)%1;
+        c.strokeStyle=`rgba(219,236,245,${.08*Math.sin(Math.PI*p)**2})`;
+        c.lineWidth=Math.max(1,ih*.001);c.beginPath();
+        c.ellipse(x+iw*.5,y+ih*.44,iw*(.10+p*.25),ih*(.025+p*.06),0,0,Math.PI*2);c.stroke();
+      }
     }else{
       // Subtle glints over water; source objects are never warped or cropped.
       const waterStart=spec.waterStart||.53;

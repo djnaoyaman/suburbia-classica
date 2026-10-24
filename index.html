@@ -118,9 +118,9 @@ footer{max-width:1200px;margin:0 auto;padding:8px 24px 40px;color:var(--sub);fon
 .opts label{font-size:12px;color:var(--sub);display:flex;gap:6px;align-items:center;cursor:pointer}
 /* ---- screensaver / display mode ---- */
 #ss{position:fixed;inset:0;z-index:100;background:#000;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s linear 1.2s;color:#f3ece0}
-#ss.on{opacity:1;visibility:visible;transition:opacity 1.2s ease;cursor:none}
+#ss.on{opacity:1;visibility:visible;transition:opacity 1.2s ease;cursor:auto}
 #ss.light{color:#2b2622}
-#ssc{position:absolute;inset:0;width:100%;height:100%;transition:opacity .8s ease}
+#ssc{pointer-events:none;position:absolute;inset:0;width:100%;height:100%;transition:opacity .8s ease}
 #ss .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.38) 100%)}
 #ss.light .vig{background:radial-gradient(ellipse at center,transparent 60%,rgba(60,40,20,.18) 100%)}
 #ss .brand{position:absolute;top:36px;left:44px;font-family:var(--en);font-weight:500;letter-spacing:.42em;font-size:13px;opacity:.7}
@@ -465,6 +465,20 @@ a.ilink:hover{background-size:100% 2px}
 @media(max-height:480px){#ss .brand{top:20px;left:20px;font-size:9px}#ss .info{bottom:max(16px,env(safe-area-inset-bottom));left:20px;max-width:50vw}#ss .info .tj{font-size:18px}#ss .info .te{font-size:12px}#ss .info .np{margin-bottom:4px}#ss .info .tc{margin-top:6px}#ssArtNote{max-width:220px}}
 @media(prefers-reduced-motion:reduce){#ss,#ssPrevious{transition:none}}
 
+
+/* One four-action transport, shared by the normal and fullscreen players. */
+.transport{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:5px;border:1px solid rgba(217,179,130,.45);border-radius:999px;background:rgba(16,20,23,.9);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.transport button,#ss .ss-playback button{display:inline-flex;align-items:center;justify-content:center;min-width:46px;width:46px;height:46px;min-height:46px;padding:0;border:0;border-radius:50%;color:#f3ece0;background:transparent}
+.transport button:hover,#ss .ss-playback button:hover{background:rgba(217,179,130,.16);color:#f5d4a9}
+.transport button:disabled,#ss .ss-playback button:disabled{opacity:.45;cursor:default}
+.transport button[aria-pressed="true"],#ss .ss-playback button[aria-pressed="true"]{background:#d9b382;color:#171b1e;opacity:1}
+.transport .ic{width:20px;height:20px;fill:currentColor;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#ss .ss-playback{display:inline-flex;flex-wrap:nowrap;gap:4px}
+#ss .ss-return{display:block;margin:8px 0 0 auto;min-height:44px;padding:6px 12px;font-size:11px;color:inherit;border-color:rgba(255,255,255,.35);background:rgba(16,20,23,.6)}
+#ss .ss-tools{min-width:220px}
+@media(max-width:700px){#ss .ss-tools{left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));width:auto;text-align:center}#ss .ss-return{margin:6px auto 0}#ssPlaybackStatus{margin:4px 0 6px}#ssArtNote{margin-left:auto;margin-right:auto}#ss .brand{top:max(260px,calc(env(safe-area-inset-top) + 244px))}}
+@media(max-height:480px){#ss .ss-tools{left:auto;max-width:300px;text-align:right}#ss .ss-return{margin-left:auto;margin-right:0}#ss .brand{top:20px}}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -496,9 +510,7 @@ a.ilink:hover{background-size:100% 2px}
       <div class="c" id="nowSub"></div>
     </div>
     <div class="ctrl">
-      <button id="bPrev" title="前の曲" aria-label="前の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4.5" y="5" width="2.6" height="14" rx="1.1"/><path d="M19 5.6v12.8c0 .8-.9 1.3-1.6.8l-8.6-6.4a1 1 0 0 1 0-1.6l8.6-6.4c.7-.5 1.6 0 1.6.8z"/></svg></button>
-      <button id="bToggle" title="再生/一時停止" aria-label="再生/一時停止"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg></button>
-      <button id="bNext" title="次の曲" aria-label="次の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="16.9" y="5" width="2.6" height="14" rx="1.1"/><path d="M5 5.6v12.8c0 .8.9 1.3 1.6.8l8.6-6.4a1 1 0 0 0 0-1.6L6.6 4.8C5.9 4.3 5 4.8 5 5.6z"/></svg></button>
+      <div class="transport" role="group" aria-label="音楽の再生操作"><button type="button" id="bPrev" title="前の曲" aria-label="前の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5v14M19 5.5 9 12l10 6.5z"/></svg></button><button type="button" id="bStop" title="停止" aria-label="停止"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg></button><button type="button" id="bToggle" title="再生" aria-label="再生" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7z"/></svg></button><button type="button" id="bNext" title="次の曲" aria-label="次の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 5v14M5 5.5 15 12 5 18.5z"/></svg></button></div>
       <button id="bShow" title="ディスプレイ表示（全画面）"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> 全画面</button>
       <div class="opts">
         <label><input type="checkbox" id="auto" checked>自動で次の曲へ</label>
@@ -523,13 +535,8 @@ a.ilink:hover{background-size:100% 2px}
   <canvas id="ssc" aria-hidden="true"></canvas>
   <canvas id="ssPrevious" aria-hidden="true"></canvas>
   <div class="ss-tools" id="ssTools">
-    <div class="ss-playback" role="group" aria-label="全画面の再生操作">
-      <button type="button" id="ssPrev">前の曲</button>
-      <button type="button" id="ssPlay" disabled>再生</button>
-      <button type="button" id="ssStop" title="音楽と動きをその位置で停止。再生で続きから再開します。">停止</button>
-      <button type="button" id="ssNext">次の曲</button>
-      <button type="button" id="ssBack" aria-label="曲画面に戻る">戻る</button>
-    </div>
+    <div class="ss-playback transport" role="group" aria-label="全画面の再生操作"><button type="button" id="ssPrev" title="前の曲" aria-label="前の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5v14M19 5.5 9 12l10 6.5z"/></svg></button><button type="button" id="ssStop" title="停止" aria-label="停止"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg></button><button type="button" id="ssPlay" title="再生" aria-label="再生" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7z"/></svg></button><button type="button" id="ssNext" title="次の曲" aria-label="次の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 5v14M5 5.5 15 12 5 18.5z"/></svg></button></div>
+    <button type="button" id="ssBack" class="ss-return">曲画面に戻る</button>
     <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
       <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
@@ -1261,7 +1268,6 @@ window.onYouTubeIframeAPIReady = function(){
         if([0,1,2].includes(e.data)&&(window.__suburbiaAnalyticsState!==e.data||window.__suburbiaAnalyticsItem!==SONGS[cur]?.id)){window.__suburbiaAnalyticsState=e.data;window.__suburbiaAnalyticsItem=SONGS[cur]?.id;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
         ssSetMotionPlaying(playing);
-        { const b=document.getElementById('bToggle'); if(b&&b.innerHTML!==undefined) b.innerHTML = playing ? '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>' : '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg>'; }
         if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }
         if (e.data === 1) { errCount = 0; setStatus(''); }
       },
@@ -1621,14 +1627,10 @@ $('#overlay').onclick = () => {
   const i = currentViewIdx();
   if (i >= 0) playSong(i); else { go(0); }
 };
-$('#bPrev').onclick = () => go((cur < 0 ? 0 : cur) - 1);
-$('#bNext').onclick = () => go((cur < 0 ? 0 : cur) + 1);
-$('#bToggle').onclick = () => {
-  if (!ytReady) return;
-  if (!started) { $('#overlay').click(); return; }
-  const st = player.getPlayerState();
-  if (st === 1) player.pauseVideo(); else player.playVideo();
-};
+$('#bPrev').onclick = () => ssStep(-1);
+$('#bNext').onclick = () => ssStep(1);
+$('#bToggle').onclick = ssPlay;
+$('#bStop').onclick = ssStop;
 
 /* ================= スクリーンセーバー（楽曲ごとのジェネラティブ・アート） ================= */
 function mk(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -1918,9 +1920,8 @@ function ssLoop(now){
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
 }
 function ssSyncPlayback(){
-  const play=$('#ssPlay'), stop=$('#ssStop');
-  play.disabled=!ytReady||playing;
-  stop.disabled=!started&&!playing&&SS.paused;
+  ['#ssPlay','#bToggle'].forEach(id=>{const b=$(id);b.disabled=!ytReady||playing;b.setAttribute('aria-pressed',String(playing));});
+  ['#ssStop','#bStop'].forEach(id=>{$(id).disabled=!started&&!playing&&SS.paused;});
   $('#ssPlaybackStatus').textContent=!ytReady?'音楽プレイヤーを読み込み中':playing?'再生中':'停止中 — 再生で続きから';
 }
 function ssSetMotionPlaying(active){
@@ -1964,7 +1965,7 @@ function ssSwap(i){ // 曲が変わったらアートをクロスフェード
   clearTimeout(SS.sw);ssFreezeFrame();ssSet(i);SS.lastFrame=0;
   if(REDUCED) ssLoop(performance.now());
 }
-ssSyncMode();
+ssSyncMode();ssSyncPlayback();
 document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('click',()=>{
   if(artMode===b.dataset.artMode)return;
   artMode=b.dataset.artMode;
@@ -1980,18 +1981,21 @@ $('#ssPrev').addEventListener('click',()=>ssStep(-1));
 $('#ssNext').addEventListener('click',()=>ssStep(1));
 $('#ssPlay').addEventListener('click',ssPlay);
 $('#ssStop').addEventListener('click',ssStop);
-// Keep style controls usable in automatic and manual display modes.
-['mousedown','touchstart','wheel','keydown','mousemove'].forEach(ev=>$('#ssTools').addEventListener(ev,e=>{
-  e.stopPropagation();if(ev==='keydown'&&e.key==='Escape')ssHide();
-}));
-let lx=-1,ly=-1;
-addEventListener('mousemove',e=>{
-  if(SS.on){ if(!SS.manual && lx>=0 && Math.hypot(e.clientX-lx,e.clientY-ly)>8) ssHide(); }
-  else SS.idle=0;
-  if(lx<0||!SS.on){lx=e.clientX;ly=e.clientY;}
+// Fullscreen is interactive: background input never dismisses the player.
+function ssTrapFocus(e){
+  const buttons=Array.from($('#ssTools').querySelectorAll('button:not([disabled])'));
+  if(!buttons.length)return;
+  const first=buttons[0],last=buttons[buttons.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+}
+['mousedown','touchstart','wheel','mousemove'].forEach(ev=>$('#ssTools').addEventListener(ev,e=>{e.stopPropagation();SS.idle=0;}));
+$('#ssTools').addEventListener('keydown',e=>{
+  e.stopPropagation();if(e.key==='Escape')ssHide();else if(e.key==='Tab')ssTrapFocus(e);
 });
-['mousedown','touchstart','wheel'].forEach(ev=>addEventListener(ev,()=>{ if(SS.on) ssHide(); else SS.idle=0; },{passive:true}));
-addEventListener('keydown',()=>{ if(SS.on) ssHide(); else SS.idle=0; });
+let lx=-1,ly=-1;
+['mousemove','mousedown','touchstart','wheel'].forEach(ev=>addEventListener(ev,()=>{SS.idle=0;},{passive:true}));
+addEventListener('keydown',e=>{SS.idle=0;if(SS.on&&e.key==='Escape')ssHide();else if(SS.on&&e.key==='Tab')ssTrapFocus(e);});
 document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement && SS.on && SS.manual) ssHide(); });
 addEventListener('resize',()=>{ if(SS.on){ ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;if(REDUCED)ssLoop(performance.now()); } });
 $('#bShow').onclick=()=>{ lx=-1; ssShow(true); };

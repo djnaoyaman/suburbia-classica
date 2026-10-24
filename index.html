@@ -450,6 +450,21 @@ a.ilink:hover{background-size:100% 2px}
 #ss.light #ssArtNote{text-shadow:none}
 @media(max-width:700px){#ss .brand{top:100px;left:24px;font-size:10px}#ss .ss-tools{top:16px;right:16px}#ss .info{max-width:calc(100vw - 48px)}}
 
+
+/* Fullscreen controls: audio and artwork share a pause/resume clock. */
+#ss .ss-tools{top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));max-width:calc(100vw - 32px);width:max-content}
+#ss .ss-playback{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+#ss .ss-playback button{min-width:64px;min-height:44px;background:rgba(7,14,22,.82);color:#fff;border:1px solid rgba(255,255,255,.55);padding:8px 16px}
+#ss .ss-playback button:disabled{opacity:.55;cursor:default}
+#ss button:focus-visible{outline:3px solid #ffbd70;outline-offset:3px}
+#ssPlaybackStatus{font-size:11px;line-height:1.5;margin:6px 0 8px;text-shadow:0 1px 5px #000}
+#ss.light #ssPlaybackStatus{text-shadow:none}
+#ssClose,#ss .art-switch button{min-height:44px}
+#ss .info{bottom:max(32px,calc(env(safe-area-inset-bottom) + 20px))}
+@media(max-width:700px){#ss .brand{top:max(190px,calc(env(safe-area-inset-top) + 174px))}}
+@media(max-height:480px){#ss .brand{top:20px;left:20px;font-size:9px}#ss .info{bottom:max(16px,env(safe-area-inset-bottom));left:20px;max-width:50vw}#ss .info .tj{font-size:18px}#ss .info .te{font-size:12px}#ss .info .np{margin-bottom:4px}#ss .info .tc{margin-top:6px}#ssArtNote{max-width:220px}}
+@media(prefers-reduced-motion:reduce){#ss,#ssPrevious{transition:none}}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -508,6 +523,12 @@ a.ilink:hover{background-size:100% 2px}
   <canvas id="ssc" aria-hidden="true"></canvas>
   <canvas id="ssPrevious" aria-hidden="true"></canvas>
   <div class="ss-tools" id="ssTools">
+    <div class="ss-playback" role="group" aria-label="全画面の再生操作">
+      <button type="button" id="ssPlay" disabled>再生</button>
+      <button type="button" id="ssStop" title="音楽と動きをその位置で停止。再生で続きから再開します。">停止</button>
+      <button type="button" id="ssBack">戻る</button>
+    </div>
+    <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
       <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
       <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
@@ -1232,10 +1253,11 @@ window.onYouTubeIframeAPIReady = function(){
     width:'100%', height:'100%', videoId:first.yt.id,
     playerVars:{playsinline:1, rel:0, modestbranding:1},
     events:{
-      onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); },
+      onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); ssSyncPlayback(); },
       onStateChange:e=>{
         if([0,1,2].includes(e.data)&&(window.__suburbiaAnalyticsState!==e.data||window.__suburbiaAnalyticsItem!==SONGS[cur]?.id)){window.__suburbiaAnalyticsState=e.data;window.__suburbiaAnalyticsItem=SONGS[cur]?.id;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
+        ssSetMotionPlaying(playing);
         { const b=document.getElementById('bToggle'); if(b&&b.innerHTML!==undefined) b.innerHTML = playing ? '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>' : '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg>'; }
         if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }
         if (e.data === 1) { errCount = 0; setStatus(''); }
@@ -1842,7 +1864,7 @@ const ARTS = {
 
 let artMode='original';
 try { if(localStorage.getItem('suburbia-art-mode')==='realism') artMode='realism'; } catch {}
-const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, W:0, H:0, idle:0, sw:0};
+const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, elapsed:0, paused:true, W:0, H:0, idle:0, sw:0};
 const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
 function ssResize(){const d=Math.min(window.devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;}
 function ssArtIndex(){return cur>=0?cur:Math.max(0,currentViewIdx());}
@@ -1869,7 +1891,7 @@ function ssFreezeFrame(){
 function ssSet(i){
   const s=SONGS[i], spec=ART_BY_ID[s.id]||'bokeh', name=typeof spec==='string'?spec:spec.art, a=ARTS[name]; SS.art=a;
   cx.globalCompositeOperation='source-over';cx.globalAlpha=1;cx.clearRect(0,0,SS.W,SS.H);
-  SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now();
+  SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
   const real=window.ClassicaRealism;
   const wantsReal=artMode==='realism'&&real&&real.has(s.id);
   SS.real=!!(wantsReal&&real.available(s.id));
@@ -1880,9 +1902,9 @@ function ssSet(i){
 }
 function ssLoop(now){
   if(!SS.on) return;
-  if(!SS.real||!SS.lastFrame||now-SS.lastFrame>=32){
-    SS.lastFrame=now;
-    const t=REDUCED?12:(now-SS.t0)/1000;
+  if((SS.dirty||!SS.paused)&&(!SS.real||!SS.lastFrame||now-SS.lastFrame>=32)){
+    SS.lastFrame=now;SS.dirty=false;
+    const t=REDUCED?12:(SS.elapsed+(SS.paused?0:now-SS.t0))/1000;
     if(SS.real&&!window.ClassicaRealism.draw(cx,SS.W,SS.H,t,SS.realState)){
       SS.real=false;ssArtNote(ssArtIndex(),true);
     }
@@ -1890,10 +1912,33 @@ function ssLoop(now){
   }
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
 }
+function ssSyncPlayback(){
+  const play=$('#ssPlay'), stop=$('#ssStop');
+  play.disabled=!ytReady||playing;
+  stop.disabled=!started&&!playing&&SS.paused;
+  $('#ssPlaybackStatus').textContent=!ytReady?'音楽プレイヤーを読み込み中':playing?'再生中':'停止中 — 再生で続きから';
+}
+function ssSetMotionPlaying(active){
+  const now=performance.now();
+  if(active&&SS.paused){SS.t0=now;SS.paused=false;}
+  else if(!active&&!SS.paused){SS.elapsed+=now-SS.t0;SS.paused=true;}
+  ssSyncPlayback();
+}
+function ssPlay(){
+  if(!ytReady)return;
+  if(!started){$('#overlay').click();return;}
+  player.playVideo(); // Animation resumes when YouTube confirms playback.
+}
+function ssStop(){
+  if(ytReady&&player)player.pauseVideo();
+  playing=false;
+  ssSetMotionPlaying(false); // Freeze immediately, including during buffering.
+}
 function ssShow(manual){
   if(SS.on) return; if(manual){window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track('art_display_open',{});} SS.on=true; SS.manual=!!manual; SS.idle=0;SS.focusBefore=document.activeElement;
   ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;cv.style.opacity=1;$('#ssInfo').style.opacity=1; ssEl.classList.add('on'); ssEl.setAttribute('aria-hidden','false');ssEl.inert=false;
-  $('#ssTools [aria-pressed="true"]').focus({preventScroll:true});
+  ssSyncPlayback();
+  $('#ssBack').focus({preventScroll:true});
   SS.raf=requestAnimationFrame(ssLoop);
   if(manual && ssEl.requestFullscreen) ssEl.requestFullscreen().catch(()=>{});
 }
@@ -1915,6 +1960,9 @@ document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('clic
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
 $('#ssClose').addEventListener('click',ssHide);
+$('#ssBack').addEventListener('click',ssHide);
+$('#ssPlay').addEventListener('click',ssPlay);
+$('#ssStop').addEventListener('click',ssStop);
 // Keep style controls usable in automatic and manual display modes.
 ['mousedown','touchstart','wheel','keydown','mousemove'].forEach(ev=>$('#ssTools').addEventListener(ev,e=>{
   e.stopPropagation();if(ev==='keydown'&&e.key==='Escape')ssHide();

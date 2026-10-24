@@ -39,7 +39,7 @@ vec3 sky(vec3 r){
   col+=lamp*exp(-d*7.0)*(scene==1.0?0.11:0.34);
   col=mix(col,lamp*(scene==1.0?1.15:1.65),(1.0-smoothstep(0.024,0.028,d))*(1.0-veil*0.8));
   // Tree canopy reflection is generated from spatial density, not an image overlay.
-  if(scene==0.0||scene==3.0){
+  if(scene==3.0){
     float leaf=fbm(r.xz*5.0+vec2(sin(ph)*0.04,cos(ph)*0.07));
     float canopy=smoothstep(0.43,0.61,leaf)*smoothstep(0.15,0.7,abs(r.x));
     col=mix(col,vec3(0.035,0.085,0.035),canopy*0.94);

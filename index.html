@@ -586,6 +586,10 @@ a.ilink:hover{background-size:100% 2px}
 <script src="realism-context.js?v=20261024-shared01"></script>
 <script src="realism-nature.js?v=20261024-shared01"></script>
 <script src="realism-nature-next.js?v=20261024-shared01"></script>
+<script src="realism-nature-seed.js?v=20261024-material01"></script>
+<script src="realism-nature-flame.js?v=20261024-material01"></script>
+<script src="realism-nature-grass.js?v=20261024-material01"></script>
+<script src="realism-nature-film.js?v=20261024-material01"></script>
 <script>
 const SONGS = [
 {
@@ -2046,6 +2050,11 @@ document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('clic
   try{localStorage.setItem('suburbia-art-mode',artMode);}catch{}
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
+addEventListener('classica-nature-ready',event=>{
+  if(!SS.on||artMode!=='realism'||!SS.real||event.detail?.id!==SONGS[ssArtIndex()].id)return;
+  SS.dirty=true;SS.lastFrame=0;
+  if(REDUCED)ssLoop(performance.now());
+});
 addEventListener('classica-art-ready',()=>{
   if(SS.on&&SS.real){SS.dirty=true;SS.lastFrame=0;if(REDUCED)ssLoop(performance.now());}
 });

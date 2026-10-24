@@ -1625,7 +1625,8 @@ $('#overlay').onclick = () => {
   started = true;
   $('#overlay').classList.add('hide');
   const i = currentViewIdx();
-  if (i >= 0) playSong(i); else { go(0); }
+  playSong(i >= 0 ? i : 0); // Start within the user gesture, even when the first song is already cued.
+  if(i < 0)go(0);
 };
 $('#bPrev').onclick = () => ssStep(-1);
 $('#bNext').onclick = () => ssStep(1);

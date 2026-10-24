@@ -461,7 +461,7 @@ a.ilink:hover{background-size:100% 2px}
 #ss.light #ssPlaybackStatus{text-shadow:none}
 #ssClose,#ss .art-switch button{min-height:44px}
 #ss .info{bottom:max(32px,calc(env(safe-area-inset-bottom) + 20px))}
-@media(max-width:700px){#ss .brand{top:max(190px,calc(env(safe-area-inset-top) + 174px))}}
+@media(max-width:700px){#ss .brand{top:max(238px,calc(env(safe-area-inset-top) + 222px))}}
 @media(max-height:480px){#ss .brand{top:20px;left:20px;font-size:9px}#ss .info{bottom:max(16px,env(safe-area-inset-bottom));left:20px;max-width:50vw}#ss .info .tj{font-size:18px}#ss .info .te{font-size:12px}#ss .info .np{margin-bottom:4px}#ss .info .tc{margin-top:6px}#ssArtNote{max-width:220px}}
 @media(prefers-reduced-motion:reduce){#ss,#ssPrevious{transition:none}}
 
@@ -524,9 +524,11 @@ a.ilink:hover{background-size:100% 2px}
   <canvas id="ssPrevious" aria-hidden="true"></canvas>
   <div class="ss-tools" id="ssTools">
     <div class="ss-playback" role="group" aria-label="全画面の再生操作">
+      <button type="button" id="ssPrev">前の曲</button>
       <button type="button" id="ssPlay" disabled>再生</button>
       <button type="button" id="ssStop" title="音楽と動きをその位置で停止。再生で続きから再開します。">停止</button>
-      <button type="button" id="ssBack">戻る</button>
+      <button type="button" id="ssNext">次の曲</button>
+      <button type="button" id="ssBack" aria-label="曲画面に戻る">戻る</button>
     </div>
     <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
@@ -1285,11 +1287,13 @@ function setNow(i, play){
 }
 function playSong(i){ setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
 let QUEUE=null;
-function go(i){
+function queueIndex(i){
   let n = (i + SONGS.length) % SONGS.length;
   if (QUEUE && QUEUE.length && cur >= 0) { const d = i - cur; if (d === 1 || d === -1) { const pos = QUEUE.indexOf(SONGS[cur].id); if (pos >= 0) n = SONGS.findIndex(s=>s.id === QUEUE[(pos + d + QUEUE.length) % QUEUE.length]); } }
-  location.hash = '#/song/' + SONGS[n].id;
+  return n;
 }
+function go(i){location.hash = '#/song/' + SONGS[queueIndex(i)].id;}
+
 function currentViewIdx(){
   const m = location.hash.match(/^#\/song\/(.+)$/);
   return m ? SONGS.findIndex(s=>s.id === m[1]) : -1;
@@ -1925,6 +1929,13 @@ function ssSetMotionPlaying(active){
   else if(!active&&!SS.paused){SS.elapsed+=now-SS.t0;SS.paused=true;}
   ssSyncPlayback();
 }
+function ssStep(delta){
+  const from=cur>=0?cur:Math.max(0,currentViewIdx());
+  const n=queueIndex(from+delta),resume=playing;
+  setNow(n,resume); // Synchronous selection makes rapid next/previous clicks deterministic.
+  location.hash='#/song/'+SONGS[n].id;
+  ssSyncPlayback(); // A paused player cues the next song without starting it.
+}
 function ssPlay(){
   if(!ytReady)return;
   if(!started){$('#overlay').click();ssSyncPlayback();return;}
@@ -1961,10 +1972,12 @@ document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('clic
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
 addEventListener('classica-art-ready',()=>{
-  if(SS.on){SS.dirty=true;SS.lastFrame=0;if(REDUCED)ssLoop(performance.now());}
+  if(SS.on&&SS.real){SS.dirty=true;SS.lastFrame=0;if(REDUCED)ssLoop(performance.now());}
 });
 $('#ssClose').addEventListener('click',ssHide);
 $('#ssBack').addEventListener('click',ssHide);
+$('#ssPrev').addEventListener('click',()=>ssStep(-1));
+$('#ssNext').addEventListener('click',()=>ssStep(1));
 $('#ssPlay').addEventListener('click',ssPlay);
 $('#ssStop').addEventListener('click',ssStop);
 // Keep style controls usable in automatic and manual display modes.

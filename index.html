@@ -1961,7 +1961,7 @@ document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('clic
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
 addEventListener('classica-art-ready',()=>{
-  if(SS.on){SS.dirty=true;SS.lastFrame=0;if(REDUCED)ssLoop(performance.now());}
+  if(SS.on&&SS.real){SS.dirty=true;SS.lastFrame=0;if(REDUCED)ssLoop(performance.now());}
 });
 $('#ssClose').addEventListener('click',ssHide);
 $('#ssBack').addEventListener('click',ssHide);

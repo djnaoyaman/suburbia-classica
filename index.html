@@ -491,12 +491,17 @@ a.ilink:hover{background-size:100% 2px}
 #ss.touch-ui #ssArtNote{position:absolute;top:calc(max(12px,env(safe-area-inset-top)) + 48px);left:16px;right:16px;max-width:none;margin:0;font-size:10px;line-height:1.4;text-align:center;pointer-events:none}
 #ss.touch-ui .brand{top:calc(max(12px,env(safe-area-inset-top)) + 88px);left:20px;font-size:9px;transition:opacity .2s}
 #ss.touch-ui .info{left:20px;right:20px;max-width:none;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 130px);pointer-events:none;transition:opacity .2s}
-#ss.touch-ui .info .tj{font-size:clamp(18px,5vw,25px);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-#ss.touch-ui .info .np,#ss.touch-ui .info .te,#ss.touch-ui .info .tc{display:none}
-#ss.touch-ui.ui-hidden .ss-tools{opacity:0;visibility:hidden;pointer-events:none}
-#ss.touch-ui.ui-hidden .ss-tools *{pointer-events:none}
-#ss.touch-ui.ui-hidden .brand,#ss.touch-ui.ui-hidden .info{opacity:0!important}
-@media(max-height:480px){#ss.touch-ui .brand{display:none}#ss.touch-ui .info{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 126px)}#ss.touch-ui .info .tj{font-size:16px;-webkit-line-clamp:1}}
+#ss.touch-ui .info .tj{font-size:clamp(18px,5vw,25px);line-height:1.3;overflow-wrap:anywhere}
+#ss.touch-ui .info .np{font-size:9px;margin-bottom:5px}
+#ss.touch-ui .info .te{font-size:13px;line-height:1.4;margin-top:3px}
+#ss.touch-ui .info .tc{font-size:11px;line-height:1.5;letter-spacing:.06em;margin-top:7px}
+.ss-mobile-details{display:none}
+#ss.touch-ui .ss-mobile-details{display:block;font-size:11px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+#ss.touch-ui.ui-hidden .ss-playback,#ss.touch-ui.ui-hidden .ss-return,#ss.touch-ui.ui-hidden .art-switch,#ss.touch-ui.ui-hidden #ssClose{opacity:0;visibility:hidden;pointer-events:none}
+#ss.touch-ui.ui-hidden .ss-tools button{pointer-events:none}
+#ss.touch-ui .info{opacity:1!important;max-height:calc(100dvh - 250px);overflow:auto;pointer-events:auto}
+#ss.touch-ui.ui-hidden .info{bottom:max(20px,env(safe-area-inset-bottom));max-height:calc(100dvh - 120px)}
+@media(max-height:480px){#ss.touch-ui .brand{display:none}#ss.touch-ui .info,#ss.touch-ui.ui-hidden .info{left:16px;right:auto;width:calc(50vw - 140px);min-width:180px;bottom:max(16px,env(safe-area-inset-bottom));max-height:calc(100dvh - 96px)}#ss.touch-ui .info .tj{font-size:16px}#ss.touch-ui .info .te{font-size:11px}}
 @media(prefers-reduced-motion:reduce){#ss.touch-ui .ss-tools,#ss.touch-ui .brand,#ss.touch-ui .info{transition:none}}
 
 </style>
@@ -572,6 +577,7 @@ a.ilink:hover{background-size:100% 2px}
     <div class="tj" id="ssTj"></div>
     <div class="te" id="ssTe"></div>
     <div class="tc"><i></i><span id="ssTc"></span></div>
+    <div id="ssDetails" class="ss-mobile-details"></div>
   </div>
 </div>
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
@@ -1929,6 +1935,7 @@ function ssSet(i){
   ssArtNote(i,wantsReal&&!SS.real);
   ssEl.classList.toggle('light',!SS.real&&!!(a.light||(spec.pal&&spec.pal.light)));
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
+  $('#ssDetails').textContent=[s.yt&&s.yt.who?'演奏：'+s.yt.who:'',s.year?'作品年：'+s.year:'',s.yt&&s.yt.rec?'録音年：'+s.yt.rec:''].filter(Boolean).join(' ／ ');
 }
 function ssLoop(now){
   if(!SS.on) return;
@@ -1970,6 +1977,10 @@ function ssStop(){
   playing=false;
   ssSetMotionPlaying(false); // Freeze immediately, including during buffering.
 }
+function ssTouchInert(hidden){
+  $('#ssTools').inert=false;
+  $('#ssTools').querySelectorAll('button').forEach(button=>{button.inert=hidden;});
+}
 function ssTouchMode(){return !!(window.matchMedia&&matchMedia('(pointer: coarse)').matches);}
 function ssTouchSchedule(){
   clearTimeout(SS.uiTimer);
@@ -1977,16 +1988,16 @@ function ssTouchSchedule(){
   SS.uiTimer=setTimeout(()=>{
     if(!SS.on||!ssTouchMode()||SS.uiKeyboard||SS.uiPressed)return;
     if($('#ssTools').contains(document.activeElement))ssEl.focus({preventScroll:true});
-    $('#ssTools').inert=true;ssEl.classList.add('ui-hidden');
+    ssTouchInert(true);ssEl.classList.add('ui-hidden');
   },3500);
 }
 function ssTouchWake(){
   if(!SS.on||!ssTouchMode())return;
-  ssEl.classList.remove('ui-hidden');$('#ssTools').inert=false;ssTouchSchedule();
+  ssEl.classList.remove('ui-hidden');ssTouchInert(false);ssTouchSchedule();
 }
 function ssTouchBegin(){
   SS.uiKeyboard=false;SS.uiPressed=false;SS.uiConsumeClick=false;
-  ssEl.classList.toggle('touch-ui',ssTouchMode());ssEl.classList.remove('ui-hidden');$('#ssTools').inert=false;
+  ssEl.classList.toggle('touch-ui',ssTouchMode());ssEl.classList.remove('ui-hidden');ssTouchInert(false);
   if(ssTouchMode()){ssEl.focus({preventScroll:true});ssTouchSchedule();}
   else $('#ssBack').focus({preventScroll:true});
 }
@@ -2019,7 +2030,7 @@ function ssShow(manual){
   if(manual && ssEl.requestFullscreen) ssEl.requestFullscreen().catch(()=>{});
 }
 function ssHide(){
-  if(!SS.on) return; SS.on=false; cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);$('#ssTools').inert=false;ssEl.classList.remove('ui-hidden');
+  if(!SS.on) return; SS.on=false; cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
   ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
@@ -2066,7 +2077,7 @@ let lx=-1,ly=-1;
 ['mousemove','mousedown','touchstart','wheel'].forEach(ev=>addEventListener(ev,()=>{SS.idle=0;},{passive:true}));
 addEventListener('keydown',e=>{SS.idle=0;if(SS.on&&e.key==='Escape')ssHide();else if(SS.on&&e.key==='Tab')ssTrapFocus(e);});
 document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement && SS.on && SS.manual) ssHide(); });
-addEventListener('resize',()=>{ if(SS.on){ssEl.classList.toggle('touch-ui',ssTouchMode());ssTouchWake();if(!ssTouchMode()){clearTimeout(SS.uiTimer);$('#ssTools').inert=false;ssEl.classList.remove('ui-hidden');} ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;if(REDUCED)ssLoop(performance.now()); } });
+addEventListener('resize',()=>{ if(SS.on){ssEl.classList.toggle('touch-ui',ssTouchMode());ssTouchWake();if(!ssTouchMode()){clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');} ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;if(REDUCED)ssLoop(performance.now()); } });
 $('#bShow').onclick=()=>{ lx=-1; ssShow(true); };
 setInterval(()=>{ if(!SS.on && $('#saver').checked && started && playing){ if(++SS.idle>=20){ lx=-1; ssShow(false); } } else if(!playing) SS.idle=0; },1000);
 if(/[?&]display=1/.test(location.search)) setTimeout(()=>ssShow(true),300);

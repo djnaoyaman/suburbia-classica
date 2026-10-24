@@ -1926,7 +1926,7 @@ function ssSetMotionPlaying(active){
 }
 function ssPlay(){
   if(!ytReady)return;
-  if(!started){$('#overlay').click();return;}
+  if(!started){$('#overlay').click();ssSyncPlayback();return;}
   player.playVideo(); // Animation resumes when YouTube confirms playback.
 }
 function ssStop(){

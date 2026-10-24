@@ -132,9 +132,9 @@ void main(){
 }`;
   let renderer;
   function create(){
-    const canvas=document.createElement('canvas');
-    const gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,powerPreference:'low-power'});
-    if(!gl)return null;
+    const surface=window.ClassicaNatureGL?.acquire();
+    if(!surface)return null;
+    const {canvas,gl}=surface;
     let program,buffer;const shaders=[];
     const dispose=()=>{shaders.forEach(s=>gl.deleteShader(s));if(program)gl.deleteProgram(program);if(buffer)gl.deleteBuffer(buffer);};
     try{
@@ -148,12 +148,11 @@ void main(){
       shaders.splice(0).forEach(s=>gl.deleteShader(s));
       buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const u=Object.fromEntries(['resolution','time','scene'].map(k=>[k,gl.getUniformLocation(program,k)]));
-      canvas.addEventListener('webglcontextlost',event=>event.preventDefault());
-      canvas.addEventListener('webglcontextrestored',()=>{dispose();renderer=undefined;});
+      canvas.addEventListener('webglcontextrestored',()=>{dispose();renderer=undefined;},{once:true});
       return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),dispose};
     }catch(error){dispose();return null;}
   }
-  function ready(){if(renderer===undefined)renderer=create();return renderer&&!renderer.gl.isContextLost();}
+  function ready(){if(window.ClassicaNatureGL?.acquire()?.gl.isContextLost())return false;if(renderer===undefined)renderer=create();return renderer&&!renderer.gl.isContextLost();}
   const api={
     has:id=>Object.prototype.hasOwnProperty.call(scenes,id)||legacy.has(id),
     describe:id=>scenes[id]?scenes[id][1]:legacy.describe(id),

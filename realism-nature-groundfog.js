@@ -4,35 +4,38 @@
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='brahms-op118-2';
- const description='静かな草地の上を、低い霧の細い層がゆっくり流れる情景';
+ const description='里の明るい踏み道が深い山林へ入り、低い霧に隠れ、また現れる境界の情景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
-float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+1.),f.x),f.y);}
-float mist(vec2 p){float v=0.,amp=.55;for(int i=0;i<4;i++){v+=amp*noise(p);p=p*2.03+vec2(8.3,1.7);amp*=.47;}return v;}
+float hash(vec2 p){p.x=mod(p.x,8.);return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
+float cloud(vec2 p,float phase){float n=0.,w=.57;for(int i=0;i<4;i++){n+=w*noise(vec2(p.x-phase*8.,p.y));p*=2.;phase*=2.;w*=.5;}return n;}
+float region(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.55,1.,length((p-c)/r));}
 void main(){
- vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
- vec2 q=vec2(.5,clamp(.55,.47*min(1./aspect,1.)+.001,1.-.47*min(1./aspect,1.)-.001))+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
- vec3 base=texture2D(material,vec2(q.x,1.-q.y)).rgb;
- // Geometry is never displaced. A shallow optical-density layer flows above the fixed meadow.
- float band=smoothstep(.48,.53,q.y)*(1.-smoothstep(.59,.625,q.y));
- if(band<.0001){gl_FragColor=vec4(base,1.);return;}
- float t=mod(time,48.)/48.,a=fract(t*2.),b=fract(a+.5),w=.5-.5*cos(TAU*a);
- vec2 p=vec2(q.x*12.,(q.y-.55)*80.);
- float f=mix(mist(p-vec2(b*4.,.12*sin(TAU*t))),mist(p-vec2(a*4.,.12*sin(TAU*t))),w);
- float ridge=exp(-pow((q.y-.553-.006*sin(q.x*17.+TAU*t))/.028,2.));
- float density=band*ridge*smoothstep(.34,.70,f)*.72;
- vec3 color=mix(base,vec3(.52,.57,.65),density);
- gl_FragColor=vec4(color,1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
+ // Static framing favors the path's vanishing point on narrow phones.
+ p.x+=.075*(1.-smoothstep(.75,1.,a));
+ vec3 base=texture2D(material,vec2(p.x,1.-p.y)).rgb;
+ float ph=mod(time,48.)/48.;
+ float width=mix(.19,.12,smoothstep(.43,.66,p.y));
+ float across=1.-smoothstep(width*.35,width,abs(p.x-.594));
+ float depth=smoothstep(.405,.495,p.y)*(1.-smoothstep(.64,.705,p.y));
+ float front=region(p,vec2(.584,.431),vec2(.175,.100));
+ vec2 ncoord=vec2(p.x*12.,p.y*19.+.25*sin(TAU*ph));
+ float n1=cloud(ncoord,ph),n2=cloud(vec2(p.x*17.+2.,p.y*27.+.2*cos(TAU*ph)),ph*2.);
+ // A positive low-density floor prevents separate opaque puffs or hollow rings.
+ float density=across*depth*(.25+.65*n1)*.65+front*(.20+.55*n2)*.30;
+ float trans=exp(-density);vec3 mist=vec3(.60,.65,.62);
+ gl_FragColor=vec4(base*trans+mist*(1.-trans),1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/groundfog-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/brahms118-yama-boundary-v1.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

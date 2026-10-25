@@ -522,6 +522,10 @@ a.ilink:hover{background-size:100% 2px}
 .art-connection .art-connection-note{font-size:10px;line-height:1.7;opacity:.65;margin-top:12px}
 .art-connection-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:3px}
 @media(max-width:600px){.art-connection{padding:16px;margin:24px 0}}
+
+/* The painting stays unobstructed; only song/control areas receive contrast. */
+#ss.impressive::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.23),transparent 27%,transparent 57%,rgba(0,0,0,.52))}
+#ss.impressive .info,#ss.impressive .brand{z-index:2;text-shadow:0 1px 10px rgba(0,0,0,.5)}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -563,7 +567,7 @@ a.ilink:hover{background-size:100% 2px}
     <div class="art-settings" aria-label="アートの設定">
       <span class="art-label">再生中のアート</span>
       <div class="art-switch" role="group" aria-label="アートのスタイル">
-        <button type="button" data-art-mode="original" aria-pressed="true">Impressive</button>
+        <button type="button" data-art-mode="impressive" aria-pressed="true">Impressive</button>
         <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
       </div>
       <p class="art-note" id="artNote" role="status"></p>
@@ -582,7 +586,7 @@ a.ilink:hover{background-size:100% 2px}
     <button type="button" id="ssBack" class="ss-return">曲画面に戻る</button>
     <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
-      <button type="button" data-art-mode="original" aria-pressed="true">Impressive</button>
+      <button type="button" data-art-mode="impressive" aria-pressed="true">Impressive</button>
       <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
     </div>
     <button type="button" id="ssClose" aria-label="アート表示を閉じる">閉じる ×</button>
@@ -602,7 +606,8 @@ a.ilink:hover{background-size:100% 2px}
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
 <script src="realism.js?v=20261023-all74"></script>
-<script src="original-art.js?v=20261025-original2"></script>
+<script src="impressive-catalog.js?v=20261025-impressionists-v1"></script>
+<script src="impressive-art.js?v=20261025-impressionists-v1"></script>
 <script src="realism-context.js?v=20261025-resource1"></script>
 <script src="realism-nature.js?v=20261024-shared01"></script>
 <script src="realism-nature-next.js?v=20261024-shared01"></script>
@@ -1764,244 +1769,8 @@ $('#bNext').onclick = () => ssStep(1);
 $('#bToggle').onclick = ssPlay;
 $('#bStop').onclick = ssStop;
 
-/* ================= スクリーンセーバー（楽曲ごとのジェネラティブ・アート） ================= */
-function mk(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const lg = (c,x0,y0,x1,y1,stops)=>{const g=c.createLinearGradient(x0,y0,x1,y1);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g};
-const rg = (c,x,y,r,col0,col1)=>{const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col0);g.addColorStop(1,col1);return g};
-const ART_BY_ID = {
- "nessun-dorma":{art:"mesh",pal:{bg:['#05060f', '#141a33'],c:['90,110,190', '230,200,140', '60,70,130'],a:0.5,stars:true}},
- "brindisi":{art:"mesh",pal:{bg:['#150a0c', '#3a1a1c'],c:['230,170,90', '190,70,80', '240,220,170'],a:0.55}},
- "habanera":{art:"mesh",pal:{bg:['#140608', '#3a0f14'],c:['200,40,60', '240,140,70', '110,30,70'],a:0.55,rings:true,ring:'255,190,170'}},
- "orpheus-overture":{art:"mesh",pal:{bg:['#160d08', '#3a2410'],c:['240,170,60', '220,90,60', '250,220,140'],a:0.55}},
- "william-tell-overture":{art:"mesh",pal:{bg:['#0c1310', '#233524'],c:['110,160,120', '210,200,130', '90,130,160'],a:0.5}},
- "queen-of-night":{art:"mesh",pal:{bg:['#05050f', '#1a1236'],c:['120,90,200', '230,215,170', '70,60,140'],a:0.5,stars:true}},
- "toreador":{art:"mesh",pal:{bg:['#160805', '#3a1608'],c:['230,100,40', '240,190,70', '150,40,40'],a:0.55}},
- "figaro-letter-duet":{art:"mesh",pal:{light:true,bg:['#f4efe6', '#e8ddca'],c:['225,200,160', '200,190,215', '215,225,215'],a:0.55}},
- "flower-duet":{art:"mesh",pal:{light:true,bg:['#f6eef0', '#ead9de'],c:['235,190,200', '210,200,230', '240,225,190'],a:0.55}},
- "o-mio-babbino":{art:"mesh",pal:{light:true,bg:['#f5ecdf', '#e8d6bf'],c:['235,195,150', '220,170,170', '210,215,190'],a:0.55}},
- "lascia-ch-io-pianga":{art:"mesh",pal:{bg:['#0a0d14', '#1c2433'],c:['140,160,200', '200,180,150', '90,110,150'],a:0.45}},
- "rojo-no-tsuki":{art:"mesh",pal:{bg:['#070b14', '#18243a'],c:['230,225,190', '110,140,180', '80,100,140'],a:0.45,rings:true,ring:'240,235,200'}},
- "heidenroslein":{art:"mesh",pal:{light:true,bg:['#eef3e8', '#dce8d4'],c:['235,170,180', '180,215,160', '240,230,170'],a:0.55}},
- "ave-verum-corpus":{art:"mesh",pal:{bg:['#0d0b14', '#2a2230'],c:['230,205,150', '150,130,190', '200,170,150'],a:0.5,rings:true,ring:'240,225,190'}},
- "erlkonig":{art:"mesh",pal:{bg:['#04070a', '#0f1a1c'],c:['70,100,100', '150,150,140', '40,60,70'],a:0.45,stars:true}},
- "caccini-ave-maria":{art:"mesh",pal:{bg:['#100d12', '#2c2430'],c:['235,210,160', '190,160,190', '210,180,150'],a:0.5,rings:true,ring:'245,230,200'}},
- "faure-pie-jesu":{art:"mesh",pal:{bg:['#0c1018', '#1f2a3a'],c:['200,215,235', '230,215,185', '140,160,200'],a:0.45}},
- "verdi-dies-irae":{art:"mesh",pal:{bg:['#060405', '#1c0a0c'],c:['170,30,40', '90,20,30', '220,150,90'],a:0.55,rings:true,ring:'230,150,120'}},
-
- "beethoven-5":{art:"mesh",pal:{bg:['#0b0b10','#2a1216'],c:['190,50,60','90,40,70','230,150,90'],a:.5,rings:true,ring:'240,200,190'}},
- "beethoven-9":{art:"mesh",pal:{bg:['#0a0d1a','#2a2210'],c:['230,190,90','90,110,190','200,120,90'],a:.5,stars:true}},
- "vivaldi-spring":{art:"mesh",pal:{light:true,bg:['#eef7ec','#d6ecd4'],c:['160,225,150','250,235,160','170,215,235'],a:.6}},
- "largo-new-world":{art:"mesh",pal:{bg:['#10150f','#2a3320'],c:['150,170,110','200,170,110','110,140,130'],a:.45}},
- "bolero":{art:"mesh",pal:{bg:['#14080a','#34100f'],c:['220,80,50','240,160,70','150,40,60'],a:.55,rings:true,ring:'255,200,150'}},
- "pomp-circumstance-1":{art:"mesh",pal:{bg:['#0a0c1c','#1c1830'],c:['180,50,70','60,80,170','230,210,170'],a:.5}},
- "eine-kleine":{art:"mesh",pal:{light:true,bg:['#f4efe6','#e6dccb'],c:['230,205,150','200,190,220','210,225,215'],a:.55}},
- "pictures":{art:"mesh",pal:{bg:['#0f0c14','#2a1e30'],c:['200,150,60','120,80,160','60,150,150'],a:.5,rings:true,ring:'240,215,160'}},
- "le-cygne":{art:"mesh",pal:{bg:['#08121a','#16303c'],c:['170,210,225','230,240,245','110,160,190'],a:.45,rings:true,ring:'220,240,250'}},
- "jupiter":{art:"mesh",pal:{bg:['#0b0a14','#2a1c20'],c:['230,160,90','190,110,70','110,90,170'],a:.55,stars:true}},
- "toccata-fugue-dm":{art:"mesh",pal:{bg:['#050508','#15121c'],c:['120,60,70','70,60,110','190,160,120'],a:.4,stars:true}},
- "farandole":{art:"mesh",pal:{bg:['#17100a','#3a2410'],c:['240,170,60','210,100,50','240,210,120'],a:.55}},
- "carmen-prelude":{art:"mesh",pal:{bg:['#140608','#3a0f14'],c:['210,40,50','240,150,60','120,30,60'],a:.55}},
- "cavalleria-intermezzo":{art:"mesh",pal:{bg:['#150f12','#2e1e22'],c:['200,130,120','160,110,140','230,190,150'],a:.45}},
- "barber-adagio":{art:"mesh",pal:{bg:['#07080c','#14181f'],c:['100,110,130','150,150,170','80,100,120'],a:.38,rings:true,ring:'200,205,220'}},
- 
- "flaxen-hair":{art:"mesh",pal:{light:true,bg:['#f3ead2','#e6d3a8'],c:['235,200,120','240,225,170','200,170,110'],a:.55}},
- "arabesque-1":{art:"mesh",pal:{bg:['#0c1a1c','#1f3a36'],c:['110,190,170','200,220,150','90,150,170'],a:.45}},
- "prelude-bwv846":{art:"mesh",pal:{light:true,bg:['#eef0f4','#d9dee8'],c:['170,190,225','210,215,235','190,200,210'],a:.5,rings:true,ring:'70,90,130'}},
- "pavane":{art:"mesh",pal:{bg:['#150f1a','#2d1e33'],c:['150,100,160','200,150,150','100,100,150'],a:.45,moon:true}},
- "nocturne-20":{art:"mesh",pal:{bg:['#07080f','#161a2c'],c:['70,80,130','120,110,160','60,100,120'],a:.4,stars:true}},
- "pathetique-2":{art:"mesh",pal:{bg:['#110d14','#2c2230'],c:['170,110,100','120,90,140','200,160,120'],a:.45}},
- "k331-1":{art:"mesh",pal:{light:true,bg:['#f2ece4','#e4d8c8'],c:['230,190,160','210,200,170','200,170,190'],a:.55,rings:true,ring:'150,110,90'}},
- "prelude-7":{art:"mesh",pal:{light:true,bg:['#f0f1e6','#dde3cc'],c:['200,220,160','230,225,170','170,200,180'],a:.5}},
- "brahms-waltz-15":{art:"mesh",pal:{bg:['#1a1210','#35241c'],c:['210,150,100','170,110,90','230,190,140'],a:.45}},
- "mendelssohn-spring-song":{art:"mesh",pal:{light:true,bg:['#eef6ee','#d7ebd8'],c:['170,225,170','240,235,170','190,225,215'],a:.55}},
- "goldberg-aria":{art:"mesh",pal:{bg:['#0b0d12','#1d222c'],c:['150,150,170','100,110,140','190,170,130'],a:.4,rings:true,ring:'210,215,230'}},
- "reverie":{art:"mesh",pal:{bg:['#0e1020','#232744'],c:['140,150,210','190,150,200','110,170,200'],a:.45,stars:true}},
- "gnossienne-1":{art:"mesh",pal:{bg:['#0a0a0c','#1a1820'],c:['100,90,120','140,110,100','80,90,110'],a:.35}},
- "waltz-64-2":{art:"mesh",pal:{bg:['#12080e','#2b1220'],c:['190,80,110','140,70,130','230,150,150'],a:.5}},
- "waltz-69-1":{art:"mesh",pal:{light:true,bg:['#f4e4e0','#e8c8c8'],c:['235,170,170','245,205,185','210,160,190'],a:.55}},
- "tchaikovsky-october":{art:"mesh",pal:{bg:['#160d08','#35200f'],c:['210,120,50','170,80,40','230,170,90'],a:.5}},
- "k310-2":{art:"mesh",pal:{bg:['#0d1118','#1d2a3a'],c:['100,140,190','150,170,200','120,120,170'],a:.45}},
- "schubert-impromptu-90-3":{art:"mesh",pal:{bg:['#08101a','#12303a'],c:['70,150,170','120,180,190','90,120,170'],a:.45,rings:true,ring:'190,225,235'}},
- "brahms-op118-2":{art:"mesh",pal:{bg:['#150f0c','#2e2018'],c:['190,130,90','150,100,80','220,170,120'],a:.45}},
- "fur-elise":"petals","moonlight":"moonwater","tristesse":"ribbons","fantaisie-impromptu":"flow","nocturne-9-2":"bokeh","raindrop":"rain","clair-de-lune":"clouds","gymnopedie-1":"minimal","traumerei":"dandelion","liebestraum-3":"aurora",
- "canon":"canonwave","air-g-string":"string","jesu-joy":"rays",
- "rach-pc2-2":{art:"mesh",pal:{bg:['#070b1c','#1a1230'],c:['40,70,170','190,60,70','90,60,150'],a:.55,rings:true,ring:'200,210,255'}},
- "schubert-ave-maria":{art:"mesh",pal:{bg:['#0b1226','#243a5a'],c:['120,150,210','230,200,150','170,150,220'],a:.5,stars:true}},
- "liebesgruss":{art:"mesh",pal:{light:true,bg:['#f4e6d8','#e8cdb8'],c:['240,170,150','250,210,160','220,150,170'],a:.55}},
- "vocalise":{art:"mesh",pal:{bg:['#0d1220','#1f2a3e'],c:['150,170,210','100,150,160','200,170,200'],a:.45,rings:true,ring:'220,225,245'}},
- "brahms-lullaby":{art:"mesh",pal:{bg:['#0a0f24','#1b1f44'],c:['70,80,170','170,130,200','230,190,130'],a:.4,stars:true,moon:true}},
- "mozart-pc21-2":{art:"mesh",pal:{light:true,bg:['#e8f0f2','#cfe0e4'],c:['150,200,220','200,225,200','230,215,200'],a:.55,rings:true,ring:'60,90,110'}},
- "faure-apres-un-reve":{art:"mesh",pal:{bg:['#10101e','#2a2540'],c:['110,100,170','170,130,160','80,110,140'],a:.45}},
- "paganini-var18":{art:"mesh",pal:{bg:['#150c10','#2e1a1a'],c:['230,160,80','160,60,90','250,200,130'],a:.5,rings:true,ring:'255,220,170'}},
- "solveigs-song":{art:"mesh",pal:{bg:['#050b14','#0e2a34'],c:['60,170,170','90,200,150','80,110,190'],a:.4,stars:true}}};
-const ARTS = {
- /* エリーゼのために：花びらがゆっくり舞う */
- petals:{init(w,h,r){return{p:Array.from({length:90},()=>({x:r()*w,y:r()*(h+80),s:8+r()*26,v:9+r()*20,rot:r()*6.28,vr:(r()-.5)*.7,ph:r()*6.28,a:.3+r()*.5,hue:338+r()*28}))}},
-  draw(c,w,h,t,st){
-   c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#241420'],[1,'#3a1f2a']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,w*.72,h*.28,Math.max(w,h)*.5,'rgba(255,196,170,.20)','rgba(255,196,170,0)');c.fillRect(0,0,w,h);
-   st.p.forEach(q=>{const y=((q.y+q.v*t)%(h+80))-40,x=q.x+Math.sin(t*.35+q.ph)*46;
-    c.save();c.translate(x,y);c.rotate(q.rot+q.vr*t);
-    c.fillStyle=`hsla(${q.hue},62%,80%,${q.a})`;c.beginPath();c.ellipse(0,0,q.s,q.s*.48,0,0,6.283);c.fill();
-    c.fillStyle=`hsla(${q.hue},70%,92%,${q.a*.5})`;c.beginPath();c.ellipse(-q.s*.18,0,q.s*.5,q.s*.2,0,0,6.283);c.fill();c.restore();});
-  }},
- /* 月光：静かな水面に映る月 */
- moonwater:{init(w,h,r){return{s:Array.from({length:150},()=>({x:r()*w,y:r()*h*.55,r:.4+r()*1.2,ph:r()*6.28}))}},
-  draw(c,w,h,t,st){
-   const hz=h*.6,R=Math.min(w,h)*.075,mx=w*.5,my=h*.3;
-   c.fillStyle=lg(c,0,0,0,hz,[[0,'#04060d'],[1,'#12243a']]);c.fillRect(0,0,w,hz);
-   c.fillStyle=lg(c,0,hz,0,h,[[0,'#0c1a2c'],[1,'#03060c']]);c.fillRect(0,hz,w,h-hz);
-   st.s.forEach(s=>{c.fillStyle=`rgba(235,240,255,${.25+.45*(.5+.5*Math.sin(t*.9+s.ph))})`;c.beginPath();c.arc(s.x,s.y,s.r,0,6.283);c.fill();});
-   c.fillStyle=rg(c,mx,my,R*7,'rgba(210,225,255,.30)','rgba(210,225,255,0)');c.fillRect(mx-R*7,my-R*7,R*14,R*14);
-   c.fillStyle='#f1f4fb';c.beginPath();c.arc(mx,my,R,0,6.283);c.fill();
-   for(let k=0;k<46;k++){const yy=hz+4+k*k*.32,wd=R*(1.3+k*.07)*(.55+.45*Math.sin(t*.8+k)),xx=mx+Math.sin(t*.55+k*1.7)*(4+k*.9);
-    c.fillStyle=`rgba(225,235,255,${.55*(1-k/48)})`;c.fillRect(xx-wd/2,yy,wd,1.6);}
-   c.fillStyle='rgba(180,200,230,.25)';c.fillRect(0,hz,w,1);
-  }},
- /* 別れの曲：夕景を横切る細い光の帯 */
- ribbons:{init(){return{}},
-  draw(c,w,h,t){
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#10122e'],[.55,'#3a1a30'],[1,'#7a3a2c']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,w*.5,h*.66,Math.max(w,h)*.45,'rgba(255,170,110,.30)','rgba(255,170,110,0)');c.fillRect(0,0,w,h);
-   for(let i=0;i<9;i++){c.beginPath();
-    for(let x=0;x<=w+8;x+=8){const y=h*(.32+.052*i)+Math.sin(x*.0042+t*.16+i)*h*.07+Math.sin(x*.0014-t*.09+i*2)*h*.05;x?c.lineTo(x,y):c.moveTo(x,y);}
-    c.strokeStyle=`rgba(255,${200-i*8},${150-i*6},${.34-i*.025})`;c.lineWidth=1.3;c.stroke();
-    if(i%3===0){c.lineTo(w,h);c.lineTo(0,h);c.closePath();c.fillStyle='rgba(255,170,130,.03)';c.fill();}}
-  }},
- /* 幻想即興曲：渦を巻く光の粒の流れ */
- flow:{init(w,h,r){return{first:true,p:Array.from({length:650},()=>({x:r()*w,y:r()*h,l:r()*200,h:r()<.55?268:38}))}},
-  draw(c,w,h,t,st){
-   if(st.first){c.fillStyle='#0b0716';c.fillRect(0,0,w,h);st.first=false;}
-   c.fillStyle='rgba(11,7,22,.035)';c.fillRect(0,0,w,h);
-   st.p.forEach(p=>{const a=Math.sin(p.x*.0032+t*.11)*Math.cos(p.y*.0042-t*.08)*3.4+Math.sin((p.x+p.y)*.002+t*.05);
-    const nx=p.x+Math.cos(a)*1.9,ny=p.y+Math.sin(a)*1.9;
-    c.strokeStyle=`hsla(${p.h},78%,${p.h>100?74:76}%,.95)`;c.lineWidth=1.3;c.beginPath();c.moveTo(p.x,p.y);c.lineTo(nx,ny);c.stroke();
-    p.x=nx;p.y=ny;if(--p.l<0||nx<0||ny<0||nx>w||ny>h){p.x=Math.random()*w;p.y=Math.random()*h;p.l=120+Math.random()*180;}});
-  }},
- /* ノクターン：夜の街のボケ */
- bokeh:{init(w,h,r){return{b:Array.from({length:40},()=>({x:r()*w,y:r()*h,r:22+r()*80,v:4+r()*9,ph:r()*6.28,warm:r()<.62,a:.06+r()*.13}))}},
-  draw(c,w,h,t,st){
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#060a18'],[1,'#141c38']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,w*.5,h*1.05,Math.max(w,h)*.6,'rgba(255,190,110,.22)','rgba(255,190,110,0)');c.fillRect(0,0,w,h);
-   st.b.forEach(b=>{const y=((b.y-b.v*t)%(h+2*b.r)+(h+2*b.r))%(h+2*b.r)-b.r,x=b.x+Math.sin(t*.3+b.ph)*30;
-    const col=b.warm?'255,196,120':'130,170,255',al=b.a*(.75+.25*Math.sin(t*.7+b.ph));
-    c.fillStyle=rg(c,x,y,b.r,`rgba(${col},${al*1.6})`,`rgba(${col},0)`);c.beginPath();c.arc(x,y,b.r,0,6.283);c.fill();
-    c.strokeStyle=`rgba(${col},${al*.9})`;c.lineWidth=1;c.beginPath();c.arc(x,y,b.r*.78,0,6.283);c.stroke();});
-  }},
- /* 雨だれ：水面に広がる波紋 */
- rain:{init(w,h,r){return{rip:[],next:0,d:Array.from({length:34},()=>({x:r()*w,y:r()*h,v:260+r()*220,l:12+r()*16,a:.05+r()*.1}))}},
-  draw(c,w,h,t,st){
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#0a1217'],[1,'#17272e']]);c.fillRect(0,0,w,h);
-   if(t>st.next){st.rip.push({x:w*(.08+Math.random()*.84),y:h*(.35+Math.random()*.6),t0:t,R:45+Math.random()*95,d:3.8+Math.random()*2});st.next=t+.18+Math.random()*.5;}
-   st.rip=st.rip.filter(q=>t-q.t0<q.d);
-   st.rip.forEach(q=>{const a=(t-q.t0)/q.d;for(let k=0;k<3;k++){const rr=q.R*a*(1-k*.2);if(rr<1)continue;
-    c.strokeStyle=`rgba(170,205,215,${(1-a)*(.42-k*.1)})`;c.lineWidth=1.2;c.beginPath();c.ellipse(q.x,q.y,rr,rr*.32,0,0,6.283);c.stroke();}});
-   st.d.forEach(d=>{const y=(d.y+d.v*t)%(h+40)-20;c.strokeStyle=`rgba(190,220,230,${d.a})`;c.lineWidth=1;c.beginPath();c.moveTo(d.x,y);c.lineTo(d.x-1.5,y+d.l);c.stroke();});
-  }},
- /* 月の光：薄雲を渡る月 */
- clouds:{init(w,h,r){return{c:Array.from({length:9},(_,i)=>({y:h*(.18+.09*i)+r()*30,hh:50+r()*70,sp:5+r()*11,off:r()*(w+800),a:.07+r()*.09}))}},
-  draw(c,w,h,t,st){
-   const R=Math.min(w,h)*.07,mx=w*.7,my=h*.27;
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#050d19'],[1,'#12304a']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,mx,my,R*9,'rgba(200,225,255,.30)','rgba(200,225,255,0)');c.fillRect(0,0,w,h);
-   c.fillStyle='#eef4fb';c.beginPath();c.arc(mx,my,R,0,6.283);c.fill();
-   st.c.forEach(q=>{const x=((q.off+q.sp*t)%(w+800))-400;
-    for(let k=0;k<3;k++){const cx=x+k*160,cy=q.y+k*8;c.fillStyle=rg(c,cx,cy,q.hh*3,`rgba(205,225,245,${q.a})`,'rgba(205,225,245,0)');
-     c.save();c.translate(cx,cy);c.scale(2.6,1);c.translate(-cx,-cy);c.beginPath();c.arc(cx,cy,q.hh*2.2,0,6.283);c.fill();c.restore();}});
-  }},
- /* ジムノペディ：紙の上のミニマルな円（明るい） */
- minimal:{light:true,init(){return{}},
-  draw(c,w,h,t){
-   const u=Math.min(w,h),br=1+.03*Math.sin(t*.45);
-   c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,w,h,[[0,'#ece3d3'],[1,'#ddd1bd']]);c.fillRect(0,0,w,h);
-   c.globalCompositeOperation='multiply';
-   const cy=h*.5+Math.sin(t*.3)*6;
-   c.fillStyle='rgba(196,118,82,.88)';c.beginPath();c.arc(w*.4+Math.sin(t*.2)*8,cy,u*.22*br,0,6.283);c.fill();
-   c.fillStyle='rgba(120,148,128,.82)';c.beginPath();c.arc(w*.4+u*.2+Math.cos(t*.23)*8,cy+u*.04,u*.14*(2-br),0,6.283);c.fill();
-   c.fillStyle='rgba(50,48,54,.9)';c.beginPath();c.arc(w*.66+Math.sin(t*.27)*6,cy-u*.06,u*.045,0,6.283);c.fill();
-   c.globalCompositeOperation='source-over';
-   c.strokeStyle='rgba(43,38,34,.35)';c.lineWidth=1;c.beginPath();c.moveTo(w*.14,cy+u*.26);c.lineTo(w*.86,cy+u*.26);c.stroke();
-  }},
- /* トロイメライ：夕暮れに漂う綿毛 */
- dandelion:{init(w,h,r){return{s:Array.from({length:62},()=>({x:r()*(w+100),y:r()*h,sc:.6+r()*1.3,ph:r()*6.28,v:6+r()*10}))}},
-  draw(c,w,h,t,st){
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#1d2240'],[.55,'#64476a'],[1,'#dea48c']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,w*.3,h*.95,Math.max(w,h)*.55,'rgba(255,205,160,.35)','rgba(255,205,160,0)');c.fillRect(0,0,w,h);
-   st.s.forEach(s=>{const x=((s.x+s.v*t)%(w+100))-50,y=(((s.y-s.v*.45*t)%h)+h)%h+Math.sin(t*.5+s.ph)*24;
-    c.save();c.translate(x,y);c.rotate(Math.sin(t*.4+s.ph)*.4-.5);c.strokeStyle='rgba(255,246,236,.55)';c.fillStyle='rgba(255,250,244,.8)';c.lineWidth=.8;
-    for(let k=0;k<12;k++){const a=-Math.PI/2+(k-5.5)*.19,L=13*s.sc;c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(a)*L,Math.sin(a)*L);c.stroke();c.beginPath();c.arc(Math.cos(a)*L,Math.sin(a)*L,1.1*s.sc,0,6.283);c.fill();}
-    c.fillStyle='rgba(120,80,70,.6)';c.beginPath();c.ellipse(0,3*s.sc,1.2*s.sc,3*s.sc,0,0,6.283);c.fill();c.restore();});
-  }},
- /* 愛の夢：オーロラのカーテン */
- aurora:{init(){return{}},
-  draw(c,w,h,t){
-   c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#050711'],[1,'#120c1c']]);c.fillRect(0,0,w,h);
-   c.globalCompositeOperation='lighter';
-   const cols=[['255,105,150','255,200,120'],['255,160,80','190,100,220'],['90,200,225','255,130,170'],['255,120,100','255,215,130']];
-   for(let i=0;i<4;i++){const g=lg(c,0,h*.12,0,h*.8,[[0,`rgba(${cols[i][0]},0)`],[.3,`rgba(${cols[i][0]},.8)`],[.68,`rgba(${cols[i][1]},.35)`],[1,`rgba(${cols[i][1]},0)`]]);c.fillStyle=g;
-    c.globalAlpha=.36+.1*Math.sin(t*.25+i*1.7);
-    c.beginPath();c.moveTo(0,h);
-    for(let x=0;x<=w+10;x+=10){const top=h*(.16+.07*i)+Math.sin(x*.0032+t*.14+i*1.3)*h*.09+Math.sin(x*.0075-t*.2+i)*h*.03;c.lineTo(x,top);}
-    c.lineTo(w,h);c.closePath();c.fill();
-  }
-   c.globalAlpha=1;c.globalCompositeOperation='source-over';
-  }},
- /* カノン：同じ旋律が遅れて重なる3本の線 */
- canonwave:{init(w,h,r){return{d:Array.from({length:70},()=>({x:r()*w,y:r()*h,r:.6+r()*1.6,ph:r()*6.28}))}},
-  draw(c,w,h,t,st){
-   c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#06141a'],[1,'#0e2a30']]);c.fillRect(0,0,w,h);
-   st.d.forEach(p=>{c.fillStyle=`rgba(240,220,170,${.08+.1*Math.sin(t*.6+p.ph)})`;c.beginPath();c.arc(p.x,p.y,p.r,0,6.283);c.fill();});
-   const f=x=>Math.sin(x*.0062)*.55+Math.sin(x*.0021+1.2)*.45, A=h*.11, sh=w*.16;
-   for(let i=0;i<3;i++){
-    const cy=h*(.36+.14*i);
-    c.beginPath();for(let x=0;x<=w;x+=6){const y=cy+f(x-t*40-i*sh)*A;x?c.lineTo(x,y):c.moveTo(x,y);}
-    c.strokeStyle=`rgba(240,206,140,${.55-i*.12})`;c.lineWidth=1.5;c.stroke();
-    const dx=((t*70-i*sh*.9)%(w+200)+(w+200))%(w+200)-100, dy=cy+f(dx-t*40-i*sh)*A;
-    c.fillStyle=rg(c,dx,dy,26,'rgba(255,230,170,.9)','rgba(255,230,170,0)');c.beginPath();c.arc(dx,dy,26,0,6.283);c.fill();
-   }
-  }},
- /* G線上のアリア：一本の弦の振動 */
- string:{init(w,h,r){return{d:Array.from({length:60},()=>({x:r()*w,y:r()*h,r:.5+r()*1.8,v:3+r()*8,ph:r()*6.28}))}},
-  draw(c,w,h,t,st){
-   c.fillStyle=lg(c,0,0,0,h,[[0,'#120b07'],[1,'#26170f']]);c.fillRect(0,0,w,h);
-   c.fillStyle=rg(c,w*.5,h*.5,Math.max(w,h)*.55,'rgba(255,170,90,.22)','rgba(255,170,90,0)');c.fillRect(0,0,w,h);
-   st.d.forEach(p=>{const y=((p.y-p.v*t)%h+h)%h;c.fillStyle=`rgba(255,215,160,${.12+.14*Math.sin(t+p.ph)})`;c.beginPath();c.arc(p.x+Math.sin(t*.3+p.ph)*14,y,p.r,0,6.283);c.fill();});
-   const x0=w*.08,L=w*.84,cy=h*.5,A=h*.055*Math.exp(-((t%10))/4.2);
-   [[0,.5,10],[.012,.3,4],[.024,.15,2]].forEach((o,k)=>{const tt=t-o[0];
-    c.beginPath();for(let x=0;x<=L;x+=6){const u=x/L,y=cy+A*(Math.sin(Math.PI*u)*Math.sin(tt*2.2)*.8+Math.sin(2*Math.PI*u)*Math.sin(tt*4.4)*.28+Math.sin(3*Math.PI*u)*Math.sin(tt*6.6)*.12);x?c.lineTo(x0+x,y):c.moveTo(x0+x,y);}
-    c.strokeStyle=k===0?`rgba(255,226,176,${.95})`:`rgba(255,190,120,${o[1]*.4})`;c.lineWidth=k===0?1.4:o[2];c.stroke();});
-   c.fillStyle='rgba(255,226,176,.55)';[x0,x0+L].forEach(x=>{c.beginPath();c.arc(x,cy,4,0,6.283);c.fill();});
-  }},
- /* 主よ人の望みの喜びよ：窓から差す朝の光 */
- rays:{init(w,h,r){return{m:Array.from({length:80},()=>({x:r()*w,y:r()*h,r:.8+r()*3,v:3+r()*7,ph:r()*6.28}))}},
-  draw(c,w,h,t,st){
-   c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,w,h,[[0,'#3a2414'],[1,'#7a4f2c']]);c.fillRect(0,0,w,h);
-   const ox=w*.12,oy=-h*.12;
-   for(let i=0;i<8;i++){const a=.55+i*.11+Math.sin(t*.08+i)*.02,wd=.035+.02*Math.sin(t*.2+i*2);
-    c.fillStyle=lg(c,ox,oy,ox+Math.cos(a)*h*1.4,oy+Math.sin(a)*h*1.4,[[0,`rgba(255,238,200,${.20+.08*Math.sin(t*.3+i)})`],[1,'rgba(255,238,200,0)']]);
-    c.beginPath();c.moveTo(ox,oy);c.lineTo(ox+Math.cos(a-wd)*h*1.8,oy+Math.sin(a-wd)*h*1.8);c.lineTo(ox+Math.cos(a+wd)*h*1.8,oy+Math.sin(a+wd)*h*1.8);c.closePath();c.fill();}
-   st.m.forEach(p=>{const y=((p.y-p.v*t)%h+h)%h,x=p.x+Math.sin(t*.25+p.ph)*30;c.fillStyle=rg(c,x,y,p.r*3,`rgba(255,244,214,${.5+.4*Math.sin(t*.8+p.ph)})`,'rgba(255,244,214,0)');c.beginPath();c.arc(x,y,p.r*3,0,6.283);c.fill();});
-  }},
- /* 汎用：ゆっくり動く色の塊（パレット指定） */
- mesh:{init(w,h,r,pal){return{pal,s:Array.from({length:120},()=>({x:r()*w,y:r()*h*.7,r:.4+r()*1.2,ph:r()*6.28}))}},
-  draw(c,w,h,t,st){
-   const P=st.pal;c.globalCompositeOperation='source-over';
-   c.fillStyle=lg(c,0,0,0,h,[[0,P.bg[0]],[1,P.bg[1]]]);c.fillRect(0,0,w,h);
-   const M=Math.max(w,h);
-   P.c.forEach((col,i)=>{const x=w*(.15+.7*((i*.37)%1))+Math.sin(t*.06*(1+i*.35)+i*2)*w*.2,y=h*(.2+.6*((i*.53)%1))+Math.cos(t*.05*(1+i*.3)+i)*h*.18,R=M*(.34+.08*Math.sin(t*.1+i));
-    c.fillStyle=rg(c,x,y,R,`rgba(${col},${P.a||.5})`,`rgba(${col},0)`);c.fillRect(0,0,w,h);});
-   if(P.rings){c.strokeStyle=`rgba(${P.ring||'255,255,255'},.09)`;c.lineWidth=1;for(let k=0;k<5;k++){const rr=Math.min(w,h)*(.12+.09*k)*(1+.02*Math.sin(t*.3+k));c.beginPath();c.arc(w*.5,h*.5,rr,0,6.283);c.stroke();}}
-   if(P.stars){st.s.forEach(p=>{c.fillStyle=`rgba(255,250,235,${.2+.5*(.5+.5*Math.sin(t*.9+p.ph))})`;c.beginPath();c.arc(p.x,p.y,p.r,0,6.283);c.fill();});}
-   if(P.moon){const R=Math.min(w,h)*.045;c.fillStyle=rg(c,w*.74,h*.2,R*6,'rgba(255,240,200,.28)','rgba(255,240,200,0)');c.fillRect(0,0,w,h);c.fillStyle='#fff2cf';c.beginPath();c.arc(w*.74,h*.2,R,0,6.283);c.fill();c.fillStyle=P.bg[0];c.beginPath();c.arc(w*.74+R*.5,h*.2-R*.15,R*.92,0,6.283);c.fill();}
-  }}
-};
-
-let artMode='original';
+/* ================= 楽曲ごとの印象派絵画 ================= */
+let artMode='impressive';
 try { if(localStorage.getItem('suburbia-art-mode')==='realism') artMode='realism'; } catch {}
 const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, elapsed:0, paused:true, W:0, H:0, idle:0, sw:0};
 const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
@@ -2015,6 +1784,11 @@ function ssArtNote(i,unavailable=false,loading=false){
     if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。Impressiveを表示します。';
     else if(unavailable) note='この端末ではリアリズムを利用できないため、Impressiveを表示します。';
     else if(loading) note='リアリズムを読み込み中です。';
+  }else if(SS.on){
+    const state=window.ClassicaImpressive?.status?.(id);
+    if(!window.ClassicaImpressive)note='絵画データを読み込めませんでした。ページを再読み込みしてください。';
+    else if(state==='loading'||state==='inactive')note='絵画を読み込み中です。';
+    else if(state==='failed')note='絵画を読み込めませんでした。通信状態をご確認ください。';
   }
   if(SS.note===note)return;SS.note=note;
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;
@@ -2042,29 +1816,28 @@ function ssMaterialPhase(i=ssArtIndex()){
   if(bundle.states.includes('failed'))return 'failed';
   return bundle.states.some(value=>value==='queued'||value==='loading')?'loading':'ready';
 }
-function ssSyncArtTone(i=ssArtIndex()){
-  const spec=ART_BY_ID[SONGS[i].id];
-  const light=SS.original?SS.art.light:SS.art?.light||(typeof spec==='object'&&spec?.pal?.light);
-  ssEl.classList.toggle('light',!SS.real&&!!light);
+function ssSyncArtTone(){
+  ssEl.classList.toggle('light',false);
+  ssEl.classList.toggle('impressive',!SS.real);
 }
 function ssSet(i){
-  const s=SONGS[i], spec=ART_BY_ID[s.id]||'bokeh', name=typeof spec==='string'?spec:spec.art;
-  const original=window.ClassicaOriginal?.create?.(s.id),a=original||ARTS[name];SS.art=a;SS.original=!!original;
+  const s=SONGS[i],a=window.ClassicaImpressive?.create?.(s.id);SS.art=a;SS.impressive=!!a;
   ssClearFrame(true);
-  SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
+  SS.st=a?.init(SS.W,SS.H); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
   SS.mediaAt=null;SS.mediaTime=null;SS.mediaDuration=0;
   const real=window.ClassicaRealism;
   const wantsReal=artMode==='realism'&&real&&real.has(s.id);
   window.ClassicaNatureGL?.activate?.(wantsReal?s.id:null);
   SS.real=!!(wantsReal&&real.available(s.id));
   SS.realState=SS.real?real.init(s.id):null;
+  window.ClassicaImpressive?.activate?.(SS.on&&!SS.real?s.id:null);
   ssArtNote(i,wantsReal&&!SS.real,SS.real&&ssMaterialPhase(i)==='loading');
   ssSyncArtTone(i);
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
   $('#ssDetails').textContent=[s.yt&&s.yt.who?'演奏：'+s.yt.who:'',s.year?'作品年：'+s.year:'',s.yt&&s.yt.rec?'録音年：'+s.yt.rec:''].filter(Boolean).join(' ／ ');
   ssSyncCredit(i);
 }
-function ssOriginalTime(now,fallback){
+function ssImpressiveTime(now,fallback){
   if(!ytReady||typeof player?.getCurrentTime!=='function')return fallback;
   // YouTube exposes media time, but not cross-origin audio samples. Poll at 4 Hz
   // and interpolate between readings; a seek becomes visible within 250 ms.
@@ -2089,13 +1862,15 @@ function ssLoop(now){
       if(phase==='loading'){
         cx.fillStyle='#111820';cx.fillRect(0,0,SS.W,SS.H);ssArtNote(ssArtIndex(),false,true);
       }else if(phase==='failed'||!window.ClassicaRealism.draw(cx,SS.W,SS.H,t,SS.realState)){
-        SS.real=false;ssClearFrame();ssSyncArtTone();ssArtNote(ssArtIndex(),true);
+        SS.real=false;window.ClassicaImpressive?.activate?.(SONGS[ssArtIndex()].id);ssClearFrame();ssSyncArtTone();ssArtNote(ssArtIndex(),true);
       }else ssArtNote(ssArtIndex());
     }
     if(!SS.real){
-      const time=SS.original&&!REDUCED?ssOriginalTime(now,t):t;
-      const progress=SS.original&&SS.mediaDuration>0?time/SS.mediaDuration:undefined;
-      SS.art.draw(cx,SS.W,SS.H,time,SS.st,{progress});
+      const time=SS.impressive&&!REDUCED?ssImpressiveTime(now,t):t;
+      const progress=SS.impressive&&SS.mediaDuration>0?time/SS.mediaDuration:undefined;
+      const ready=SS.art?.draw(cx,SS.W,SS.H,time,SS.st,{progress});
+      if(!ready){cx.fillStyle='#242321';cx.fillRect(0,0,SS.W,SS.H);}
+      if(artMode==='impressive')ssArtNote(ssArtIndex());
     }
   }
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
@@ -2186,7 +1961,7 @@ function ssShow(manual){
   if(manual && ssEl.requestFullscreen) ssEl.requestFullscreen().catch(()=>{});
 }
 function ssHide(){
-  if(!SS.on) return; SS.on=false; window.ClassicaNatureGL?.activate?.(null); cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
+  if(!SS.on) return; SS.on=false; window.ClassicaNatureGL?.activate?.(null); window.ClassicaImpressive?.activate?.(null); cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
   ssClearFrame(true);ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
@@ -2202,6 +1977,11 @@ document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('clic
   try{localStorage.setItem('suburbia-art-mode',artMode);}catch{}
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
+addEventListener('classica-impressive-ready',event=>{
+  if(!SS.on||SS.real||event.detail?.id!==SONGS[ssArtIndex()].id)return;
+  SS.dirty=true;SS.lastFrame=0;
+  if(REDUCED)ssLoop(performance.now());
+});
 addEventListener('classica-nature-ready',event=>{
   if(!SS.on||artMode!=='realism'||!SS.real||event.detail?.id!==SONGS[ssArtIndex()].id)return;
   SS.dirty=true;SS.lastFrame=0;

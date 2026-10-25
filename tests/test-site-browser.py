@@ -45,7 +45,7 @@ with sync_playwright() as p:
       const loading=document.querySelector('#ssArtNote').textContent.includes('読み込み中');
       ssArtNote(0,true);
       const fallback=document.querySelector('#ssArtNote').textContent.includes('利用できない');
-      artMode='original';ssSyncMode();return loading&&fallback;
+      artMode='impressive';ssSyncMode();return loading&&fallback;
     }""")
     page.locator('#fq').fill('ショパン')
     page.wait_for_function("document.querySelectorAll('.card').length===8")

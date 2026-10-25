@@ -4,29 +4,54 @@
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='waltz-64-2';
- const description='暗い小石の隙間を、海泡がほどけてめぐる情景';
+ const description='暗い岩棚に沿う砂の通り道が、低い波の寄せ返しで狭まり、また現れる情景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
-float stone(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.92,1.10,length((p-c)/r));}
-void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 tx=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;float ph=TAU*mod(time,48.)/48.;
- // Three fixed obstacles: flow vanishes at their bodies, not a rotating photographic plate.
- float solids=max(stone(tx,vec2(.115,.785),vec2(.35,.38)),max(stone(tx,vec2(1.02,.69),vec2(.35,.43)),stone(tx,vec2(.50,.01),vec2(.43,.47))));
- float water=1.-solids;vec2 d=tx-vec2(.54,.51);float r=length(d);
- vec2 swirl=vec2(-d.y,d.x)*(.075*sin(ph)+.025*sin(ph*2.-r*6.))*exp(-r*r*9.);
- vec2 retreat=vec2(.004*sin(ph*2.+tx.y*8.),.009*sin(ph*2.-tx.x*4.));
- vec2 local=water*water*(swirl+retreat);
- float edge=min(min(tx.x,1.-tx.x),min(tx.y,1.-tx.y));local*=smoothstep(0.,.05,edge);
- vec2 room=min(tx,1.-tx);local*=min(1.,min(room.x/(abs(local.x)+.000001),room.y/(abs(local.y)+.000001)));
- vec3 col=texture2D(material,vec2(tx.x-local.x,1.-tx.y-local.y)).rgb;
- gl_FragColor=vec4(col,1.);}
+vec3 sampleStage(vec2 p,float stage){
+ p=clamp(p,vec2(.00048828125),vec2(.99951171875));
+ return texture2D(material,vec2((p.x+stage)*.5,1.-p.y)).rgb;
+}
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+1.),f.x),f.y);}
+void main(){
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
+ p.x+=.055*(1.-smoothstep(.75,1.,a));
+ float ph=TAU*mod(time,48.)/8.;
+ float edge=.94-.90*p.y+.45*p.y*p.y;
+ float coastal=1.-smoothstep(.70,.79,p.y);
+ float wet=smoothstep(edge-.042,edge-.009,p.x);
+ float guard=smoothstep(0.,.028,p.x)*(1.-smoothstep(.972,1.,p.x))*smoothstep(0.,.025,p.y)*(1.-smoothstep(.975,1.,p.y));
+ float front=exp(-pow(abs((p.x-edge)/.115),2.))*wet*coastal;
+ float surge=.021*sin(ph-p.y*5.)+.004*sin(ph*2.+p.y*13.);
+ vec2 q=p; q.x+=surge*front*guard;
+ float water=smoothstep(edge+.018,edge+.075,p.x)*coastal;
+ q+=vec2(.0015*sin(ph*2.+p.y*110.+p.x*34.),.0012*cos(ph*2.+p.x*90.-p.y*33.))*water*guard;
+ vec3 original=sampleStage(p,0.);
+ vec3 clearFilm=sampleStage(q,1.);
+ // Local air bubbles lose opacity and break into unequal patches while the film drains.
+ // No whole-scene crossfade: dry sand, rocks, horizon and sky keep original UV and RGB.
+ float pockets=noise(p*vec2(95.,160.)+vec2(cos(ph),sin(ph))*.65);
+ float life=.5+.5*sin(ph-p.y*7.+noise(p*19.)*2.2);
+ float survival=smoothstep(.30,.78,life+pockets*.30);
+ vec3 foamy=sampleStage(q,0.);
+ // Preserve photographic bubble microstructure, but dissolve it locally into transparent water.
+ float white=max(0.,dot(foamy-clearFilm,vec3(.299,.587,.114)));
+ float bubbles=smoothstep(.016,.10,white);
+ vec3 film=mix(clearFilm,foamy,survival*bubbles);
+ film*=1.-.022*front*(.5+.5*sin(ph-p.y*5.));
+ float region=wet*coastal;
+ vec3 col=mix(original,film,region);
+ gl_FragColor=vec4(col,1.);
+}
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/waltz-foam-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/waltz64-shore-passage-atlas-v2.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

@@ -15,7 +15,7 @@ float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(ha
 float mist(vec2 p){float v=0.,amp=.55;for(int i=0;i<4;i++){v+=amp*noise(p);p=p*2.03+vec2(8.3,1.7);amp*=.47;}return v;}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
- vec2 q=vec2(.5,.55)+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
+ vec2 q=vec2(.5,clamp(.55,.47*min(1./aspect,1.)+.001,1.-.47*min(1./aspect,1.)-.001))+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
  vec3 base=texture2D(material,vec2(q.x,1.-q.y)).rgb;
  // Geometry is never displaced. A shallow optical-density layer flows above the fixed meadow.
  float band=smoothstep(.48,.53,q.y)*(1.-smoothstep(.59,.625,q.y));

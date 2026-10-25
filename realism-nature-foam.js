@@ -18,6 +18,8 @@ void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y
  vec2 swirl=vec2(-d.y,d.x)*(.075*sin(ph)+.025*sin(ph*2.-r*6.))*exp(-r*r*9.);
  vec2 retreat=vec2(.004*sin(ph*2.+tx.y*8.),.009*sin(ph*2.-tx.x*4.));
  vec2 local=water*water*(swirl+retreat);
+ float edge=min(min(tx.x,1.-tx.x),min(tx.y,1.-tx.y));local*=smoothstep(0.,.05,edge);
+ vec2 room=min(tx,1.-tx);local*=min(1.,min(room.x/(abs(local.x)+.000001),room.y/(abs(local.y)+.000001)));
  vec3 col=texture2D(material,vec2(tx.x-local.x,1.-tx.y-local.y)).rgb;
  gl_FragColor=vec4(col,1.);}
 `;

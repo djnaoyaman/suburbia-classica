@@ -34,7 +34,7 @@
     "artId": "tchaikovsky-october",
     "site": "Earth Number",
     "label": "地面の下でつながるキノコ",
-    "text": "地上に見える小さな傘から、地下に広がる菌類の世界へ。見える姿と、広がりの数字を見比べる。",
+    "text": "地上の姿からは見えない菌類の広がりを紹介する展示から着想し、雨水がしずくとなる朽木の隙間へ目を向ける創作の林床を描きました。特定の菌類個体や地下の広がり、成長速度を再現したものではありません。",
     "url": "https://djnaoyaman.github.io/earthnumber/#fungus"
   },
   {

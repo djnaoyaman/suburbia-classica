@@ -4,37 +4,56 @@
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='tchaikovsky-october';
- const description='秋の林のひだから、微細な粒が静かにほどける情景';
+ const description='朽木の樹皮の隙間に見える細い菌糸状の繊維と、濡れた木肌を通って離れる小さな雨滴';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
-float hash(float n){return fract(sin(n*127.1)*43758.5453);}
+vec3 photo(vec2 p){return texture2D(material,clamp(vec2(p.x,1.-p.y),vec2(.00048828125),vec2(.99951171875))).rgb;}
 void main(){
- vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
- vec2 q=vec2(.5,.51)+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
- vec3 color=texture2D(material,vec2(q.x,1.-q.y)).rgb;
- // No particles exist outside this envelope; skip expensive foreground work.
- if(q.x<.22||q.x>.62||q.y<.35||q.y>.58){gl_FragColor=vec4(color,1.);return;}
- // Fine independent motes originate below the gills; the mushroom and log remain geometrically fixed.
- for(int i=0;i<88;i++){
-  float fi=float(i),age=fract(mod(time,48.)/(12.+12.*floor(hash(fi+61.)*2.))+hash(fi+5.));
-  float sx=.408+.19*hash(fi+17.);float sy=.555+.008*sin(fi*2.);
-  vec2 p=vec2(sx,sy)+vec2(-.10-.05*hash(fi+23.),-.18)*age;
-  p+=vec2(.008*sin(TAU*age+fi)*age,.003*sin(TAU*age*2.+fi)*age);
-  float fade=smoothstep(0.,.10,age)*(1.-smoothstep(.72,1.,age));
-  float radius=.0009+.0015*hash(fi+31.);vec2 d=(q-p)/radius;
-  float mote=exp(-dot(d,d)*2.)*fade*(.15+.45*hash(fi+43.));
-  color=mix(color,vec3(.96,.83,.60),mote);
- }
- gl_FragColor=vec4(color,1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
+ vec3 col=photo(p);
+ float clock=mod(time,48.);float cycle=fract(clock/6.);
+ // The wood and pale fibers stay fixed. Only water in a small existing groove moves.
+ float pathX=.520+.016*sin((p.y-.359)*12.);
+ float groove=(1.-smoothstep(.0015,.0045,abs(p.x-pathX)))*smoothstep(.359,.374,p.y)*(1.-smoothstep(.405,.425,p.y));
+ float flow=.5+.5*sin(p.y*220.+TAU*clock/3.);
+ vec2 waterUV=p+vec2(.0011*sin(TAU*clock/3.+p.y*120.),.0006*cos(TAU*clock/3.+p.y*80.))*groove;
+ col=mix(col,photo(waterUV)*(.98+.035*flow),groove*.65);
+ // Grow at an attached bark tip, pinch off, then descend into the shaded recess.
+ float grow=smoothstep(0.,.68,cycle);
+ float fall=clamp((cycle-.68)/.32,0.,1.);
+ float life=smoothstep(0.,.10,cycle)*(1.-smoothstep(.98,1.,cycle));
+ vec2 center=vec2(.520+.0015*fall,.359-.013*grow-.045*fall*fall);
+ vec2 radii=vec2(.003+.007*grow,.004+.009*grow);
+ radii.y*=1.+.20*sin(fall*3.14159265);
+ vec2 d=(p-center)/radii;float r=length(d);
+ float aa=max(1.2/resolution.y,1.2/resolution.x)/radii.x;
+ float drop=(1.-smoothstep(1.-aa,1.+aa,r))*life;
+ // The lower foreground wood edge occludes the descending water, never the other way around.
+ drop*=smoothstep(.300,.312,p.y);
+ // Narrow transparent neck retracts before the detached drop travels downward.
+ float neck=(1.-smoothstep(.0008,.0022,abs(p.x-.520)))*smoothstep(min(center.y,.3589),.359,p.y)*(1.-smoothstep(.359,.364,p.y));
+ neck*=life*(1.-smoothstep(.66,.72,cycle));
+ float cap=sqrt(max(0.,1.-min(1.,r*r)));
+ vec3 refr=photo(p+d*.009*cap);
+ float rim=pow(clamp(r,0.,1.),7.);
+ refr*=1.-.23*rim;
+ refr+=vec3(.18,.20,.21)*rim*smoothstep(-.35,.65,d.y);
+ float glint=exp(-dot((d-vec2(-.32,.42))*vec2(3.,4.),(d-vec2(-.32,.42))*vec2(3.,4.)));
+ refr+=vec3(.43,.47,.49)*glint;
+ refr+=vec3(.07,.08,.085)*cap*smoothstep(-.35,.45,d.y);
+ col=mix(col,refr,drop*.88);
+ col=mix(col,photo(p+vec2(.001,0.))*.94,neck*.35);
+ gl_FragColor=vec4(col,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/mushroom-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/october-hidden-mycelium-v1.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

@@ -504,6 +504,17 @@ a.ilink:hover{background-size:100% 2px}
 @media(max-height:480px){#ss.touch-ui .brand{display:none}#ss.touch-ui .info,#ss.touch-ui.ui-hidden .info{left:16px;right:auto;width:calc(50vw - 140px);min-width:180px;bottom:max(16px,env(safe-area-inset-bottom));max-height:calc(100dvh - 96px)}#ss.touch-ui .info .tj{font-size:16px}#ss.touch-ui .info .te{font-size:11px}}
 @media(prefers-reduced-motion:reduce){#ss.touch-ui .ss-tools,#ss.touch-ui .brand,#ss.touch-ui .info{transition:none}}
 
+
+/* Contextual reading stays in the song page, never over the artwork. */
+.art-connection{margin:28px 0;padding:20px 22px;border:1px solid var(--line);border-radius:12px;background:rgba(128,128,128,.035);max-width:100%;overflow-wrap:anywhere}
+.art-connection h2{font-size:15px;letter-spacing:.04em;margin:0 0 12px}
+.art-connection p{font-size:13px;line-height:1.9;margin:8px 0}
+.art-connection .art-connection-scene{font-size:12px;opacity:.75}
+.art-connection-link{display:block;padding:10px 0;min-height:44px;box-sizing:border-box;line-height:1.7;text-decoration:underline;text-underline-offset:4px}
+.art-connection-link>span{display:block;font-size:11px;opacity:.72;text-decoration:none}
+.art-connection .art-connection-note{font-size:10px;line-height:1.7;opacity:.65;margin-top:12px}
+.art-connection-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:3px}
+@media(max-width:600px){.art-connection{padding:16px;margin:24px 0}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FM0LBF65WC"></script>
@@ -622,6 +633,7 @@ a.ilink:hover{background-size:100% 2px}
 <script src="realism-nature-storm.js?v=20261025-material09"></script>
 <script src="realism-nature-canopy.js?v=20261025-material09"></script>
 <script src="realism-nature-songbird.js?v=20261025-material09"></script>
+<script src="art-connections.js?v=20261025-connections01"></script>
 <script>
 const SONGS = [
 {
@@ -1550,6 +1562,7 @@ function renderSong(i){
       '<div class="k">献呈</div><div>'+al(s.ded)+'</div>' +
       '<div class="k">ムード</div><div>'+s.mood.map(m=>'<a class="ilink" href="#/mood/'+encodeURIComponent(m)+'">'+m+'</a>').join('・')+'</div>' +
     '</div>' +
+    (window.ClassicaArtConnections ? window.ClassicaArtConnections.render(s.id, window.ClassicaRealism && window.ClassicaRealism.describe ? window.ClassicaRealism.describe(s.id) : '') : '') +
     sec('作曲の経緯','<p>'+al(s.story)+'</p>') +
     sec('出版・初演','<p>'+al(s.pub)+'</p>') +
     sec('題名・通称の由来','<p>'+al(s.nameOrigin)+'</p>') +

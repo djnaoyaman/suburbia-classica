@@ -524,6 +524,9 @@ a.ilink:hover{background-size:100% 2px}
 @media(max-width:600px){.art-connection{padding:16px;margin:24px 0}}
 
 /* The painting stays unobstructed; only song/control areas receive contrast. */
+.art-switch button:disabled{opacity:.45;cursor:not-allowed}
+#ss.visual .vig{display:none}
+#ss.visual .info,#ss.visual .brand{text-shadow:0 1px 8px #000,0 1px 3px #000}
 #ss.impressive::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.23),transparent 27%,transparent 57%,rgba(0,0,0,.52))}
 #ss.impressive .info,#ss.impressive .brand{z-index:2;text-shadow:0 1px 10px rgba(0,0,0,.5)}
 </style>
@@ -569,6 +572,7 @@ a.ilink:hover{background-size:100% 2px}
       <div class="art-switch" role="group" aria-label="アートのスタイル">
         <button type="button" data-art-mode="impressive" aria-pressed="true">Impressive</button>
         <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
+      <button type="button" data-art-mode="visual" aria-pressed="false" disabled title="Visualは月光・月の光・ジムノペディ第1番・パヴァーヌの4曲に対応">Visual</button>
       </div>
       <p class="art-note" id="artNote" role="status"></p>
       <p class="art-available">全74曲の情景。Realismは水・光・雲など、曲ごとの自然の表情を描くアニメーションです。</p>
@@ -588,6 +592,7 @@ a.ilink:hover{background-size:100% 2px}
     <div class="art-switch" role="group" aria-label="アートのスタイル">
       <button type="button" data-art-mode="impressive" aria-pressed="true">Impressive</button>
       <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
+      <button type="button" data-art-mode="visual" aria-pressed="false" disabled title="Visualは月光・月の光・ジムノペディ第1番・パヴァーヌの4曲に対応">Visual</button>
     </div>
     <button type="button" id="ssClose" aria-label="アート表示を閉じる">閉じる ×</button>
     <p id="ssArtNote" class="art-note" role="status"></p>
@@ -606,6 +611,7 @@ a.ilink:hover{background-size:100% 2px}
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
 <script src="realism.js?v=20261023-all74"></script>
+<script src="visual-art.js?v=20261025-visual4"></script>
 <script src="impressive-catalog.js?v=20261025-impressionists-v1"></script>
 <script src="impressive-art.js?v=20261025-impressionists-v1"></script>
 <script src="realism-context.js?v=20261025-resource1"></script>
@@ -1771,16 +1777,29 @@ $('#bStop').onclick = ssStop;
 
 /* ================= 楽曲ごとの印象派絵画 ================= */
 let artMode='impressive';
-try { if(localStorage.getItem('suburbia-art-mode')==='realism') artMode='realism'; } catch {}
+try { const saved=localStorage.getItem('suburbia-art-mode');if(saved==='realism'||saved==='visual')artMode=saved; } catch {}
 const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, elapsed:0, paused:true, W:0, H:0, idle:0, sw:0};
 const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
 function ssPixelRatio(){return Math.min(window.devicePixelRatio||1,2,Math.sqrt(4194304/Math.max(1,innerWidth*innerHeight)));}
 function ssResize(){const d=ssPixelRatio();cv.width=Math.round(innerWidth*d);cv.height=Math.round(innerHeight*d);cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;ssClearFrame();SS.dirty=true;SS.lastFrame=0;}
 function ssArtIndex(){return cur>=0?cur:Math.max(0,currentViewIdx());}
+function ssVisualMode(i){
+  const supported=!!window.ClassicaVisual?.has?.(SONGS[i].id);
+  if(artMode==='visual'&&!supported){
+    artMode='impressive';SS.visualNotice=SONGS[i].id;
+    try{localStorage.setItem('suburbia-art-mode',artMode);}catch{}
+  }
+  document.querySelectorAll('[data-art-mode]').forEach(b=>{
+    if(b.dataset.artMode==='visual')b.disabled=!supported;
+    b.setAttribute('aria-pressed',String(b.dataset.artMode===artMode));
+  });
+}
 function ssArtNote(i,unavailable=false,loading=false){
+  ssVisualMode(i);
   const id=SONGS[i].id, real=window.ClassicaRealism;
   let note='';
-  if(artMode==='realism') {
+  if(artMode==='visual')note='再生位置に沿った光の演出です。音声波形・音符の解析ではありません。';
+  else if(artMode==='realism') {
     if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。Impressiveを表示します。';
     else if(unavailable) note='この端末ではリアリズムを利用できないため、Impressiveを表示します。';
     else if(loading) note='リアリズムを読み込み中です。';
@@ -1790,6 +1809,7 @@ function ssArtNote(i,unavailable=false,loading=false){
     else if(state==='loading'||state==='inactive')note='絵画を読み込み中です。';
     else if(state==='failed')note='絵画を読み込めませんでした。通信状態をご確認ください。';
   }
+  if(SS.visualNotice===id&&artMode==='impressive')note='この曲はVisual対象外のため、Impressiveに切り替えました。'+note;
   if(SS.note===note)return;SS.note=note;
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;
 }
@@ -1818,10 +1838,13 @@ function ssMaterialPhase(i=ssArtIndex()){
 }
 function ssSyncArtTone(){
   ssEl.classList.toggle('light',false);
-  ssEl.classList.toggle('impressive',!SS.real);
+  ssEl.classList.toggle('impressive',!SS.real&&!SS.visual);
+  ssEl.classList.toggle('visual',!!SS.visual);
 }
 function ssSet(i){
-  const s=SONGS[i],a=window.ClassicaImpressive?.create?.(s.id);SS.art=a;SS.impressive=!!a;
+  ssVisualMode(i);
+  const s=SONGS[i];SS.visual=artMode==='visual';
+  const a=SS.visual?window.ClassicaVisual.create(s.id):window.ClassicaImpressive?.create?.(s.id);SS.art=a;SS.impressive=!SS.visual&&!!a;
   ssClearFrame(true);
   SS.st=a?.init(SS.W,SS.H); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
   SS.mediaAt=null;SS.mediaTime=null;SS.mediaDuration=0;
@@ -1830,7 +1853,7 @@ function ssSet(i){
   window.ClassicaNatureGL?.activate?.(wantsReal?s.id:null);
   SS.real=!!(wantsReal&&real.available(s.id));
   SS.realState=SS.real?real.init(s.id):null;
-  window.ClassicaImpressive?.activate?.(SS.on&&!SS.real?s.id:null);
+  window.ClassicaImpressive?.activate?.(SS.on&&!SS.real&&!SS.visual?s.id:null);
   ssArtNote(i,wantsReal&&!SS.real,SS.real&&ssMaterialPhase(i)==='loading');
   ssSyncArtTone(i);
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
@@ -1853,7 +1876,7 @@ function ssImpressiveTime(now,fallback){
 }
 function ssLoop(now){
   if(!SS.on) return;
-  if((SS.dirty||!SS.paused)&&(!SS.real||!SS.lastFrame||now-SS.lastFrame>=32)){
+  if((SS.dirty||!SS.paused)&&(!(SS.real||SS.visual)||!SS.lastFrame||now-SS.lastFrame>=(SS.visual?40:32))){
     SS.lastFrame=now;SS.dirty=false;
     const t=REDUCED?12:(SS.elapsed+(SS.paused?0:now-SS.t0))/1000;
     if(SS.real){
@@ -1866,11 +1889,11 @@ function ssLoop(now){
       }else ssArtNote(ssArtIndex());
     }
     if(!SS.real){
-      const time=SS.impressive&&!REDUCED?ssImpressiveTime(now,t):t;
+      const time=(SS.impressive||SS.visual)&&!REDUCED?ssImpressiveTime(now,t):t;
       const progress=SS.impressive&&SS.mediaDuration>0?time/SS.mediaDuration:undefined;
       const ready=SS.art?.draw(cx,SS.W,SS.H,time,SS.st,{progress});
       if(!ready){cx.fillStyle='#242321';cx.fillRect(0,0,SS.W,SS.H);}
-      if(artMode==='impressive')ssArtNote(ssArtIndex());
+      if(artMode==='impressive'||artMode==='visual')ssArtNote(ssArtIndex());
     }
   }
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
@@ -1972,13 +1995,14 @@ function ssSwap(i){ // 曲が変わったら旧フレームを破棄して切り
 }
 ssSyncMode();ssSyncPlayback();
 document.querySelectorAll('[data-art-mode]').forEach(b=>b.addEventListener('click',()=>{
-  if(artMode===b.dataset.artMode)return;
+  if(b.disabled||artMode===b.dataset.artMode)return;
+  SS.visualNotice=null;
   artMode=b.dataset.artMode;
   try{localStorage.setItem('suburbia-art-mode',artMode);}catch{}
   ssSyncMode();if(SS.on)ssSwap(ssArtIndex());
 }));
 addEventListener('classica-impressive-ready',event=>{
-  if(!SS.on||SS.real||event.detail?.id!==SONGS[ssArtIndex()].id)return;
+  if(!SS.on||SS.real||SS.visual||event.detail?.id!==SONGS[ssArtIndex()].id)return;
   SS.dirty=true;SS.lastFrame=0;
   if(REDUCED)ssLoop(performance.now());
 });
@@ -2032,5 +2056,6 @@ route();
 </script>
 </body>
 </html>
+
 
 

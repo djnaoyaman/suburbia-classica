@@ -143,6 +143,144 @@ function render(c,w,h,time){const t=((Number(time)||0)%24+24)%24,ph=TAU*t/24;
 module.exports={render,id:'pavane-fullfield',duration:24};
 
 return module.exports; })();
+works["fur-elise"] = (() => { const module = {exports:{}};
+'use strict';
+// Broad paired return gestures, not notation or measured sound.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1c1c2b');bg.addColorStop(.5,'#33242d');bg.addColorStop(1,'#1b2332');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const episode=.5-.5*Math.cos(p);
+ c.lineCap='butt';c.lineJoin='miter';
+ for(let k=0;k<13;k++){
+  const v=(k-2)/8,y=v*h;
+  const answer=.5+.5*Math.sin(p-v*3.7);
+  const center=(.47+.22*Math.sin(p+v*2.1))*w;
+  const rise=(.065+.07*episode)*h;
+  const thickness=(.016+.025*Math.pow(answer,2))*h;
+  const gap=(.045+.10*(1-answer))*w;
+  for(let side=0;side<2;side++){
+   const sign=side?1:-1;
+   const hinge=center+sign*gap;
+   const g=c.createLinearGradient(side?w:0,y,hinge,y+rise);
+   g.addColorStop(0,side?'rgba(185,146,163,.19)':'rgba(199,150,140,.25)');
+   g.addColorStop(.65,`rgba(230,174,158,${.38+.42*answer})`);
+   g.addColorStop(1,`rgba(251,239,216,${.62+.32*answer})`);
+   c.strokeStyle=g;c.lineWidth=thickness;
+   c.beginPath();c.moveTo(side?w*1.08:-w*.08,y);
+   c.lineTo(hinge,y);c.lineTo(hinge,y+sign*rise);
+   c.lineTo(hinge-sign*(.08+.08*answer)*w,y+sign*rise);c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'fur-elise',duration:24};
+
+return module.exports; })();
+works["tristesse"] = (() => { const module = {exports:{}};
+'use strict';
+// Three independent light planes: melody, inner voice and accompaniment as an
+// editorial spatial association, not measured music or composer intention.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#2a253e');bg.addColorStop(.55,'#3e2a35');bg.addColorStop(1,'#202d3d');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const planes=[
+  {angle:-.65+.25*Math.sin(p),x:.34+.12*Math.sin(p),y:.35+.14*Math.cos(p),width:.47,color:'249,214,179',alpha:.83},
+  {angle:1.07+.23*Math.sin(p+.8),x:.62+.14*Math.cos(p),y:.56+.18*Math.sin(p+.6),width:.32,color:'184,170,224',alpha:.70},
+  {angle:.10+.27*Math.sin(p+2.4),x:.46+.20*Math.sin(p+1.7),y:.70+.18*Math.cos(p+1.2),width:.36,color:'243,232,215',alpha:.70}
+ ];
+ for(let k=0;k<3;k++){
+  const q=planes[k],co=Math.cos(q.angle),si=Math.sin(q.angle);
+  const point=(u,v)=>[(q.x+co*u-si*v)*w,(q.y+si*u+co*v)*h];
+  const a=point(-1.4,-q.width/2),b=point(1.4,-q.width/2),d=point(1.4,q.width/2),e=point(-1.4,q.width/2);
+  const lo=point(0,-q.width/2),hi=point(0,q.width/2),g=c.createLinearGradient(lo[0],lo[1],hi[0],hi[1]);
+  const gleam=.33+.24*Math.sin(p+k*1.8);
+  g.addColorStop(0,`rgba(${q.color},.07)`);g.addColorStop(gleam,`rgba(${q.color},${q.alpha})`);g.addColorStop(1,`rgba(${q.color},.12)`);
+  c.fillStyle=g;c.beginPath();c.moveTo(...a);c.lineTo(...b);c.lineTo(...d);c.lineTo(...e);c.closePath();c.fill();
+ }
+ c.restore();
+}
+module.exports={render,id:'tristesse',duration:24};
+
+return module.exports; })();
+works["fantaisie-impromptu"] = (() => { const module = {exports:{}};
+'use strict';
+// Opposing four/three spatial registrations: editorial cross-rhythm, not MIDI.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#13253A');bg.addColorStop(.52,'#251A3C');bg.addColorStop(1,'#0C303D');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ c.lineCap='round';c.lineJoin='round';
+ // A broad, breathing release in the middle; both registrations remain present.
+ const calm=.5-.5*Math.cos(p);
+ for(let family=0;family<2;family++){
+  const sign=family?1:-1,group=family?3:4;
+  for(let k=0;k<248;k++){
+   const u=-.8+2.6*k/247;
+   const packet=.5+.5*Math.cos(group*TAU*u+sign*p);
+   const alpha=.48+.47*packet;
+   const g=c.createLinearGradient(0,family?h:0,w,family?0:h);
+   g.addColorStop(0,family?'rgba(153,127,186,.24)':'rgba(88,161,190,.28)');
+   g.addColorStop(.25,`rgba(${family?'189,177,224':'148,220,238'},${alpha})`);
+   g.addColorStop(.55,`rgba(${family?'225,218,244':'222,249,250'},${alpha*.95})`);
+   g.addColorStop(.82,`rgba(${family?'166,158,221':'103,200,225'},${alpha*.8})`);
+   g.addColorStop(1,'rgba(111,150,190,.24)');
+   c.strokeStyle=g;c.lineWidth=.78+.25*packet;c.beginPath();
+   for(let j=0;j<=68;j++){
+    const x=-.12+1.24*j/68;
+    const bow=.085*Math.sin(Math.PI*x)*Math.sin(p+u*1.6);
+    const release=calm*.095*Math.sin(Math.PI*x)*Math.sin(TAU*u);
+    const gathering=.032*Math.sin(group*TAU*u+sign*p+1.5*x);
+    const y=u+gathering+sign*(x-.5)*.88+bow+release;
+    if(j===0)c.moveTo(x*w,y*h);else c.lineTo(x*w,y*h);
+   }
+   c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'fantaisie-impromptu',duration:24};
+
+return module.exports; })();
+works["nocturne-9-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Broad asymmetric returns of light; changing inflections over a slower support.
+// Editorial composition grounded in recurring ornamented melody, not audio analysis.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#12294A');bg.addColorStop(.55,'#192941');bg.addColorStop(1,'#2A223A');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const point=(theta,r,k)=>{
+  const bend=.1*Math.sin(theta-p)+.035*Math.sin(3*theta+p)*(k/8);
+  return [( -.58+.13*Math.sin(k*.55+p)+r*(.93*Math.cos(theta)+.18*Math.cos(2*theta)+bend))*w,
+   (-.12+.08*Math.cos(k*.4-p)+r*(.62*Math.sin(theta)+.1*Math.sin(2*theta-.5))+.035*Math.sin(p+k*.35))*h];
+ };
+ // Nine broad planes with large clear intervals, not a woven fine-line field.
+ for(let k=8;k>=0;k--){
+  const r=.55+k*.26+.045*Math.sin(p+k*.7),width=.065+.045*(.5+.5*Math.sin(p-k*.8));
+  const phase=p+k*.35;
+  const g=c.createLinearGradient(w*(-.2+.2*Math.sin(phase)),h*.1,w*1.1,h*.92);
+  g.addColorStop(0,'rgba(101,142,190,.18)');g.addColorStop(.27,'rgba(191,164,179,.4)');
+  g.addColorStop(.53,`rgba(247,226,198,${.73+.14*Math.sin(phase)})`);
+  g.addColorStop(.74,'rgba(197,133,153,.54)');g.addColorStop(1,'rgba(87,123,176,.18)');
+  c.fillStyle=g;
+  for(let soft=0;soft<5;soft++){
+   const edge=soft/5,wi=width*(1-.32*edge);c.globalAlpha=.3+soft*.04;c.beginPath();
+   for(let j=0;j<=120;j++){const a=TAU*j/120,xy=point(a,r+wi,k);j?c.lineTo(...xy):c.moveTo(...xy);}
+   for(let j=120;j>=0;j--){const a=TAU*j/120,xy=point(a,Math.max(.012,r-wi),k);c.lineTo(...xy);}
+   c.closePath();c.fill('evenodd');
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'nocturne-9-2',duration:24};
+
+return module.exports; })();
 function create(id){
  const work=works[id];if(!work)return null;
  let target=null,proxy=null,scale=1;
@@ -160,5 +298,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual4'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual8'});
 })();

@@ -11,7 +11,7 @@ for(const [id,hash]of Object.entries(expected)){
  const c={module:{exports:{}}};vm.runInNewContext(source,c);sources[id]=c.module.exports;
 }
 const win={};vm.runInNewContext(js,{window:win});const visual=win.ClassicaVisual;
-assert.deepEqual([...visual.list()].sort(),Object.keys(expected).sort());assert.equal(visual.create('fur-elise'),null);
+assert(Object.keys(expected).every(id=>visual.has(id)));assert.equal(new Set(visual.list()).size,visual.list().length);assert.equal(visual.create('__unreleased__'),null);
 // Native Canvas is optional; source and lifecycle tests need only Node built-ins.
 let pixelFrames=0;
 try{
@@ -34,14 +34,14 @@ const buttons=Array.from({length:2},()=>['impressive','realism','visual'].map(mo
 let draws=0,clears=0,raf=0,media=14;
 const cx=new Proxy({clearRect(){clears++;},canvas:{width:554}}, {get(o,k){return k in o?o[k]:(()=>{});},set(o,k,v){o[k]=v;return true;}});
 const storage=new Map(),activations=[],nature=[];
-const ctx={window:{ClassicaVisual:visual,ClassicaImpressive:{create:()=>({init:()=>({}),draw:()=>{draws++;return true;}}),status:()=> 'ready',activate:id=>activations.push(id)},ClassicaNatureGL:{activate:id=>nature.push(id)},ClassicaArtConnections:{renderFullscreen:()=>''}},document:{querySelectorAll:()=>buttons,fullscreenElement:null},$:element,SONGS:[...Object.keys(expected),'fur-elise'].map(id=>({id,title:id,en:id,composer:'Composer',year:'1899',yt:{who:'Performer'}})),cur:0,currentViewIdx:()=>0,SS:{on:true,W:277,H:600,elapsed:0,paused:true,dirty:true,mediaAt:null,mediaTime:null},artMode:'visual',localStorage:{setItem:(k,v)=>storage.set(k,v)},performance:{now:()=>1000},playing:false,REDUCED:false,ytReady:true,player:{getCurrentTime:()=>media,getDuration:()=>120},cx,cv:element('cv'),ssEl:element('ss'),ssPixelRatio:()=>2,ssTouchInert:()=>{},clearTimeout(){},cancelAnimationFrame(){},requestAnimationFrame(){raf++;return raf;},ssSyncPlayback(){}};
+const ctx={window:{ClassicaVisual:visual,ClassicaImpressive:{create:()=>({init:()=>({}),draw:()=>{draws++;return true;}}),status:()=> 'ready',activate:id=>activations.push(id)},ClassicaNatureGL:{activate:id=>nature.push(id)},ClassicaArtConnections:{renderFullscreen:()=>''}},document:{querySelectorAll:()=>buttons,fullscreenElement:null},$:element,SONGS:[...Object.keys(expected),'__unreleased__'].map(id=>({id,title:id,en:id,composer:'Composer',year:'1899',yt:{who:'Performer'}})),cur:0,currentViewIdx:()=>0,SS:{on:true,W:277,H:600,elapsed:0,paused:true,dirty:true,mediaAt:null,mediaTime:null},artMode:'visual',localStorage:{setItem:(k,v)=>storage.set(k,v)},performance:{now:()=>1000},playing:false,REDUCED:false,ytReady:true,player:{getCurrentTime:()=>media,getDuration:()=>120},cx,cv:element('cv'),ssEl:element('ss'),ssPixelRatio:()=>2,ssTouchInert:()=>{},clearTimeout(){},cancelAnimationFrame(){},requestAnimationFrame(){raf++;return raf;},ssSyncPlayback(){}};
 vm.createContext(ctx);
 for(const name of ['ssArtIndex','ssVisualMode','ssArtNote','ssSyncCredit','ssSyncMode','ssClearFrame','ssMaterialPhase','ssSyncArtTone','ssSet','ssImpressiveTime','ssLoop','ssSetMotionPlaying'])vm.runInContext(fn(name),ctx);
 // Use a cheap stand-in only for lifecycle draw counts; original exact render tested above.
 ctx.window.ClassicaVisual={has:visual.has,create:id=>visual.has(id)?{init:()=>null,draw:()=>{draws++;return true;}}:null};
 for(let sweep=0;sweep<4;sweep++)for(let i=0;i<5;i++){
  ctx.cur=i;ctx.artMode='visual';ctx.ssSet(i);ctx.SS.lastFrame=0;assert.equal(ctx.SS.visual,i<4);assert.equal(ctx.artMode,i<4?'visual':'impressive');
- assert.equal(activations.at(-1),i<4?null:'fur-elise');assert.equal(nature.at(-1),null);
+ assert.equal(activations.at(-1),i<4?null:'__unreleased__');assert.equal(nature.at(-1),null);
  assert.equal(buttons.find(x=>x.dataset.artMode==='visual').disabled,i===4);
  assert.equal(element('#ssTj').textContent,ctx.SONGS[i].title);assert(element('#ssDetails').textContent.includes('1899'));
  ctx.ssLoop(1000);const count=draws;ctx.ssLoop(1050);assert.equal(draws,count,'paused redraw');

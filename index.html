@@ -563,7 +563,7 @@ a.ilink:hover{background-size:100% 2px}
     <div class="art-settings" aria-label="アートの設定">
       <span class="art-label">再生中のアート</span>
       <div class="art-switch" role="group" aria-label="アートのスタイル">
-        <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
+        <button type="button" data-art-mode="original" aria-pressed="true">Impressive</button>
         <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
       </div>
       <p class="art-note" id="artNote" role="status"></p>
@@ -582,7 +582,7 @@ a.ilink:hover{background-size:100% 2px}
     <button type="button" id="ssBack" class="ss-return">曲画面に戻る</button>
     <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
-      <button type="button" data-art-mode="original" aria-pressed="true">Original</button>
+      <button type="button" data-art-mode="original" aria-pressed="true">Impressive</button>
       <button type="button" data-art-mode="realism" aria-pressed="false">Realism</button>
     </div>
     <button type="button" id="ssClose" aria-label="アート表示を閉じる">閉じる ×</button>
@@ -2012,8 +2012,8 @@ function ssArtNote(i,unavailable=false,loading=false){
   const id=SONGS[i].id, real=window.ClassicaRealism;
   let note='';
   if(artMode==='realism') {
-    if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。オリジナルを表示します。';
-    else if(unavailable) note='この端末ではリアリズムを利用できないため、オリジナルを表示します。';
+    if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。Impressiveを表示します。';
+    else if(unavailable) note='この端末ではリアリズムを利用できないため、Impressiveを表示します。';
     else if(loading) note='リアリズムを読み込み中です。';
   }
   if(SS.note===note)return;SS.note=note;

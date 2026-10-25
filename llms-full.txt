@@ -2,7 +2,7 @@
 
 > 各曲のページ: https://djnaoyaman.github.io/suburbia-classica/songs/曲ID.html
 
-> 現収録74曲にはピアノ以外の編成も含みます。今後の選曲方針、音源の確認範囲、Original／Realismと着想の扱いは https://djnaoyaman.github.io/suburbia-classica/about.html を参照してください。以下の各曲本文は変更していません。
+> 現収録74曲にはピアノ以外の編成も含みます。今後の選曲方針、音源の確認範囲、Impressive／Realismと着想の扱いは https://djnaoyaman.github.io/suburbia-classica/about.html を参照してください。以下の各曲本文は変更していません。
 
 # エリーゼのために
 
@@ -4388,3 +4388,4 @@ DGによるフィッシャー＝ディースカウとムーアのシューベル
 - https://operatoday.com/2008/10/verdi_requiem_quattro_pezzi_sacri/
 - https://www.classicfm.com/composers/verdi/dies-irae-requiem-lyrics-translation-which-films/
 - https://imslp.org/wiki/Requiem_(Verdi,_Giuseppe)
+

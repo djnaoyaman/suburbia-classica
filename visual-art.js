@@ -445,6 +445,143 @@ function render(c,w,h,time){
 module.exports={render,id:'flaxen-hair',duration:24};
 
 return module.exports; })();
+works["arabesque-1"] = (() => { const module = {exports:{}};
+'use strict';
+// Interlaced ornament: editorial association with continuous figuration.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#042c2e');bg.addColorStop(.55,'#063c35');bg.addColorStop(1,'#061f2d');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const point=(f,k,t)=>{const q=-.3+k*.23,phase=TAU*(t*1.13)+p+k*.5;return f===0?{x:q+.14*Math.sin(phase),y:t}:{x:t,y:q+.14*Math.sin(phase+.9)};};
+ const thick=Math.min(w,h)*.055;
+ function strand(f,k){
+  for(let n=-3;n<=3;n++){
+   const off=n*thick/7,edge=.72+.28*(n+3)/6;
+   const g=c.createLinearGradient(0,0,f?w:0,f?0:h),a=.5+.5*Math.sin(p+k*.8);
+   const color=f?[210,231,208]:[62,203,172];
+   for(const [q,intensity]of[[0,.4],[.25,.63],[.5,.65+.35*a],[.8,.66],[1,.42]]){const z=intensity*edge;g.addColorStop(q,`rgb(${Math.round(5+color[0]*z)},${Math.round(25+color[1]*z*.9)},${Math.round(26+color[2]*z*.88)})`);}
+   c.strokeStyle=g;c.lineWidth=thick/7*1.04;c.beginPath();
+   for(let j=0;j<=100;j++){const t=-.2+1.4*j/100,a=point(f,k,t),b=point(f,k,t+.0001),dx=(b.x-a.x)*w,dy=(b.y-a.y)*h,len=Math.hypot(dx,dy),x=a.x*w-dy/len*off,y=a.y*h+dx/len*off;if(j===0)c.moveTo(x,y);else c.lineTo(x,y);}c.stroke();
+  }
+ }
+ for(let f=0;f<2;f++)for(let k=0;k<8;k++)strand(f,k);
+ // Alternating crossings: redraw the same continuous strand only locally.
+ for(let a=0;a<8;a++)for(let b=0;b<8;b++)if((a+b)%2===0){
+  let x=-.3+a*.23,y=-.3+b*.23;
+  let lo=x-.14,hi=x+.14;
+  for(let i=0;i<36;i++){const mid=(lo+hi)*.5,ym=point(1,b,mid).y;if(mid-point(0,a,ym).x>0)hi=mid;else lo=mid;}
+  x=(lo+hi)*.5;y=point(1,b,x).y;
+  c.save();c.beginPath();c.arc(x*w,y*h,thick*1.8/Math.max(.12,Math.abs(1-(.14*TAU*1.13*Math.cos(TAU*y*1.13+p+a*.5))*(.14*TAU*1.13*Math.cos(TAU*x*1.13+p+b*.5+.9)))/Math.hypot(1,.14*TAU*1.13*Math.cos(TAU*y*1.13+p+a*.5)*w/h)/Math.hypot(1,.14*TAU*1.13*Math.cos(TAU*x*1.13+p+b*.5+.9)*h/w)),0,TAU);c.clip();strand(0,a);c.restore();
+ }
+ c.restore();
+}
+module.exports={render,id:'arabesque-1',duration:24};
+
+return module.exports; })();
+works["prelude-bwv846"] = (() => { const module = {exports:{}};
+'use strict';
+// An invariant broken route reveals changing harmonic illumination, not MIDI.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineJoin='miter';c.lineCap='butt';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1d2c3b');bg.addColorStop(.5,'#34434b');bg.addColorStop(1,'#182a34');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ for(let j=-2;j<13;j++)for(let n=0;n<5;n++){
+  const off=n*.009,base=j*.115+off;
+  const pts=[];
+  for(let k=-1;k<=5;k++){
+   const x=k*.25,up=(k+j)%2===0?.064:-.064;
+   pts.push([x,base+up], [x+.145,base+up],[x+.145,base-up],[x+.25,base-up]);
+  }
+  const width=(n===2?2.2:.7)*Math.max(1,h/600);
+  for(let k=0;k<pts.length-1;k++){
+   const a=pts[k],b=pts[k+1],cx=(a[0]+b[0])*.5,cy=(a[1]+b[1])*.5;
+   const wave=.5+.5*Math.cos(cx*4+cy*5-p*2+j*.37),slow=.5+.5*Math.sin(p-cy*3);
+   const intensity=.14+.86*Math.pow(wave,4),warm=slow*.6;
+   const r=Math.round(85+159*intensity),g=Math.round(112+132*intensity),bl=Math.round(130+(105-75*warm)*intensity);
+   c.strokeStyle=`rgb(${r},${g},${bl})`;c.lineWidth=width*(1+3.1*Math.pow(wave,9));c.beginPath();c.moveTo(a[0]*w,a[1]*h);c.lineTo(b[0]*w,b[1]*h);c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'prelude-bwv846',duration:24};
+
+return module.exports; })();
+works["nocturne-20"] = (() => { const module = {exports:{}};
+'use strict';
+// Long recollective phrases and reconnected ornamental intervals; editorial, not score sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#071F32';c.fillRect(0,0,w,h);
+ const seams=[.22+.055*Math.sin(p),.55+.07*Math.cos(p+.6),.81+.04*Math.sin(p-1)];
+ for(let row=-1;row<16;row++){
+  const y=(row/14+.018*Math.sin(p+row*.58))*h;
+  const peak=.5+.5*Math.cos(p-row*.52),thick=(.009+.025*peak)*h;
+  let edges=[-.1,...seams,1.1];
+  for(let s=0;s<4;s++){
+   const reconnect=.5+.5*Math.cos(p+row*.43+s),gap=.012+.034*(1-reconnect);
+   const x1=(edges[s]+(s?gap:0))*w,x2=(edges[s+1]-(s<3?gap:0))*w;
+   const g=c.createLinearGradient(x1,y,x2,y+thick);
+   g.addColorStop(0,`rgba(116,157,183,${.18+.25*peak})`);
+   g.addColorStop(.5,`rgba(206,199,232,${.24+.58*peak})`);
+   g.addColorStop(1,`rgba(239,201,144,${(.12+.6*peak)*reconnect})`);
+   c.fillStyle=g;c.fillRect(x1,y,x2-x1,thick);
+   for(let k=0;k<4;k++){
+    c.fillStyle=`rgba(234,236,246,${(.1+.38*peak)*(1-k/5)})`;
+    c.fillRect(x1,y+(k+.5)*thick/4,x2-x1,.5);
+   }
+  }
+ }
+ // Upright ornamental ladders link adjacent phrases, rather than background grid.
+ for(let s=0;s<3;s++)for(let j=0;j<20;j++){
+  const y=(j/19)*h,energy=Math.pow(.5+.5*Math.cos(p-j*.3-s*1.7),4);
+  const x=seams[s]*w,len=(.012+.045*energy)*w;
+  c.fillStyle=`rgba(227,187,125,${.08+.67*energy})`;
+  c.fillRect(x-len*.5,y,len,.6+energy*.6);
+  c.fillStyle=`rgba(178,203,226,${.05+.22*energy})`;
+  c.fillRect(x-.35,y-.012*h,.7,.024*h);
+ }
+ c.restore();
+}
+module.exports={render,id:'nocturne-20',duration:24};
+
+return module.exports; })();
+works["pathetique-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Alternating broad sheltering spans and inner moving light; editorial interpretation.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#153D40';c.fillRect(0,0,w,h);c.lineCap='round';c.lineJoin='round';
+ // The spans enter alternately from both edges, with asymmetric corner heights.
+ for(let k=-1;k<7;k++){
+  const left=k%2===0,phase=p-k*.75,energy=.5+.5*Math.cos(phase);
+  const y=(k*.185+.04*Math.sin(phase))*h;
+  const reach=(.65+.22*energy)*w,turn=(left?reach:w-reach),start=left?-.18*w:1.18*w;
+  const inner=y+.14*h,far=left?1.15*w:-.15*w;
+  const path=()=>{c.beginPath();c.moveTo(start,y);c.lineTo(turn+(left?-.12:.12)*w,y);c.bezierCurveTo(turn,y,turn,inner,turn+(left?.12:-.12)*w,inner);c.lineTo(far,inner);};
+  const grad=c.createLinearGradient(0,y,w,inner);
+  const warm=left?energy:1-energy;
+  grad.addColorStop(0,`rgba(188,113,77,${.55+.25*warm})`);
+  grad.addColorStop(.34,`rgba(220,198,152,${.65+.28*energy})`);
+  grad.addColorStop(.66,`rgba(247,230,192,${.65+.3*energy})`);
+  grad.addColorStop(1,'rgba(92,164,160,.65)');
+  c.strokeStyle=grad;c.lineWidth=h*(.046+.027*energy);path();c.stroke();
+  // Closely inset light tracery reveals thickness without turning every area into a mesh.
+  for(let f=0;f<8;f++){
+   c.save();c.translate(0,(f-3.5)*h*.0048);
+   c.lineWidth=.52;c.strokeStyle=`rgba(255,239,210,${(.15+.48*energy)*(1-Math.abs(f-3.5)/5)})`;path();c.stroke();c.restore();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'pathetique-2',duration:24};
+
+return module.exports; })();
 function create(id){
  const work=works[id];if(!work)return null;
  let target=null,proxy=null,scale=1;
@@ -462,5 +599,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual12'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual16'});
 })();

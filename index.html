@@ -495,6 +495,13 @@ a.ilink:hover{background-size:100% 2px}
 #ss.touch-ui .info .np{font-size:9px;margin-bottom:5px}
 #ss.touch-ui .info .te{font-size:13px;line-height:1.4;margin-top:3px}
 #ss.touch-ui .info .tc{font-size:11px;line-height:1.5;letter-spacing:.06em;margin-top:7px}
+#ss .ss-credit{max-width:100%;margin-top:2px;font-size:10px;line-height:1.4;text-transform:none;letter-spacing:normal}
+#ss .ss-credit[hidden]{display:none!important}
+#ss .ss-credit-link{display:inline-flex;align-items:center;max-width:100%;min-height:44px;box-sizing:border-box;color:inherit;text-decoration:none;pointer-events:auto;vertical-align:top}
+#ss .ss-credit-prefix,#ss .ss-credit-detail{flex:none}
+#ss .ss-credit-site{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ss .ss-credit-link:hover .ss-credit-site{text-decoration:underline}
+#ss .ss-credit-link:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:2px}
 #ss .ss-mobile-details{display:block;font-size:13px;line-height:1.5;margin-top:6px;overflow-wrap:anywhere}
 #ss.touch-ui .ss-mobile-details{display:block;font-size:11px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
 #ss.touch-ui.ui-hidden .ss-playback,#ss.touch-ui.ui-hidden .ss-return,#ss.touch-ui.ui-hidden .art-switch,#ss.touch-ui.ui-hidden #ssClose{opacity:0;visibility:hidden;pointer-events:none}
@@ -589,6 +596,7 @@ a.ilink:hover{background-size:100% 2px}
     <div class="te" id="ssTe"></div>
     <div class="tc"><i></i><span id="ssTc"></span></div>
     <div id="ssDetails" class="ss-mobile-details"></div>
+    <div id="ssCredit" class="ss-credit" hidden></div>
   </div>
 </div>
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
@@ -663,7 +671,7 @@ a.ilink:hover{background-size:100% 2px}
 <script src="realism-nature-nautilus.js?v=20261025-resource1"></script>
 <script src="realism-nature-hourglass.js?v=20261025-resource1"></script>
 <script src="realism-nature-ash.js?v=20261025-resource1"></script>
-<script src="art-connections.js?v=20261025-butterflycollab1"></script>
+<script src="art-connections.js?v=20261025-fullscreencredit1"></script>
 <script>
 const SONGS = [
 {
@@ -1995,9 +2003,13 @@ function ssArtNote(i,unavailable=false,loading=false){
   if(SS.note===note)return;SS.note=note;
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;
 }
+function ssSyncCredit(i=ssArtIndex()){
+  const el=$('#ssCredit'),html=window.ClassicaArtConnections?.renderFullscreen?.(SONGS[i].id,artMode)||'';
+  if(el.innerHTML!==html)el.innerHTML=html;el.hidden=!html;
+}
 function ssSyncMode(){
   document.querySelectorAll('[data-art-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.artMode===artMode)));
-  ssArtNote(ssArtIndex());
+  ssArtNote(ssArtIndex());ssSyncCredit();
 }
 function ssClearFrame(reset=false){
   if(reset)cv.width=cv.width;
@@ -2031,6 +2043,7 @@ function ssSet(i){
   ssSyncArtTone(i);
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
   $('#ssDetails').textContent=[s.yt&&s.yt.who?'演奏：'+s.yt.who:'',s.year?'作品年：'+s.year:'',s.yt&&s.yt.rec?'録音年：'+s.yt.rec:''].filter(Boolean).join(' ／ ');
+  ssSyncCredit(i);
 }
 function ssLoop(now){
   if(!SS.on) return;
@@ -2105,12 +2118,15 @@ function ssTouchBegin(){
 function ssTouchPointer(e){
   if(!SS.on||!ssTouchMode())return;
   SS.uiKeyboard=false;SS.uiPressed=true;clearTimeout(SS.uiTimer);
+  const credit=!!e.target?.closest?.('#ssCredit a');
   const hidden=ssEl.classList.contains('ui-hidden');SS.uiConsumeClick=hidden;
+  if(credit){SS.uiConsumeClick=false;return;}
   ssTouchWake();
   if(hidden){e.preventDefault();e.stopImmediatePropagation();}
 }
 function ssTouchClick(e){
   if(!SS.on||!ssTouchMode())return;
+  if(e.target?.closest?.('#ssCredit a')){SS.uiConsumeClick=false;return;}
   if(SS.uiConsumeClick){SS.uiConsumeClick=false;e.preventDefault();e.stopImmediatePropagation();}
   ssTouchWake();
 }
@@ -2119,7 +2135,7 @@ function ssTouchKey(e){
   SS.uiConsumeClick=false;
   if(e.key==='Tab'){
     const hidden=ssEl.classList.contains('ui-hidden');SS.uiKeyboard=true;clearTimeout(SS.uiTimer);ssTouchWake();
-    if(hidden){e.preventDefault();$('#ssPrev').focus({preventScroll:true});}
+    if(hidden&&!$('#ssCredit').contains(e.target)){e.preventDefault();$('#ssPrev').focus({preventScroll:true});}
   }
 }
 function ssShow(manual){
@@ -2166,10 +2182,15 @@ ssEl.addEventListener('click',ssTouchClick,true);
 ssEl.addEventListener('keydown',ssTouchKey,true);
 ['pointerup','pointercancel'].forEach(name=>addEventListener(name,()=>{SS.uiPressed=false;ssTouchSchedule();},{passive:true}));
 $('#ssTools').addEventListener('focusin',()=>{if(SS.on&&ssTouchMode()&&!SS.uiPressed){SS.uiKeyboard=true;clearTimeout(SS.uiTimer);ssTouchWake();}});
-$('#ssTools').addEventListener('focusout',()=>{setTimeout(()=>{if(!$('#ssTools').contains(document.activeElement)){SS.uiKeyboard=false;ssTouchSchedule();}},0);});
+$('#ssTools').addEventListener('focusout',()=>{setTimeout(()=>{if(!$('#ssTools').contains(document.activeElement)&&!$('#ssCredit').contains(document.activeElement)){SS.uiKeyboard=false;ssTouchSchedule();}},0);});
+$('#ssCredit').addEventListener('click',e=>{e.stopPropagation();SS.idle=0;});
+$('#ssCredit').addEventListener('focusin',()=>{if(SS.on&&ssTouchMode()){SS.uiKeyboard=true;clearTimeout(SS.uiTimer);}});
+$('#ssCredit').addEventListener('focusout',()=>{setTimeout(()=>{if(!$('#ssTools').contains(document.activeElement)&&!$('#ssCredit').contains(document.activeElement)){SS.uiKeyboard=false;ssTouchSchedule();}},0);});
+$('#ssCredit').addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Escape')ssHide();else if(e.key==='Tab')ssTrapFocus(e);});
 // Fullscreen is interactive: background input never dismisses the player.
 function ssTrapFocus(e){
-  const buttons=Array.from($('#ssTools').querySelectorAll('button:not([disabled])'));
+  const buttons=Array.from($('#ssTools').querySelectorAll('button:not([disabled])')).filter(button=>!button.inert);
+  const credit=$('#ssCredit');if(!credit.hidden){const link=credit.querySelector('a[href]');if(link)buttons.push(link);}
   if(!buttons.length)return;
   const first=buttons[0],last=buttons[buttons.length-1];
   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}

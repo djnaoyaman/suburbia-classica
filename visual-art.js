@@ -281,6 +281,170 @@ function render(c,w,h,time){
 module.exports={render,id:'nocturne-9-2',duration:24};
 
 return module.exports; })();
+works["raindrop"] = (() => { const module = {exports:{}};
+'use strict';
+// The invariant pulse reappears inside changing space. Editorial, not audio sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#101d30';c.fillRect(0,0,w,h);
+ const wash=c.createLinearGradient(0,0,w,h);wash.addColorStop(0,'#18253a');wash.addColorStop(.52,'#273a4a');wash.addColorStop(1,'#151c2b');c.fillStyle=wash;c.fillRect(0,0,w,h);
+ const centers=[[.26,.28,0],[.74,.71,2.1],[.55,1.13,4.2]];
+ const rows=118,steps=64;
+ for(let j=-12;j<rows+12;j++){
+  const v=j/rows;
+  c.beginPath();
+  let intensity=0;
+  for(let i=0;i<=steps;i++){
+   const u=-.14+1.28*i/steps;
+   let d=0,light=0;
+   for(const [cx,cy,ph]of centers){
+    const dx=(u-cx)*.64,dy=v-cy,rr=Math.sqrt(dx*dx+dy*dy+.003);
+    const wave=rr*13-p*2+ph;
+    const envelope=.55+.45*Math.cos(rr*3-p+ph*.4);
+    d+=Math.sin(wave)*.039*envelope/(1+rr*1.4);
+    light+=Math.pow(.5+.5*Math.cos(wave),8)*envelope*.34;
+   }
+   const y=(v+d+.07*Math.sin(u*3+p)*Math.cos(v*2-p))*h;
+   const x=u*w;
+   if(i===0)c.moveTo(x,y);else c.lineTo(x,y);
+   intensity+=light/(steps+1);
+  }
+  const gl=.5+.5*Math.sin(v*8-p*2);
+  const g=c.createLinearGradient(0,0,w,0);
+  g.addColorStop(0,`rgba(144,179,201,${.26+intensity*.7})`);
+  g.addColorStop(.32,`rgba(223,237,235,${.58+intensity*.5})`);
+  g.addColorStop(.7,`rgba(242,215,172,${.38+gl*.4+intensity*.4})`);
+  g.addColorStop(1,`rgba(154,186,209,${.26+intensity*.7})`);
+  c.strokeStyle=g;c.lineWidth=(.35+4.5*Math.pow(gl,12))*Math.max(1,h/600);c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'raindrop',duration:24};
+
+return module.exports; })();
+works["traumerei"] = (() => { const module = {exports:{}};
+'use strict';
+// Returning open contours reveal different inner depths. Editorial time only.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#182039');bg.addColorStop(.5,'#342c45');bg.addColorStop(1,'#192638');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ for(let k=0;k<5;k++){
+  const ph=p+k*1.43,base=-.13+k*.29+.075*Math.sin(ph),bend=.2+.65*(.5+.5*Math.sin(p+k*.7));
+  const lift=.09+.15*Math.sin(k*1.1+.7);
+  const plane=c.createLinearGradient(0,(base-.2)*h,w,(base+.4)*h);
+  plane.addColorStop(0,'rgba(184,184,220,.08)');plane.addColorStop(.45,'rgba(242,216,205,.38)');plane.addColorStop(1,'rgba(174,186,221,.10)');
+  c.fillStyle=plane;c.beginPath();c.moveTo(-.15*w,(base+.12)*h);
+  c.bezierCurveTo((bend-.56)*w,(base-lift)*h,(bend+.04)*w,(base-lift+.07*Math.sin(ph))*h,1.15*w,(base+.13+.05*Math.sin(ph))*h);
+  c.lineTo(1.15*w,(base+.39+.05*Math.sin(ph))*h);
+  c.bezierCurveTo((bend+.04)*w,(base+.26-lift+.07*Math.sin(ph+1))*h,(bend-.56)*w,(base+.26-lift-.10)*h,-.15*w,(base+.38)*h);c.closePath();c.fill();
+  for(let n=0;n<42;n++){
+   const q=n/41,depth=Math.pow(q,1.8),rise=.09+.15*Math.sin(k*1.1+.7);
+   const yy=base+depth*.26;
+   const alpha=(.18+.82*Math.pow(.5+.5*Math.cos(q*4.5-p+k),3))*(.50+.50*Math.sin(Math.PI*(.06+.88*q)));
+   const gx=(.2+.6*(.5+.5*Math.sin(ph)))*w;
+   const g=c.createLinearGradient(-.1*w,0,1.1*w,0);
+   const col=k%2?'222,186,180':'206,211,235';
+   g.addColorStop(0,`rgba(${col},.015)`);g.addColorStop(.20,`rgba(${col},${alpha*.6})`);g.addColorStop(.54,`rgba(249,233,211,${alpha})`);g.addColorStop(.83,`rgba(${col},${alpha*.48})`);g.addColorStop(1,`rgba(${col},.015)`);
+   c.strokeStyle=g;c.lineWidth=(.6+5.8*Math.pow(q,3))*Math.max(1,h/600);
+   c.beginPath();c.moveTo(-.15*w,(yy+.12)*h);
+   c.bezierCurveTo((bend-.56)*w,(yy-rise-.10*depth)*h,(bend+.04)*w,(yy-rise+.07*Math.sin(ph+q))*h,1.15*w,(yy+.13+.05*Math.sin(ph))*h);c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'traumerei',duration:24};
+
+return module.exports; })();
+works["liebestraum-3"] = (() => { const module = {exports:{}};
+'use strict';
+// Sustained cantabile light, with two branching responses which rejoin the span.
+// An editorial spatial interpretation, not music analysis or fluid simulation.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#291E35';c.fillRect(0,0,w,h);
+ const rows=Math.ceil(h/2),dy=h/rows;
+ for(let j=0;j<rows;j++){
+  const v=(j+.5)/rows,flow=.24+.54*v+.10*Math.sin(TAU*v+p),fork=Math.pow(Math.sin(Math.PI*v),2);
+  const left=flow-.52*fork*(.8+.2*Math.cos(p)),right=flow+.48*fork*(.8-.2*Math.cos(p));
+  const width=.075+.045*(.5+.5*Math.cos(p-TAU*v));
+  const g=c.createLinearGradient(0,0,w,0);
+  for(let n=0;n<=64;n++){
+   const u=n/64;
+   const main=.45*Math.exp(-Math.pow((u-flow)/width,2))+.6*Math.exp(-Math.pow((u-flow)/(width*.4),2));
+   const sides=.32*Math.exp(-Math.pow((u-left)/.11,2))+.47*Math.exp(-Math.pow((u-left)/.039,2))+.3*Math.exp(-Math.pow((u-right)/.12,2))+.43*Math.exp(-Math.pow((u-right)/.046,2));
+   const surrounding=.13+.14*(.5+.5*Math.cos(TAU*(u*.7-v*.4)+p));
+   const light=1-Math.exp(-(main+sides+surrounding)*1.2);
+   const rose=.5+.5*Math.sin(p+TAU*v*.7-u*2);
+   const r=Math.round(41+205*light),gg=Math.round(30+(195-12*rose)*light),b=Math.round(53+(176-8*rose)*light);
+   g.addColorStop(u,`rgb(${r},${gg},${b})`);
+  }
+  c.fillStyle=g;c.fillRect(0,j*dy,w,dy+.15);
+ }
+ // Fine internal articulations stay within the broad light spans.
+ c.lineCap='round';c.lineJoin='round';
+ for(let arm=-1;arm<=1;arm++)for(let k=0;k<11;k++){
+  const u=(k-5)/5,g=c.createLinearGradient(0,0,w,h);
+  const alpha=.46+.35*(.5+.5*Math.cos(p+arm*.8+u));
+  g.addColorStop(0,'rgba(231,194,207,0)');g.addColorStop(.22,`rgba(237,207,208,${alpha*.65})`);g.addColorStop(.52,`rgba(255,242,221,${alpha})`);g.addColorStop(.82,`rgba(216,189,216,${alpha*.6})`);g.addColorStop(1,'rgba(197,177,208,0)');
+  c.strokeStyle=g;c.lineWidth=.52+.16*(1-Math.abs(u));c.beginPath();
+  for(let j=0;j<=100;j++){
+   const v=-.1+1.2*j/100,flow=.24+.54*v+.10*Math.sin(TAU*v+p),fork=Math.pow(Math.sin(Math.PI*v),2);
+   const mid=flow+(arm<0?-.52*fork*(.8+.2*Math.cos(p)):arm>0?.48*fork*(.8-.2*Math.cos(p)):0);
+   const x=mid+u*(.024+.012*Math.sin(TAU*v-p)*Math.sin(TAU*v-p))+.004*Math.sin(TAU*v*3+p+u*2)*fork;
+   if(j===0)c.moveTo(x*w,v*h);else c.lineTo(x*w,v*h);
+  }
+  c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'liebestraum-3',duration:24};
+
+return module.exports; })();
+works["flaxen-hair"] = (() => { const module = {exports:{}};
+'use strict';
+// Five open tonal regions: pentatonic simplicity as editorial spatial organization.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#243B3C';c.fillRect(0,0,w,h);
+ const a=.32+.055*Math.sin(p),b=.63+.04*Math.cos(p),y=.4+.045*Math.sin(p+.7),z=.72+.035*Math.cos(p-.4);
+ const cells=[[[0,0],[a,0],[a+.08,y],[0,y+.2]],[[a,0],[1,0],[b,y-.03],[a+.08,y]],[[0,y+.2],[a+.08,y],[b,z],[0,1]],[[a+.08,y],[b,y-.03],[1,.34],[1,.85],[b,z]],[[0,1],[b,z],[1,.85],[1,1]]];
+ const colors=[['#9B9878','#E8E0BD','#809A8C'],['#6E968D','#CBD9BD','#81977E'],['#7F9E90','#E7E5CA','#BDAC83'],['#C3BE91','#FAEBCD','#91AB98'],['#74958C','#D9DAC2','#C9B48C']];
+ for(let k=0;k<5;k++){
+  const pts=cells[k],cx=pts.reduce((s,v)=>s+v[0],0)/pts.length,cy=pts.reduce((s,v)=>s+v[1],0)/pts.length;
+  // Broad interiors carry the light; shallow open seams retain negative space.
+  const g=c.createLinearGradient(w*(cx-.5+.13*Math.sin(p+k)),h*(cy-.4),w*(cx+.45),h*(cy+.5+.11*Math.cos(p-k)));
+  g.addColorStop(0,colors[k][0]);g.addColorStop(.48+.17*Math.sin(p-k*.8),colors[k][1]);g.addColorStop(1,colors[k][2]);c.fillStyle=g;
+  c.beginPath();pts.forEach((v,i)=>{const x=(cx+(v[0]-cx)*.985)*w,yy=(cy+(v[1]-cy)*.985)*h;i?c.lineTo(x,yy):c.moveTo(x,yy);});c.closePath();c.fill();
+  c.save();c.clip();
+  // Fine internal lamination bends toward each region's own edge, rather than a shared mesh.
+  const angle=[.24,1.06,-.48,.7,-.18][k],dx=Math.cos(angle),dy=Math.sin(angle);
+  for(let line=0;line<46;line++){
+   const u=-.35+1.7*line/45,lit=.5+.5*Math.cos(TAU*u-p-k*.8);
+   const gl=c.createLinearGradient(w*(cx-.45),h*(cy-.5),w*(cx+.45),h*(cy+.5));
+   gl.addColorStop(0,'rgba(255,247,216,0)');gl.addColorStop(.5,`rgba(255,252,233,${.12+.32*lit})`);gl.addColorStop(1,'rgba(50,88,79,.08)');c.strokeStyle=gl;c.lineWidth=.48+.2*lit;c.beginPath();
+   for(let j=0;j<=18;j++){
+    const q=-.8+1.6*j/18;
+    const xx=cx+q*dx-(u-.5)*dy+.025*Math.sin(q*2+p+k)*(u-.5);
+    const yy=cy+q*dy+(u-.5)*dx+.045*Math.cos(q*2-p+k)*(u-.5);
+    if(j===0)c.moveTo(xx*w,yy*h);else c.lineTo(xx*w,yy*h);
+   }
+   c.stroke();
+  }
+  c.restore();
+ }
+ c.restore();
+}
+module.exports={render,id:'flaxen-hair',duration:24};
+
+return module.exports; })();
 function create(id){
  const work=works[id];if(!work)return null;
  let target=null,proxy=null,scale=1;
@@ -298,5 +462,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual8'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual12'});
 })();

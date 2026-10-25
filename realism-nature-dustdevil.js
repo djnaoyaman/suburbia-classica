@@ -11,7 +11,7 @@ precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
 vec3 photo(vec2 q){return texture2D(material,vec2(q.x,1.-q.y)).rgb;}
-void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 q=vec2(.5,.455)+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.98;float t=mod(time,48.);vec3 base=photo(q);float h=smoothstep(.355,.40,q.y)*(1.-smoothstep(.56,.59,q.y));float lateral=1.-smoothstep(.009,.019,abs(q.x-.5));float warm=smoothstep(.015,.18,base.r-base.b);float mask=h*lateral*warm;float f=fract(t/12.);vec3 flow=vec3(0.);float total=0.;for(int i=0;i<2;i++){float ph=fract(f+float(i)*.5);float w=1.-abs(ph*2.-1.);vec2 source=q;source.y-=ph*.018;source.x+=.006*sin(q.y*62.-TAU*t/12.+float(i)*3.14159)*mask;flow+=photo(source)*w;total+=w;}gl_FragColor=vec4(mix(base,flow/max(total,.001),mask*.85),1.);}
+void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 q=vec2(.5,clamp(.455,.49*min(1./a,1.)+.001,1.-.49*min(1./a,1.)-.001))+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.98;float t=mod(time,48.);vec3 base=photo(q);float h=smoothstep(.355,.40,q.y)*(1.-smoothstep(.56,.59,q.y));float lateral=1.-smoothstep(.009,.019,abs(q.x-.5));float warm=smoothstep(.015,.18,base.r-base.b);float mask=h*lateral*warm;float f=fract(t/12.);vec3 flow=vec3(0.);float total=0.;for(int i=0;i<2;i++){float ph=fract(f+float(i)*.5);float w=1.-abs(ph*2.-1.);vec2 source=q;source.y-=ph*.018;source.x+=.006*sin(q.y*62.-TAU*t/12.+float(i)*3.14159)*mask;flow+=photo(source)*w;total+=w;}gl_FragColor=vec4(mix(base,flow/max(total,.001),mask*.85),1.);}
 `;
  let imageRecord,renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));

@@ -17,7 +17,7 @@ vec2 ear(vec2 q,vec2 center,vec2 axis,vec2 pivot,float angle){
 }
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- vec2 q=vec2(.53,.455)+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.94;
+ vec2 q=vec2(.53,clamp(.455,.47*min(1./a,1.)+.001,1.-.47*min(1./a,1.)-.001))+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.94;
  float ph=TAU*mod(time,48.)/48.;vec2 p=q;
  p+=ear(q,vec2(.411,.563),normalize(vec2(-.48,.88)),vec2(.435,.528),.05*sin(ph*2.));
  p+=ear(q,vec2(.486,.557),normalize(vec2(.70,.71)),vec2(.459,.53),.04*sin(ph*3.+.9));

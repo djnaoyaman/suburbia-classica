@@ -48,7 +48,7 @@
     "artId": "canon",
     "site": "gooooooooood expression",
     "label": "波紋で景色をゆがめる仕組み",
-    "text": "重なり合う波紋を、今度は表現の仕組みから。画像を読む位置の小さなずれが、揺れる景色をつくる。",
+    "text": "波が通ると、水底の石の模様が一瞬ちがって見える。屈折に似たゆがみを元の模様と比べる表現図鑑から着想し、静かな浅瀬を描きました。水の物理シミュレーションや実在の場所の再現ではありません。",
     "url": "https://djnaoyaman.github.io/gooooooooood_expression/expressions/shader-ripple.html"
   },
   {

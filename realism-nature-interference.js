@@ -4,36 +4,36 @@
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='canon';
- const description='三つの小さな波が重なり、水面の映り込みを細かく屈折させる情景';
+ const description='澄んだ浅水の一波が石英筋と砂目を僅かに屈折させ、静穏な同じ形へ戻る情景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
-vec3 sampleAt(vec2 q){return texture2D(material,vec2(q.x,1.-q.y)).rgb;}
-vec2 packet(vec2 q,vec2 origin,float offset){
- float age=fract(mod(time,48.)/12.+offset);vec2 d=q-origin;float r=length(d);
- float front=age*.36;
- float envelope=exp(-pow((r-front)/.042,2.))*smoothstep(0.,.055,age)*(1.-smoothstep(.72,.96,age));
- float phase=(r-front)*215.;
- float slope=cos(phase)*envelope*.0038*exp(-r*2.3);
- return d/max(r,.003)*slope;
-}
 void main(){
- vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
- vec2 q=vec2(.5,.5)+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
- // Three staggered capillary packets refract the reflected environment; no drawn ring graphic.
- vec2 normal=packet(q,vec2(.425,.54),.05)+packet(q,vec2(.56,.59),.38)+packet(q,vec2(.535,.435),.72);
- vec3 color=sampleAt(q+normal);
- float optical=dot(normal,vec2(-.55,.83));
- color+=vec3(.80,.86,.91)*optical*2.4;
- gl_FragColor=vec4(clamp(color,0.,1.),1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
+ float phase=mod(time,12.)/12.;
+ float radius=-.035+.56*phase;
+ vec2 delta=(p-vec2(.535,.555))*vec2(1.,1.35);
+ float dist=length(delta);vec2 radial=delta/max(dist,.0001);
+ float u=(dist-radius)/.042;
+ // One smooth lens-like disturbance passes, then every bottom feature returns exactly.
+ // This is a visual reference-coordinate offset, not a physical water solver.
+ float lens=u*exp(-u*u);
+ float life=smoothstep(0.,.09,phase)*(1.-smoothstep(.82,1.,phase));
+ float dryRock=smoothstep(.21,.29,p.x);
+ float edge=smoothstep(0.,.035,p.x)*(1.-smoothstep(.965,1.,p.x))*smoothstep(0.,.035,p.y)*(1.-smoothstep(.965,1.,p.y));
+ vec2 offset=radial*vec2(1.,.74074074)*(.016*lens*life*dryRock*edge);
+ vec2 q=p+offset;
+ vec3 col=texture2D(material,clamp(vec2(q.x,1.-q.y),vec2(.00048828125),vec2(.99951171875))).rgb;
+ gl_FragColor=vec4(col,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/interference-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/canon-refraction-comparison-v1.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

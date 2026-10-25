@@ -439,7 +439,7 @@ a.ilink:hover{background-size:100% 2px}
 .art-note:empty{display:none}
 .art-available{font-size:11px;line-height:1.8;color:var(--sub);margin:6px 0}
 .art-available a{text-decoration:underline;text-underline-offset:3px}
-#ssPrevious{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+#ssPrevious{display:none;pointer-events:none}
 #ss .ss-tools{position:absolute;z-index:2;right:28px;top:24px;cursor:auto;text-align:right;color:inherit;max-width:calc(100vw - 40px)}
 #ss .art-switch{background:rgba(7,14,22,.55);color:#f3ece0;border-color:rgba(255,255,255,.28);backdrop-filter:blur(12px)}
 #ss .art-switch button[aria-pressed="true"]{background:#f3ece0;color:#17212a}
@@ -1981,39 +1981,54 @@ let artMode='original';
 try { if(localStorage.getItem('suburbia-art-mode')==='realism') artMode='realism'; } catch {}
 const SS = {on:false, manual:false, art:null, st:null, raf:0, t0:0, elapsed:0, paused:true, W:0, H:0, idle:0, sw:0};
 const ssEl=$('#ss'), cv=$('#ssc'), cx=cv.getContext('2d');
-function ssResize(){const d=Math.min(window.devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;}
+function ssResize(){const d=Math.min(window.devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;cx.setTransform(d,0,0,d,0,0);SS.W=innerWidth;SS.H=innerHeight;ssClearFrame();SS.dirty=true;SS.lastFrame=0;}
 function ssArtIndex(){return cur>=0?cur:Math.max(0,currentViewIdx());}
-function ssArtNote(i,unavailable=false){
+function ssArtNote(i,unavailable=false,loading=false){
   const id=SONGS[i].id, real=window.ClassicaRealism;
   let note='';
   if(artMode==='realism') {
     if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。オリジナルを表示します。';
     else if(unavailable) note='この端末ではリアリズムを利用できないため、オリジナルを表示します。';
+    else if(loading) note='リアリズムを読み込み中です。';
     else if(real.describe) note=real.describe(id);
   }
+  if(SS.note===note)return;SS.note=note;
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;
 }
 function ssSyncMode(){
   document.querySelectorAll('[data-art-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.artMode===artMode)));
   ssArtNote(ssArtIndex());
 }
-function ssFreezeFrame(){
-  const old=$('#ssPrevious');old.width=cv.width;old.height=cv.height;
-  old.getContext('2d').drawImage(cv,0,0);old.style.transition='none';old.style.opacity=1;
-  void old.offsetWidth;
-  old.style.transition='';old.style.opacity=0;
+function ssClearFrame(reset=false){
+  if(reset)cv.width=cv.width;
+  cx.setTransform(1,0,0,1,0,0);cx.globalAlpha=1;cx.globalCompositeOperation='source-over';
+  cx.filter='none';cx.shadowColor='rgba(0,0,0,0)';cx.shadowBlur=0;cx.shadowOffsetX=0;cx.shadowOffsetY=0;cx.imageSmoothingEnabled=true;
+  cx.clearRect(0,0,cv.width,cv.height);
+  const d=Math.min(window.devicePixelRatio||1,1.5);cx.setTransform(d,0,0,d,0,0);
+  const old=$('#ssPrevious');old.width=0;old.height=0;old.style.opacity=0;
+}
+function ssMaterialPhase(i=ssArtIndex()){
+  const id=SONGS[i].id,state=window.ClassicaNatureGL?.materialState?.();
+  const bundle=state?.materials?.find(item=>item.id===id);
+  if(!bundle)return 'ready';
+  if(bundle.states.includes('failed'))return 'failed';
+  return bundle.states.some(value=>value==='queued'||value==='loading')?'loading':'ready';
+}
+function ssSyncArtTone(i=ssArtIndex()){
+  const spec=ART_BY_ID[SONGS[i].id];
+  ssEl.classList.toggle('light',!SS.real&&!!(SS.art?.light||(typeof spec==='object'&&spec?.pal?.light)));
 }
 function ssSet(i){
   const s=SONGS[i], spec=ART_BY_ID[s.id]||'bokeh', name=typeof spec==='string'?spec:spec.art, a=ARTS[name]; SS.art=a;
-  cx.globalCompositeOperation='source-over';cx.globalAlpha=1;cx.clearRect(0,0,SS.W,SS.H);
+  ssClearFrame(true);
   SS.st=a.init(SS.W,SS.H,mk(i*97+13),typeof spec==='string'?null:spec.pal); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
   const real=window.ClassicaRealism;
   const wantsReal=artMode==='realism'&&real&&real.has(s.id);
   window.ClassicaNatureGL?.activate?.(wantsReal?s.id:null);
   SS.real=!!(wantsReal&&real.available(s.id));
   SS.realState=SS.real?real.init(s.id):null;
-  ssArtNote(i,wantsReal&&!SS.real);
-  ssEl.classList.toggle('light',!SS.real&&!!(a.light||(spec.pal&&spec.pal.light)));
+  ssArtNote(i,wantsReal&&!SS.real,SS.real&&ssMaterialPhase(i)==='loading');
+  ssSyncArtTone(i);
   $('#ssTj').textContent=s.title; $('#ssTe').textContent=s.en.split(' — ')[0].replace(/^Piano Sonata.*$/,s.en); $('#ssTc').textContent=s.composer;
   $('#ssDetails').textContent=[s.yt&&s.yt.who?'演奏：'+s.yt.who:'',s.year?'作品年：'+s.year:'',s.yt&&s.yt.rec?'録音年：'+s.yt.rec:''].filter(Boolean).join(' ／ ');
 }
@@ -2022,8 +2037,14 @@ function ssLoop(now){
   if((SS.dirty||!SS.paused)&&(!SS.real||!SS.lastFrame||now-SS.lastFrame>=32)){
     SS.lastFrame=now;SS.dirty=false;
     const t=REDUCED?12:(SS.elapsed+(SS.paused?0:now-SS.t0))/1000;
-    if(SS.real&&!window.ClassicaRealism.draw(cx,SS.W,SS.H,t,SS.realState)){
-      SS.real=false;ssArtNote(ssArtIndex(),true);
+    if(SS.real){
+      ssClearFrame();
+      const phase=ssMaterialPhase();
+      if(phase==='loading'){
+        cx.fillStyle='#111820';cx.fillRect(0,0,SS.W,SS.H);ssArtNote(ssArtIndex(),false,true);
+      }else if(phase==='failed'||!window.ClassicaRealism.draw(cx,SS.W,SS.H,t,SS.realState)){
+        SS.real=false;ssClearFrame();ssSyncArtTone();ssArtNote(ssArtIndex(),true);
+      }else ssArtNote(ssArtIndex());
     }
     if(!SS.real) SS.art.draw(cx,SS.W,SS.H,t,SS.st);
   }
@@ -2111,12 +2132,12 @@ function ssShow(manual){
 }
 function ssHide(){
   if(!SS.on) return; SS.on=false; window.ClassicaNatureGL?.activate?.(null); cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
-  ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
+  ssClearFrame(true);ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
 }
-function ssSwap(i){ // 曲が変わったらアートをクロスフェード
-  clearTimeout(SS.sw);ssFreezeFrame();ssSet(i);SS.lastFrame=0;
+function ssSwap(i){ // 曲が変わったら旧フレームを破棄して切り替える
+  clearTimeout(SS.sw);ssSet(i);SS.lastFrame=0;
   if(REDUCED) ssLoop(performance.now());
 }
 ssSyncMode();ssSyncPlayback();

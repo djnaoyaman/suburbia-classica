@@ -2013,7 +2013,6 @@ function ssArtNote(i,unavailable=false,loading=false){
     if(!real||!real.has(id)) note='この曲のリアリズムは準備中です。オリジナルを表示します。';
     else if(unavailable) note='この端末ではリアリズムを利用できないため、オリジナルを表示します。';
     else if(loading) note='リアリズムを読み込み中です。';
-    else if(real.describe) note=real.describe(id);
   }
   if(SS.note===note)return;SS.note=note;
   $('#artNote').textContent=note;$('#ssArtNote').textContent=note;

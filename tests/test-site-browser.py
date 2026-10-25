@@ -34,6 +34,19 @@ with sync_playwright() as p:
     page.goto(BASE + 'index.html')
     page.wait_for_function("document.querySelectorAll('.card').length===74")
     home_description = page.locator('meta[name=description]').get_attribute('content')
+    # Ready Realism art has no scene-description overlay; status messages remain.
+    assert page.evaluate("""() => {
+      artMode='realism';
+      for(let i=0;i<SONGS.length;i++){
+        ssArtNote(i);
+        if(document.querySelector('#ssArtNote').textContent || document.querySelector('#artNote').textContent)return false;
+      }
+      ssArtNote(0,false,true);
+      const loading=document.querySelector('#ssArtNote').textContent.includes('読み込み中');
+      ssArtNote(0,true);
+      const fallback=document.querySelector('#ssArtNote').textContent.includes('利用できない');
+      artMode='original';ssSyncMode();return loading&&fallback;
+    }""")
     page.locator('#fq').fill('ショパン')
     page.wait_for_function("document.querySelectorAll('.card').length===8")
     page.locator('#fsort').select_option('year')
@@ -114,4 +127,4 @@ with sync_playwright() as p:
         assert page.locator('html[lang=ja]').count() == 1
     assert not errors, errors
     browser.close()
-print('PASS: reset, URL safety, malformed routes, sorted/singleton queues, cancelled error skips, 74 song routes, metadata, native pages')
+print('PASS: Realism without description overlays, reset, URL safety, malformed routes, sorted/singleton queues, cancelled error skips, 74 song routes, metadata, native pages')

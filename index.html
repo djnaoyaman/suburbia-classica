@@ -1363,8 +1363,10 @@ function autolink(text, selfId){
 
 const TBD ='<span class="pend">調査中・確認できず</span>';
 const $ = s => document.querySelector(s);
+const htmlEscape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const view = $('#view');
 let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
+let errorSkipTimer=0;
 if (location.protocol === 'file:') $('#banner').style.display = 'block';
 
 /* ---------- YouTube ---------- */
@@ -1388,7 +1390,11 @@ window.onYouTubeIframeAPIReady = function(){
       onError:()=>{
         setStatus('この動画は再生できません（埋め込み制限など）。');
         errCount++;
-        if ($('#auto').checked && errCount < SONGS.length) setTimeout(()=>go(cur + 1), 1500);
+        clearTimeout(errorSkipTimer);
+        if (started && $('#auto').checked && errCount < (QUEUE?.length||SONGS.length)) {
+          const failed=cur;
+          errorSkipTimer=setTimeout(()=>{if(started&&cur===failed&&$('#auto').checked)go(cur+1);},1500);
+        }
       }
     }
   };
@@ -1398,6 +1404,7 @@ window.onYouTubeIframeAPIReady = function(){
 function setStatus(t){ $('#status').textContent = t; }
 function setNow(i, play){
   const s = SONGS[i]; if (!s) return;
+  clearTimeout(errorSkipTimer);
   cur = i;
   $('#nowTitle').textContent = s.title;
   $('#nowSub').textContent = s.composer + (s.yt.who ? '／演奏：' + s.yt.who : '');
@@ -1412,7 +1419,11 @@ function queueIndex(i){
   if (QUEUE && QUEUE.length && cur >= 0) { const d = i - cur; if (d === 1 || d === -1) { const pos = QUEUE.indexOf(SONGS[cur].id); if (pos >= 0) n = SONGS.findIndex(s=>s.id === QUEUE[(pos + d + QUEUE.length) % QUEUE.length]); } }
   return n;
 }
-function go(i){location.hash = '#/song/' + SONGS[queueIndex(i)].id;}
+function go(i){
+  const n=queueIndex(i), hash='#/song/'+SONGS[n].id;
+  if(location.hash===hash){if(started&&ytReady)playSong(n);}
+  else location.hash=hash;
+}
 
 function currentViewIdx(){
   const m = location.hash.match(/^#\/song\/(.+)$/);
@@ -1477,18 +1488,18 @@ function fFacets(){
   const ct=[...new Set(SONGS.map(ctryOf))].sort((a,b)=>cnt('ctry',s=>ctryOf(s)===b)-cnt('ctry',s=>ctryOf(s)===a)).map(c=>fOpt('ctry',c,c,cnt('ctry',s=>ctryOf(s)===c),FS.ctry.has(c))).join('');
   const uses=USES.map(u=>fOpt('uses',u[0],u[1],cnt('uses',x=>u[2](x)),FS.uses.has(u[0]))).join('');
   const comps=[...new Set(SONGS.map(s=>compKey(s.composer)))].map(c=>({c,n:cnt('comp',s=>compKey(s.composer)===c)})).sort((a,b)=>b.n-a.n||a.c.localeCompare(b.c,'ja'));
-  const comp='<details class="fcomp"'+(FS.comp?' open':'')+'><summary>'+(FS.comp?FS.comp:'作曲者を選ぶ')+'<i>'+comps.filter(x=>x.n>0).length+'人</i></summary><div class="fcl"><input type="search" id="fcq" placeholder="作曲者を検索" aria-label="作曲者を検索" autocomplete="off"><div class="fcb">'+comps.map(x=>'<button type="button" class="fc'+(FS.comp===x.c?' on':'')+(x.n===0&&FS.comp!==x.c?' zero':'')+'" data-f="comp" data-v="'+x.c+'" data-k="'+fnorm(x.c)+'">'+x.c+'<i>'+x.n+'</i></button>').join('')+'</div></div></details>';
+  const comp='<details class="fcomp"'+(FS.comp?' open':'')+'><summary>'+(FS.comp?htmlEscape(FS.comp):'作曲者を選ぶ')+'<i>'+comps.filter(x=>x.n>0).length+'人</i></summary><div class="fcl"><input type="search" id="fcq" placeholder="作曲者を検索" aria-label="作曲者を検索" autocomplete="off"><div class="fcb">'+comps.map(x=>'<button type="button" class="fc'+(FS.comp===x.c?' on':'')+(x.n===0&&FS.comp!==x.c?' zero':'')+'" data-f="comp" data-v="'+x.c+'" data-k="'+fnorm(x.c)+'">'+x.c+'<i>'+x.n+'</i></button>').join('')+'</div></div></details>';
   return g('カテゴリ',cats)+g('ムード',moods)+g('時代',eras)+g('国',ct)+g('使われ方',uses)+g('作曲者',comp);
 }
 function fPills(){
-  const P=[]; const add=(f,v,l)=>P.push('<button type="button" class="pill" data-f="'+f+'" data-v="'+v+'" data-rm="1">'+l+' <b>×</b></button>');
-  if(FS.q.trim()) P.push('<button type="button" class="pill" data-rm="q">“'+FS.q.trim().replace(/</g,'&lt;')+'” <b>×</b></button>');
+  const P=[]; const add=(f,v,l)=>P.push('<button type="button" class="pill" data-f="'+f+'" data-v="'+htmlEscape(v)+'" data-rm="1">'+htmlEscape(l)+' <b>×</b></button>');
+  if(FS.q.trim()) P.push('<button type="button" class="pill" data-rm="q">“'+htmlEscape(FS.q.trim())+'” <b>×</b></button>');
   FS.cats.forEach(v=>add('cats',v,v)); FS.moods.forEach(v=>add('moods',v,v)); FS.eras.forEach(v=>add('eras',v,v)); FS.ctry.forEach(v=>add('ctry',v,v));
   USES.forEach(u=>{ if(FS.uses.has(u[0])) add('uses',u[0],u[1]); }); if(FS.comp) add('comp',FS.comp,FS.comp);
   return P.join('');
 }
 function fResults(){
-  const l=SONGS.filter(s=>fmatch(s)); const idx=s=>SONGS.indexOf(s);
+  const l=fSorted(SONGS.filter(s=>fmatch(s))); const idx=s=>SONGS.indexOf(s);
   let body='';
   if(!l.length){
     body='<div class="fempty"><p class="big2">該当する曲がありません</p><p>条件を少しゆるめると見つかるかもしれません。</p><button type="button" class="b k" data-act="reset">条件をリセット</button></div>';
@@ -1524,8 +1535,8 @@ function fToggle(f,v){
 function fBind(){
   const root=document.getElementById('fl'); if(!root||typeof root.addEventListener!=='function') return;
   root.addEventListener('click',e=>{
-    const b=e.target.closest('[data-f],[data-act],[data-rm],#ftog'); if(!b) return;
-    if(b.id==='ftog'){ document.getElementById('fpanel').classList.toggle('open'); b.classList.toggle('on'); return; }
+    const b=e.target.closest('[data-f],[data-act],[data-rm],#ftog,#freset'); if(!b) return;
+    if(b.id==='ftog'){ const open=document.getElementById('fpanel').classList.toggle('open'); b.classList.toggle('on',open); b.setAttribute('aria-expanded',String(open)); return; }
     if(b.dataset.act==='reset'||b.id==='freset'){ fReset(); const q=document.getElementById('fq'); if(q) q.value=''; const s=document.getElementById('fsort'); if(s) s.value='major'; fApply(); return; }
     if(b.dataset.rm==='q'){ FS.q=''; const q=document.getElementById('fq'); if(q) q.value=''; fApply(); return; }
     if(b.dataset.f){ fToggle(b.dataset.f,b.dataset.v); if(b.dataset.f==='comp'){ const d=document.querySelector('#fpanel .fcomp'); if(d) d.open=false; } fApply(); }
@@ -1543,8 +1554,8 @@ function renderList(mode,val){
   const wide=window.matchMedia&&matchMedia('(min-width:861px)').matches;
   const title=mode==='composer'?'COMPOSER — '+val:mode==='mood'?'MOOD — '+val:mode==='cat'?'CATEGORY — '+val:'SELECTION';
   view.innerHTML=
-   '<h2 style="margin-top:0;border-top:0">'+title+'</h2>'+
-   '<div id="fl" class="fl"><div class="fl-top"><label class="fl-s"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="fq" type="search" placeholder="曲名・作曲者・映画／CM名・ムードで検索（例：月光、ショパン、夜）" aria-label="曲を検索" autocomplete="off" value="'+FS.q.replace(/"/g,'&quot;')+'"></label><button type="button" id="ftog" class="b'+(wide?' on':'')+'" aria-controls="fpanel">絞り込み<span id="fbadge" class="badge"></span></button></div>'+
+   '<h2 style="margin-top:0;border-top:0">'+htmlEscape(title)+'</h2>'+
+   '<div id="fl" class="fl"><div class="fl-top"><label class="fl-s"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="fq" type="search" placeholder="曲名・作曲者・映画／CM名・ムードで検索（例：月光、ショパン、夜）" aria-label="曲を検索" autocomplete="off" value="'+htmlEscape(FS.q)+'"></label><button type="button" id="ftog" class="b'+(wide||fActive()?' on':'')+'" aria-controls="fpanel" aria-expanded="'+(wide||fActive()?'true':'false')+'">絞り込み<span id="fbadge" class="badge"></span></button></div>'+
    '<div id="fpanel" class="fl-panel'+(wide||fActive()?' open':'')+'">'+fFacets()+'</div>'+
    '<div class="fl-bar"><span id="fcount" aria-live="polite"></span><span id="fpills" class="pills"></span><span class="sp"></span><label class="fl-sort">並び順 <select id="fsort"><option value="major">メジャー順</option><option value="year">年代順</option><option value="comp">作曲者順</option><option value="title">曲名順</option></select></label><button type="button" id="freset" class="lnkb">リセット</button></div>'+
    '<div id="fact" class="fl-act"><button type="button" class="b k" id="fplay"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.6v14.8c0 .8.9 1.3 1.6.8l11-7.4a1 1 0 0 0 0-1.6l-11-7.4C7.9 3.3 7 3.8 7 4.6z"/></svg>この条件で連続再生</button><button type="button" class="b" id="frand"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7h3.2c1.6 0 3 .8 3.9 2.1l3.8 5.8c.9 1.3 2.3 2.1 3.9 2.1H21M3 17h3.2c1.6 0 3-.8 3.9-2.1M13.9 9.1C14.8 7.8 16.2 7 17.8 7H21M18.5 4.5L21 7l-2.5 2.5M18.5 14.5L21 17l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ランダムに1曲</button></div></div>'+
@@ -1693,10 +1704,11 @@ function renderTimeline(){
     '<div class="tl-wrap"><div class="tl-labs" style="padding-top:'+HEAD+'px">'+labels+'</div><div class="tl-scroll" id="tlScroll">'+svg+'</div></div>'+lst;
   const sc=document.getElementById('tlScroll'); if(sc) sc.scrollLeft=Math.max(0,X(1780)-40);
 }
+const HOME_DESCRIPTION=document.querySelector('meta[name=description]')?.content||'';
 function seoRoute(i){
   try{ const B=document.querySelector('link[rel=canonical]'); const D=document.querySelector('meta[name=description]');
     if(i>=0){ const s=SONGS[i]; const h=B.getAttribute('data-home'); if(B) B.href=h+'songs/'+s.id+'.html'; if(D) D.content=s.summary; }
-    else if(B){ B.href=B.getAttribute('data-home'); } }catch(e){}
+    else {if(B)B.href=B.getAttribute('data-home');if(D)D.content=HOME_DESCRIPTION;} }catch(e){}
 }
 
 /* ===== motion js ===== */
@@ -1725,7 +1737,10 @@ function route(){
     else if (ytReady) setNow(i, false);
   } else {
     const m = location.hash.match(/^#\/(composer|mood|cat)\/(.+)$/);
-    if (m) renderList(m[1], decodeURIComponent(m[2])); else if (/^#\/\?/.test(location.hash)) renderList('f'); else renderList();
+    if(m){
+      let value;try{value=decodeURIComponent(m[2]);}catch(e){value=null;}
+      if(value===null)renderList();else renderList(m[1],value);
+    }else if (/^#\/\?/.test(location.hash)) renderList('f'); else renderList();
     if (!started && ytReady && cur < 0) setNow(0, false);
   }
   window.scrollTo(0, 0);
@@ -2087,6 +2102,7 @@ function ssPlay(){
   player.playVideo(); // Animation resumes when YouTube confirms playback.
 }
 function ssStop(){
+  clearTimeout(errorSkipTimer);
   if(ytReady&&player)player.pauseVideo();
   playing=false;
   ssSetMotionPlaying(false); // Freeze immediately, including during buffering.
@@ -2213,4 +2229,5 @@ route();
 </script>
 </body>
 </html>
+
 

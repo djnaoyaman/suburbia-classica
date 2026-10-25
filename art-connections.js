@@ -79,5 +79,11 @@
    '<a class="art-connection-link" href="'+esc(item.url)+'" target="_blank" rel="noopener noreferrer">'+esc(item.label)+'<span>'+esc(item.site)+' ↗ <span class="art-connection-new">（別タブ）</span></span></a>'+
    '<p class="art-connection-note">アートから広がる編集上の連想です。作曲者の意図や実際の撮影地を示すものではありません。</p></section>';
  }
- window.ClassicaArtConnections=Object.freeze({render});
+ const shortSites={'鎌・くらんぽ':'鎌・くらんぽ','一見坊の【日本妖怪学体系】':'妖怪学体系','Earth Number':'Earth Number','gooooooooood expression':'expression','花鳥風月、そして魚と虫。':'花鳥風月'};
+ function renderFullscreen(id,mode){
+  const item=mode==='realism'?byId.get(id):null;if(!item)return '';
+  const name=shortSites[item.site]||item.site;
+  return '<a class="ss-credit-link" href="'+esc(item.url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc('Realismの着想：'+item.site+'。連携先の詳細を別タブで開く')+'" title="'+esc(item.site+' — 別タブで開く')+'"><span class="ss-credit-prefix">Realismの着想：</span><span class="ss-credit-site">'+esc(name)+'</span><span class="ss-credit-detail"> · 詳細↗（別タブ）</span></a>';
+ }
+ window.ClassicaArtConnections=Object.freeze({render,renderFullscreen});
 })();

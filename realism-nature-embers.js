@@ -16,15 +16,10 @@ void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y
 for(int i=0;i<18;i++){float k=float(i),seed=rand(k+1.);float cycles=3.+floor(rand(k+19.)*3.);float f=fract(t/48.*cycles+seed);float opacity=smoothstep(0.,.12,f)*(1.-smoothstep(.78,1.,f));vec2 c=vec2(.40+.19*rand(k+31.)+.025*sin(f*5.+k)*f,.425+.235*f);float r=.0023+.0028*rand(k+43.);float spin=TAU*(f*(1.+floor(seed*3.))+seed);mat2 rot=mat2(cos(spin),-sin(spin),sin(spin),cos(spin));vec2 d=rot*(q-c)/r;d.y/=.35+.42*rand(k+53.);float rr=length(d);float shape=1.-smoothstep(.52,.95,rr*(1.+.15*sin(atan(d.y,d.x)*3.+k)));float hot=step(.64,rand(k+7.));vec3 ash=mix(vec3(.52,.47,.40),vec3(.82,.26,.035),hot);col=mix(col,ash,shape*opacity*.82);float glow=exp(-dot((q-c)/(r*2.5),(q-c)/(r*2.5)))*hot*opacity;col+=vec3(.07,.018,.002)*glow;}
 gl_FragColor=vec4(col,1.);}
 `;
- let imageRecord,renderer;
+ let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
- function image(){
-  if(imageRecord)return imageRecord;
-  const record=imageRecord={state:'loading',value:null};const img=new Image();img.decoding='async';
-  const failed=()=>{record.state='failed';announce();};img.onerror=failed;
-  img.onload=()=>{const done=()=>{record.state='ready';record.value=img;announce();};if(typeof img.decode==='function')img.decode().then(done,failed);else done();};
-  img.src='assets/realism/embers-material.webp';return record;
- }
+ function releaseMaterial(){if(renderer)renderer.releaseTexture();}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/embers-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -40,7 +35,7 @@ gl_FragColor=vec4(col,1.);}
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));
    canvas.addEventListener('webglcontextrestored',()=>{dispose();renderer=undefined;announce();},{once:true});
-   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),upload(img){
+   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),releaseTexture(){if(texture)gl.deleteTexture(texture);texture=undefined;uploadFailed=false;},upload(img){
     if(uploadFailed)return null;if(texture)return texture;try{if(typeof gl.getError==='function'){for(let n=0;n<8;n++){if(gl.getError()===gl.NO_ERROR)break;}}texture=gl.createTexture();if(!texture){uploadFailed=true;return null;}gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,gl.NONE);
     try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);if(typeof gl.getError==='function'&&gl.getError()!==gl.NO_ERROR)throw Error('Texture upload unavailable');}catch(error){gl.deleteTexture(texture);texture=undefined;uploadFailed=true;return null;}

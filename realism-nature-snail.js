@@ -13,15 +13,10 @@ const float TAU=6.28318530718;
 vec2 bend(vec2 p,vec2 a,vec2 b,float angle){vec2 d=b-a;float h=clamp(dot(p-a,d)/dot(d,d),0.,1.);float dist=length(p-a-h*d);float m=(1.-smoothstep(.005,.011,dist))*smoothstep(.05,.65,h);float an=angle*m;vec2 q=p-a;return a+mat2(cos(an),-sin(an),sin(an),cos(an))*q;}
 void main(){vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;vec2 q=(uv-.5)*vec2(aspect,1.);vec2 p=q/(max(aspect,1.)*1.2)+vec2(.51,.49);float ph=TAU*mod(time,48.)/48.;vec2 t=p;t=bend(t,vec2(.600,.448),vec2(.659,.529),.045*sin(ph*3.));t=bend(t,vec2(.606,.448),vec2(.672,.490),.038*sin(ph*2.+.8));t=bend(t,vec2(.610,.428),vec2(.650,.416),.030*sin(ph*3.+1.2));t=bend(t,vec2(.608,.428),vec2(.628,.405),.025*sin(ph*2.+2.));gl_FragColor=vec4(texture2D(material,vec2(t.x,1.-t.y)).rgb,1.);}
 `;
- let imageRecord,renderer;
+ let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
- function image(){
-  if(imageRecord)return imageRecord;
-  const record=imageRecord={state:'loading',value:null};const img=new Image();img.decoding='async';
-  const failed=()=>{record.state='failed';announce();};img.onerror=failed;
-  img.onload=()=>{const done=()=>{record.state='ready';record.value=img;announce();};if(typeof img.decode==='function')img.decode().then(done,failed);else done();};
-  img.src='assets/realism/snail-integrated.webp';return record;
- }
+ function releaseMaterial(){if(renderer)renderer.releaseTexture();}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/snail-integrated.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -37,7 +32,7 @@ void main(){vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolut
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));
    canvas.addEventListener('webglcontextrestored',()=>{dispose();renderer=undefined;announce();},{once:true});
-   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),upload(img){
+   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),releaseTexture(){if(texture)gl.deleteTexture(texture);texture=undefined;uploadFailed=false;},upload(img){
     if(uploadFailed)return null;if(texture)return texture;try{if(typeof gl.getError==='function'){for(let n=0;n<8;n++){if(gl.getError()===gl.NO_ERROR)break;}}texture=gl.createTexture();if(!texture){uploadFailed=true;return null;}gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,gl.NONE);
     try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);if(typeof gl.getError==='function'&&gl.getError()!==gl.NO_ERROR)throw Error('Texture upload unavailable');}catch(error){gl.deleteTexture(texture);texture=undefined;uploadFailed=true;return null;}

@@ -16,15 +16,10 @@ void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y
 for(int i=0;i<9;i++){float fi=float(i);float phase=ph+fi*.15+.10*sin(ph*(2.+mod(fi,2.))+fi*.7);float rx=span*(.16+.05*hash(fi+1.)),ry=.075+.03*hash(fi+5.);vec2 center=vec2((hash(fi+8.)-.5)*.16*span+rx*cos(phase),.09+(hash(fi+4.)-.5)*.11+ry*sin(phase));vec2 velocity=vec2(-rx*sin(phase),ry*cos(phase));vec3 form=pose(fi);float heading=atan(velocity.y,velocity.x)-form.z;float size=span*(.034+.014*hash(fi+9.));vec2 z=(q-center)/size;vec2 p=mat2(cos(heading),-sin(heading),sin(heading),cos(heading))*z+form.xy;vec2 axis=vec2(cos(form.z),sin(form.z)),normal=vec2(-axis.y,axis.x);vec2 local=p-form.xy;float along=dot(local,axis),across=dot(local,normal);float wing=smoothstep(.13,.28,abs(across));float flap=.92+.08*cos(ph*(12.+mod(fi,4.))+fi*1.9);p=form.xy+axis*along+normal*(across/mix(1.,flap,wing));float inside=step(0.,p.x)*step(p.x,1.)*step(0.,p.y)*step(p.y,1.);vec2 tile=vec2(mod(fi,3.),floor(fi/3.));vec2 st=(tile+vec2(clamp(p.x,.001,.999),clamp(1.-p.y,.001,.999)))/3.;vec4 bird=texture2D(material,vec2(st.x*.5,st.y));col=mix(col,bird.rgb*.31,bird.a*inside*.88);}
 gl_FragColor=vec4(col,1.);}
 `;
- let imageRecord,renderer;
+ let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
- function image(){
-  if(imageRecord)return imageRecord;
-  const record=imageRecord={state:'loading',value:null};const img=new Image();img.decoding='async';
-  const failed=()=>{record.state='failed';announce();};img.onerror=failed;
-  img.onload=()=>{const done=()=>{record.state='ready';record.value=img;announce();};if(typeof img.decode==='function')img.decode().then(done,failed);else done();};
-  img.src='assets/realism/birds-atlas.webp';return record;
- }
+ function releaseMaterial(){if(renderer)renderer.releaseTexture();}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/birds-atlas.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -40,7 +35,7 @@ gl_FragColor=vec4(col,1.);}
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));
    canvas.addEventListener('webglcontextrestored',()=>{dispose();renderer=undefined;announce();},{once:true});
-   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),upload(img){
+   return {canvas,gl,program,buffer,u,position:gl.getAttribLocation(program,'p'),releaseTexture(){if(texture)gl.deleteTexture(texture);texture=undefined;uploadFailed=false;},upload(img){
     if(uploadFailed)return null;if(texture)return texture;try{if(typeof gl.getError==='function'){for(let n=0;n<8;n++){if(gl.getError()===gl.NO_ERROR)break;}}texture=gl.createTexture();if(!texture){uploadFailed=true;return null;}gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,gl.NONE);
     try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);if(typeof gl.getError==='function'&&gl.getError()!==gl.NO_ERROR)throw Error('Texture upload unavailable');}catch(error){gl.deleteTexture(texture);texture=undefined;uploadFailed=true;return null;}

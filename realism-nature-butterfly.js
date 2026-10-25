@@ -4,27 +4,44 @@
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='jesu-joy';
- const description='小枝に留まる蝶が、体を静めて翅をゆっくり開閉する情景';
+ const description='小花に横向きにとまる淡色の蝶の翅脈と鱗粉を、僅かな翅角度と触角の動きで眺める情景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
-vec4 insect(vec2 p){float inside=step(0.,p.x)*step(p.x,1.)*step(0.,p.y)*step(p.y,1.);vec4 s=texture2D(material,vec2(clamp(p.x*.5,.0005,.4995),clamp(1.-p.y,.0005,.9995)));s.a*=inside;return s;}
-float capsule(vec2 p,vec2 a,vec2 b){vec2 d=b-a;float h=clamp(dot(p-a,d)/dot(d,d),0.,1.);return 1.-smoothstep(.019,.026,length(p-a-h*d));}
-void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 q=(uv-.5)*vec2(a,1.);vec2 env=q/max(a,1.)+.5;vec3 col=texture2D(material,vec2(.5+.5*env.x,1.-env.y)).rgb;
- float ph=TAU*mod(time,48.)/48.,size=min(.62,a*.82);vec2 p=q/size+.5;float side=step(.5,p.x);float angle=.10+.36*(.5+.5*sin(ph*6.+side*.14));
- vec2 projected=p;projected.x=.5+(p.x-.5)/cos(angle);
- // Fixed thorax/abdomen/feet; antenna wedge is excluded from wing projection.
- float body=1.-smoothstep(.052,.078,abs(p.x-.5));float antenna=(1.-smoothstep(.025+.72*max(0.,p.y-.6),.045+.72*max(0.,p.y-.6),abs(p.x-.5)))*smoothstep(.60,.67,p.y);float feet=max(capsule(p,vec2(.46,.61),vec2(.36,.73)),capsule(p,vec2(.54,.61),vec2(.66,.72)));float anchorMask=max(max(body,antenna),feet);
- vec4 original=insect(p),wing=insect(projected);vec4 s=mix(wing,original,anchorMask);
- float bodyShadow=exp(-pow(abs((p.x-.5)/.055),2.)-pow(abs((p.y-.48)/.29),2.));col*=1.-.25*bodyShadow;
- vec3 lit=s.rgb*mix(.93+.07*cos(angle),1.,anchorMask);col=mix(col,lit,s.a);gl_FragColor=vec4(col,1.);}
+vec3 stage(vec2 p,float n){p=clamp(p,vec2(.00048828125),vec2(.99951171875));return texture2D(material,vec2((p.x+n)*.5,p.y)).rgb;}
+void edge(vec2 p,vec2 a,vec2 b,inout float d,inout float sign){vec2 v=b-a;float h=clamp(dot(p-a,v)/dot(v,v),0.,1.);d=min(d,length(p-a-v*h));if((a.y>p.y)!=(b.y>p.y)){float x=a.x+(p.y-a.y)*(b.x-a.x)/(b.y-a.y);if(p.x<x)sign=-sign;}}
+float wingDistance(vec2 p){float d=10.,s=1.;
+edge(p,vec2(.395,.333),vec2(.425,.338),d,s);edge(p,vec2(.425,.338),vec2(.46,.36),d,s);edge(p,vec2(.46,.36),vec2(.493,.394),d,s);edge(p,vec2(.493,.394),vec2(.52,.435),d,s);edge(p,vec2(.52,.435),vec2(.532,.468),d,s);edge(p,vec2(.532,.468),vec2(.519,.486),d,s);edge(p,vec2(.519,.486),vec2(.504,.513),d,s);edge(p,vec2(.504,.513),vec2(.465,.53),d,s);edge(p,vec2(.465,.53),vec2(.427,.545),d,s);edge(p,vec2(.427,.545),vec2(.402,.542),d,s);edge(p,vec2(.402,.542),vec2(.38,.528),d,s);edge(p,vec2(.38,.528),vec2(.365,.503),d,s);edge(p,vec2(.365,.503),vec2(.361,.466),d,s);edge(p,vec2(.361,.466),vec2(.371,.431),d,s);edge(p,vec2(.371,.431),vec2(.378,.417),d,s);edge(p,vec2(.378,.417),vec2(.374,.391),d,s);edge(p,vec2(.374,.391),vec2(.375,.36),d,s);edge(p,vec2(.375,.36),vec2(.385,.34),d,s);edge(p,vec2(.385,.34),vec2(.395,.333),d,s);return d*s;}
+float wingAlpha(vec2 p){if(p.x<.35||p.x>.54||p.y<.325||p.y>.555)return 0.;float d=wingDistance(p);float difference=length(stage(p,0.)-stage(p,1.));float key=smoothstep(.045,.15,difference);float support=1.-smoothstep(.001,.005,d);return support*mix(key,1.,1.-smoothstep(-.006,-.002,d));}
+vec2 inverseRotate(vec2 p,vec2 root,float angle){float c=cos(angle),s=sin(angle);return root+mat2(c,-s,s,c)*(p-root);}
+float lineMask(vec2 p,vec2 a,vec2 b){vec2 v=b-a;float h=clamp(dot(p-a,v)/dot(v,v),0.,1.);return 1.-smoothstep(.0025,.0045,length(p-a-v*h));}
+float antennaAlpha(vec2 p,vec2 root,vec2 tip){float support=lineMask(p,root,tip);if(support<=0.)return 0.;float difference=length(stage(p,0.)-stage(p,1.));return support*smoothstep(.025,.095,difference)*smoothstep(.008,.016,length(p-root));}
+void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 p=(vec2(uv.x,1.-uv.y)-.5)*vec2(a,1.)/max(a,1.)+.5;
+ float ph=TAU*mod(time,48.)/48.;vec2 root=vec2(.525,.484);
+ float angle=.022*sin(ph*4.);vec2 q=inverseRotate(p,root,angle);
+ vec3 original=stage(p,0.),clean=stage(p,1.);
+ float oldA=wingAlpha(p),newA=wingAlpha(q);
+ vec3 col=mix(original,clean,oldA);col=mix(col,stage(q,0.),newA);
+ // Thorax, head, proboscis, legs and flower contacts are always the original pixels.
+ float anchor=smoothstep(.513,.526,p.x)*smoothstep(.462,.481,p.y);
+ float legs=max(max(lineMask(p,vec2(.518,.505),vec2(.503,.547)),lineMask(p,vec2(.503,.547),vec2(.495,.559))),max(lineMask(p,vec2(.532,.505),vec2(.535,.533)),lineMask(p,vec2(.546,.507),vec2(.557,.532))));
+ anchor=max(anchor,legs);
+ col=mix(col,original,anchor);
+ vec2 ar=vec2(.549,.467),t1=vec2(.627,.412),t2=vec2(.623,.443);
+ vec2 u1=inverseRotate(p,ar,.014*sin(ph*6.)),u2=inverseRotate(p,ar,.011*sin(ph*4.+.7));
+ float a1=antennaAlpha(p,ar,t1),a2=antennaAlpha(p,ar,t2);
+ col=mix(col,clean,max(a1,a2));
+ float n1=antennaAlpha(u1,ar,t1),n2=antennaAlpha(u2,ar,t2);
+ col=mix(col,stage(u1,0.),n1);col=mix(col,stage(u2,0.),n2);
+ gl_FragColor=vec4(col,1.);
+}
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/butterfly-atlas.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/jesu-flower-side-atlas-v1.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

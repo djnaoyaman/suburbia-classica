@@ -1721,6 +1721,16 @@ for(let i=0;i<210;i++){const v=-.55+2.1*(i+.18*Math.sin(i*2.399))/209;const g=c.
 module.exports={render,id:'eine-kleine',duration:96};
 
 return module.exports; })();
+
+works["habanera"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,amp=(.13+.015*Math.sin(p))/1.7;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#352b43';c.fillRect(0,0,w,h);
+for(let i=0;i<320;i++){const u=-.22+1.44*i/319,b=1.2*Math.PI*u-p,yoff=.10*Math.sin(b),yu=.12*Math.PI*Math.cos(b);
+function at(v){const a=2.805*Math.PI*u+p+.8*Math.sin(Math.PI*v),ca=Math.cos(a),x=u+amp*Math.sin(a),dx=amp*.8*Math.PI*Math.cos(Math.PI*v)*ca,xu=1+amp*2.805*Math.PI*ca,J=Math.abs(xu-dx*yu),light=Math.min(.999,.1+.76/(.52+J));return[x,v+yoff,dx,light];}
+const g=c.createLinearGradient(0,(-.2+yoff)*h,0,(1.2+yoff)*h);let mean=0;for(let k=0;k<7;k++){const z=k/6,light=at(-.2+1.4*z)[3],near=Math.max(0,(light-.45)/.55),rgb=[153+102*near,161+69*near,204-33*near];mean+=light/7;g.addColorStop(z,`rgba(${rgb.join(',')},${.22+.72*light})`);}c.strokeStyle=g;c.lineWidth=(.46+.45*mean)*s;c.beginPath();let v=-.2,a=at(v);c.moveTo(a[0]*w,a[1]*h);for(let k=1;k<=6;k++){const v1=-.2+1.4*k/6,b=at(v1),d=(v1-v)/3;c.bezierCurveTo((a[0]+a[2]*d)*w,(a[1]+d)*h,(b[0]-b[2]*d)*w,(b[1]-d)*h,b[0]*w,b[1]*h);v=v1;a=b;}c.stroke();}c.restore();}
+module.exports={render,id:'habanera',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1769,5 +1779,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-eine1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-habanera1'});
 })();

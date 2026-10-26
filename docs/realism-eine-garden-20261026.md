@@ -1,0 +1,7 @@
+# Eine kleine Nachtmusik — an imagined evening gathering
+
+Mozart’s original title points to evening or night, and the scoring names two violin parts, viola, and cello/bass. The current Köchel catalogue stresses that the name “Serenade” comes from the later first print, not Mozart; it interprets the work as a chamber Divertimento, and the precise occasion of its composition is unknown. This scene therefore does not claim a documented outdoor premiere or commission. [Mozarteum’s Köchel entry](https://kv.mozarteum.at/de/work/eine-kleine-nachtmusik-6049).
+
+Five present-day adults with two violins, viola, cello and double bass gather quietly in an invented night garden. The image translates title and chamber scoring into a photographic editorial moment—not an assertion that this exact ensemble size, garden, clothing or performance setting was prescribed by Mozart. It replaces an insect-specific metaphor with a legible small musical gathering.
+
+The players are at rest, with bows away from the strings. Faces, hands, bodies and instruments remain fixed; this is not footage of a performance. Only a small loose shawl fold and a bounded canopy sprig respond gently to the breeze. The camera and garden masonry stay still. A portrait crop retains all five faces and the string group, while trimming some outer instrumental details; the wide view shows the full ensemble. The selected recording is unchanged. Reduced motion holds a still frame and the existing fallback remains available.

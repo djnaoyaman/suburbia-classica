@@ -248,32 +248,37 @@ module.exports={render,id:'fantaisie-impromptu',duration:24};
 return module.exports; })();
 works["nocturne-9-2"] = (() => { const module = {exports:{}};
 'use strict';
-// Broad asymmetric returns of light; changing inflections over a slower support.
-// Editorial composition grounded in recurring ornamented melody, not audio analysis.
+// Private layered open-fan light study. Editorial time, not audio or note analysis.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
  const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#12294A');bg.addColorStop(.55,'#192941');bg.addColorStop(1,'#2A223A');c.fillStyle=bg;c.fillRect(0,0,w,h);
- const point=(theta,r,k)=>{
-  const bend=.1*Math.sin(theta-p)+.035*Math.sin(3*theta+p)*(k/8);
-  return [( -.58+.13*Math.sin(k*.55+p)+r*(.93*Math.cos(theta)+.18*Math.cos(2*theta)+bend))*w,
-   (-.12+.08*Math.cos(k*.4-p)+r*(.62*Math.sin(theta)+.1*Math.sin(2*theta-.5))+.035*Math.sin(p+k*.35))*h];
- };
- // Nine broad planes with large clear intervals, not a woven fine-line field.
- for(let k=8;k>=0;k--){
-  const r=.55+k*.26+.045*Math.sin(p+k*.7),width=.065+.045*(.5+.5*Math.sin(p-k*.8));
-  const phase=p+k*.35;
-  const g=c.createLinearGradient(w*(-.2+.2*Math.sin(phase)),h*.1,w*1.1,h*.92);
-  g.addColorStop(0,'rgba(101,142,190,.18)');g.addColorStop(.27,'rgba(191,164,179,.4)');
-  g.addColorStop(.53,`rgba(247,226,198,${.73+.14*Math.sin(phase)})`);
-  g.addColorStop(.74,'rgba(197,133,153,.54)');g.addColorStop(1,'rgba(87,123,176,.18)');
-  c.fillStyle=g;
-  for(let soft=0;soft<5;soft++){
-   const edge=soft/5,wi=width*(1-.32*edge);c.globalAlpha=.3+soft*.04;c.beginPath();
-   for(let j=0;j<=120;j++){const a=TAU*j/120,xy=point(a,r+wi,k);j?c.lineTo(...xy):c.moveTo(...xy);}
-   for(let j=120;j>=0;j--){const a=TAU*j/120,xy=point(a,Math.max(.012,r-wi),k);c.lineTo(...xy);}
-   c.closePath();c.fill('evenodd');
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#080F25');bg.addColorStop(.55,'#17233D');bg.addColorStop(1,'#141627');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ c.lineCap='round';
+ for(let layer=0;layer<3;layer++){
+  const phase=p+layer*2.05;
+  for(let i=0;i<112;i++){
+   const raw=i/111, u=raw+.065*Math.sin(raw*TAU*2+layer*.7), q=u*2-1;
+   const focus=.46+.31*Math.sin(p+layer*1.9);
+   const crest=Math.exp(-Math.pow((u-focus)/.18,2));
+   const g=c.createLinearGradient(0,h*(.15+layer*.25),w,h*(.8-layer*.2));
+   const rgb=layer===0?'249,225,184':layer===1?'228,164,177':'144,184,219';
+   g.addColorStop(0,`rgba(${rgb},${.06+.2*crest})`);g.addColorStop(.28,`rgba(${rgb},${.12+.48*crest})`);g.addColorStop(.62,`rgba(${rgb},${.18+.77*crest})`);g.addColorStop(1,`rgba(${rgb},${.08+.3*crest})`);
+   c.strokeStyle=g;c.lineWidth=.5+.57*crest;c.beginPath();
+   for(let j=0;j<=100;j++){
+    const v=-.22+1.44*j/100;
+    // Wide open fans have different vanishing directions, never a shared central star.
+    let x,y;
+    const ornament=.023*Math.sin(v*15+u*6+phase)*Math.sin(Math.PI*u)*(.55+.45*Math.cos(p-layer));
+    if(layer===0){
+     x=v;y=.12+.83*u+.28*q*Math.sin(v*2.8+.3)+.16*Math.sin(v*4.1+phase)*Math.sin(Math.PI*u)+ornament;
+    }else if(layer===1){
+     y=v;x=.06+.89*u+.38*q*Math.sin(v*2.4-1)+.13*Math.sin(v*4.7-phase)*Math.sin(Math.PI*u)+ornament;
+    }else{
+     x=v;y=.94-.9*u+.22*q*Math.cos(v*3.6+phase*.0)+.085*Math.sin(v*5+phase)*Math.sin(Math.PI*u)+ornament*.55;
+    }
+    if(j===0)c.moveTo(x*w,y*h);else c.lineTo(x*w,y*h);
+   }c.stroke();
   }
  }
  c.restore();
@@ -628,5 +633,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pathetique1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-nocturne9-1'});
 })();

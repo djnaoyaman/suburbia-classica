@@ -1699,6 +1699,16 @@ function render(c,w,h,time){
 module.exports={render,id:'le-cygne',duration:96};
 
 return module.exports; })();
+
+works["barber-adagio"] = (() => { const module = {exports:{}};
+'use strict';const TAU=Math.PI*2;
+// Open, broad paired density shoulders with delayed response; no recording synchronization.
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120,s=Math.min(w,h)/277;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#15232e';c.fillRect(0,0,w,h);
+for(let depth=2;depth>=0;depth--){const phase=p-depth*.85,center=.56-.27*Math.sin(phase),N=[300,240,140][depth],width=[.48,.45,.39][depth];const base=Array.from({length:17},(_,j)=>{const v=-.15+1.3*j/16,dv=v-center,g=Math.exp(-dv*dv/.19),amp=.018+.025*g,ap=-.05*dv/.19*g,phi=.65*Math.sin(3*v+phase)+depth*.42,phip=1.95*Math.cos(3*v+phase),bend=.075*Math.sin(3.8*v-phase)+.035*Math.sin(6*v+phase+depth),bendp=.285*Math.cos(3.8*v-phase)+.21*Math.cos(6*v+phase+depth);return{v,amp,ap,sp:Math.sin(phi),cp:Math.cos(phi),phip,bend,bendp}});const g=c.createLinearGradient(0,h,w*.2,0);if(depth===0){g.addColorStop(0,'rgba(179,169,153,.38)');g.addColorStop(.55,'rgba(231,222,198,.64)');g.addColorStop(1,'rgba(203,215,216,.43)')}else if(depth===1){g.addColorStop(0,'rgba(111,149,168,.32)');g.addColorStop(.45,'rgba(172,201,205,.48)');g.addColorStop(1,'rgba(156,173,190,.36)')}else{g.addColorStop(0,'rgba(98,129,151,.24)');g.addColorStop(.6,'rgba(140,162,179,.32)');g.addColorStop(1,'rgba(122,143,166,.22)')}c.strokeStyle=g;c.lineWidth=width*s;c.beginPath();
+for(let i=0;i<N;i++){const q=-.2+1.4*i/(N-1),sq=Math.sin(2*TAU*q),cq=Math.cos(2*TAU*q);const at=k=>{const b=base[k],sn=sq*b.cp+cq*b.sp,cs=cq*b.cp-sq*b.sp;return[q+b.amp*sn+b.bend,b.ap*sn+b.amp*cs*b.phip+b.bendp]};let a=at(0),v0=base[0].v;c.moveTo(a[0]*w,v0*h);for(let j=1;j<17;j++){const b=at(j),v1=base[j].v,dv=(v1-v0)/3;c.bezierCurveTo((a[0]+dv*a[1])*w,(v0+dv)*h,(b[0]-dv*b[1])*w,(v1-dv)*h,b[0]*w,v1*h);a=b;v0=v1}}c.stroke()}c.restore()}
+module.exports={id:'barber-adagio',duration:120,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1747,5 +1757,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-cygne1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-barber1'});
 })();

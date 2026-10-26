@@ -1061,6 +1061,53 @@ function render(c,w,h,time){
 module.exports={render,id:'brahms-op118-2',duration:96};
 
 return module.exports; })();
+
+works["rach-pc2-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Reciprocal piano/woodwind-like foreground exchange; editorial, never recording sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#202839';c.fillRect(0,0,w,h);c.globalCompositeOperation='screen';c.lineCap='round';
+for(let voice=0;voice<2;voice++){
+ const phase=p+voice*Math.PI,angle=voice?-.23:.18,cr=Math.cos(angle),sr=Math.sin(angle),n=voice?96:108,rgb=voice?'227,181,164':'178,212,235',presence=.73+.22*Math.cos(p-voice*Math.PI);
+ for(let i=0;i<n;i++){
+  const v=-.38+1.76*(i+.15*Math.sin(i*2.399))/(n-1);
+  function field(u){
+   const a=1.6*Math.PI*v+phase,sa=Math.sin(a),ca=Math.cos(a),su=Math.sin(Math.PI*u),cu=Math.cos(Math.PI*u),s2=Math.sin(TAU*u),c2=Math.cos(TAU*u);
+   const x=u+.05*s2*ca,y=v+.2125*su*sa,xu=1+.05*TAU*c2*ca,yu=.2125*Math.PI*cu*sa,xv=-.08*Math.PI*s2*sa,yv=1+.34*Math.PI*su*ca;
+   const dx=x-.5,dy=y-.5,normal=Math.abs(xu*yv-xv*yu)/Math.hypot(xu,yu);
+   return [.5+dx*cr-dy*sr,.5+dx*sr+dy*cr,xu*cr-yu*sr,xu*sr+yu*cr,normal];
+  }
+  const g=c.createLinearGradient(-.1*w,0,1.1*w,0);for(let k=0;k<=8;k++){const a=field(-.1+1.2*k/8),light=Math.min(1,Math.pow(.35/(.2+a[4]),.6));g.addColorStop(k/8,`rgba(${rgb},${presence*(.18+.63*light)})`);}c.strokeStyle=g;c.lineWidth=.56*unit;
+  c.beginPath();let old=field(-.1);c.moveTo(old[0]*w,old[1]*h);const step=1.2/8;for(let j=1;j<=8;j++){const next=field(-.1+j*step);c.bezierCurveTo((old[0]+old[2]*step/3)*w,(old[1]+old[3]*step/3)*h,(next[0]-next[2]*step/3)*w,(next[1]-next[3]*step/3)*h,next[0]*w,next[1]*h);old=next;}c.stroke();
+ }
+}
+c.restore();}
+module.exports={render,id:'rach-pc2-2',duration:96};
+
+return module.exports; })();
+
+works["schubert-ave-maria"] = (() => { const module = {exports:{}};
+'use strict';
+// Liszt piano arrangement: held middle cantabile with breathing surrounding support.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#332b2d';c.fillRect(0,0,w,h);
+function field(u,v){const a=TAU*.55*u+.2*Math.sin(p),b=TAU*v+p,compress=.65+.16*Math.cos(TAU*.55*u);const x=u+.035*Math.sin(b),y=.5+(v-.5)*compress+.10*Math.sin(a)+.06*Math.sin(b)*Math.sin(Math.PI*u);const xu=1,xv=.035*TAU*Math.cos(b),yu=-(v-.5)*.16*TAU*.55*Math.sin(TAU*.55*u)+.1*TAU*.55*Math.cos(a)+.06*Math.PI*Math.sin(b)*Math.cos(Math.PI*u),yv=compress+.06*TAU*Math.cos(b)*Math.sin(Math.PI*u);return[x,y,xu,yu,Math.abs(xu*yv-xv*yu)];}
+const bins=Array.from({length:24},()=>[]);
+for(let iy=0;iy<204;iy++)for(let ix=0;ix<176;ix++){
+const seed=((ix*73+iy*151)%211)/211,u=-.16+1.32*(ix+seed*.6)/175,v=-1+3*(iy+((ix*37+iy*19)%131)/131*.6)/203,a=field(u,v),light=Math.min(.999,Math.pow(.30/(.12+a[4]),.72)),depth=(ix+iy*2)%3,tone=Math.min(7,Math.floor(light*8)),size=unit*(.40+1.12*light)*(depth===0?1.08:depth===1?.93:.78);
+if(a[0]<-.04||a[0]>1.04||a[1]<-.04||a[1]>1.04)continue;bins[depth*8+tone].push(a[0]*w,a[1]*h,size);
+}
+for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){const rgb=depth===0?'236,218,192':depth===1?'162,175,195':'194,146,127';c.fillStyle=`rgba(${rgb},${.16+tone*.095})`;c.beginPath();let b=bins[depth*8+tone];for(let i=0;i<b.length;i+=3){let s=b[i+2];c.rect(b[i]-s*.5,b[i+1]-s*.4,s,s*.8);}c.fill();}
+// The central cantabile stays continuous while the surrounding granules breathe.
+c.lineWidth=.44*unit;for(let i=0;i<96;i++){const v=-.5+2*(i+.5)/96;c.strokeStyle=`rgba(252,232,204,${.06+.5*Math.exp(-Math.pow((v-.5)/.38,2))})`;c.beginPath();let old=field(-.12,v);c.moveTo(old[0]*w,old[1]*h);const step=1.24/8;for(let j=1;j<=8;j++){let next=field(-.12+j*step,v);c.bezierCurveTo((old[0]+old[2]*step/3)*w,(old[1]+old[3]*step/3)*h,(next[0]-next[2]*step/3)*w,(next[1]-next[3]*step/3)*h,next[0]*w,next[1]*h);old=next;}c.stroke();}
+c.restore();}
+module.exports={render,id:'schubert-ave-maria',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1109,5 +1156,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-brahms1181'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-rachave1'});
 })();

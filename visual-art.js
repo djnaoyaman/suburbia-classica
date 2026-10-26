@@ -1399,6 +1399,24 @@ c.stroke()}c.restore()}
 module.exports={id:'brahms-lullaby',duration:96,render};
 
 return module.exports; })();
+
+works["faure-apres-un-reve"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=2*Math.PI;
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';c.fillStyle='#261e30';c.fillRect(0,0,w,h);
+for(let i=0;i<240;i++){
+ const q=-.32+1.64*i/239,a=.17*Math.sin(6*q-p),b=.12*Math.cos(4.5*q+.6*Math.sin(p)),d=.06*Math.sin(q*8+p),sway=.045*Math.sin(4*q-p),lit=.5+.5*Math.sin(5*q-p+.6),center=.5+.27*Math.sin(4*q-p);
+ const x=u=>u+sway*Math.sin(Math.PI*u),dx=u=>1+sway*Math.PI*Math.cos(Math.PI*u);
+ const y=u=>q+a*Math.sin(Math.PI*u)+b*Math.sin(2*Math.PI*u+.5)+d*(u-.5),dy=u=>a*Math.PI*Math.cos(Math.PI*u)+b*2*Math.PI*Math.cos(2*Math.PI*u+.5)+d;
+ const g=c.createLinearGradient(-.1*w,y(-.1)*h,1.1*w,y(1.1)*h);
+ g.addColorStop(0,`rgba(139,130,190,${.40+.15*lit})`);g.addColorStop(center-.20,`rgba(221,152,157,${.60+.20*lit})`);g.addColorStop(center,`rgba(255,239,209,${.82+.16*lit})`);g.addColorStop(center+.20,`rgba(229,184,191,${.62+.18*lit})`);g.addColorStop(1,`rgba(142,158,195,${.42+.17*lit})`);
+ c.strokeStyle=g;c.lineWidth=(.50+.32*lit)*s;c.beginPath();let u0=-.12,X=x(u0),Y=y(u0),DX=dx(u0),DY=dy(u0);c.moveTo(X*w,Y*h);
+ for(let j=1;j<=6;j++){const u1=-.12+1.24*j/6,Z=x(u1),V=y(u1),DZ=dx(u1),DV=dy(u1),du=(u1-u0)/3;c.bezierCurveTo((X+du*DX)*w,(Y+du*DY)*h,(Z-du*DZ)*w,(V-du*DV)*h,Z*w,V*h);u0=u1;X=Z;Y=V;DX=DZ;DY=DV;}c.stroke();
+}c.restore();}
+module.exports={render,id:'faure-apres-un-reve',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1447,5 +1465,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-lullaby1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-faure1'});
 })();

@@ -1347,6 +1347,35 @@ for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'243,220,170'
 module.exports={render,id:'orpheus-overture',duration:96};
 
 return module.exports; })();
+
+works["rojo-no-tsuki"] = (() => { const module = {exports:{}};
+'use strict';
+// Returning phrasing seen through separated optical depths; editorial time, not the recorded score.
+const TAU=2*Math.PI;
+function hash(n){n=Math.imul(n^n>>>16,0x45d9f3b);n=Math.imul(n^n>>>16,0x45d9f3b);return((n^n>>>16)>>>0)/4294967296;}
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#2c303b');bg.addColorStop(.5,'#33323b');bg.addColorStop(1,'#252f3c');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]),states=[0,1,2].map(d=>{const phase=p+d*2.07,angle=[-.20,.28,-.06][d]+.06*Math.sin(phase);return{phase,ca:Math.cos(angle),sa:Math.sin(angle),frequency:.62+d*.13};});
+ for(let iy=0;iy<180;iy++)for(let ix=0;ix<180;ix++){
+  const i=iy*180+ix,depth=Math.min(2,Math.floor(hash(i+7529)*3)),s=states[depth];
+  const u=-.38+1.76*(ix+hash(i+149))/180,v=-.38+1.76*(iy+hash(i+9187))/180;
+  const x0=u+.11*Math.sin(TAU*v*.65+s.phase);
+  const centre=.5+.23*Math.sin(s.phase)+.14*Math.sin(TAU*s.frequency*x0+s.phase);
+  const q=Math.tanh((v-centre)/.32),y0=v-.20*q,J=1-.20/.32*(1-q*q);
+  const x=.5+s.ca*(x0-.5)-s.sa*(y0-.5),y=.5+s.sa*(x0-.5)+s.ca*(y0-.5);
+  const light=Math.min(.999,Math.max(.12,(1/Math.sqrt(J)-.55)*.72)),tone=Math.min(7,Math.floor(light*8)),size=unit*(.40+1.22*light)*(1-depth*.055);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let d=0;d<3;d++)for(let t=0;t<8;t++){
+  const rgb=d===0?[233,228,211]:d===1?[174,200,215]:[205,174,151];c.fillStyle=`rgba(${rgb.join(',')},${.16+t*.108})`;c.beginPath();const a=bins[d*8+t];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'rojo-no-tsuki',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1395,5 +1424,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-orpheus1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-kojo1'});
 })();

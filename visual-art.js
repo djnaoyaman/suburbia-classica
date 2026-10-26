@@ -783,6 +783,50 @@ function render(c,w,h,time){
 module.exports={id:'waltz-64-2',duration:96,render};
 
 return module.exports; })();
+
+works["schubert-impromptu-90-3"] = (() => { const module = {exports:{}};
+'use strict';
+// Editorial interpretation of sustained melody above unbroken arpeggios; not audio sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const t=(((Number.isFinite(time)?time:0)%96)+96)%96,p=TAU*t/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#181f2b';c.fillRect(0,0,w,h);
+ // Three uninterrupted depth currents. Compression illuminates strands, no solid carrier.
+ c.globalCompositeOperation='screen';
+ for(let layer=0;layer<3;layer++){
+  const count=[84,64,52][layer]; c.lineWidth=unit*(layer===0?.52:.62);
+  for(let j=0;j<count;j++){
+   const v=(j+.5+.2*Math.sin(j*2.399))/count,phase=v*TAU,slow=p+(layer*2.1),level=.5+.5*Math.cos(phase*2-slow);
+   // The same mapping's local dv compression controls light along each continuous strand.
+   const gradient=c.createLinearGradient(-.08*w,0,1.08*w,0),rgb=layer===0?'112,160,204':layer===1?'214,225,233':'221,175,140';
+   for(let q=0;q<=12;q++){
+    const u=-.08+1.16*q/12;
+    const compress=.52+.29*Math.cos(u*TAU*.75+p+layer);
+    const derivative=compress+.055*.22*TAU*Math.cos(u*TAU*1.5-slow+phase*.22)+.09*TAU*Math.cos(phase+slow)*Math.sin(u*Math.PI);
+    const crowd=Math.min(1,.16/(.10+Math.abs(derivative)));
+    gradient.addColorStop(q/12,`rgba(${rgb},${.17+.58*crowd})`);
+   }
+   c.strokeStyle=gradient;
+   c.beginPath();
+   function point(u){
+    const curve=.13*Math.sin(u*TAU*.75+slow)+.055*Math.sin(u*TAU*1.5-slow+phase*.22);
+    const compress=.52+.29*Math.cos(u*TAU*.75+p+layer);
+    const y=.5+(v-.5)*compress+curve+(layer-1)*.22+.09*Math.sin(phase+slow)*Math.sin(u*Math.PI);
+    const x=u+.028*Math.sin(phase+slow+u*3);
+    const dx=1+.084*Math.cos(phase+slow+u*3);
+    const dy=-(v-.5)*.29*TAU*.75*Math.sin(u*TAU*.75+p+layer)+.13*TAU*.75*Math.cos(u*TAU*.75+slow)+.055*TAU*1.5*Math.cos(u*TAU*1.5-slow+phase*.22)+.09*Math.sin(phase+slow)*Math.PI*Math.cos(u*Math.PI);
+    return [x*w,y*h,dx*w,dy*h];
+   }
+   let prior=point(-.08);c.moveTo(prior[0],prior[1]);const step=1.16/20;
+   for(let k=1;k<=20;k++){const next=point(-.08+step*k);c.bezierCurveTo(prior[0]+prior[2]*step/3,prior[1]+prior[3]*step/3,next[0]-next[2]*step/3,next[1]-next[3]*step/3,next[0],next[1]);prior=next;}
+c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={id:'schubert-impromptu-90-3',duration:96,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -831,5 +875,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-waltz64-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-schubert90-1'});
 })();

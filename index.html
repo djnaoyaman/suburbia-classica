@@ -1601,11 +1601,11 @@ function renderSong(i){
   const s = SONGS[i], p = SONGS[(i-1+SONGS.length)%SONGS.length], n = SONGS[(i+1)%SONGS.length];
   const al = t => autolink(t, s.id);
   const q = encodeURIComponent(compKey(s.composer) + ' ' + s.title.replace(/（.*?）/g,''));
-  const films = s.films.length ? '<ul class="plain">'+s.films.map(f=>'<li>'+lnk(f[3],f[0])+'（'+f[1]+'）<br><small>'+al(f[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
-  const cms = s.cms.length ? '<ul class="plain">'+s.cms.map(c=>'<li>'+lnk(c[2],c[0])+'<br><small>'+c[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const films = s.films.length ? '<ul class="plain">'+s.films.map(f=>'<li>'+lnk(f[3],f[0])+'（'+f[1]+'）<br><small>'+al(f[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典はありません。</p>';
+  const cms = s.cms.length ? '<ul class="plain">'+s.cms.map(c=>'<li>'+lnk(c[2],c[0])+'<br><small>'+c[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典はありません。</p>';
   const cmNote = s.cmNote ? '<p class="note">'+s.cmNote+'</p>' : '';
-  const tbs = s.textbooks.length ? '<ul class="plain">'+s.textbooks.map(t=>'<li>'+lnk(t[2],t[0])+'<br><small>'+t[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">教科書・鑑賞教材での掲載を示す出典は確認できなかった</p>';
-  const recs = s.recs.length ? '<ul class="plain">'+s.recs.map(r=>'<li><b style="font-weight:500">'+r[0]+'</b>（'+r[1]+'）<br><small>'+al(r[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典なし</p>';
+  const tbs = s.textbooks.length ? '<ul class="plain">'+s.textbooks.map(t=>'<li>'+lnk(t[2],t[0])+'<br><small>'+t[1]+'</small></li>').join('')+'</ul>' : '<p class="pend">教科書・鑑賞教材での掲載を示す出典は確認できませんでした。</p>';
+  const recs = s.recs.length ? '<ul class="plain">'+s.recs.map(r=>'<li><b style="font-weight:500">'+r[0]+'</b>（'+r[1]+'）<br><small>'+al(r[2])+'</small></li>').join('')+'</ul>' : '<p class="pend">確認できた出典はありません。</p>';
   const ck = compKey(s.composer), others = SONGS.filter(o=>compKey(o.composer)===ck && o.id!==s.id);
   const sameComp = others.length ? sec('同じ作曲者の曲','<div class="links">'+others.map(o=>'<a class="btn" href="#/song/'+o.id+'">'+o.title+'</a>').join('')+'</div>') : '';
   view.innerHTML =

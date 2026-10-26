@@ -29,13 +29,6 @@
     "label": "妖怪は、なぜ場所に現れるのか",
     "text": "水辺の小さな気配から、場所と境界に結びつく妖怪へ。見えているものと、感じたものの間を読む。",
     "url": "https://djnaoyaman.github.io/youkai/essay.html"
-  },
-  {
-    "artId": "tchaikovsky-october",
-    "site": "Earth Number",
-    "label": "地面の下でつながるキノコ",
-    "text": "地上の姿からは見えない菌類の広がりを紹介する展示から着想し、雨水がしずくとなる朽木の隙間へ目を向ける創作の林床を描きました。特定の菌類個体や地下の広がり、成長速度を再現したものではありません。",
-    "url": "https://djnaoyaman.github.io/earthnumber/#fungus"
   }
 ];
  const allowedPaths=['/kuranpo/','/youkai/','/earthnumber/','/gooooooooood_expression/','/sakanamushi/'];

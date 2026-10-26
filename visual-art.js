@@ -1936,6 +1936,16 @@ for(const depth of[1,0]){const phase=p+depth*1.3;for(let i=0;i<240;i++){const v=
 c.restore();}module.exports={render,id:'erlkonig',duration:96};
 
 return module.exports; })();
+
+works["faure-pie-jesu"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+// Gentle96s editorial breath; current Corboz recording is not time-synchronized.
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#26313b';c.fillRect(0,0,w,h);
+for(let depth=0;depth<3;depth++){const phase=p+depth*.75;for(let i=0;i<180;i++){const u=-.4+1.8*i/179;function at(v){const A=5.5*u+.75*Math.sin(3*v+phase),U=u+.12*Math.sin(A),Uu=1+.66*Math.cos(A),Uv=.27*Math.cos(A)*Math.cos(3*v+phase),V=v+.06*Math.sin(5*U-phase),B=.3*Math.cos(5*U-phase),Vu=B*Uu,Vv=1+B*Uv,X=U+.10*Math.sin(3.8*V+phase),C=.38*Math.cos(3.8*V+phase),Xu=Uu+C*Vu,Xv=Uv+C*Vv,Y=V+.035*Math.sin(5*X+phase),D=.175*Math.cos(5*X+phase),Yu=Vu+D*Xu,Yv=Vv+D*Xv,spacing=Math.abs(Xu*Yv-Xv*Yu)/Math.hypot(Xv,Yv),light=.16+.84*Math.exp(-.5*(spacing/.85)**2);return{x:X*w,y:Y*h,dx:Xv*w,dy:Yv*h,light};}const ns=[];for(let j=0;j<=16;j++)ns.push(at(-.4+1.8*j/16));const A=ns[0],B=ns[16],gx=B.x-A.x,gy=B.y-A.y,den=gx*gx+gy*gy,g=c.createLinearGradient(A.x,A.y,B.x,B.y),st=ns.map((a,j)=>({v:j===0?0:j===16?1:Math.max(.001,Math.min(.999,((a.x-A.x)*gx+(a.y-A.y)*gy)/den)),l:a.light})).sort((a,b)=>a.v-b.v);let mean=0;for(const z of st){const l=z.l;mean+=l;g.addColorStop(z.v,`rgba(${Math.round((depth===2?147:136)+(depth===2?104:118)*l)},${Math.round(148+(depth===1?102:96)*l)},${Math.round(168+(depth===0?67:83)*l)},${.16+.75*l})`);}c.strokeStyle=g;c.lineWidth=s*(.48+1.30*mean/17);c.beginPath();c.moveTo(A.x,A.y);for(let j=0;j<16;j++){const a=ns[j],b=ns[j+1],d=1.8/16/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();}}
+c.restore();}module.exports={render,id:'faure-pie-jesu',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1984,5 +1994,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-erlkonig1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-piejesu1'});
 })();

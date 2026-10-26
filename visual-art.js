@@ -1376,6 +1376,17 @@ function render(c,w,h,time){
 module.exports={render,id:'rojo-no-tsuki',duration:96};
 
 return module.exports; })();
+
+works["queen-of-night"] = (() => { const module = {exports:{}};
+'use strict';
+// Articulated opposing light planes, editorial vocal/register contrast; never audio sync.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,margin=Math.max(4,2*s),bins=Array.from({length:24},()=>[]);c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#242b49';c.fillRect(0,0,w,h);
+for(let j=0;j<156;j++)for(let i=0;i<174;i++){let hash=Math.imul(i+1,1597334677)^Math.imul(j+1,3812015801);hash=Math.imul(hash^(hash>>>16),2246822519);const u=-.2+1.4*(i+((i*31+j*47)%181)/240)/173,v=-.2+1.4*(j+(hash>>>0)/4294967296)/155,a=.25+.16*Math.sin(v*4.5+p),b=.77+.12*Math.cos(v*5.3-p),d=u-a,d2=u-b,g=Math.exp(-.5*d*d/.0324),g2=Math.exp(-.5*d2*d2/.0256),x=u-.32*d*g-.26*d2*g2,y=v+.035*Math.sin(p)*(g-g2),light=Math.min(.999,.08+.77*g+.65*g2),depth=(i+2*j)%3,z=s*(.48+1.42*light);if(x*w<-margin||x*w>w+margin||y*h<-margin||y*h>h+margin)continue;bins[depth*8+Math.floor(light*8)].push(x*w,y*h,z);}
+for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'222,231,248':d===1?'157,160,231':'226,151,194'},${.17+k*.105})`;c.beginPath();let b=bins[d*8+k];for(let i=0;i<b.length;i+=3)c.rect(b[i]-.5*b[i+2],b[i+1]-.36*b[i+2],b[i+2],b[i+2]*.72);c.fill();}c.restore();}
+module.exports={render,id:'queen-of-night',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1424,5 +1435,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-kojo1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-queen1'});
 })();

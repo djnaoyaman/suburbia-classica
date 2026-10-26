@@ -596,6 +596,46 @@ function render(c,w,h,time){
 module.exports={render,id:'pathetique-2',duration:24};
 
 return module.exports; })();
+
+works["reverie"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+// Memory-like optical fields, not physical refraction or audio-derived data.
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24,s=Math.min(w,h);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineJoin='round';
+ // A continuous luminous field: no opaque windows or finite plane outlines.
+ const rows=180;
+ for(let j=0;j<rows;j++){
+  const y=(j+.5)/rows,g=c.createLinearGradient(0,0,w,0);
+  for(let k=0;k<=20;k++){
+   const x=k/20,a=x-y*.52-.25-.16*Math.sin(p),b=x*.6+y-.72-.17*Math.sin(p+2),d=x+y*.38-.9-.18*Math.cos(p);
+   const lightA=Math.exp(-a*a/.038)*(.74+.26*Math.cos(y*3-p)),lightB=Math.exp(-b*b/.055)*(.72+.28*Math.sin(x*3+p)),memory=Math.exp(-d*d/.023)*(.6+.4*Math.cos(p-1.4));
+   const red=13+58*lightA+33*lightB+38*memory,green=23+47*lightA+48*lightB+31*memory,blue=43+62*lightA+49*lightB+22*memory;
+   g.addColorStop(x,`rgb(${Math.round(red)},${Math.round(green)},${Math.round(blue)})`);
+  }
+  c.fillStyle=g;c.fillRect(0,j*h/rows,w,h/rows+1);
+ }
+ // Fine refractive fringes belong to the same field, softly slipping through its depths.
+ for(let i=-18;i<155;i++){
+  const u=i/135,phase=p+.28*Math.sin(u*5-p),g=c.createLinearGradient(0,0,w,h);
+  for(let k=0;k<=16;k++){
+   const v=k/16,focus=Math.pow(.5+.5*Math.cos(v*TAU*.9-phase-u*4),5);
+   g.addColorStop(v,`rgba(${i%3===0?'243,224,190':'181,209,243'},${.045+.65*focus+.18*Math.pow(.5+.5*Math.sin(v*TAU*.8+phase+u*2),4)})`);
+  }
+  c.strokeStyle=g;c.lineWidth=.55*Math.max(1,s/277);c.beginPath();
+  for(let j=0;j<=120;j++){
+   const v=-.18+j*1.36/120,x=v*w;
+   const lens=Math.exp(-Math.pow((v-(.48+.16*Math.sin(p)))/.32,2));
+   const y=(u+.22*v+.065*Math.sin(v*5.2-phase+u*3)+lens*.045*Math.sin(u*7+phase))*h;
+   if(j===0)c.moveTo(x,y);else c.lineTo(x,y);
+  }c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'reverie',duration:24};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -644,5 +684,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-arabesque1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-reverie1'});
 })();

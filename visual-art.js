@@ -1297,6 +1297,17 @@ for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'247,196,139'
 module.exports={render,id:'bolero',duration:96};
 
 return module.exports; })();
+
+works["farandole"] = (() => { const module = {exports:{}};
+'use strict';
+// Two distinct open currents interweave, editorial counterpoint rather than recording sync.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,margin=Math.max(4,2*s),bins=Array.from({length:24},()=>[]);c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#19383d';c.fillRect(0,0,w,h);
+for(let layer=0;layer<2;layer++){let phase=p+layer*2.4,angle=layer?-.42:.31,cr=Math.cos(angle),sr=Math.sin(angle);for(let j=0;j<110;j++)for(let i=0;i<132;i++){let hash=Math.imul(i+1,1597334677)^Math.imul(j+1+layer*137,3812015801);hash=Math.imul(hash^(hash>>>16),2246822519);const u=-.28+1.56*(i+((i*37+j*71)%193)/250)/131,v=-.40+1.8*(j+(hash>>>0)/4294967296)/109,a=T*.85*v+phase,y0=v+.16*Math.sin(Math.PI*u+layer*.7)+.13*Math.sin(a),jac=1+.13*T*.85*Math.cos(a),x0=u+.035*Math.sin(a+phase),dx=x0-.5,dy=y0-.5,x=(.5+dx*cr-dy*sr)*w,y=(.5+dx*sr+dy*cr)*h;if(x<-margin||x>w+margin||y<-margin||y>h+margin)continue;const light=Math.min(.999,.12+.76/(.5+Math.abs(jac))),z=s*(.48+1.45*light),depth=layer?2:(i+j)%2;bins[depth*8+Math.floor(light*8)].push(x,y,z);}}
+for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'240,224,156':d===1?'115,219,209':'239,157,132'},${.16+k*.105})`;c.beginPath();let b=bins[d*8+k];for(let i=0;i<b.length;i+=3)c.rect(b[i]-.5*b[i+2],b[i+1]-.35*b[i+2],b[i+2],b[i+2]*.7);c.fill();}c.restore();}
+module.exports={render,id:'farandole',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1345,5 +1356,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-bolero1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-farandole1'});
 })();

@@ -675,6 +675,40 @@ c.restore();}
 module.exports={render,id:'k331-1',duration:96};
 
 return module.exports; })();
+
+works["prelude-7"] = (() => { const module = {exports:{}};
+'use strict';
+// Two interacting open light fronts; brief idea and altered response, not audio sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const t=(((Number.isFinite(time)?time:0)%48)+48)%48,p=t/48*TAU;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#342b2d';c.fillRect(0,0,w,h);
+const bins=Array.from({length:24},()=>[]),unit=Math.min(w,h)/277;
+for(let iy=0;iy<160;iy++)for(let ix=0;ix<190;ix++){
+ const seed=((ix*73+iy*151)%211)/211,u=-.25+1.5*(ix+seed*.65)/189,v=-.25+1.5*(iy+((ix*37+iy*19)%131)/131*.65)/159;
+ const a=TAU*1.65*(.65*u+.45*v)+p,b=TAU*1.35*(-.3*u+.7*v)-p+.8;
+ const ca=Math.cos(a),cb=Math.cos(b),sa=Math.sin(a),sb=Math.sin(b);
+ const x=u+(.13/1.65)*sa+(.07/1.35)*sb,y=v+(.07/1.65)*sa-(.12/1.35)*sb;
+ // Analytic Jacobian of exactly the same mapping used for point positions.
+ const xu=1+TAU*(.13*.65*ca-.07*.3*cb),xv=TAU*(.13*.45*ca+.07*.7*cb);
+ const yu=TAU*(.07*.65*ca+.12*.3*cb),yv=1+TAU*(.07*.45*ca-.12*.7*cb);
+ const determinant=xu*yv-xv*yu,trace=xu*xu+xv*xv+yu*yu+yv*yv;
+ const minimumStretch=Math.sqrt(Math.max(.001,(trace-Math.sqrt(Math.max(0,trace*trace-4*determinant*determinant)))/2));
+ // Directional crowding gives each front light; area crowding deepens overlaps.
+ const light=Math.min(.999,.58*Math.pow(.36/(.12+Math.abs(determinant)),.72)+.42*Math.pow(.32/(.12+minimumStretch),.72));
+ const depth=(ix+iy*2)%3,tone=Math.min(7,Math.floor(light*8));
+ const size=unit*(.37+1.27*light)*(depth===0?1.12:depth===1?.96:.78);
+ if(x<-.04||x>1.04||y<-.04||y>1.04)continue;
+ bins[depth*8+tone].push(x*w,y*h,size);
+}
+for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+ const color=depth===0?[252,234,196]:depth===1?[221,196,147]:[166,122,113];c.fillStyle=`rgba(${color.join(',')},${.18+tone*.105})`;c.beginPath();const b=bins[depth*8+tone];
+ for(let i=0;i<b.length;i+=3){const s=b[i+2];c.rect(b[i]-s*.5,b[i+1]-s*.4,s,s*.8);}c.fill();
+}
+c.restore();}
+module.exports={render,id:'prelude-7',duration:48};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -723,5 +757,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-k331-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-prelude7-1'});
 })();

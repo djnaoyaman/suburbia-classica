@@ -1946,6 +1946,36 @@ for(let depth=0;depth<3;depth++){const phase=p+depth*.75;for(let i=0;i<180;i++){
 c.restore();}module.exports={render,id:'faure-pie-jesu',duration:96};
 
 return module.exports; })();
+works["verdi-dies-irae"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=2*Math.PI;
+// Opposed, advancing pressure fronts. An editorial 96-second phrase, not recording sync.
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+ const left=.27+.18*Math.sin(p),right=.75+.14*Math.sin(p+.9),lean=-.42+.12*Math.cos(p),strike=.28+.045*Math.cos(4*p),answer=.20+.025*Math.sin(4*p+.8);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#251a29');bg.addColorStop(.55,'#341a23');bg.addColorStop(1,'#1b1929');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ function at(u,v){
+  const a=(u-left)/.17,b=(u-right)/.22,A=Math.tanh(a),B=Math.tanh(b),Au=(1-A*A)/.17,Bu=(1-B*B)/.22;
+  const z=4.3*v-.65*Math.sin(p),q=3.5*v+.55*Math.cos(p);
+  const y=v+lean*(u-.5)+strike*A*Math.cos(z)-answer*B*Math.sin(q),yu=lean+strike*Au*Math.cos(z)-answer*Bu*Math.sin(q),yv=1-4.3*strike*A*Math.sin(z)-3.5*answer*B*Math.cos(q);
+  const x=u+.045*Math.sin(3.3*v+p),xv=.1485*Math.cos(3.3*v+p),spacing=Math.abs(yv-xv*yu)/Math.hypot(1,yu);
+  const fold=Math.exp(-.5*(spacing/.56)**2),front=.5*(1-A*A)+.32*(1-B*B),light=Math.min(1,.10+.77*fold+.13*front);
+  return{x:x*w,y:y*h,dx:w,dy:yu*h,light};
+ }
+ for(let i=0;i<456;i++){
+  const v=-.7+2.4*i/455,ns=[];for(let j=0;j<=24;j++)ns.push(at(-.45+1.9*j/24,v));
+  const A=ns[0],B=ns[24],g=c.createLinearGradient(A.x,0,B.x,0);let mean=0;
+  for(let j=0;j<=24;j++){const l=ns[j].light;mean+=l;g.addColorStop(j/24,`rgba(${Math.round(163+92*l)},${Math.round(67+177*l)},${Math.round(88+135*l)},${.14+.78*l})`);}
+  c.strokeStyle=g;c.lineWidth=s*(.42+1.0*mean/25);c.beginPath();c.moveTo(A.x,A.y);
+  for(let j=0;j<24;j++){const a=ns[j],b=ns[j+1],d=1.9/24/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'verdi-dies-irae',duration:96};
+
+return module.exports; })();
+
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1994,5 +2024,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-piejesu1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-dies1'});
 })();

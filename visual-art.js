@@ -1387,6 +1387,18 @@ for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'222,231,248'
 module.exports={render,id:'queen-of-night',duration:96};
 
 return module.exports; })();
+
+works["brahms-lullaby"] = (() => { const module = {exports:{}};
+'use strict';
+// Two unequal continuous transmitted-light populations; editorial, not audio-synchronized.
+const TAU=Math.PI*2;
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#142733';c.fillRect(0,0,w,h);
+for(let d=0;d<2;d++){const phase=d===0?p:-p+1.1,N=d===0?410:330,slope=d===0?.27:-.19,amp=d===0?.12:.155,fre=d===0?3.4:2.7;const g=c.createLinearGradient(0,0,w,h);if(d===0){g.addColorStop(0,'rgba(244,222,177,.38)');g.addColorStop(.48,'rgba(242,229,201,.58)');g.addColorStop(1,'rgba(195,173,151,.28)')}else{g.addColorStop(0,'rgba(121,192,206,.18)');g.addColorStop(.63,'rgba(173,223,219,.37)');g.addColorStop(1,'rgba(199,213,230,.24)')}c.strokeStyle=g;c.lineWidth=(d===0?.48:.42)*s;c.beginPath();const basis=Array.from({length:13},(_,j)=>{const u=-.15+1.3*j/12;return [u,Math.sin(fre*u+.7*Math.sin(phase)),Math.cos(fre*u+.7*Math.sin(phase)),Math.cos(2.4*u-phase),Math.sin(2.4*u-phase)]});
+for(let i=0;i<N;i++){const q=-.4+1.8*i/(N-1),Q=q+.11*Math.sin(4.4*q+.55*Math.sin(phase)+d*.8),a=.10*Math.sin(2.5*q+.4+d),b=amp*(.8+.2*Math.cos(3*q-phase));const y=k=>Q+a*basis[k][1]+b*basis[k][3]+slope*(basis[k][0]-.5);const dy=k=>a*fre*basis[k][2]-b*2.4*basis[k][4]+slope;let x0=-.15,y0=y(0),dy0=dy(0);c.moveTo(x0*w,y0*h);for(let j=1;j<=12;j++){let x1=-.15+1.3*j/12,y1=y(j),dy1=dy(j),dx=(x1-x0)/3;c.bezierCurveTo((x0+dx)*w,(y0+dx*dy0)*h,(x1-dx)*w,(y1-dx*dy1)*h,x1*w,y1*h);x0=x1;y0=y1;dy0=dy1}}
+c.stroke()}c.restore()}
+module.exports={id:'brahms-lullaby',duration:96,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1435,5 +1447,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-queen1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-lullaby1'});
 })();

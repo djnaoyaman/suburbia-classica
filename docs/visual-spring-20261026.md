@@ -1,0 +1,7 @@
+# Spring Song — delicate continuous light
+
+Adds Mendelssohn Spring Song as Visual28/74, a48-second editorial cycle of fine continuous strands. The same spatial deformation and its analytic Jacobian control density and bounded radiance; no literal plant, extra glow object, or score-note synchronization is claimed. Current song and recording metadata remain untouched.
+
+One private performance variant reduced the fine sampling to520 paths/64steps and culled complete offscreen runs using their actual bounds and stroke margin. Actual eight-phase phone/wide comparisons retained the fine hierarchy. This is intentionally not pixel-identical to the denser rejected-cost prototype. Bounded culling checks were portrait-exact and at most4channel levels in sampled wide frames; not an all-time equality proof. Native median36.2/73.9ms atDPR1/2 compared withClair26.1/71.2 in the same environment; not physical-device FPS or browser-memory certification. Existing40ms frame bound remains unchanged. Small tone steps and local fine-line shimmer can remain.
+
+Author loop/seek/opacity and selected adjacent checks, earlier denser601frame temporal evidence, independent actual-source/visual review and focused integration tests have distinct scopes. No repeatedfull temporal certification is claimed for the final variant. All27 prior source closures/shared runtime, Impressive/Realism,74prose/music/citations/metadata and factual corrections remain exact; only append/version/cachequery plus dedicated test/doc change.

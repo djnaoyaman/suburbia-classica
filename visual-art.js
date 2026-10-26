@@ -977,6 +977,60 @@ function render(c,w,h,time){
 module.exports={render,id:'k310-2',duration:96};
 
 return module.exports; })();
+
+works["mendelssohn-spring-song"] = (() => { const module = {exports:{}};
+'use strict';
+// One private performance variant520×64 plus complete-run bounds culling.
+// Private causal-light study: the unchanged mapping's analytic Jacobian controls radiance.
+// Editorial visual cycle, not score timing or recording analysis.
+const TAU=2*Math.PI;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%48+48)%48)/48;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ c.fillStyle='#0d302d';c.fillRect(0,0,w,h);
+ const bins=Array.from({length:48},()=>[]),N=520,S=64;
+ const rows=Array.from({length:S+1},(_,j)=>{
+  const v=-.13+1.26*j/S,F=.55+.45*Math.cos(v*5-p),G=.5+.5*Math.sin(v*4.8+p+.4);
+  return {v,F,G,broad:.10*Math.sin(v*5.2+p)+.045*Math.sin(v*10.3+1.2),bv:.52*Math.cos(v*5.2+p)+.4635*Math.cos(v*10.3+1.2),Fv:-2.25*Math.sin(v*5-p),Gv:2.4*Math.cos(v*4.8+p+.4)};
+ });
+ for(let i=0;i<N;i++){
+  const seed=((i*137)%661)/661,depth=i%3,u=-.35+1.7*(i+.85*seed)/(N-1)+.004*Math.sin(i*1.87),s8=Math.sin(u*8),c8=Math.cos(u*8),ybase=.016*Math.sin(u*9+p),yuBase=.144*Math.cos(u*9+p);
+  let last,lastBin=-1,run;
+  for(let j=0;j<=S;j++){
+   const {v,F,G,broad,bv,Fv,Gv}=rows[j],A=u*14+v*4.1-p,B=u*37-v*8+p,C=v*24+u*17+p,K=v*11+u*14-p;
+   const sa=Math.sin(A),ca=Math.cos(A),sb=Math.sin(B),cb=Math.cos(B),sc=Math.sin(C),cc=Math.cos(C),sk=Math.sin(K),ck=Math.cos(K);
+   const x=(u+broad+.070*sa*F+.030*sb*G*G+.008*sc*s8)*w;
+   const y=(v+ybase+.006*sk)*h;
+   const xu=1+.98*ca*F+1.11*cb*G*G+.008*(17*cc*s8+8*sc*c8);
+   const xv=bv+.070*(4.1*ca*F+sa*Fv)+.030*(-8*cb*G*G+2*sb*G*Gv)+.192*cc*s8;
+   const yu=yuBase+.084*ck,yv=1+.066*ck,J=xu*yv-xv*yu;
+   // Broad bounded compression response; no singular bright spikes at J=0.
+   const compression=1/(1+J*J/.9025),tone=Math.min(15,Math.floor((.06+.92*compression)*16)),bin=depth*16+tone;
+   if(last){
+    if(bin!==lastBin){run=[last[0],last[1],x,y];bins[bin].push(run)}else run.push(x,y);
+    lastBin=bin;
+   }
+   last=[x,y];
+  }
+ }
+ for(let d=0;d<3;d++)for(let t=0;t<16;t++){
+  const k=t/15,r=Math.round(57+185*k),g=Math.round(119+122*k),b=Math.round(94+(d===1?64:98)*k);
+  c.strokeStyle=`rgba(${r},${g},${b},${.10+.37*k})`;
+  c.lineWidth=(.36+d*.09)*(Math.min(w,h)/277);c.beginPath();
+  for(const a of bins[d*16+t]){
+   // Cull only an entire run whose actual bounds miss the padded viewport.
+   let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+   for(let q=0;q<a.length;q+=2){minX=Math.min(minX,a[q]);maxX=Math.max(maxX,a[q]);minY=Math.min(minY,a[q+1]);maxY=Math.max(maxY,a[q+1]);}
+   const margin=c.lineWidth*2+1;
+   if(maxX < -margin || minX > w+margin || maxY < -margin || minY > h+margin)continue;
+   c.moveTo(a[0],a[1]);for(let q=2;q<a.length;q+=2)c.lineTo(a[q],a[q+1]);
+  }c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'mendelssohn-spring-song',duration:48};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1025,5 +1079,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-gk1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-spring1'});
 })();

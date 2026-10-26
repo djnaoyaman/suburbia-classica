@@ -1776,6 +1776,30 @@ function render(c,w,h,time){
 module.exports={render,id:'caccini-ave-maria',duration:96};
 
 return module.exports; })();
+
+works["ave-verum-corpus"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=2*Math.PI;
+// Single connected field, editorial120s breath; not recorded-note synchronization.
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120,s=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#1c2d3c';c.fillRect(0,0,w,h);
+ const cx=.35+.11*Math.sin(p),cy=.38+.08*Math.cos(p),ex=.69+.08*Math.cos(p+.7),ey=.67+.09*Math.sin(p-.5);
+ function field(x,y){const a=x-cx,b=y-cy,aa=x-ex,bb=y-ey,n=Math.exp(-((a+.42*b)**2/.105+b*b/.075)),m=Math.exp(-((aa-.5*bb)**2/.085+bb*bb/.12)),light=Math.min(1,.09+.84*n+.60*m),slope=.38+.42*Math.sin(3.3*y)+.22*Math.cos(3.6*x)+.22*(n-m)*Math.sin(p+.6);return{slope,light};}
+ const step=1.8/16;
+ for(let i=0;i<400;i++){
+  const q=-.9+2.8*i/399,ys=new Array(17);ys[8]=q;
+  for(let direction of[-1,1])for(let j=8;direction<0?j>0:j<16;j+=direction){const x=-.4+j*step,y=ys[j],dt=direction*step,k=field(x,y).slope;ys[j+direction]=y+dt*field(x+dt*.5,y+dt*k*.5).slope;}
+  const ns=ys.map((y,j)=>{const x=-.4+j*step,f=field(x,y);return{x,y,k:f.slope,l:f.light};}),g=c.createLinearGradient(-.4*w,0,1.4*w,0);let mean=0;
+  for(let j=0;j<=16;j++){const l=ns[j].l;mean+=l;g.addColorStop(j/16,`rgba(${Math.round(112+143*l)},${Math.round(157+89*l)},${Math.round(182+50*l)},${.18+.76*l})`);}
+  c.strokeStyle=g;c.lineWidth=s*(.42+1.62*mean/17);c.beginPath();c.moveTo(ns[0].x*w,ns[0].y*h);
+  for(let j=0;j<16;j++){const a=ns[j],b=ns[j+1];c.bezierCurveTo((a.x+step/3)*w,(a.y+a.k*step/3)*h,(b.x-step/3)*w,(b.y-b.k*step/3)*h,b.x*w,b.y*h);}c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'ave-verum-corpus',duration:120};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1824,5 +1848,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-caccini1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-aveverum1'});
 })();

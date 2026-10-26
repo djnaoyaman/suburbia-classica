@@ -1640,6 +1640,19 @@ function render(c,w,h,time){
 module.exports={id:'jupiter',duration:120,render};
 
 return module.exports; })();
+
+works["vivaldi-spring"] = (() => { const module = {exports:{}};
+'use strict';
+// Returning breadth and contrasting open currents: editorial ritornello, not audio sync.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%72)+72)%72)/72,s=Math.min(w,h)/277;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#123d3d';c.fillRect(0,0,w,h);const bins=Array.from({length:24},()=>[]),states=Array.from({length:3},(_,k)=>{const phase=p+k*T/3,width=.14+.025*Math.cos(phase);return{phase,base:.15+k*.34,width2:width*width,weight:k===1?.8:.65};});
+for(let j=0;j<168;j++)for(let i=0;i<192;i++){let u=-.2+1.4*(i+((i*73+j*151)%211)/300)/191,v=-.2+1.4*(j+((i*37+j*19)%131)/190)/167,x=u,y=v,light=0;
+for(let k=0;k<3;k++){const state=states[k],phase=state.phase,centre=state.base+.115*Math.sin(T*.65*u+phase),d=v-centre,g=Math.exp(-.5*d*d/state.width2),slope=.115*T*.65*Math.cos(T*.65*u+phase);y-=.34*d*g;x+=.04*Math.sin(phase+u*2)*g-.055*slope*d*g;light+=g*state.weight;}
+light=Math.min(.999,.08+.78*light);let depth=(i+2*j)%3,tone=Math.floor(Math.min(.999,light*(.88+.12*Math.sin(u*9-v*8+p+depth)))*8),z=s*(.50+1.40*light)*(depth===0?1.08:depth===1?.95:.82);bins[depth*8+tone].push(x*w,y*h,z);}
+for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'247,231,157':d===1?'121,220,189':'148,194,231'},${.18+k*.105})`;c.beginPath();const b=bins[d*8+k];for(let i=0;i<b.length;i+=3)c.rect(b[i]-.5*b[i+2],b[i+1]-.36*b[i+2],b[i+2],b[i+2]*.72);c.fill();}c.restore();}
+module.exports={render,id:'vivaldi-spring',duration:72};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1688,5 +1701,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-jupiter1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-vivaldi1'});
 })();

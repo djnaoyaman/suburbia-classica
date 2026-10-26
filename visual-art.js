@@ -145,37 +145,35 @@ module.exports={render,id:'pavane-fullfield',duration:24};
 return module.exports; })();
 works["fur-elise"] = (() => { const module = {exports:{}};
 'use strict';
-// Broad paired return gestures, not notation or measured sound.
+// Private reconsideration only. A lyrical field, not score or audio simulation.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
  const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
- c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1c1c2b');bg.addColorStop(.5,'#33242d');bg.addColorStop(1,'#1b2332');c.fillStyle=bg;c.fillRect(0,0,w,h);
- const episode=.5-.5*Math.cos(p);
- c.lineCap='butt';c.lineJoin='miter';
- for(let k=0;k<13;k++){
-  const v=(k-2)/8,y=v*h;
-  const answer=.5+.5*Math.sin(p-v*3.7);
-  const center=(.47+.22*Math.sin(p+v*2.1))*w;
-  const rise=(.065+.07*episode)*h;
-  const thickness=(.016+.025*Math.pow(answer,2))*h;
-  const gap=(.045+.10*(1-answer))*w;
-  for(let side=0;side<2;side++){
-   const sign=side?1:-1;
-   const hinge=center+sign*gap;
-   const g=c.createLinearGradient(side?w:0,y,hinge,y+rise);
-   g.addColorStop(0,side?'rgba(185,146,163,.19)':'rgba(199,150,140,.25)');
-   g.addColorStop(.65,`rgba(230,174,158,${.38+.42*answer})`);
-   g.addColorStop(1,`rgba(251,239,216,${.62+.32*answer})`);
-   c.strokeStyle=g;c.lineWidth=thickness;
-   c.beginPath();c.moveTo(side?w*1.08:-w*.08,y);
-   c.lineTo(hinge,y);c.lineTo(hinge,y+sign*rise);
-   c.lineTo(hinge-sign*(.08+.08*answer)*w,y+sign*rise);c.stroke();
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#111d30');bg.addColorStop(.5,'#24263c');bg.addColorStop(1,'#192438');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const cx1=.29+.15*Math.sin(p),cy1=.30+.17*Math.cos(p),cx2=.70+.14*Math.cos(p),cy2=.69+.16*Math.sin(p);
+ for(let line=0;line<270;line++){
+  let x=-.24,y=-.48+1.96*line/269;
+  const key=line/269,phase=key*TAU*1.4-p,bright=.5+.5*Math.cos(phase);
+  const pts=[[x,y]];
+  for(let step=0;step<170;step++){
+   const a=Math.exp(-((x-cx1)*(x-cx1)/.11+(y-cy1)*(y-cy1)/.20)),b=Math.exp(-((x-cx2)*(x-cx2)/.13+(y-cy2)*(y-cy2)/.16));
+   const dx=.88+.28*a-.12*b,dy=(.67+.20*Math.sin(p)) *a-(.73+.19*Math.cos(p))*b+.09*Math.sin(p+y*2.4);
+   x+=dx*.0105;y+=dy*.0105;pts.push([x,y]);
   }
+  const g=c.createLinearGradient(pts[0][0]*w,0,pts[pts.length-1][0]*w,0);let peak=0;
+  for(let j=0;j<=12;j++){
+   const a=pts[Math.round(j*(pts.length-1)/12)],q=(a[0]-pts[0][0])/(pts[pts.length-1][0]-pts[0][0]);
+   const first=Math.exp(-((a[0]-cx1)**2/.15+(a[1]-cy1)**2/.055))*(.76+.24*(.5+.5*Math.cos(p)));
+   const second=Math.exp(-((a[0]-cx2)**2/.15+(a[1]-cy2)**2/.070))*(.76+.24*(.5+.5*Math.sin(p)));
+   const energy=Math.min(1,(first+second)*1.26);peak=Math.max(peak,energy);
+   g.addColorStop(q,`rgba(${Math.round(155+100*energy)},${Math.round(175+69*energy)},${Math.round(208+25*energy)},${.22+.77*energy})`);
+  }
+  c.strokeStyle=g;c.lineWidth=(.43+1.15*Math.pow(peak,2))*Math.max(1,h/600);c.beginPath();pts.forEach((a,i)=>i?c.lineTo(a[0]*w,a[1]*h):c.moveTo(a[0]*w,a[1]*h));c.stroke();
  }
  c.restore();
 }
-module.exports={render,id:'fur-elise',duration:24};
+module.exports={render,id:'fur-elise-private-reconsideration',duration:24};
 
 return module.exports; })();
 works["tristesse"] = (() => { const module = {exports:{}};
@@ -595,5 +593,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-flaxen1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-elise1'});
 })();

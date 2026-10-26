@@ -1709,6 +1709,18 @@ for(let i=0;i<N;i++){const q=-.2+1.4*i/(N-1),sq=Math.sin(2*TAU*q),cq=Math.cos(2*
 module.exports={id:'barber-adagio',duration:120,render};
 
 return module.exports; })();
+
+works["eine-kleine"] = (() => { const module = {exports:{}};
+'use strict';
+// Balanced opening and answering bowed fields, an editorial sonata dialogue.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#263246';c.fillRect(0,0,w,h);c.globalCompositeOperation='screen';c.lineWidth=.60*s;
+for(let layer=0;layer<2;layer++){const sense=layer?-1:1,phase=p+layer*Math.PI,amp=.12+.025*Math.cos(phase),rgb=layer?[244,165,135]:[153,211,232];
+function f(u,v){const freq=layer?1.3:.85,a=T*freq*v+phase+.25*Math.sin(Math.PI*u+phase),ux=layer?1.28:.82,b=Math.PI*ux*u+(layer?.9:0)+.35*Math.sin(p),height=layer?.20:.30,local=(.62+.38*Math.sin(Math.PI*u+(layer?.4:0))),warp=amp/freq,y=v+sense*height*Math.sin(b)+warp*Math.sin(a)*local,dy=sense*height*Math.PI*ux*Math.cos(b)+warp*(Math.cos(a)*.25*Math.PI*Math.cos(Math.PI*u+phase)*local+Math.sin(a)*.38*Math.PI*Math.cos(Math.PI*u+(layer?.4:0)));const spacing=1+warp*Math.cos(a)*T*freq*local;return[u,y,spacing,dy];}
+for(let i=0;i<210;i++){const v=-.55+2.1*(i+.18*Math.sin(i*2.399))/209;const g=c.createLinearGradient(0,0,w,0);let mean=0;for(let k=0;k<5;k++){const u=k/4,J=f(u,v)[2],near=Math.exp(-Math.pow((J-.24)/.70,2));mean+=near/5;const color=rgb.map((a,j)=>a+( [255,241,207][j]-a)*near*.72);g.addColorStop(u,`rgba(${color.join(',')},${.20+.70*near})`);}c.strokeStyle=g;c.lineWidth=(.52+.34*mean)*s;c.beginPath();let old=f(-.1,v);c.moveTo(old[0]*w,old[1]*h);for(let j=1;j<=8;j++){let next=f(-.1+j*.15,v);c.bezierCurveTo((old[0]+.05)*w,(old[1]+old[3]*.05)*h,(next[0]-.05)*w,(next[1]-next[3]*.05)*h,next[0]*w,next[1]*h);old=next;}c.stroke();}}c.restore();}
+module.exports={render,id:'eine-kleine',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1757,5 +1769,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-barber1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-eine1'});
 })();

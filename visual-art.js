@@ -448,32 +448,43 @@ module.exports={render,id:'flaxen-hair',duration:24};
 return module.exports; })();
 works["arabesque-1"] = (() => { const module = {exports:{}};
 'use strict';
-// Interlaced ornament: editorial association with continuous figuration.
+// Editorial curved counterpoint; independent of audio/score events.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
- const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
- c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';
- const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#042c2e');bg.addColorStop(.55,'#063c35');bg.addColorStop(1,'#061f2d');c.fillStyle=bg;c.fillRect(0,0,w,h);
- const point=(f,k,t)=>{const q=-.3+k*.23,phase=TAU*(t*1.13)+p+k*.5;return f===0?{x:q+.14*Math.sin(phase),y:t}:{x:t,y:q+.14*Math.sin(phase+.9)};};
- const thick=Math.min(w,h)*.055;
- function strand(f,k){
-  for(let n=-3;n<=3;n++){
-   const off=n*thick/7,edge=.72+.28*(n+3)/6;
-   const g=c.createLinearGradient(0,0,f?w:0,f?0:h),a=.5+.5*Math.sin(p+k*.8);
-   const color=f?[210,231,208]:[62,203,172];
-   for(const [q,intensity]of[[0,.4],[.25,.63],[.5,.65+.35*a],[.8,.66],[1,.42]]){const z=intensity*edge;g.addColorStop(q,`rgb(${Math.round(5+color[0]*z)},${Math.round(25+color[1]*z*.9)},${Math.round(26+color[2]*z*.88)})`);}
-   c.strokeStyle=g;c.lineWidth=thick/7*1.04;c.beginPath();
-   for(let j=0;j<=100;j++){const t=-.2+1.4*j/100,a=point(f,k,t),b=point(f,k,t+.0001),dx=(b.x-a.x)*w,dy=(b.y-a.y)*h,len=Math.hypot(dx,dy),x=a.x*w-dy/len*off,y=a.y*h+dx/len*off;if(j===0)c.moveTo(x,y);else c.lineTo(x,y);}c.stroke();
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24,short=Math.min(w,h);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#031c24');bg.addColorStop(.48,'#07302e');bg.addColorStop(1,'#082333');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ // Unequal curved directions form changing open cells, never a radial fan.
+ for(let family=0;family<2;family++){
+  const count=family?109:121,phase=p+(family?1.4:0),depth=.5+.5*Math.sin(phase),rgb=family?'231,239,212':'115,217,192';
+  for(let i=-17;i<count+17;i++){
+   const u=i/(count-1),spacing=u+.037*Math.sin(u*TAU*1.8+phase)+.011*Math.sin(u*TAU*4.7-phase),focus=.5+.5*Math.sin(u*5-phase);
+   const g=family?c.createLinearGradient(0,0,w,0):c.createLinearGradient(0,0,0,h);
+   for(let k=0;k<=20;k++){
+    const v=k/20;
+    // Two traveling phrases, elongated along the actual filament rather than detached dots.
+    const a=Math.pow(.5+.5*Math.cos(v*TAU*1.6-phase-u*4.1),5);
+    const b=Math.pow(.5+.5*Math.cos(v*TAU*.85+phase*2+u*6.2),8);
+    const passage=.003+.94*a+.56*b,interlace=.55+.45*Math.cos(v*TAU*2+u*7.5+phase);
+    g.addColorStop(v,`rgba(${rgb},${Math.min(.96,(.8+.8*focus)*passage*(.78+.22*depth)*interlace)})`);
+   }
+   c.strokeStyle=g;c.lineWidth=(.58+.26*depth)*Math.max(1,short/277);c.beginPath();
+   const point=v=>{
+    if(family===0){
+     const a=v*TAU*1.15+.65*Math.sin(phase)+u*2.1,b=v*TAU*2.1-phase+u*5;
+     return [(spacing+.12*Math.sin(a)+.048*Math.sin(b))*w,v*h,(.12*TAU*1.15*Math.cos(a)+.048*TAU*2.1*Math.cos(b))*w,h];
+    }
+    const a=v*TAU*.72+u*2.5+phase,b=v*TAU*1.7+phase*2-u*4;
+    return [v*w,(spacing+.19*Math.sin(a)+.045*Math.sin(b))*h,w,(.19*TAU*.72*Math.cos(a)+.045*TAU*1.7*Math.cos(b))*h];
+   };
+   // Cubic Hermite reconstruction preserves tangent continuity, unlike polyline knots.
+   const step=1.36/16;let previous=point(-.18);c.moveTo(previous[0],previous[1]);
+   for(let j=1;j<=16;j++){
+    const next=point(-.18+step*j);
+    c.bezierCurveTo(previous[0]+previous[2]*step/3,previous[1]+previous[3]*step/3,next[0]-next[2]*step/3,next[1]-next[3]*step/3,next[0],next[1]);
+    previous=next;
+   }c.stroke();
   }
- }
- for(let f=0;f<2;f++)for(let k=0;k<8;k++)strand(f,k);
- // Alternating crossings: redraw the same continuous strand only locally.
- for(let a=0;a<8;a++)for(let b=0;b<8;b++)if((a+b)%2===0){
-  let x=-.3+a*.23,y=-.3+b*.23;
-  let lo=x-.14,hi=x+.14;
-  for(let i=0;i<36;i++){const mid=(lo+hi)*.5,ym=point(1,b,mid).y;if(mid-point(0,a,ym).x>0)hi=mid;else lo=mid;}
-  x=(lo+hi)*.5;y=point(1,b,x).y;
-  c.save();c.beginPath();c.arc(x*w,y*h,thick*1.8/Math.max(.12,Math.abs(1-(.14*TAU*1.13*Math.cos(TAU*y*1.13+p+a*.5))*(.14*TAU*1.13*Math.cos(TAU*x*1.13+p+b*.5+.9)))/Math.hypot(1,.14*TAU*1.13*Math.cos(TAU*y*1.13+p+a*.5)*w/h)/Math.hypot(1,.14*TAU*1.13*Math.cos(TAU*x*1.13+p+b*.5+.9)*h/w)),0,TAU);c.clip();strand(0,a);c.restore();
  }
  c.restore();
 }
@@ -585,7 +596,7 @@ function render(c,w,h,time){
 module.exports={render,id:'pathetique-2',duration:24};
 
 return module.exports; })();
-// Only BWV uses the bounded raster. One backing maximum across all instances.
+// BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
  if(owner!==bwvOwner)return;
@@ -593,20 +604,20 @@ function releaseBwv(owner){
  bwvBacking=null;bwvContext=null;bwvOwner=null;
 }
 function drawBwv(owner,work,c,w,h,time){
- const W=c.canvas.width,H=c.canvas.height,capH=Math.min(H,Math.max(1,Math.round(h)));
+ const W=c.canvas.width,H=c.canvas.height,capW=work.id==='arabesque-1'?Math.min(W,Math.max(1,Math.round(w))):W,capH=Math.min(H,Math.max(1,Math.round(h)));
  if(capH===H){releaseBwv(bwvOwner);return false;}
  if(bwvOwner!==owner){releaseBwv(bwvOwner);bwvOwner=owner;}
  if(!bwvBacking){bwvBacking=document.createElement('canvas');bwvContext=bwvBacking.getContext('2d');}
  if(!bwvContext){releaseBwv(owner);throw new Error('Visual backing unavailable');}
- if(bwvBacking.width!==W)bwvBacking.width=W;
+ if(bwvBacking.width!==capW)bwvBacking.width=capW;
  if(bwvBacking.height!==capH)bwvBacking.height=capH;
- const unit=Math.min(w,h)/277,lw=w/unit,lh=h/unit,sx=W/lw,sy=capH/lh;
+ const unit=Math.min(w,h)/277,lw=w/unit,lh=h/unit,sx=capW/lw,sy=capH/lh;
  const proxy=new Proxy(bwvContext,{
   get(ctx,key){if(key==='setTransform')return(a,b,d,e,x,y)=>ctx.setTransform(a*sx,b*sy,d*sx,e*sy,x*sx,y*sy);
    const value=ctx[key];return typeof value==='function'?value.bind(ctx):value;},
   set(ctx,key,value){ctx[key]=value;return true;}
  });
- bwvContext.setTransform(1,0,0,1,0,0);bwvContext.clearRect(0,0,W,capH);
+ bwvContext.setTransform(1,0,0,1,0,0);bwvContext.clearRect(0,0,capW,capH);
  work.render(proxy,lw,lh,Number.isFinite(time)?Math.max(0,time):0);
  c.save();try{
   c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='transparent';
@@ -620,7 +631,7 @@ function create(id){
  let target=null,proxy=null,scale=1;const owner={};
  return {light:false,init(){return null;},dispose(){releaseBwv(owner);target=null;proxy=null;},draw(c,w,h,time){
   if(!(w>0&&h>0))return false;
-  if(id==='prelude-bwv846'&&drawBwv(owner,work,c,w,h,time))return true;
+  if((id==='prelude-bwv846'||id==='arabesque-1')&&drawBwv(owner,work,c,w,h,time))return true;
   // Keep the approved 277px logical short edge and line widths at every DPR.
   const unit=Math.min(w,h)/277, lw=w/unit, lh=h/unit;
   scale=(c.canvas.width/w)*unit;
@@ -633,5 +644,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-nocturne9-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-arabesque1'});
 })();

@@ -10,7 +10,7 @@ function load(text){const window={},document={createElement(tag){assert.equal(ta
 const a=load(base),b=load(candidate),report={otherPixelCases:0,bwvCapCases:0,lifecycle:[],limits:'Native Canvas/VM, not browser/mobile. Canvas dimension setters model browser zero dimensions because napi native maps zero to its default size; released test storage uses 1px and logical zero. Y cap is intentionally not pixel-identical to full DPR.'};
 function cv(w,h,dpr){return createCanvas(Math.round(w*dpr),Math.round(h*dpr));}
 function pix(c){return Buffer.from(c.getContext('2d').getImageData(0,0,c.width,c.height).data);}
-for(const id of a.list())if(id!=='prelude-bwv846'){
+for(const id of a.list())if(id!=='prelude-bwv846'&&id!=='arabesque-1'){
  const aa=a.create(id),bb=b.create(id);
  for(const [w,h,dpr]of[[277,600,1],[277,600,2],[960,540,1]])for(const t of[0,6,12,18]){const x=cv(w,h,dpr),y=cv(w,h,dpr);aa.draw(x.getContext('2d'),w,h,t);bb.draw(y.getContext('2d'),w,h,t);assert(pix(x).equals(pix(y)),id);report.otherPixelCases++;x.width=x.height=y.width=y.height=1;}
  bb.dispose();

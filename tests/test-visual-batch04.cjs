@@ -2,7 +2,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),crypto=require('crypto'),path=require('path');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'visual-art.js'),'utf8');
-const expected={"arabesque-1": "1d623fd7b4e3a5a5649998c7b22bdcb49a476ee3d9ffbda60be12370e923faf8", "prelude-bwv846": "2cd9f5e88a785005907490f6d293c501a77905ebbcf689b883a29c3ee486ff5d", "nocturne-20": "a252ec084dbfa1bb65d47edce014f618730c0b5bc2c6727bf858dcb2fb0e6979", "pathetique-2": "4c976e99e63bb50429379dabfe2a4270e115a319bf8571064c59b561a34419e7"};
+const expected={"arabesque-1": "be19d3d952a5e124c04a60437aab65cc4bf3d669cb2a263b4dfb9aaab7d676f2", "prelude-bwv846": "2cd9f5e88a785005907490f6d293c501a77905ebbcf689b883a29c3ee486ff5d", "nocturne-20": "a252ec084dbfa1bb65d47edce014f618730c0b5bc2c6727bf858dcb2fb0e6979", "pathetique-2": "4c976e99e63bb50429379dabfe2a4270e115a319bf8571064c59b561a34419e7"};
 const sources={};
 for(const [id,hash]of Object.entries(expected)){
  const head='works['+JSON.stringify(id)+'] = (() => { const module = {exports:{}};\n';
@@ -23,8 +23,8 @@ try{
   for(const t of [0,3,6,12,18,23.96,24]){
    ca.fillStyle='#f0f';ca.fillRect(0,0,w*dpr,h*dpr);ca.setTransform(dpr,0,0,dpr,0,0);
    assert.equal(art.draw(ca,w,h,t),true);
-   if(id==='prelude-bwv846'&&dpr>1){
-    const off=createCanvas(b.width,h),oc=off.getContext('2d'),sx=b.width/(w/unit),sy=h/(h/unit);
+   if((id==='prelude-bwv846'||id==='arabesque-1')&&dpr>1){
+    const capW=id==='arabesque-1'?w:b.width,off=createCanvas(capW,h),oc=off.getContext('2d'),sx=capW/(w/unit),sy=h/(h/unit);
     const op=new Proxy(oc,{get(c,k){if(k==='setTransform')return(a,b,d,e,x,y)=>c.setTransform(a*sx,b*sy,d*sx,e*sy,x*sx,y*sy);const v=c[k];return typeof v==='function'?v.bind(c):v;},set(c,k,v){c[k]=v;return true;}});
     sources[id].render(op,w/unit,h/unit,t);cb.setTransform(1,0,0,1,0,0);cb.clearRect(0,0,b.width,b.height);cb.imageSmoothingQuality='high';cb.drawImage(off,0,0,b.width,b.height);off.width=1;off.height=1;
    }else sources[id].render(proxy,w/unit,h/unit,t);

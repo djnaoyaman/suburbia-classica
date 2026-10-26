@@ -1855,6 +1855,23 @@ c.restore();}
 module.exports={render,id:'waltz-69-1',duration:96};
 
 return module.exports; })();
+
+works["beethoven-9"] = (() => { const module = {exports:{}};
+'use strict';const TAU=2*Math.PI;
+// Editorial144s opening; no recording synchronization.
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%144)+144)%144)/144,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#152a43';c.fillRect(0,0,w,h);
+const opening=.5+.5*Math.sin(p-.7);
+function shape(q){const z=5.5*q-p,angle=(.14+.32*opening)*Math.sin(3.9*q+.5*Math.sin(p))+.08*Math.sin(p),cs=Math.cos(angle),sn=Math.sin(angle),px=.48+.20*Math.sin(3.2*q-p),py=q+.07*Math.cos(4*q+p),point=(x,y)=>[px+(x-px)*cs-(y-py)*sn,py+(x-px)*sn+(y-py)*cs],vector=(x,y)=>[x*cs-y*sn,x*sn+y*cs],v0=point(-.38,q+.06*Math.sin(3*q+p)),vm=point(.45+.07*Math.sin(4*q+p),q+.24*Math.sin(z)),v1=point(1.38,q+.09*Math.sin(4.4*q-p)),d0=vector(.83,.18*Math.cos(z)),dm=vector(.84,.14*Math.sin(4.8*q+p)),d1=vector(.93,-.18*Math.cos(z));return[[v0,[v0[0]+d0[0]/3,v0[1]+d0[1]/3],[vm[0]-dm[0]/3,vm[1]-dm[1]/3],vm],[vm,[vm[0]+dm[0]/3,vm[1]+dm[1]/3],[v1[0]-d1[0]/3,v1[1]-d1[1]/3],v1]];}
+
+function at(n,j,u){const a=n[j],v=1-u,r={};for(let k=0;k<2;k++){r[k]=v*v*v*a[0][k]+3*v*v*u*a[1][k]+3*v*u*u*a[2][k]+u*u*u*a[3][k];r[k+2]=3*v*v*(a[1][k]-a[0][k])+6*v*u*(a[2][k]-a[1][k])+3*u*u*(a[3][k]-a[2][k]);}return r;}
+for(let i=0;i<400;i++){const q=-.65+2.3*i/399,n=shape(q),up=shape(q+.0001),dn=shape(q-.0001),A=n[0][0],B=n[1][3],gx=(B[0]-A[0])*w,gy=(B[1]-A[1])*h,den=gx*gx+gy*gy,stops=[];let mean=0;
+ for(let k=0;k<=8;k++){const j=Math.min(1,Math.floor(k/4)),u=k===8?1:(k%4)/4,a=at(n,j,u),b=at(up,j,u),d=at(dn,j,u),qx=(b[0]-d[0])/.0002,qy=(b[1]-d[1])/.0002,spacing=Math.abs(a[2]*qy-a[3]*qx)/Math.max(.000001,Math.hypot(a[2],a[3])),light=.12+.88*Math.exp(-.5*(spacing/(.54+.40*opening))**2);mean+=light;stops.push({v:k===0?0:k===8?1:Math.max(.001,Math.min(.999,((a[0]-A[0])*w*gx+(a[1]-A[1])*h*gy)/den)),l:light});}
+ const g=c.createLinearGradient(A[0]*w,A[1]*h,B[0]*w,B[1]*h);stops.sort((a,b)=>a.v-b.v);for(const z of stops){const l=z.l;g.addColorStop(z.v,`rgba(${Math.round(74+181*l)},${Math.round(144+98*l)},${Math.round(205+7*l)},${.17+.76*l})`);}c.strokeStyle=g;c.lineWidth=s*(.45+1.35*mean/9);c.beginPath();c.moveTo(A[0]*w,A[1]*h);for(const a of n)c.bezierCurveTo(a[1][0]*w,a[1][1]*h,a[2][0]*w,a[2][1]*h,a[3][0]*w,a[3][1]*h);c.stroke();}
+c.restore();}
+module.exports={render,id:'beethoven-9',duration:144};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1903,5 +1920,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-waltz691'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-beethoven91'});
 })();

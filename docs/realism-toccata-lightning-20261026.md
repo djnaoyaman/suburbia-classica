@@ -1,0 +1,11 @@
+# Toccata Realism: localized repeated lightning
+
+User-requested change to `toccata-fugue-dm` Realism only. Existing cloud photograph, slow cloud movement, 48-second cycle, renderer/lifecycle, Impressive and Visual remain unchanged. The former faint 24-second bolt envelope becomes two staggered triplets every 4.8 seconds, with approximately 0.17-second main strokes, a small fork delayed 28 ms, low afterglow and dark pauses. Strike positions and orientation vary deterministically with the scene time. The scene description is updated to match.
+
+The background receives no flash gain. The minimum onset-group separation is 0.44 seconds, with at most three onset groups in a sliding second. This is not a formal flash-count or photosensitive-safety certification: the delayed fork and actual luminance changes must not be conflated with event counts. Sampled native images compared with a quiet reference had maximum area above a 0.1 linear-luminance difference of 0.3563 percent (three view ratios). These are selected quiet-reference comparisons, not a complete consecutive-frame scan. No claim of zero risk or WCAG certification is made.
+
+Native Mesa shader compilation and selected actual phase images passed; the 48-second endpoint images matched. The independent reviewer inspected localized branching strokes and retained dark surroundings. Additional proposed temporal-series rendering was NOT executed. Mock regression covers repeated/paused and out-of-order time inputs, re-entry, invalid time normalization, legacy forwarding, material/context failure, context restoration, texture release and size cap. Renderer/lifecycle and cloud code are byte-identical to the prior version.
+
+Existing reduced-motion behavior holds the scene at time 12 and schedules no animation RAF. Existing Realism uses elapsed animation time, not media seek synchronization; that behavior is unchanged. The normal Cloud Browser displayed the site's existing Impressive fallback when Realism was unavailable, so native shader evidence is not a claim that browser Realism or physical-device FPS was verified.
+
+Only this shader/description, its cache query, this note and the focused regression change. All 58 Visuals, PR76 timing, PR98 scaling, the two requested audio replacements and unrelated song text are preserved.

@@ -1,14 +1,45 @@
-/* toccata-fugue-dm: localized animal movement with fixed environment.
+/* toccata-fugue-dm: rapid, localized lightning bursts in the existing fixed cloud environment.
  * Not video footage. Load after the existing natural studies and shared context host.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='toccata-fugue-dm';
- const description='夜の遠い雲に、細い分岐の光が静かに現れて消える情景';
+ const description='夜の雲に、鋭い稲妻と細い枝光が時間差で繰り返し走り、余光が消える情景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+// Every strike is a pure function of scene time: no RNG, timers, or retained trails.
+// A minimum .44 s between onset groups bounds the entire scene to <= 3 groups/s.
+// Only the narrow material channels brighten. The photo never receives a flash.
+float hash(float n){return fract(sin(n*127.1+311.7)*43758.5453);}
+vec3 channel(vec2 p,vec2 center,vec2 size,float mirror,float age,float gain){
+ if(age<0.||age>.62)return vec3(0.);
+ vec2 b=(p-center)/size+.5;
+ b.x=mix(b.x,1.-b.x,mirror);
+ float inside=step(0.,b.x)*step(b.x,1.)*step(0.,b.y)*step(b.y,1.);
+ vec4 bolt=texture2D(material,vec2(clamp(b.x*.5,.0005,.4995),clamp(1.-b.y,.0005,.9995)));
+ float side=abs(b.x-.48);
+ float distanceDown=clamp(1.-b.y+.32*side,0.,1.);
+ // A fast descending leader, then a crisp return stroke; side branches arrive last.
+ float front=smoothstep(0.,.045,age)*1.20;
+ float grow=1.-smoothstep(front-.04,front+.04,distanceDown);
+ float stroke=smoothstep(0.,.012,age)*(1.-smoothstep(.065,.17,age));
+ float afterglow=.065*smoothstep(.015,.05,age)*(1.-smoothstep(.12,.62,age));
+ float energy=pow(bolt.a,2.)*inside*grow*(stroke+afterglow)*gain;
+ return mix(bolt.rgb,vec3(.86,.93,1.),.24)*energy;
+}
+vec3 strike(vec2 p,float age,float seed){
+ if(age<0.||age>.655)return vec3(0.);
+ float x=.35+.30*hash(seed),y=.51+.025*hash(seed+1.);
+ float mirror=step(.5,hash(seed+2.));
+ vec3 light=channel(p,vec2(x,y),vec2(.30,.52+.07*hash(seed+3.)),mirror,age,1.28);
+ // A smaller, displaced fork accompanies the same flash, not another screen pulse.
+ float side=mix(-1.,1.,step(.50,x));
+ vec2 second=vec2(x-side*.16,.57);
+ light+=channel(p,second,vec2(.17,.32),1.-mirror,age-.028,.72);
+ return light;
+}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
  vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
@@ -18,19 +49,15 @@ void main(){
  vec2 wind=vec2(.012*sin(phase+7.*p.y)+.004*sin(2.*phase+11.*p.x),.005*sin(phase-9.*p.x));
  vec2 cloud=p+edge*wind;
  vec3 col=texture2D(material,vec2(.5+.5*cloud.x,1.-cloud.y)).rgb;
- float age=fract(t/24.);
- float envelope=smoothstep(.025,.15,age)*(1.-smoothstep(.58,.90,age));
- vec2 b=(p-vec2(.47,.52))/.35+.5;
- float inside=step(0.,b.x)*step(b.x,1.)*step(0.,b.y)*step(b.y,1.);
- vec4 bolt=texture2D(material,vec2(clamp(b.x*.5,.0005,.4995),clamp(1.-b.y,.0005,.9995)));
- // Main channel and side branches develop at distinct delays down the photo's anatomy.
- float side=abs(b.x-.48);
- float distanceDown=clamp(1.-b.y+.45*side,0.,1.);
- float front=smoothstep(.04,.53,age)*1.20;
- float grow=1.-smoothstep(front-.055,front+.055,distanceDown);
- float tail=1.-smoothstep(.48,.86,age-.14*distanceDown);
- float energy=pow(bolt.a,2.)*inside*grow*tail*envelope;
- col+=bolt.rgb*energy*.18;
+ // Two staggered triplets per 4.8 s, with dark breathing space between storms.
+ // The 48 s scene boundary is quiet, preserving the existing seamless cloud loop.
+ float burst=mod(t,4.8),seed=floor(t/4.8)*7.;
+ col+=strike(p,burst-.18,seed+1.);
+ col+=strike(p,burst-.62,seed+2.);
+ col+=strike(p,burst-1.06,seed+3.);
+ col+=strike(p,burst-2.40,seed+4.);
+ col+=strike(p,burst-2.84,seed+5.);
+ col+=strike(p,burst-3.28,seed+6.);
  gl_FragColor=vec4(col,1.);
 }
 `;

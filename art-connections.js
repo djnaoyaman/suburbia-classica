@@ -36,13 +36,6 @@
     "label": "地面の下でつながるキノコ",
     "text": "地上の姿からは見えない菌類の広がりを紹介する展示から着想し、雨水がしずくとなる朽木の隙間へ目を向ける創作の林床を描きました。特定の菌類個体や地下の広がり、成長速度を再現したものではありません。",
     "url": "https://djnaoyaman.github.io/earthnumber/#fungus"
-  },
-  {
-    "artId": "rach-pc2-2",
-    "site": "Earth Number",
-    "label": "地球の水をひとつに集めたら",
-    "text": "魚が泳ぐ水の向こうには、どれほどの水があるのだろう。海・淡水・湖と川を、同じ縮尺で見渡す。",
-    "url": "https://djnaoyaman.github.io/earthnumber/#water"
   }
 ];
  const allowedPaths=['/kuranpo/','/youkai/','/earthnumber/','/gooooooooood_expression/','/sakanamushi/'];

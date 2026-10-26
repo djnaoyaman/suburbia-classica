@@ -1108,6 +1108,35 @@ c.restore();}
 module.exports={render,id:'schubert-ave-maria',duration:96};
 
 return module.exports; })();
+
+works["vocalise"] = (() => { const module = {exports:{}};
+'use strict';
+// An extended breath and a quieter answering depth: editorial, not audio-derived.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#242c44');bg.addColorStop(.5,'#302b42');bg.addColorStop(1,'#392732');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<152;iy++)for(let ix=0;ix<176;ix++){
+  const u=-.18+1.36*(ix+((ix*73+iy*151)%211)/211*.91)/175,v=-.18+1.36*(iy+((ix*37+iy*19)%131)/131*.91)/151,depth=(ix+iy*2)%3;
+  const phase=p+depth*.36,slope=.35+.15*Math.sin(p),a=.095+.012*Math.cos(phase),b=.12;
+  const q=TAU*(v-slope*u)+phase+.45*Math.sin(Math.PI*u),r=Math.PI*v+.7*Math.sin(phase);
+  const sq=Math.sin(q),cq=Math.cos(q),sr=Math.sin(r),cr=Math.cos(r);
+  const x=u+b*sr,y=v+a*sq;
+  const yu=a*cq*(-TAU*slope+.45*Math.PI*Math.cos(Math.PI*u)),yv=1+a*TAU*cq,xv=b*Math.PI*cr,J=yv-xv*yu;
+  const light=Math.min(.999,Math.max(.08,(1/Math.sqrt(Math.max(.16,J))-.46)*.86));
+  const grain=.89+.11*Math.sin(u*8+v*13+depth*.9),tone=Math.min(7,Math.floor(light*grain*8)),size=unit*(.43+1.65*light)*(1-depth*.07);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[238,222,224]:depth===1?[177,189,229]:[224,161,158];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'vocalise',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1156,5 +1185,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-rachave1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-vocalise1'});
 })();

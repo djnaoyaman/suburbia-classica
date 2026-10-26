@@ -1557,15 +1557,15 @@ function drawBwv(owner,work,c,w,h,time){
 }
 function create(id){
  const work=works[id];if(!work)return null;
- let target=null,proxy=null,scale=1;const owner={};
+ let target=null,proxy=null,sx=1,sy=1;const owner={};
  return {light:false,init(){return null;},dispose(){releaseBwv(owner);target=null;proxy=null;},draw(c,w,h,time){
   if(!(w>0&&h>0))return false;
   if((id==='prelude-bwv846'||id==='arabesque-1')&&drawBwv(owner,work,c,w,h,time))return true;
   // Keep the approved 277px logical short edge and line widths at every DPR.
   const unit=Math.min(w,h)/277, lw=w/unit, lh=h/unit;
-  scale=(c.canvas.width/w)*unit;
+  sx=(c.canvas.width/w)*unit;sy=c.canvas.height/h===c.canvas.width/w?sx:(c.canvas.height/h)*unit;
   if(target!==c){target=c;proxy=new Proxy(c,{
-   get(ctx,key){if(key==='setTransform')return(a,b,d,e,x,y)=>ctx.setTransform(a*scale,b*scale,d*scale,e*scale,x*scale,y*scale);
+   get(ctx,key){if(key==='setTransform')return(a,b,d,e,x,y)=>ctx.setTransform(a*sx,b*sy,d*sx,e*sy,x*sx,y*sy);
     const value=ctx[key];return typeof value==='function'?value.bind(ctx):value;},
    set(ctx,key,value){ctx[key]=value;return true;}
   });}
@@ -1573,5 +1573,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-nessun1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-fractional1'});
 })();

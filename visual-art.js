@@ -546,31 +546,34 @@ module.exports={render,id:'nocturne-20',duration:24};
 return module.exports; })();
 works["pathetique-2"] = (() => { const module = {exports:{}};
 'use strict';
-// Alternating broad sheltering spans and inner moving light; editorial interpretation.
+// Private point-density cantabile study. Deterministic editorial motion, not audio analysis.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
  const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- c.fillStyle='#153D40';c.fillRect(0,0,w,h);c.lineCap='round';c.lineJoin='round';
- // The spans enter alternately from both edges, with asymmetric corner heights.
- for(let k=-1;k<7;k++){
-  const left=k%2===0,phase=p-k*.75,energy=.5+.5*Math.cos(phase);
-  const y=(k*.185+.04*Math.sin(phase))*h;
-  const reach=(.65+.22*energy)*w,turn=(left?reach:w-reach),start=left?-.18*w:1.18*w;
-  const inner=y+.14*h,far=left?1.15*w:-.15*w;
-  const path=()=>{c.beginPath();c.moveTo(start,y);c.lineTo(turn+(left?-.12:.12)*w,y);c.bezierCurveTo(turn,y,turn,inner,turn+(left?.12:-.12)*w,inner);c.lineTo(far,inner);};
-  const grad=c.createLinearGradient(0,y,w,inner);
-  const warm=left?energy:1-energy;
-  grad.addColorStop(0,`rgba(188,113,77,${.55+.25*warm})`);
-  grad.addColorStop(.34,`rgba(220,198,152,${.65+.28*energy})`);
-  grad.addColorStop(.66,`rgba(247,230,192,${.65+.3*energy})`);
-  grad.addColorStop(1,'rgba(92,164,160,.65)');
-  c.strokeStyle=grad;c.lineWidth=h*(.046+.027*energy);path();c.stroke();
-  // Closely inset light tracery reveals thickness without turning every area into a mesh.
-  for(let f=0;f<8;f++){
-   c.save();c.translate(0,(f-3.5)*h*.0048);
-   c.lineWidth=.52;c.strokeStyle=`rgba(255,239,210,${(.15+.48*energy)*(1-Math.abs(f-3.5)/5)})`;path();c.stroke();c.restore();
-  }
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#092F37');bg.addColorStop(.6,'#0B4145');bg.addColorStop(1,'#162D35');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ // Twenty-four batched tonal strata; point populations never spawn or reset.
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<150;iy++)for(let ix=0;ix<180;ix++){
+  const seed=((ix*73+iy*151)%211)/211;
+  const u=-.18+1.36*(ix+seed*.6)/179,v=-.18+1.36*(iy+((ix*37+iy*19)%131)/131*.6)/149;
+  const depth=(ix+iy*2)%3;
+  const x=u+.075*Math.sin(v*5.4+p+depth*.35)*Math.sin(Math.PI*u);
+  const y=v+.105*Math.sin(u*5.2-p)*Math.sin(v*4.3+.4)+.026*Math.sin(v*9+p*2+u*2);
+  const cantus=.42+.17*Math.sin(x*4.1+.3)+.06*Math.sin(p)*Math.sin(Math.PI*x);
+  const main=Math.exp(-Math.pow((y-cantus)/.145,2));
+  const answer=Math.exp(-Math.pow((y-(.77-.11*Math.sin(x*4.7+p)))/.17,2));
+  const light=Math.min(.999,.12+.7*main+.38*answer);
+  const shimmer=.8+.2*Math.sin(x*8-y*6+p+depth*.7);
+  const tone=Math.min(7,Math.floor(light*shimmer*8));
+  const size=(.55+1.25*light)*(depth===0?1.15:depth===1?.95:.85);
+  bins[depth*8+tone].push([x*w,y*h,size]);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const a=.20+tone*.105,colors=depth===0?[249,232,190]:depth===1?[137,216,200]:[197,151,112];
+  c.fillStyle=`rgba(${colors.join(',')},${a})`;c.beginPath();
+  for(const [x,y,s]of bins[depth*8+tone])c.rect(x-s*.5,y-s*.36,s,s*.72);
+  c.fill();
  }
  c.restore();
 }
@@ -625,5 +628,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-bwv1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pathetique1'});
 })();

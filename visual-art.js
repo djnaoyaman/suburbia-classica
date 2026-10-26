@@ -1562,6 +1562,84 @@ function render(c,w,h,time){
 module.exports={id:'pomp-circumstance-1',duration:120,render};
 
 return module.exports; })();
+
+works["jupiter"] = (() => { const module = {exports:{}};
+'use strict';
+// Jupiter — analytic-derivative trial. Same218 contours, material and120s phrase.
+// Fixed per-contour angle count comes from a full-phase Hermite shape-error bound.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120;
+ const s=Math.min(w,h)/277,open=.5-.5*Math.cos(p),ang=.42*Math.sin(p)+.14*Math.sin(2*p),ca=Math.cos(ang),sa=Math.sin(ang);
+ const cx=.42+.30*Math.cos(p),cy=.49+.17*Math.sin(p);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='round';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1b1729');bg.addColorStop(.53,'#142e39');bg.addColorStop(1,'#172332');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const N=218,basis=new Map(),sp=Math.sin(p),cp=Math.cos(p),s2p=Math.sin(2*p),c2p=Math.cos(2*p);
+ const tolerance=.08*s;
+ function angles(n){
+  if(basis.has(n))return basis.get(n);const a=[];
+  for(let j=0;j<n;j++){
+   const th=TAU*j/n,ct=Math.cos(th),st=Math.sin(th),c2=ct*ct-st*st,s2=2*st*ct,c3=c2*ct-s2*st,s3=s2*ct+c2*st;
+   const sin2p=s2*cp+c2*sp,cos2p=c2*cp-s2*sp,sin3m2p=s3*c2p-c3*s2p,cos3m2p=c3*c2p+s3*s2p,sin3mp=s3*cp-c3*sp,cos3mp=c3*cp+s3*sp;
+   a.push([s2,c2,.155*sin2p+.072*cos3m2p,.31*cos2p-.216*sin3m2p,ct+.09*cos2p,-st-.18*sin2p,st+.065*sin3mp,ct+.195*cos3mp]);
+  }
+  basis.set(n,a);return a;
+ }
+ for(let i=0;i<N;i++){
+  const u=(i+.5)/N,raw=.014+1.62*u;
+  const r=raw+.098*Math.sin(6.4*raw-p)-.098*Math.sin(-p);
+  const density=1/(1+.6272*Math.cos(6.4*raw-p));
+  const near=.5+.5*Math.sin(3.4*raw-p+.6);
+  const rotation=.26*Math.sin(3*raw-p),cr=Math.cos(rotation),sr=Math.sin(rotation);
+  const ax=(.85+.34*open),ay=(1.16-.25*open);
+  // All-phase fourth-derivative bounds of the unprojected analytic curve.
+  const rmax=raw+.196*Math.abs(Math.sin(3.2*raw)),bmax=.034*Math.min(1,5*rmax),a2=.155*rmax+bmax,a3=.072*rmax;
+  const mx=2.44*rmax+52.52*a2+164.17*a3,my=6.265*rmax+61.345*a2+178.12*a3;
+  // Each projected coordinate has bound1.19*dimension*hypot(mx,my).
+  const M4=1.19*Math.hypot(w,h)*Math.hypot(mx,my);
+  const S=Math.max(16,4*Math.ceil(TAU*Math.pow(M4/(384*tolerance),.25)/4)),step=TAU/S,table=angles(S);
+  const points=new Float64Array(S*4),amp=.034*Math.min(1,r*5),bs=Math.sin(4*raw-p),bc=Math.cos(4*raw-p);
+  const m00=w*(ca*ax*cr-sa*ay*sr),m01=w*(-ca*ax*sr-sa*ay*cr),m10=h*(sa*ax*cr+ca*ay*sr),m11=h*(-sa*ax*sr+ca*ay*cr);
+  const ox=(cx+.08*raw*Math.sin(3*raw+p))*w,oy=(cy-.08*raw*Math.cos(2*raw-p))*h;
+  for(let j=0;j<S;j++){
+   const a=table[j],rr=r*(1+a[2])+amp*(a[0]*bc+a[1]*bs),dr=r*a[3]+2*amp*(a[1]*bc-a[0]*bs);
+   const X=rr*a[4],Y=rr*a[6],dX=dr*a[4]+rr*a[5],dY=dr*a[6]+rr*a[7],k=j*4;
+   points[k]=ox+m00*X+m01*Y;points[k+1]=oy+m10*X+m11*Y;
+   points[k+2]=(m00*dX+m01*dY)*step/3;points[k+3]=(m10*dX+m11*dY)*step/3;
+  }
+  // The reflection axis follows the material's eccentric frame, not a fixed screen hotspot.
+  const lx=Math.cos(ang+rotation-.55),ly=Math.sin(ang+rotation-.55);
+  const span=Math.max(.08,r),g=c.createLinearGradient((cx-span*lx)*w,(cy-span*ly)*h,(cx+span*lx)*w,(cy+span*ly)*h);
+  const shoulder=Math.sqrt(Math.min(2,density)/2);
+  const a=.61+.24*near+.12*shoulder;
+  g.addColorStop(0,`rgba(80,164,187,${a*.74})`);
+  g.addColorStop(.28,`rgba(126,212,213,${a*.91})`);
+  g.addColorStop(.42,`rgba(255,244,209,${a})`);
+  g.addColorStop(.69,`rgba(255,224,170,${a})`);
+  g.addColorStop(.86,`rgba(245,157,128,${a*.93})`);
+  g.addColorStop(1,`rgba(173,112,144,${a*.76})`);
+  c.strokeStyle=g;c.lineWidth=(.53+.36*near+.23*shoulder)*s;c.beginPath();
+  const visible=new Uint8Array(S);let start=0,skipped=0;
+  for(let j=0;j<S;j++){
+   const a=j*4,b=((j+1)%S)*4,x0=points[a],y0=points[a+1],xe=points[b],ye=points[b+1];
+   const x1=x0+points[a+2],y1=y0+points[a+3],x2=xe-points[b+2],y2=ye-points[b+3];
+   const outside=Math.max(x0,xe,x1,x2)<-8*s||Math.min(x0,xe,x1,x2)>w+8*s||Math.max(y0,ye,y1,y2)<-8*s||Math.min(y0,ye,y1,y2)>h+8*s;
+   if(outside){start=(j+1)%S;skipped++;}else visible[j]=1;
+  }
+  let pen=false;
+  for(let k=0;k<S;k++){
+   const j=(start+k)%S;if(!visible[j]){pen=false;continue;}
+   const a=j*4,b=((j+1)%S)*4,x0=points[a],y0=points[a+1],xe=points[b],ye=points[b+1];
+   if(!pen)c.moveTo(x0,y0);c.bezierCurveTo(x0+points[a+2],y0+points[a+3],xe-points[b+2],ye-points[b+3],xe,ye);pen=true;
+  }
+  if(!skipped)c.closePath();
+  c.stroke();
+ }
+ c.restore();
+}
+module.exports={id:'jupiter',duration:120,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1610,5 +1688,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pomp1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-jupiter1'});
 })();

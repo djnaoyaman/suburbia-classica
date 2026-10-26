@@ -1134,7 +1134,7 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - 録音: 1960年代前半（1962年とする資料があるが、Op.39かは未確認）
 - 録音場所: Decca Studios, West Hampstead（Prestoの記載。未確認）
 
-カッチェンは1961〜65年にDeccaでブラームスのピアノ独奏曲を網羅的に録音しました。Op.39のワルツ集は16曲を前半8曲・後半8曲に分けた形で収録され、第15番変イ長調は通称「ブラームスの子守歌」と呼ばれます。Topicトラックの題は「Wiegenlied」表記です。
+カッチェンは1961〜65年にDeccaでブラームスのピアノ独奏曲を網羅的に録音しました。Op.39のワルツ集は16曲を前半8曲・後半8曲に分けた形で収録され、第15番変イ長調には、Deccaの配信カタログで「Wiegenlied」と併記される例がありますが、歌曲「子守歌」Op.49-4とは別の作品です。Topicトラックの題は「Wiegenlied」表記です。
 
 （音源の投稿元（Julius Katchen - Topic）はoEmbedで確認済みです。）
 
@@ -1147,6 +1147,8 @@ Op.28全24曲に、嬰ハ短調Op.45、変イ長調遺作、ソナタ第2番を�
 - https://en.wikipedia.org/wiki/Sixteen_Waltzes,_Op._39_(Brahms)
 - https://www.henle.de/Waltzes-op.-39/HN-1638
 - https://imslp.org/wiki/16_Waltzes,_Op.39_(Brahms,_Johannes)
+- https://classical.music.apple.com/in/recording/johannes-brahms-1833-pp81-1452427383
+- https://urresearch.rochester.edu/institutionalPublicationPublicView.action?institutionalItemId=8611&versionNumber=1
 
 
 ---

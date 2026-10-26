@@ -1800,6 +1800,26 @@ function render(c,w,h,time){
 module.exports={render,id:'ave-verum-corpus',duration:120};
 
 return module.exports; })();
+
+works["air-g-string"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=2*Math.PI;
+// Wilhelmj long solo/support role, editorial only; no audio synchronization.
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,sn=Math.sin(p),cs=Math.cos(p);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#302735';c.fillRect(0,0,w,h);
+ for(let i=0;i<320;i++){
+  const q=-.6+2.2*(i+.15*Math.sin(i*2.399))/319;
+  function at(u){const a=4.2*q+.8*Math.sin(Math.PI*u)+.55*sn,y=q+.26*Math.sin(a)+.12*Math.sin(Math.PI*u+.55*sn)+(.16+.10*cs)*(u-.5),dy=.26*.8*Math.PI*Math.cos(Math.PI*u)*Math.cos(a)+.12*Math.PI*Math.cos(Math.PI*u+.55*sn)+.16+.10*cs,dq=1+.26*4.2*Math.cos(a),light=.12+.88*Math.exp(-.5*(dq/.62)**2);return{u,y,dy,light};}
+  const ns=[];for(let j=0;j<=6;j++)ns.push(at(-.2+1.4*j/6));const g=c.createLinearGradient(-.2*w,0,1.2*w,0);let mean=0;
+  ns.forEach((a,j)=>{const l=a.light;mean+=l;g.addColorStop(j/6,`rgba(${Math.round(159+96*l)},${Math.round(139+105*l)},${Math.round(165+58*l)},${.18+.74*l})`);});
+  c.strokeStyle=g;c.lineWidth=s*(.45+1.3*mean/7);c.beginPath();c.moveTo(ns[0].u*w,ns[0].y*h);for(let j=0;j<6;j++){const a=ns[j],b=ns[j+1],d=(b.u-a.u)/3;c.bezierCurveTo((a.u+d)*w,(a.y+d*a.dy)*h,(b.u-d)*w,(b.y-d*b.dy)*h,b.u*w,b.y*h);}c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'air-g-string',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1848,5 +1868,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-aveverum1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-air1'});
 })();

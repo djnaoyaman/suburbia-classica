@@ -1178,6 +1178,36 @@ function render(c,w,h,time){
 module.exports={render,id:'paganini-var18',duration:96};
 
 return module.exports; })();
+
+works["solveigs-song"] = (() => { const module = {exports:{}};
+'use strict';
+// Unequal returning depths: editorial association with waiting, not a measured performance.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#2b303b');bg.addColorStop(.5,'#353232');bg.addColorStop(1,'#282b37');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<160;iy++)for(let ix=0;ix<180;ix++){
+  const depth=(ix+iy*2)%3,u=-.22+1.44*(ix+((ix*73+iy*151)%211)/211*.95)/179,v=-.22+1.44*(iy+((ix*37+iy*19)%131)/131*.95)/159;
+  const phase=p+depth*1.1,turn=depth===1;
+  const a=turn?v:u,b=turn?u:v,centre=.5+.23*Math.sin(Math.PI*b+.8*Math.sin(phase))+.12*Math.cos(phase);
+  const z=Math.tanh((a-centre)/.23),A=a-.145*z,B=b+.07*Math.sin(Math.PI*a+phase)*Math.sin(Math.PI*b);
+  const da=1-.145/.23*(1-z*z),db=.145/.23*(1-z*z)*.23*Math.PI*Math.cos(Math.PI*b+.8*Math.sin(phase));
+  const ba=.07*Math.PI*Math.cos(Math.PI*a+phase)*Math.sin(Math.PI*b),bb=1+.07*Math.PI*Math.sin(Math.PI*a+phase)*Math.cos(Math.PI*b),J=da*bb-db*ba;
+  const x=turn?B:A,y=turn?A:B;
+  const light=Math.min(.999,Math.max(.1,(1/Math.sqrt(Math.max(.16,J))-.52)*.71));
+  const tone=Math.min(7,Math.floor(light*8)),size=unit*(.37+1.2*light)*(1-depth*.055);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[239,225,205]:depth===1?[182,198,224]:[210,158,113];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'solveigs-song',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1226,5 +1256,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-paganini1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-solveig1'});
 })();

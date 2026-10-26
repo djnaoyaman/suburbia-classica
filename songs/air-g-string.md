@@ -3,14 +3,14 @@
 - 英題: Air on the G String — Orchestral Suite No.3, BWV 1068 (arr. Wilhelmj)
 - 作曲者: バッハ（編曲：ウィルヘルミ）（バロック（編曲はロマン派期））
 - カテゴリ: 協奏曲・編曲
-- 作曲年: 原曲1730年代初め頃／編曲1871年
+- 作曲年: 原曲の作曲年は未確定／編曲1871年
 - 作品番号: BWV 1068-2
 - ページ: https://djnaoyaman.github.io/suburbia-classica/songs/air-g-string.html
 
 バッハの管弦楽組曲の緩徐楽章を、ウィルヘルミがG線だけで弾けるよう編曲した、静かに歌う名旋律です。原曲の歩む低音と、編曲版の低い独奏という、同じ作品から生まれた響きの違いにも惹かれます。
 
 ## 作曲の経緯
-原曲はバッハの管弦楽組曲第3番ニ長調BWV1068の第2曲「エア」で、1730年代初めにケーテン時代の作とされます（作曲地には異論の余地あり）。組曲の他の楽章がトランペットやティンパニを含む中、この楽章だけが弦楽と通奏低音で演奏されます。1871年、ヴァイオリニストのアウグスト・ウィルヘルミが、ヴァイオリン独奏と弦楽（またはピアノ、オルガン）のために編曲しました。ハ長調に移調し、第1ヴァイオリンの旋律をさらに1オクターブ下げて、G線だけで弾けるようにしました。譜面に「auf der G-Saite（G線で）」と書き込んだことが通称の由来で、他の声部は弱音で控えめにされました。
+原曲はバッハの管弦楽組曲第3番ニ長調BWV1068の第2曲「エア」です。現存する演奏資料には1730年頃のものがありますが、原形をケーテン時代などにさかのぼらせる説もあり、作曲時期・作曲地は確定していません。組曲の他の楽章がトランペットやティンパニを含む中、この楽章だけが弦楽と通奏低音で演奏されます。1871年、ヴァイオリニストのアウグスト・ウィルヘルミが、ヴァイオリン独奏と弦楽（またはピアノ、オルガン）のために編曲しました。ハ長調に移調し、第1ヴァイオリンの旋律をさらに1オクターブ下げて、G線だけで弾けるようにしました。譜面に「auf der G-Saite（G線で）」と書き込んだことが通称の由来で、他の声部は弱音で控えめにされました。
 
 ## 出版・初演
 ウィルヘルミ編曲版は1871年です（出版社・詳細は未確認）。IMSLPに掲載されています。
@@ -56,3 +56,7 @@
 ## 出典
 - https://en.wikipedia.org/wiki/Air_on_the_G_String
 - https://imslp.org/wiki/Orchestral%20Suite%20No.3%20in%20D%20major,%20BWV%201068%20(Bach,%20Johann%20Sebastian)
+- https://www.bach-leipzig.de/en/neutral/johann-sebastian-bach-%E2%94%80-chronology
+- https://www.bachvereniging.nl/en/bwv/bwv-1068
+- https://www.brandenburg.com.au/online-concerts/from-our-stage/fos-bachs-universe/
+- https://www.hyperion-records.co.uk/notes/55020-B.pdf

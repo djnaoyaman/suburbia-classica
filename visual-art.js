@@ -827,6 +827,40 @@ c.stroke();
 module.exports={id:'schubert-impromptu-90-3',duration:96,render};
 
 return module.exports; })();
+
+works["tchaikovsky-october"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#292e2b';c.fillRect(0,0,w,h);
+const bins=Array.from({length:24},()=>[]),unit=Math.min(w,h)/277;
+for(let iy=0;iy<160;iy++)for(let ix=0;ix<190;ix++){
+const seed=((ix*73+iy*151)%211)/211,u=-.25+1.5*(ix+seed*.65)/189,v=-.25+1.5*(iy+((ix*37+iy*19)%131)/131*.65)/159;
+// Descending bowed sheet with uneven countercurrent; brightness derives from the same sheet's compression.
+const a=TAU*(1.5*v+(.16+.06*Math.sin(p))*Math.sin(u*4.2+.35*Math.sin(p)))-p;
+const b=TAU*(.85*u-.22*v)+.45*Math.sin(p);
+const ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(b),sb=Math.sin(b);
+const au=TAU*(.16+.06*Math.sin(p))*4.2*Math.cos(u*4.2+.35*Math.sin(p)),av=TAU*1.5,bu=TAU*.85,bv=-TAU*.22;
+const strength=.083+.002*Math.sin(p+.4);
+const x=u+.010*sa+.045*sb,y=v+strength*sa-.036*sb;
+const xu=1+.010*ca*au+.045*cb*bu,xv=.010*ca*av+.045*cb*bv;
+const yu=strength*ca*au-.036*cb*bu,yv=1+strength*ca*av-.036*cb*bv;
+const determinant=xu*yv-xv*yu;
+const light=Math.min(.999,.06+.84*Math.pow(.40/(.14+Math.abs(determinant)),.9));
+
+const depth=(ix+iy*2)%3,tone=Math.min(7,Math.floor(light*8));
+const size=unit*(.35+1.25*light)*(depth===0?1.1:depth===1?.94:.8);
+if(x<-.04||x>1.04||y<-.04||y>1.04)continue;
+bins[depth*8+tone].push(x*w,y*h,size);
+}
+for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+const color=depth===0?[239,224,177]:depth===1?[188,168,113]:[177,126,102];c.fillStyle=`rgba(${color.join(',')},${.17+tone*.105})`;c.beginPath();const b=bins[depth*8+tone];
+for(let i=0;i<b.length;i+=3){const s=b[i+2];c.rect(b[i]-s*.5,b[i+1]-s*.4,s,s*.8);}c.fill();
+}c.restore();}
+module.exports={render,id:'tchaikovsky-october',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -875,5 +909,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-schubert90-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-october1'});
 })();

@@ -1336,6 +1336,17 @@ function render(c,w,h,time){
 module.exports={id:'pictures',duration:72,render};
 
 return module.exports; })();
+
+works["orpheus-overture"] = (() => { const module = {exports:{}};
+'use strict';
+// Broad theatrical exchanges between two open light gatherings; editorial, not audio sync.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,margin=Math.max(4,2*s),bins=Array.from({length:24},()=>[]),fields=[{x:.35+.05*Math.sin(p),y:.30+.08*Math.cos(p),a:.34+.19*Math.sin(p),width:.17+.02*Math.cos(p)},{x:.65+.04*Math.cos(p),y:.70-.07*Math.sin(p),a:-.28+.17*Math.cos(p),width:.22-.025*Math.sin(p)}].map(q=>({...q,cr:Math.cos(q.a),sr:Math.sin(q.a)}));c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#233653';c.fillRect(0,0,w,h);
+for(let j=0;j<150;j++)for(let i=0;i<170;i++){let hash=Math.imul(i+1,1597334677)^Math.imul(j+1,3812015801);hash=Math.imul(hash^(hash>>>16),2246822519);const u=-.18+1.36*(i+((i*31+j*47)%181)/240)/169,v=-.18+1.36*(j+(hash>>>0)/4294967296)/149;let x=u,y=v,light=.08,turn=0;for(let k=0;k<2;k++){const q=fields[k],dx=u-q.x,dy=v-q.y,along=dx*q.cr+dy*q.sr,across=-dx*q.sr+dy*q.cr,g=Math.exp(-.5*(along*along/.49+across*across/(q.width*q.width))),normal=-.38*across*g,slide=(k?-.035:.035)*g*Math.sin(p);x+=-q.sr*normal+q.cr*slide;y+=q.cr*normal+q.sr*slide;light+=g*(k?.65:.8);turn+=g*(k?1:-1);}light=Math.min(.999,light);if(x*w<-margin||x*w>w+margin||y*h<-margin||y*h>h+margin)continue;const d=(i+2*j)%3,z=s*(.48+1.42*light);bins[d*8+Math.floor(light*8)].push(x*w,y*h,z);}
+for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'243,220,170':d===1?'143,199,232':'234,151,160'},${.17+k*.105})`;c.beginPath();let b=bins[d*8+k];for(let i=0;i<b.length;i+=3)c.rect(b[i]-.5*b[i+2],b[i+1]-.36*b[i+2],b[i+2],b[i+2]*.72);c.fill();}c.restore();}
+module.exports={render,id:'orpheus-overture',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1384,5 +1395,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pictures1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-orpheus1'});
 })();

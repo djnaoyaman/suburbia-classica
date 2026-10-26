@@ -43,13 +43,6 @@
     "label": "地球の水をひとつに集めたら",
     "text": "魚が泳ぐ水の向こうには、どれほどの水があるのだろう。海・淡水・湖と川を、同じ縮尺で見渡す。",
     "url": "https://djnaoyaman.github.io/earthnumber/#water"
-  },
-  {
-    "artId": "liebesgruss",
-    "site": "花鳥風月、そして魚と虫。",
-    "label": "「蝸牛」という名前を読む",
-    "text": "苔の上で触角を動かす姿から、「蝸牛」の二文字へ。図鑑で「虫」を選び、形と名前のつながりを楽しむ。",
-    "url": "https://djnaoyaman.github.io/sakanamushi/"
   }
 ];
  const allowedPaths=['/kuranpo/','/youkai/','/earthnumber/','/gooooooooood_expression/','/sakanamushi/'];

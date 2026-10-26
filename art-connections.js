@@ -45,13 +45,6 @@
     "url": "https://djnaoyaman.github.io/earthnumber/#water"
   },
   {
-    "artId": "canon",
-    "site": "gooooooooood expression",
-    "label": "波紋で景色をゆがめる仕組み",
-    "text": "波が通ると、水底の石の模様が一瞬ちがって見える。屈折に似たゆがみを元の模様と比べる表現図鑑から着想し、静かな浅瀬を描きました。水の物理シミュレーションや実在の場所の再現ではありません。",
-    "url": "https://djnaoyaman.github.io/gooooooooood_expression/expressions/shader-ripple.html"
-  },
-  {
     "artId": "liebesgruss",
     "site": "花鳥風月、そして魚と虫。",
     "label": "「蝸牛」という名前を読む",

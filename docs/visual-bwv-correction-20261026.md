@@ -1,0 +1,7 @@
+# BWV846 fine-light correction with bounded raster
+
+Replaces the rejected thick route diagram with overlapping fine light strata whose curvature, orientation and depth prominence evolve over24 seconds. Editorial timing is not audio waveform/note analysis. Only BWV's artwork source changes; other15 Visuals and all Impressive/Realism/music prose (including all74 voice revision) remain preserved.
+
+Frozen optimized renderer SHA256:2cd9f5e88a785005907490f6d293c501a77905ebbcf689b883a29c3ee486ff5d. Hoisting and complete-path offscreen culling were verified pixel-identical to the reviewed source across205 cases. At DPR>1 the BWV-only backing retains full physical horizontal resolution and caps vertical sampling to CSS height, then resamples to the original display aspect. This intentional non-pixel-exact policy slightly softens vertical detail while preserving the reviewed appearance. Native software raster+readback benchmarks improved approximately28–36%; these are not browser/mobile FPS measurements.
+
+One owner-scoped backing is reused, resized and explicitly released at ssSet/ssHide. Each frame clears backing/output before compositing to avoid accumulation. No production readback, image downloads, listeners or extra time state are added. DPR1 renders directly. Source/seek/loop/601 capped temporal frames, intentional cap reference, other15 parity and actual lifecycle-function replay are tested. Fine-line shimmer remains possible; no medical/device safety guarantee. All74 text and the other repaired Visuals are preserved.

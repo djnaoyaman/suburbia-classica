@@ -1031,6 +1031,36 @@ function render(c,w,h,time){
 module.exports={render,id:'mendelssohn-spring-song',duration:48};
 
 return module.exports; })();
+
+works["brahms-op118-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Reciprocal folding of an inner field: editorial reflection, not a score simulation.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#292132');bg.addColorStop(.5,'#382535');bg.addColorStop(1,'#271e30');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<152;iy++)for(let ix=0;ix<176;ix++){
+  const u=-.18+1.36*(ix+((ix*73+iy*151)%211)/211*.91)/175,v=-.18+1.36*(iy+((ix*37+iy*19)%131)/131*.91)/151,depth=(ix+iy*2)%3;
+  const phase=p+depth*.28,a=.075+.018*Math.sin(phase),b=.080+.018*Math.cos(phase);
+  const ax=TAU*(1.3*u+.25*v)+.6*Math.sin(phase),ay=Math.PI*v+.4*Math.cos(phase),bx=Math.PI*u-.4*Math.sin(phase),by=TAU*(1.2*v-.22*u)-.6*Math.cos(phase);
+  const sa=Math.sin(ax),ca=Math.cos(ax),sy=Math.sin(ay),cy=Math.cos(ay),sx=Math.sin(bx),cx=Math.cos(bx),sb=Math.sin(by),cb=Math.cos(by);
+  const x=u+a*sa*sy,y=v-b*sx*sb;
+  const ux=1+a*TAU*1.3*ca*sy,uy=a*(TAU*.25*ca*sy+Math.PI*sa*cy),vx=-b*(Math.PI*cx*sb-TAU*.22*sx*cb),vy=1-b*TAU*1.2*sx*cb,J=ux*vy-uy*vx;
+  const density=Math.min(.999,Math.max(.12,(1/Math.sqrt(Math.max(.12,J))-.45)*.78));
+  const modulation=.85+.15*Math.sin(u*9+v*11+depth*.6+.25*Math.sin(p));
+  const tone=Math.min(7,Math.floor(density*modulation*8)),size=unit*(.5+1.55*density)*(depth===0?1.05:depth===1?.95:.83);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[244,224,193]:depth===1?[192,177,215]:[209,139,155];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'brahms-op118-2',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1079,5 +1109,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-spring1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-brahms1181'});
 })();

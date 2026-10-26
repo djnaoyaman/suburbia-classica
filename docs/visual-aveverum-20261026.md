@@ -1,0 +1,9 @@
+# Ave verum corpus — quiet continuous prayer
+
+Adds a 120-second editorial Canvas Visual (62/74). A single coherent oblique flow carries broad ivory light through a fine supported blue field. Complete offscreen-to-offscreen trajectories replace the older disconnected short scratch marks. Two broad unequal illumination responses slowly redirect and illuminate the same curves; there are no extra crossing populations or required central ridge. This quiet simple interpretation is not recording or score synchronization. Existing musical facts and uncertain recording details remain unchanged.
+
+Author, writer and independent reviewer accepted phone/wide phase imagery at the existing quality level. Exposed parallel lines, modest macro movement and fine interference remain disclosed. The initial version was frozen without an artificial extra art revision. Fixed midpoint integration and shared-slope Hermite cubics approximate the smooth direction field; this is not a claim of exact field reconstruction or global injectivity. Shared-node C1 joins, sorted gradient stops, full state reset, opaque repaint and deterministic 120-second behavior were reviewed.
+
+Five-ratio loop/seek/opacity/dirty-state/restoration checks passed. Selected phone 15 seconds, wide 12 seconds, quiet phone 90 seconds and wrap contacts were actually viewed: broad illumination remained continuous without observed large reset/teleport. Maximum selected MAD was 0.96862 and area with maximum RGB channel change above 32 was 0.33102 percent. These are limited samples, not full-period/no-shimmer or physical-device FPS certification. No new benchmark was run.
+
+Prior 61 Visual closures, PR98 axis scaling, PR76 timing, audio replacements and PR108 Toccata Realism lightning remain unchanged. Only the Visual renderer cache query changes in index.html. Focused final integration tests accompany the addition.

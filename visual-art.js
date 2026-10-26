@@ -1741,6 +1741,41 @@ const g=c.createLinearGradient(0,0,w,0);let mean=0;for(let k=0;k<7;k++){const x=
 module.exports={render,id:'toreador',duration:96};
 
 return module.exports; })();
+
+works["caccini-ave-maria"] = (() => { const module = {exports:{}};
+'use strict';
+// Editorial long-breath field; not audio or score synchronized.
+const TAU=2*Math.PI,KX=6.8,KY=5.8,AX=.82/KX,AY=.4255/KY;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;
+ c.fillStyle='#282a3d';c.fillRect(0,0,w,h);
+ for(let d=2;d>=0;d--){
+  const phase=p+d*2.13,ang=[-.38,.28,.81][d]+.045*Math.sin(phase),ca=Math.cos(ang),sa=Math.sin(ang),ux=[-.23,.13,.28][d],vy=[.14,-.22,.07][d];
+  function at(u,v){
+   const U=u-.5,V=v-.5,a=KX*(U+ux)+phase,b=KY*(V+vy)-phase,e=KX*(U+ux)-phase,f=KY*(V+vy)+phase;
+   const x0=U+AX*Math.sin(a)*Math.cos(b),y0=V+AY*Math.cos(e)*Math.sin(f);
+   const xu=1+AX*KX*Math.cos(a)*Math.cos(b),xv=-AX*KY*Math.sin(a)*Math.sin(b),yu=-AY*KX*Math.sin(e)*Math.sin(f),yv=1+AY*KY*Math.cos(e)*Math.cos(f);
+   const J=xu*yv-xv*yu,spacing=J/Math.hypot(xv,yv),light=Math.min(1,Math.max(.08,(1/Math.sqrt(Math.max(.08,spacing))-.48)*.82));
+   return{x:(.5+ca*x0-sa*y0)*w,y:(.5+sa*x0+ca*y0)*h,dx:(ca*xv-sa*yv)*w,dy:(sa*xv+ca*yv)*h,light};
+  }
+  for(let i=0;i<224;i++){
+   const u=-.66+2.32*i/223,nodes=[];
+   for(let j=0;j<=8;j++)nodes.push(at(u,-.9+2.8*j/8));
+   const A=nodes[0],B=nodes[8],gx=B.x-A.x,gy=B.y-A.y,den=gx*gx+gy*gy,g=c.createLinearGradient(A.x,A.y,B.x,B.y);
+   let mean=0;
+   const stops=nodes.map((n,j)=>({s:j===0?0:j===8?1:Math.max(.001,Math.min(.999,((n.x-A.x)*gx+(n.y-A.y)*gy)/den)),l:n.light})).sort((a,b)=>a.s-b.s);
+   for(const z of stops){const l=z.l;mean+=l;const base=[[151,137,179],[135,155,183],[116,151,181]][d],near=[[255,244,231],[232,226,249],[209,237,247]][d];const rgb=base.map((b,k)=>Math.round(b+(near[k]-b)*l));g.addColorStop(z.s,`rgba(${rgb.join(',')},${.14+.72*l})`);}
+   c.strokeStyle=g;c.lineWidth=unit*(.48+1.28*mean/9)*(1-.07*d);c.beginPath();c.moveTo(A.x,A.y);
+   const dv=2.8/8;
+   for(let j=0;j<8;j++){const a=nodes[j],b=nodes[j+1];c.bezierCurveTo(a.x+a.dx*dv/3,a.y+a.dy*dv/3,b.x-b.dx*dv/3,b.y-b.dy*dv/3,b.x,b.y);}c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'caccini-ave-maria',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1789,5 +1824,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-toreador1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-caccini1'});
 })();

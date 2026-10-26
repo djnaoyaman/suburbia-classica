@@ -861,6 +861,28 @@ for(let i=0;i<b.length;i+=3){const s=b[i+2];c.rect(b[i]-s*.5,b[i+1]-s*.4,s,s*.8)
 module.exports={render,id:'tchaikovsky-october',duration:96};
 
 return module.exports; })();
+
+works["canon"] = (() => { const module = {exports:{}};
+'use strict';
+// Three delayed identical light gestures above a steady basis; editorial, not audio sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#142c35';c.fillRect(0,0,w,h);c.lineCap='round';
+// The basis is continuous and quiet, not eight architectural bars.
+c.strokeStyle='rgba(159,180,159,.13)';c.lineWidth=.38*unit;c.beginPath();for(let i=-5;i<52;i++){let v=i/46;c.moveTo(-.1*w,v*h);c.bezierCurveTo(.3*w,(v-.025)*h,.7*w,(v+.025)*h,1.1*w,v*h);}c.stroke();
+c.globalCompositeOperation='screen';
+for(let voice=0;voice<3;voice++){
+const phase=p-voice*TAU/5,rgb=['244,224,178','151,207,194','214,160,132'][voice];
+for(let j=0;j<78;j++){
+const v=-.25+1.5*(j+.17*Math.sin(j*2.399))/77;
+function field(u){const a=TAU*.68*u+phase+1.1*Math.sin(v*3.6),b=TAU*1.12*u-v*2.8+phase*.0;return [u,v+.29*Math.sin(a)+.045*Math.sin(b),.29*TAU*.68*Math.cos(a)+.045*TAU*1.12*Math.cos(b),1+.29*1.1*3.6*Math.cos(a)*Math.cos(v*3.6)-.045*2.8*Math.cos(b)];}
+const g=c.createLinearGradient(-.12*w,0,1.12*w,0);for(let q=0;q<=12;q++){const a=field(-.12+1.24*q/12),crowd=Math.min(1,.25/(.18+Math.abs(a[3])));g.addColorStop(q/12,`rgba(${rgb},${.20+.55*crowd})`);}c.strokeStyle=g;c.lineWidth=.55*unit;c.beginPath();let old=field(-.12);c.moveTo(old[0]*w,old[1]*h);const step=1.24/10;for(let k=1;k<=10;k++){let next=field(-.12+k*step);c.bezierCurveTo((old[0]+step/3)*w,(old[1]+old[2]*step/3)*h,(next[0]-step/3)*w,(next[1]-next[2]*step/3)*h,next[0]*w,next[1]*h);old=next;}c.stroke();
+}}
+c.restore();}
+module.exports={render,id:'canon',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -909,5 +931,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-october1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-canon1'});
 })();

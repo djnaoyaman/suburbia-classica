@@ -1731,6 +1731,16 @@ const g=c.createLinearGradient(0,(-.2+yoff)*h,0,(1.2+yoff)*h);let mean=0;for(let
 module.exports={render,id:'habanera',duration:96};
 
 return module.exports; })();
+
+works["toreador"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,opening=.86+.11*Math.sin(p);c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#233b4c';c.fillRect(0,0,w,h);
+for(let i=0;i<300;i++){const r=.12+1.98*i/299,b=5.25*r-p,rad=r+.16*Math.sin(b),rd=1+.84*Math.cos(b);
+function at(t){const a=2*t+p,theta=opening*(t+.25*Math.sin(a)),dt=opening*(1+.5*Math.cos(a));return[(.5+.87*rad*Math.sin(theta)),(1.32-rad*Math.cos(theta)),.87*rad*Math.cos(theta)*dt,rad*Math.sin(theta)*dt];}
+const g=c.createLinearGradient(0,0,w,0);let mean=0;for(let k=0;k<7;k++){const x=k/6,theta=Math.asin(Math.max(-1,Math.min(1,(x-.5)/(.87*rad))));let t=theta/opening;for(let n=0;n<4;n++)t-=(opening*(t+.25*Math.sin(2*t+p))-theta)/(opening*(1+.5*Math.cos(2*t+p)));const J=opening*(1+.5*Math.cos(2*t+p))*rd,light=Math.min(.999,.13+.73/(.48+Math.abs(J))),near=Math.max(0,(light-.45)/.55);mean+=light/7;g.addColorStop(x,`rgba(${143+112*near},${177+52*near},${201-49*near},${.22+.72*light})`);}c.strokeStyle=g;c.lineWidth=(.48+.42*mean)*s;c.beginPath();let t=-2.2,a=at(t);c.moveTo(a[0]*w,a[1]*h);for(let k=1;k<=12;k++){const t1=-2.2+4.4*k/12,b=at(t1),d=(t1-t)/3;c.bezierCurveTo((a[0]+a[2]*d)*w,(a[1]+a[3]*d)*h,(b[0]-b[2]*d)*w,(b[1]-b[3]*d)*h,b[0]*w,b[1]*h);a=b;t=t1;}c.stroke();}c.restore();}
+module.exports={render,id:'toreador',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1779,5 +1789,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-habanera1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-toreador1'});
 })();

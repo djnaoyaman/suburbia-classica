@@ -1525,6 +1525,43 @@ c.restore();}
 module.exports={render,id:'nessun-dorma',duration:120};
 
 return module.exports; })();
+
+works["pomp-circumstance-1"] = (() => { const module = {exports:{}};
+'use strict';
+// A single contiguous refracting field. Editorial phrase, not audio synchronization.
+const TAU=2*Math.PI;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120,s=Math.min(w,h)/277,opening=.5-.5*Math.cos(p),angle=.50*Math.cos(p)-.16*Math.cos(2*p),co=Math.cos(angle),si=Math.sin(angle);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;
+ c.fillStyle='#000000';c.fillRect(0,0,w,h);
+ // Coverage assembly of disjoint neighboring facets; not layered glow.
+ c.globalCompositeOperation='lighter';
+ const N=420,lo=-.7,span=2.4,nodes=[],v=[-.7,.1,.9,1.7];
+ function control(u){return[u+.135*Math.sin(3*u+p),u+.225*Math.sin(3.6*u-p+.6),u+.20*Math.sin(2.8*u+p+1.8),u+.17*Math.sin(3.2*u-p-1.1)];}
+ function derivative(u){return[1+.405*Math.cos(3*u+p),1+.81*Math.cos(3.6*u-p+.6),1+.56*Math.cos(2.8*u+p+1.8),1+.544*Math.cos(3.2*u-p-1.1)];}
+ function project(x,y){return[(.5+co*(x-.5)-si*(y-.5))*w,(.5+si*(x-.5)+co*(y-.5))*h];}
+ for(let i=0;i<=N;i++){const xs=control(lo+span*i/N);nodes.push(xs.map((x,k)=>project(x,v[k])));}
+ // Dual coordinate: gradient fraction exactly equals the underlying cubic's v parameter.
+ const lx=-si/w,ly=co/h,norm=lx*lx+ly*ly,gx0=w*.5-1.2*lx/norm,gy0=h*.5-1.2*ly/norm,gx1=w*.5+1.2*lx/norm,gy1=h*.5+1.2*ly/norm;
+ for(let i=0;i<N;i++){
+  const a=nodes[i],b=nodes[i+1];if(Math.max(...a.map(x=>x[0]),...b.map(x=>x[0])) < -3*s||Math.min(...a.map(x=>x[0]),...b.map(x=>x[0]))>w+3*s||Math.max(...a.map(x=>x[1]),...b.map(x=>x[1])) < -3*s||Math.min(...a.map(x=>x[1]),...b.map(x=>x[1]))>h+3*s)continue;
+  const u=lo+span*(i+.5)/N,xx=control(u),du=derivative(u),g=c.createLinearGradient(gx0,gy0,gx1,gy1),grain=.94+.06*Math.cos(i*2.399963),micro=.04*Math.cos(i*1.618034);
+  for(let k=0;k<=12;k++){
+   const z=k/12,z0=1-z,b0=z0*z0*z0,b1=3*z0*z0*z,b2=3*z0*z*z,b3=z*z*z;
+   const density=b0*du[0]+b1*du[1]+b2*du[2]+b3*du[3];
+   const slope=3*(z0*z0*(xx[1]-xx[0])+2*z0*z*(xx[2]-xx[1])+z*z*(xx[3]-xx[2]))/span;
+   const tilt=-1.45*(density-1)+1.15*slope+micro,lightAxis=.20*Math.sin(p)+.08*Math.cos(2*p),spread=.22+.42*opening;
+   const shine=Math.exp(-Math.pow((tilt-lightAxis)/spread,2)),warm=.5+.5*Math.tanh((tilt-lightAxis)*2.3),t=.06+.91*shine*grain;
+   const base=[9+15*warm,25+13*warm,64+8*warm],ivory=[255-9*warm,246-20*warm,225-55*warm];
+   const rgb=base.map((v,j)=>v+t*(ivory[j]-v));g.addColorStop(z,`rgb(${rgb[0]},${rgb[1]},${rgb[2]})`);
+  }
+  c.fillStyle=g;c.beginPath();c.moveTo(a[0][0],a[0][1]);c.bezierCurveTo(a[1][0],a[1][1],a[2][0],a[2][1],a[3][0],a[3][1]);c.lineTo(b[3][0],b[3][1]);c.bezierCurveTo(b[2][0],b[2][1],b[1][0],b[1][1],b[0][0],b[0][1]);c.closePath();c.fill();
+ }
+ c.restore();
+}
+module.exports={id:'pomp-circumstance-1',duration:120,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1573,5 +1610,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-fractional1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pomp1'});
 })();

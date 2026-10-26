@@ -52,13 +52,6 @@
     "url": "https://djnaoyaman.github.io/gooooooooood_expression/expressions/shader-ripple.html"
   },
   {
-    "artId": "jesu-joy",
-    "site": "花鳥風月、そして魚と虫。",
-    "label": "「蝶」から、虫へんの世界へ",
-    "text": "「蝶」という字から、花にとまる一羽の細部へ。虫へんのことばを入口に生き物を見る図鑑に着想し、光に浮かぶ翅の筋や触角を見つめる創作の花辺を描きました。特定の種や標本の再現ではありません。",
-    "url": "https://djnaoyaman.github.io/sakanamushi/"
-  },
-  {
     "artId": "liebesgruss",
     "site": "花鳥風月、そして魚と虫。",
     "label": "「蝸牛」という名前を読む",

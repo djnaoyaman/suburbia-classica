@@ -1,0 +1,7 @@
+# Farandole — the linked dance
+
+Bizet wrote *L’Arlésienne* as incidental music for Daudet’s play in 1872. Ernest Guiraud assembled the second orchestral suite in 1879; the scene here is an interpretation of its Farandole, not a reconstruction of the play’s original staging. [BnF’s work record](https://catalogue.bnf.fr/ark:/12148/cb13908591k).
+
+The farandole’s communal linked-chain form supplies a concrete motif: seven adults joining hands in a sunlit meadow. French cultural heritage documentation describes hand-linked communal farandoles; it does not prescribe this group, these clothes, or a single universal choreography. The people, village and setting here are invented. [Ministry of Culture field inventory, printed page 12](https://www.culture.gouv.fr/Media/Thematiques/Patrimoine-culturel-immateriel/Files/Fiches-inventaire-du-PCI/les-fetes-des-bouviers-et-des-laboureurs-de-la-drome.pdf).
+
+This is a photographic still moment, not an animated dance or an audio-synchronised performance. Hands, faces, bodies, feet, trees and architecture stay fixed. Only the interior of a loose blue skirt fold and a small canopy sprig move gently in the breeze. The wide frame shows all seven people; portrait framing concentrates on the central linked dancers, with the outer parts of the chain continuing out of view. The camera does not travel. The selected recording is unchanged, reduced motion holds a still frame, and the existing fallback is retained.

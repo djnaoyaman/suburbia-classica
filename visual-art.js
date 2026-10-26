@@ -1669,6 +1669,36 @@ c.strokeStyle=g;c.lineWidth=(.50+.36*near)*s;c.beginPath();let v=at(0);c.moveTo(
 c.restore();}module.exports={render,id:'heidenroslein',duration:96};
 
 return module.exports; })();
+
+works["le-cygne"] = (() => { const module = {exports:{}};
+'use strict';
+// An uninterrupted cantabile field over a quieter internal current; editorial, not audio-derived.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='rgba(0,0,0,0)';c.shadowOffsetX=0;c.shadowOffsetY=0;c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#172a40');bg.addColorStop(.5,'#27334b');bg.addColorStop(1,'#292538');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const basis=Array.from({length:3},(_,depth)=>{
+  const phase=p+depth*.34,off=.7*Math.sin(phase),at=x=>[Math.cos(Math.PI*.9*x+off),Math.sin(x*4.9-phase),-Math.PI*.9*Math.sin(Math.PI*.9*x+off),4.9*Math.cos(x*4.9-phase)];
+  return {ends:Array.from({length:19},(_,k)=>at(-.06+1.12*k/18)),stops:Array.from({length:9},(_,k)=>at(k/8))};
+ });
+ for(let j=0;j<480;j++){
+  const depth=j%3,q=-.22+1.44*j/479,phase=p+depth*.34,v=q+.075*Math.sin(TAU*q-phase),spacing=1+.075*TAU*Math.cos(TAU*q-phase);
+  const A=.13*Math.sin(v*4.8+phase),B=.08*Math.sin(Math.PI*v),C=.13*4.8*Math.cos(v*4.8+phase),D=.08*Math.PI*Math.cos(Math.PI*v),base=basis[depth];
+  const yy=k=>v+A*base.ends[k][0]+B*base.ends[k][1],dy=k=>A*base.ends[k][2]+B*base.ends[k][3];
+  const g=c.createLinearGradient(0,0,w,0),rgb=depth===0?[235,240,239]:depth===1?[169,193,223]:[198,170,216];
+  for(let k=0;k<=8;k++){
+   const x=k/8,J=(1+C*base.stops[k][0]+D*base.stops[k][1])*spacing;
+   const light=Math.min(1,Math.max(.08,(1/Math.max(.2,J)-.5)*.45));g.addColorStop(x,`rgba(${rgb.join(',')},${.12+.72*light})`);
+  }
+  c.strokeStyle=g;c.lineWidth=unit*.54;c.beginPath();c.moveTo(-.06*w,yy(0)*h);
+  for(let k=0;k<18;k++){const x=-.06+1.12*k/18,z=-.06+1.12*(k+1)/18,d=(z-x)/3;c.bezierCurveTo((x+d)*w,(yy(k)+d*dy(k))*h,(z-d)*w,(yy(k+1)-d*dy(k+1))*h,z*w,yy(k+1)*h);}c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'le-cygne',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1717,5 +1747,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-heiden1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-cygne1'});
 })();

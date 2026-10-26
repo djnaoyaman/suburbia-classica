@@ -1915,6 +1915,17 @@ for(const depth of[1,0]){const count=depth?224:256;for(let i=0;i<count;i++){cons
 c.restore();}module.exports={render,id:'cavalleria-intermezzo',duration:96};
 
 return module.exports; })();
+
+works["william-tell-overture"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+// Four smooth editorial states, not timed recording sections.
+function render(c,w,h,time){const t=((((Number.isFinite(time)?time:0)%96)+96)%96),p=T*t/96,k=Math.floor(t/24),f=t/24-k,e=f*f*(3-2*f),states=[[.22,.18,-.14],[.34,.22,.10],[.46,.18,.17],[.30,.16,-.10]],a=states[k],b=states[(k+1)%4],q=a.map((v,i)=>v+(b[i]-v)*e),s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#173e41';c.fillRect(0,0,w,h);
+function at(u,v){const main=q[0]+.10*(u-.5)*(u-.5)+q[2]*(u-.5),mp=.20*(u-.5)+q[2],answer=.77+.08*Math.sin(Math.PI*u+p),ap=.08*Math.PI*Math.cos(Math.PI*u+p),d=v-main,d2=v-answer,variance=q[1]*q[1],g=Math.exp(-.5*d*d/variance),g2=Math.exp(-.5*d2*d2/.0324),gu=g*d*mp/variance,gv=-g*d/variance,g2u=g2*d2*ap/.0324,g2v=-g2*d2/.0324,x=u+q[2]*(g-.55*g2),y=v-.28*d*g-.20*d2*g2,xu=1+q[2]*(gu-.55*g2u),xv=q[2]*(gv-.55*g2v),yu=.28*mp*g*(1-d*d/variance)+.20*ap*g2*(1-d2*d2/.0324),yv=1-.28*g*(1-d*d/variance)-.20*g2*(1-d2*d2/.0324),spacing=Math.abs(xu*yv-xv*yu)/Math.hypot(xu,yu),envelope=Math.min(1,.68*g+.52*g2),light=.12+.88*(.40*envelope+.60*Math.exp(-.5*(spacing/.85)**2));return{x:x*w,y:y*h,dx:xu*w,dy:yu*h,light};}
+for(let i=0;i<400;i++){const v=-.5+2*i/399,ns=[];for(let j=0;j<=12;j++)ns.push(at(-.5+2*j/12,v));const A=ns[0],B=ns[12],gx=B.x-A.x,gy=B.y-A.y,den=gx*gx+gy*gy,g=c.createLinearGradient(A.x,A.y,B.x,B.y),st=ns.map((a,j)=>({v:j===0?0:j===12?1:Math.max(.001,Math.min(.999,((a.x-A.x)*gx+(a.y-A.y)*gy)/den)),l:a.light})).sort((a,b)=>a.v-b.v);let mean=0;for(const z of st){const l=z.l;mean+=l;g.addColorStop(z.v,`rgba(${Math.round(101+151*l)},${Math.round(179+60*l)},${Math.round(183+12*l)},${.18+.77*l})`);}c.strokeStyle=g;c.lineWidth=s*(.45+1.4*mean/13);c.beginPath();c.moveTo(A.x,A.y);for(let j=0;j<12;j++){const a=ns[j],b=ns[j+1],d=2/12/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();}c.restore();}
+module.exports={render,id:'william-tell-overture',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1963,5 +1974,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-cavalleria1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-william1'});
 })();

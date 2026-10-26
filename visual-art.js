@@ -1137,6 +1137,17 @@ function render(c,w,h,time){
 module.exports={render,id:'vocalise',duration:96};
 
 return module.exports; })();
+
+works["mozart-pc21-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Muted-string support, triplet motion and piano response interpreted as three optical currents.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#253248';c.fillRect(0,0,w,h);const bins=Array.from({length:24},()=>[]);
+for(let iy=0;iy<196;iy++)for(let ix=0;ix<188;ix++){const u=-.4+1.8*(ix+((iy*37+ix*13)%131)/180)/187,v=-.45+1.9*(iy+((iy*19+ix*53)%137)/190)/195,a=T*(1.394*u+.493*v)+p,b=T*(-.348*u+1.0585*v)-p,c1=.105/1.7,c2=.13/1.45,x=u+c1*Math.sin(a)+.045/1.45*Math.sin(b),y=v+.065/1.7*Math.sin(a)+c2*Math.sin(b),xu=1+c1*T*1.394*Math.cos(a)-.045*T*.24*Math.cos(b),xv=c1*T*.493*Math.cos(a)+.045*T*.73*Math.cos(b),yu=.065*T*.82*Math.cos(a)-c2*T*.348*Math.cos(b),yv=1+.065*T*.29*Math.cos(a)+c2*T*1.0585*Math.cos(b),jac=Math.abs(xu*yv-xv*yu),fro=xu*xu+xv*xv+yu*yu+yv*yv,small=Math.sqrt(Math.max(.0001,(fro-Math.sqrt(Math.max(0,fro*fro-4*jac*jac)))/2)),density=.45*jac+.55*small;if(x<-.02||x>1.02||y<-.02||y>1.02)continue;let q=Math.min(.999,Math.pow(.29/(.11+density),.82)),d=(ix+2*iy)%3,tone=Math.floor(q*8),size=s*(.42+.8*q);bins[d*8+tone].push(x*w,y*h,size);}
+for(let d=0;d<3;d++)for(let t=0;t<8;t++){c.fillStyle=`rgba(${d===0?'207,225,239':d===1?'146,188,220':'183,174,216'},${.14+t*.1})`;c.beginPath();let b=bins[d*8+t];for(let i=0;i<b.length;i+=3)c.rect(b[i],b[i+1],b[i+2],b[i+2]*.72);c.fill();}c.restore();}
+module.exports={render,id:'mozart-pc21-2',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1185,5 +1196,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-vocalise1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pc211'});
 })();

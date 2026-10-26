@@ -1435,6 +1435,36 @@ for(let i=0;i<260;i++){
 module.exports={render,id:'o-mio-babbino',duration:96};
 
 return module.exports; })();
+
+works["jesu-joy"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';c.fillStyle='#171e36';c.fillRect(0,0,w,h);
+for(let depth=1;depth>=0;depth--){const N=depth?112:144;
+for(let i=0;i<N;i++){
+ const q=-.36+1.72*i/(N-1),phase=4.9*q+(depth?p:-2*p),lit=.5+.5*Math.sin(phase+.5),center=.5+.27*Math.sin(phase),bend=.24*Math.sin(phase),answer=.18*Math.cos(3.7*q-p);
+ const g=depth?c.createLinearGradient(-.12*w,0,1.12*w,h*.25):c.createLinearGradient(0,1.12*h,w*.25,-.12*h);
+ const colors=depth?['122,130,190','171,160,208','231,216,231','169,179,220','110,133,185']:['153,133,174','224,184,137','255,242,206','235,202,157','152,158,202'];
+ const e=depth?.76+.18*lit:.82+.16*lit;
+ for(const[z,k,a]of[[0,0,.49],[center-.20,1,.79],[center,2,1],[center+.20,3,.79],[1,4,.49]])g.addColorStop(z,`rgba(${colors[k]},${e*a})`);
+ c.strokeStyle=g;c.lineWidth=(depth?.47+.26*lit:.52+.32*lit)*s;c.beginPath();
+ if(!depth){
+  const mid=q+bend,ym=.5+.07*Math.sin(3*q+p),tangent=.13+answer;
+  c.moveTo((q-.23)*w,1.12*h);
+  c.bezierCurveTo((q-.23+answer)*w,.82*h,(mid-tangent)*w,(ym+.22)*h,mid*w,ym*h);
+  c.bezierCurveTo((mid+tangent)*w,(ym-.22)*h,(q+.23-answer)*w,.16*h,(q+.23)*w,-.12*h);
+ }else{
+  const mid=q+.18*Math.cos(phase),xm=.5+.08*Math.sin(q*3-p),tangent=.10*Math.sin(q*5+p);
+  c.moveTo(-.12*w,(q+.17)*h);
+  c.bezierCurveTo(.15*w,(q+.17+bend)*h,(xm-.22)*w,(mid-tangent)*h,xm*w,mid*h);
+  c.bezierCurveTo((xm+.22)*w,(mid+tangent)*h,.86*w,(q-.17+answer)*h,1.12*w,(q-.17)*h);
+ }
+ c.stroke();
+}}c.restore();}
+module.exports={render,id:'jesu-joy',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1483,5 +1513,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-omio1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-jesu1'});
 })();

@@ -1308,6 +1308,34 @@ for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'240,224,156'
 module.exports={render,id:'farandole',duration:96};
 
 return module.exports; })();
+
+works["pictures"] = (() => { const module = {exports:{}};
+'use strict';
+// Broad woven arches for the currently selected Great Gate track; no literal building.
+const TAU=2*Math.PI;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%72+72)%72)/72;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#183b42';c.fillRect(0,0,w,h);
+ const bins=Array.from({length:48},()=>[]),N=430,S=56;
+ const columns=Array.from({length:3},(_,depth)=>{const q=p+depth*.32;return Array.from({length:S+1},(_,j)=>{const u=-.3+1.6*j/S,U=u+.11*Math.sin(u*4.4+q),du=1+.484*Math.cos(u*4.4+q),vshift=.08*Math.sin(U*5+q);return {U,du,vshift};});});
+ for(let i=0;i<N;i++){
+  const depth=i%3,q=p+depth*.32,seed=((i*137)%433)/433,v=-.3+1.6*(i+.75*seed)/(N-1),dv=1+.42*Math.cos(v*6-q),vbase=v+.07*Math.sin(v*6-q);let last,lastBin=-1,run;
+  for(let j=0;j<=S;j++){
+   const {U,du,vshift}=columns[depth][j],V=vbase+vshift,X=U+.11*Math.sin(V*4+q),Y=V+.05*Math.sin(X*5-q),J=du*dv;
+   // Positive determinant >=.516*.58: no fold singularity or black compensation hole.
+   const light=Math.max(0,Math.min(.999,(1.85-J)/1.55)),bin=depth*16+Math.floor(light*16),x=X*w,y=Y*h;
+   if(last){if(bin!==lastBin){run=[last[0],last[1],x,y];bins[bin].push(run)}else run.push(x,y);lastBin=bin}last=[x,y];
+  }
+ }
+ for(let depth=0;depth<3;depth++)for(let t=0;t<16;t++){
+  const k=t/15;c.strokeStyle=`rgba(${Math.round(48+191*k)},${Math.round(113+116*k)},${Math.round(122+(42+depth*18)*k)},${(.14+.52*k)*(1-.10*depth)})`;c.lineWidth=(.28+.58*k)*(1-.16*depth)*Math.min(w,h)/277;c.beginPath();
+  for(const a of bins[depth*16+t]){let lo=Infinity,hi=-Infinity;for(let q=1;q<a.length;q+=2){lo=Math.min(lo,a[q]);hi=Math.max(hi,a[q])}if(hi < -10||lo > h+10)continue;c.moveTo(a[0],a[1]);for(let q=2;q<a.length;q+=2)c.lineTo(a[q],a[q+1])}c.stroke();
+ }
+ c.restore();
+}
+module.exports={id:'pictures',duration:72,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1356,5 +1384,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-farandole1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pictures1'});
 })();

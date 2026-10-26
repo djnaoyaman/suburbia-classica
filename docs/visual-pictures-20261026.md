@@ -1,0 +1,7 @@
+# Pictures — broad crossing continuous strata
+
+Adds one72-second editorial Visual for the currently selected Great Gate track, coverage41/74. Three receding continuous line strata bend into broad gold/blue-green crossings; no literal building or score reconstruction. The existing recording metadata and uncertainty remain unchanged.
+
+Actual eight-phase phone/wide and strongest selected9-second adjacent images reviewed. Focused loop/seek/opacity/state and eight selected adjacent probes passed, not a full-period or continuous-memory certificate. Fine interference/segment-bin quantization may remain. A frame-local3x57 table hoists only u/U/du values identical for each depth/sample:25sample images across5sizes are pixel-exact to the reviewed original. Geometry, bins, line count/width, color and time formulas are unchanged; no persistent frame cache introduced. Sampled cull-on/off tiny raster differences were disclosed separately, not claimed universally exact.
+
+Five-warmed same-run native medians DPR1/2: original27.84/47.24ms, hoisted22.70/40.90ms, Clair29.48/66.43ms. This is a small software timing sample, not deviceFPS or a smoothness guarantee. PR76 adaptive pacing unchanged. Prior40 source closures/shared wrapper/timing helper, Impressive/Realism and all music/prose/facts/recording/citation data preserved. Scope exact source append/version/cache query, focused helper-loaded tests and this document. No raw audio/FFT/MIDI/note synchronization claim.

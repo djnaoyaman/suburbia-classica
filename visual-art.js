@@ -1653,6 +1653,22 @@ for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'247,231,157'
 module.exports={render,id:'vivaldi-spring',duration:72};
 
 return module.exports; })();
+
+works["heidenroslein"] = (() => { const module = {exports:{}};
+'use strict';const TAU=Math.PI*2;
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#211d2b';c.fillRect(0,0,w,h);
+for(let i=0;i<250;i++){const q=.025+1.56*i/249,z=5.6*q-p,breath=Math.sin(3*p+.6*q),near=.5+.5*Math.cos(z);
+const cx=.48+.21*Math.sin(4.3*q-p),cy=.51+.16*Math.sin(5.2*q+p),rx=q*(.82+.06*breath)+.055*Math.sin(6*q-p),ry=q*(.48+.035*Math.cos(3*p))+.055*Math.sin(7.2*q+p),shear=.14*Math.sin(z);
+const ax=.10*q*Math.sin(3.7*q+p),ay=.10*q*Math.cos(4.1*q-p);
+const at=a=>[cx+rx*Math.cos(a)+shear*Math.sin(a)+ax*Math.cos(2*a),cy+ry*Math.sin(a)+ay*Math.sin(2*a)];
+const der=a=>[-rx*Math.sin(a)+shear*Math.cos(a)-2*ax*Math.sin(2*a),ry*Math.cos(a)+2*ay*Math.cos(2*a)];
+const angle=-.8+.35*Math.sin(z),start=at(angle+Math.PI),end=at(angle),g=c.createLinearGradient(start[0]*w,start[1]*h,end[0]*w,end[1]*h),a=.33+.45*near;
+g.addColorStop(0,`rgba(99,111,163,${a*.45})`);g.addColorStop(.24,`rgba(158,126,170,${a*.78})`);g.addColorStop(.58,`rgba(239,182,183,${a*.88})`);g.addColorStop(.82,`rgba(255,229,215,${a})`);g.addColorStop(1,`rgba(184,122,149,${a*.64})`);
+c.strokeStyle=g;c.lineWidth=(.50+.36*near)*s;c.beginPath();let v=at(0);c.moveTo(v[0]*w,v[1]*h);for(let j=0;j<4;j++){const t0=j*Math.PI/2,t1=(j+1)*Math.PI/2,k=(t1-t0)/3,u=at(t0),v=at(t1),du=der(t0),dv=der(t1);c.bezierCurveTo((u[0]+k*du[0])*w,(u[1]+k*du[1])*h,(v[0]-k*dv[0])*w,(v[1]-k*dv[1])*h,v[0]*w,v[1]*h)}c.closePath();c.stroke();}
+c.restore();}module.exports={render,id:'heidenroslein',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1701,5 +1717,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-vivaldi1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-heiden1'});
 })();

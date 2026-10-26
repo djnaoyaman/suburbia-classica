@@ -1148,6 +1148,36 @@ for(let d=0;d<3;d++)for(let t=0;t<8;t++){c.fillStyle=`rgba(${d===0?'207,225,239'
 module.exports={render,id:'mozart-pc21-2',duration:96};
 
 return module.exports; })();
+
+works["paganini-var18"] = (() => { const module = {exports:{}};
+'use strict';
+// Opposed optical inversions: editorial association, not score or orchestral simulation.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1f3029');bg.addColorStop(.5,'#2a3830');bg.addColorStop(1,'#272e31');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let i=0;i<39000;i++){
+  const u=-.2+1.4*((.5+i*.7548776662466927)%1),v=-.2+1.4*((.5+i*.5698402909980532)%1),depth=i%3;
+  const phase=p+depth*.70,ca=.68+.28*Math.sin(phase),cb=.03+.28*Math.cos(phase);
+  const aa=(u+v)*Math.SQRT1_2,bb=(v-u)*Math.SQRT1_2;
+  const ta=Math.tanh((aa-ca)/.23),tb=Math.tanh((bb-cb)/.24);
+  const A=aa-.145*ta,B=bb-.135*tb;
+  const x=(A-B)*Math.SQRT1_2+.035*Math.sin(phase),y=(A+B)*Math.SQRT1_2;
+  const J=(1-.145/.23*(1-ta*ta))*(1-.135/.24*(1-tb*tb));
+  const light=Math.min(.999,Math.max(.1,(1/Math.sqrt(Math.max(.12,J))-.72)*.66));
+  const tone=Math.min(7,Math.floor(light*8)),size=unit*(.42+1.30*light)*(1-depth*.055);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[247,232,191]:depth===1?[210,172,104]:[153,194,166];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'paganini-var18',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1196,5 +1226,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-pc211'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-paganini1'});
 })();

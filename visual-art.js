@@ -1261,6 +1261,31 @@ function render(c,w,h,time){
 module.exports={render,id:'flower-duet',duration:96};
 
 return module.exports; })();
+
+works["beethoven-5"] = (() => { const module = {exports:{}};
+'use strict';
+// Editorial development of one pressured field, not four objects or audio timing.
+const TAU=2*Math.PI;
+function render(c,w,h,time){
+ const p=TAU*(((Number.isFinite(time)?time:0)%48+48)%48)/48;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#191e2a';c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]),scale=Math.min(w,h)/277;
+ for(let iy=0;iy<150;iy++)for(let ix=0;ix<180;ix++){
+  const seed=((ix*71+iy*193)%223)/223,xx=-1+2*(ix+.7*seed)/179,yy=-1+2*(iy+.7*((ix*37+iy*11)%137)/137)/149,r=Math.max(.0001,Math.sqrt(xx*xx+yy*yy)),theta=Math.atan2(yy,xx),a=theta*3-p,b=r*9+p;
+  const R=r*(1+.06*Math.sin(a))+.075*r/(r+.2)*Math.sin(b),rr=1+.06*Math.sin(a)+.075*(.2/((r+.2)*(r+.2))*Math.sin(b)+9*r/(r+.2)*Math.cos(b)),rt=.18*r*Math.cos(a),turn=theta+.36*Math.sin(r*5-p),tr=1.8*Math.cos(r*5-p);
+  const J=(R/r)*(rr-rt*tr),compression=1/(1+J*J),ton=Math.min(7,Math.floor((.12+.87*compression)*8)),d=(ix+iy)%3;
+  const x=(.47+.80*R*Math.cos(turn))*w,y=(.53+.80*R*Math.sin(turn))*h,s=(.7+1.25*compression+.20*seed)*scale;
+  if(x < -1.2*s||x > w+s||y < -s||y > h+s)continue;
+  bins[d*8+ton].push(x,y,s);
+ }
+ for(let d=0;d<3;d++)for(let t=0;t<8;t++){
+  const k=t/7,colors=d===0?[239,191,126]:d===1?[173,111,104]:[189,184,201];c.fillStyle=`rgba(${colors.join(',')},${.18+.78*k})`;c.beginPath();const a=bins[d*8+t];for(let j=0;j<a.length;j+=3)c.rect(a[j],a[j+1],a[j+2]*1.2,a[j+2]*.65);c.fill();
+ }
+ c.restore();
+}
+module.exports={id:'beethoven-5',duration:48,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1309,5 +1334,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-duets1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-beethoven51'});
 })();

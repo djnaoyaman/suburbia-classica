@@ -1,0 +1,9 @@
+# William Tell — continuous forward response
+
+Adds a 96-second editorial Canvas Visual (71/74). The earlier single upper-forward/lower-answer Gaussian mapping and four smoothly interpolated states are retained. A sole sampling-direction correction changes complete fixed-u vertical trajectories to fixed-v horizontal trajectories so the existing compression acts across neighboring lines rather than along them. This is not an image rotation, added lens or new random field. Analytic tangents, normal spacing and the existing broad envelopes drive bounded per-curve illumination/width.
+
+Actual phone/wide images show broad pale-gold upper/lower responses on supported teal fine curves. Writer curation and independent review accept a quiet simple composition at the established level; the author retains a borderline reservation about low contrast, regular horizontal rows and modest macro movement. It is not a literal gallop illustration or synchronized account of all four overture sections. Selected recording identity uncertainties and existing text/audio are preserved.
+
+Shared-derivative Hermite C1 joins, finite spacing response, ordered thirteen stops, full state reset and opaque frame-local repaint were reviewed. Five-ratio loop/seek/opacity/dirty-state/restoration checks passed. Five selected 40ms contacts cover phone24/48/72 state joins,96wrap and wide12; maximum MAD1.135787/local channel51/maximum any-RGB-channel>32 area.320096 percent. Seen contacts preserve continuous support without sampled broad jump. These are limited observations, not full-cycle/no-shimmer/device-FPS proof. No benchmark or further art iteration.
+
+Prior70 Visual closures, PR98 scaling, PR76 timing, requested audio and latest Realism corrections are preserved. index.html changes only the Visual cache query.

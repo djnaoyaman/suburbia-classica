@@ -1,0 +1,9 @@
+# Carmen Prelude — continuous oblique opening
+
+Adds a 96-second editorial Canvas Visual (68/74). The older simultaneous shear mapping is retained as supported complete horizontal/oblique curves rather than scattered points. Actual transverse spacing and analytic tangents control bounded individual gold/rose illumination and width, connecting several oblique gatherings to their broad fine-line field. The rejected later disconnected star-mesh is not strengthened or reused. Opening/tightening is an editorial association with the festive opening and contrasting motif, not recording synchronization. Existing work facts and Karajan recording metadata remain unchanged.
+
+Author, writer and independent reviewer accepted phone/wide phase images at the established quality level. Strong pale cores, regular rows and local interference remain caveats; no arbitrary extra layers or forced complexity were added. Twelve shared-derivative Hermite segments approximate each original sine curve with C1 joins. The finite Gaussian spacing response remains defined through folds; this is not physical-density or global-injectivity certification. Ordered thirteen gradient stops, full Canvas state reset and opaque deterministic repaint were reviewed.
+
+Five-ratio loop/seek/opacity/dirty-state/restoration checks passed. Four selected 40ms samples cover phone24, quiet48, wrap96 and wide12; maximum MAD4.97986, local channel delta67 and maximum any-RGB-channel>32 area.8898534 percent are limited evidence, not full-cycle/no-shimmer or physical-device FPS certification. No new benchmark or artificial art iteration was run.
+
+Prior67 Visual closures, PR98 axis scaling, PR76 timing, requested audio IDs and PR108 Realism lightning are unchanged. index.html changes only the Visual cache query. Focused integration tests accompany this addition.

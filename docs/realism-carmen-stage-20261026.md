@@ -1,0 +1,9 @@
+# Carmen Prelude Realism — moving scarlet stage curtain
+
+User-requested replacement of the unrelated crab/tide-pool Realism with a generated photographic-style stage wing: scarlet silk in warm gold light, deep backstage shadow and a stone arch. It interprets the festive opening and ominous contrast of the prelude, not a literal historical production or bar-synchronized recording. It is not video footage.
+
+The alpha-isolated curtain and clean backdrop are separate materials. Only silk is displaced and gently relit; architecture, stage rigging and floor sample fixed coordinates. The 48-second wind/light cycle is seek deterministic. Framing preserves the hem and arch in phone and wide views; no animated camera pan, full-screen strobe or architecture distortion is intended. The initial single-material version that bent nearby rigging was rejected and is not published.
+
+Selected final native EGL shader compilation/rendering used Mesa llvmpipe software, not browser GPU/FPS validation. Phone/wide phase images were actually reviewed; loop0=48, reordered time and reduced12 reproductions passed. Selected stone/rigging/floor regions had zero pixel changes across the tested phases. Two-texture readiness/cache/release, context lost/restore, upload failure and non-Carmen delegation were mock-tested using the actual shared material manager. These are limited functional/quality checks, not full-device performance certification. Existing host reduced-motion behavior remains unchanged.
+
+The index replaces the old crab wrapper script rather than stacking a new wrapper above it. Fallback remains the base Carmen stage-curtain mapping or the existing unsupported-Realism Impressive fallback, not the rejected crab wrapper. Other 73 Realism entries, all69 Canvas Visuals, Impressive, audio/recording text, PR76 timing, PR98 scaling and Toccata lightning are unchanged. Old crab assets are left in the repository but are no longer requested by this page.

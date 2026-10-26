@@ -1905,6 +1905,16 @@ for(let i=0;i<420;i++){const q=-.65+2.3*i/419,a=5.6*q-.55*Math.sin(p),b=5*q-.55*
 module.exports={render,id:'brindisi',duration:96};
 
 return module.exports; })();
+
+works["cavalleria-intermezzo"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+// Sustained cantabile and foundation,96s editorial time only.
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,sn=Math.sin(p),cs=Math.cos(p);
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#233432';c.fillRect(0,0,w,h);
+for(const depth of[1,0]){const count=depth?224:256;for(let i=0;i<count;i++){const q=-.5+2*i/(count-1);function at(u){const z=u-.5,slope=.20+.14*cs,centre=depth?.79-.055*cs+.14*sn*z-(.65+.12*cs)*z*z:.28+.06*sn+(.18+.12*cs)*z+(1.05+.20*sn)*z*z+.20*z*z*z,cp=depth?.14*sn-2*(.65+.12*cs)*z:(.18+.12*cs)+2*(1.05+.20*sn)*z+.6*z*z,variance=depth?.09:.0484,k=depth?.40:.52,d=q-centre,g=Math.exp(-.5*d*d/variance),push=-k*d*g,pu=k*cp*g*(1-d*d/variance),pv=-k*g*(1-d*d/variance);let x,xu,xv;if(depth){const A=1-.13*Math.cos(Math.PI*q-.4*cs);x=.5+z*A+.025*cs*(q-.5);xu=A;xv=z*.13*Math.PI*Math.sin(Math.PI*q-.4*cs)+.025*cs;}else{const A=1+.22*Math.sin(Math.PI*q+.5*sn);x=.5+z*A-.12*slope*push;xu=A-.12*slope*pu;xv=z*.22*Math.PI*Math.cos(Math.PI*q+.5*sn)-.12*slope*pv;}const y=q+push,spacing=Math.abs(xu*(1+pv)-xv*pu)/Math.hypot(xu,pu),response=.35*g+.65*Math.exp(-.5*(spacing/.82)**2),light=.12+.88*response;return{x:x*w,y:y*h,dx:xu*w,dy:pu*h,light};}const ns=[];for(let j=0;j<=12;j++)ns.push(at(-.45+1.9*j/12));const A=ns[0],B=ns[12],gx=B.x-A.x,gy=B.y-A.y,den=gx*gx+gy*gy,g=c.createLinearGradient(A.x,A.y,B.x,B.y),st=ns.map((a,j)=>({v:j===0?0:j===12?1:Math.max(.001,Math.min(.999,((a.x-A.x)*gx+(a.y-A.y)*gy)/den)),l:a.light})).sort((a,b)=>a.v-b.v);let mean=0;for(const z of st){const l=z.l;mean+=l;g.addColorStop(z.v,depth?`rgba(${Math.round(104+117*l)},${Math.round(153+85*l)},${Math.round(153+74*l)},${.12+.63*l})`:`rgba(${Math.round(157+97*l)},${Math.round(149+88*l)},${Math.round(119+77*l)},${.17+.79*l})`);}c.strokeStyle=g;c.lineWidth=s*(.45+(depth?1.05:1.35)*mean/13);c.beginPath();c.moveTo(A.x,A.y);for(let j=0;j<12;j++){const a=ns[j],b=ns[j+1],d=1.9/12/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();}}
+c.restore();}module.exports={render,id:'cavalleria-intermezzo',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1953,5 +1963,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-brindisi1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-cavalleria1'});
 })();

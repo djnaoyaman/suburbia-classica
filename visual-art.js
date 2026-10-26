@@ -1482,6 +1482,32 @@ for(let i=0;i<316;i++){
 module.exports={render,id:'lascia-ch-io-pianga',duration:120};
 
 return module.exports; })();
+
+works["liebesgruss"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#171d29';c.fillRect(0,0,w,h);
+ for(let i=0;i<360;i++){
+  const q=-.60+2.20*i/359,z=5.4*q-p,near=.5+.5*Math.sin(z),answer=Math.sin(8.1*q+p);
+  const start=-.35+.17*Math.sin(3.1*q+p),end=1.22+.14*Math.cos(4.2*q-p),mid=(start+end)/2;
+  const rise=.24*Math.sin(z)+.075*answer,returning=.16*Math.sin(6.5*q+p+.8);
+  const y0=q+.28+rise*.25,ym=q-.08+rise,y1=q-.12+returning;
+  const d0=-.26+.20*Math.cos(z),dm=-.25+.35*Math.cos(4.8*q-p),d1=.18+.24*Math.sin(6.5*q+p);
+  const a=mid-start,b=end-mid;
+  const g=c.createLinearGradient(start*w,y0*h,end*w,y1*h),peak=.39+.14*Math.sin(z+.4);
+  const alpha=.34+.40*near;
+  g.addColorStop(0,'rgba(110,139,168,0)');g.addColorStop(.18,`rgba(120,150,180,${alpha*.60})`);g.addColorStop(peak,`rgba(255,222,205,${alpha})`);g.addColorStop(.79,`rgba(220,140,132,${alpha*.80})`);g.addColorStop(1,'rgba(152,119,150,0)');
+  c.strokeStyle=g;c.lineWidth=(.52+.34*near)*s;c.beginPath();c.moveTo(start*w,y0*h);
+  c.bezierCurveTo((start+a/3)*w,(y0+d0*a/3)*h,(mid-a/3)*w,(ym-dm*a/3)*h,mid*w,ym*h);
+  c.bezierCurveTo((mid+b/3)*w,(ym+dm*b/3)*h,(end-b/3)*w,(y1-d1*b/3)*h,end*w,y1*h);c.stroke();
+ }
+ c.restore();
+}
+module.exports={render,id:'liebesgruss',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1530,5 +1556,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-lascia1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-liebes1'});
 })();

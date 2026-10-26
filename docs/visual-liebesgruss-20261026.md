@@ -1,0 +1,13 @@
+# Liebesgruss — extended curved light
+
+Adds one96-second editorial Visual (50/74). Overlapping long curved trajectories carry a continuous approach, warm illuminated shoulder and colored recession through an unequal oblique field. Geometry and per-curve light/width share a varying depth parameter; this is not a palette swap of existing compositions or recording synchronization. Selected Perlman/Sanders violin/piano metadata and its recording/album uncertainties remain unchanged.
+
+Actual phone/wide phase sheets and selected adjacent triplets were internally reviewed. Some48/60-second phases place near-light partly outside the frame while a receding curved field remains. Exposed lines and fine-fold family resemblance are acknowledged; neither centered highlights in every phase nor zero interference is claimed. The chosen configuration differs from the old held granular dash treatment.
+
+Final source explicitly resets inherited filter/shadow offsets/color/blur, line dash, caps/joins and miter settings inside balanced save/restore. It keeps the original default butt/miter appearance. Twenty-five sampled default-pixel comparisons are exact against pre-reset source; inherited-state comparisons also pass. C1 joins, safe gradients, offscreen faded endpoints and smooth96s phase are checked; no persistent history/culling/time branch.
+
+Five-ratio loop/seek/opacity checks reran on final source. Nine selected adjacent intervals: maximum sampled mean RGB change4.9689/255 at12s, area with any channel change>32/255 max3.6011% at72s, global mean step .012868/255. Actual strongest/wrap/support contacts remain coherent. This is selected temporal evidence, not exhaustive full-cycle or continuous-memory certification; fine-line shimmer can remain.
+
+Performance evidence is noisy and retained in full, not benchmarked until favorable. Earlier default-identical source: native draw/readback medians14.12/47.17ms at DPR1/2 versus Clair25.57/71.92ms. Final source run:111.59/66.09ms versus Clair158.82/180.01ms; both controls and candidate were much slower and unstable. The reset changes state initialization only, not draw count or geometry, but neither measurement set establishes physical-deviceFPS or a smoothness guarantee. PR76 adaptive timing remains unchanged.
+
+All prior49 artwork closures, wrapper and timing helper are preserved except renderer version. Index changes only visual cachequery, retaining both PR92/93 urgent audio IDs and corrected recording explanations byte-exact. Other facts, citations, audio and Impressive/Realism unchanged. Four-file scoped release includes focused regression test and this note.

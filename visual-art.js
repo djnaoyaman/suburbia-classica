@@ -477,31 +477,38 @@ module.exports={render,id:'arabesque-1',duration:24};
 return module.exports; })();
 works["prelude-bwv846"] = (() => { const module = {exports:{}};
 'use strict';
-// An invariant broken route reveals changing harmonic illumination, not MIDI.
+// Private reconsideration. Three fine light strata exchange depth, not MIDI.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
+ const moveTo=c.moveTo.bind(c),lineTo=c.lineTo.bind(c);
  const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
- c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineJoin='miter';c.lineCap='butt';
- const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#1d2c3b');bg.addColorStop(.5,'#34434b');bg.addColorStop(1,'#182a34');c.fillStyle=bg;c.fillRect(0,0,w,h);
- for(let j=-2;j<13;j++)for(let n=0;n<5;n++){
-  const off=n*.009,base=j*.115+off;
-  const pts=[];
-  for(let k=-1;k<=5;k++){
-   const x=k*.25,up=(k+j)%2===0?.064:-.064;
-   pts.push([x,base+up], [x+.145,base+up],[x+.145,base-up],[x+.25,base-up]);
-  }
-  const width=(n===2?2.2:.7)*Math.max(1,h/600);
-  for(let k=0;k<pts.length-1;k++){
-   const a=pts[k],b=pts[k+1],cx=(a[0]+b[0])*.5,cy=(a[1]+b[1])*.5;
-   const wave=.5+.5*Math.cos(cx*4+cy*5-p*2+j*.37),slow=.5+.5*Math.sin(p-cy*3);
-   const intensity=.14+.86*Math.pow(wave,4),warm=slow*.6;
-   const r=Math.round(85+159*intensity),g=Math.round(112+132*intensity),bl=Math.round(130+(105-75*warm)*intensity);
-   c.strokeStyle=`rgb(${r},${g},${bl})`;c.lineWidth=width*(1+3.1*Math.pow(wave,9));c.beginPath();c.moveTo(a[0]*w,a[1]*h);c.lineTo(b[0]*w,b[1]*h);c.stroke();
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#0c192a');bg.addColorStop(.5,'#1b2936');bg.addColorStop(1,'#112337');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ for(let voice=0;voice<3;voice++){
+  const phase=p-voice*TAU/3,depth=.5+.5*Math.sin(phase),tilt=.12*Math.sin(phase+.4);
+  const strength=.36+.64*depth,amplitude=.055+.025*depth,lineWidth=(.42+.58*depth)*Math.max(1,w/277),rgb=voice===1?'246,232,207':'211,228,244';
+  for(let i=-14;i<112;i++){
+   const u=i/97,center=.5+.48*Math.sin(u*4.2-phase+voice*.7),accent=.45+.55*(.5+.5*Math.cos(u*5-phase));
+   const xs=new Float64Array(81);let minX=Infinity,maxX=-Infinity;
+   for(let j=0;j<=80;j++){const v=-.1+j*1.2/80,x=u+tilt*(v-.5)+amplitude*Math.sin(v*4.3+phase+u*1.8);xs[j]=x*w;minX=Math.min(minX,xs[j]);maxX=Math.max(maxX,xs[j]);}
+   // Entire polyline bounds plus stroke/AA margin, never its origin alone.
+   const margin=lineWidth*.5+4;
+   if(maxX < -margin || minX > w+margin)continue;
+   const g=c.createLinearGradient(0,0,0,h);
+   for(let j=0;j<=32;j++){
+    const v=j/32,main=Math.exp(-Math.pow((v-center)/.19,2)),memory=.42*Math.exp(-Math.pow((v-center-.18)/.22,2));
+    const energy=(1-Math.exp(-(main+memory)*accent*2.4))*strength;
+    g.addColorStop(v,`rgba(${rgb},${.025+.78*energy})`);
+   }
+   c.strokeStyle=g;c.lineWidth=lineWidth;c.beginPath();
+   for(let j=0;j<=80;j++){const v=-.1+j*1.2/80;
+    if(j===0)moveTo(xs[j],v*h);else lineTo(xs[j],v*h);
+   }c.stroke();
   }
  }
  c.restore();
 }
-module.exports={render,id:'prelude-bwv846',duration:24};
+module.exports={render,id:'prelude-bwv846-private-reconsideration',duration:24};
 
 return module.exports; })();
 works["nocturne-20"] = (() => { const module = {exports:{}};
@@ -570,11 +577,42 @@ function render(c,w,h,time){
 module.exports={render,id:'pathetique-2',duration:24};
 
 return module.exports; })();
+// Only BWV uses the bounded raster. One backing maximum across all instances.
+let bwvBacking=null,bwvContext=null,bwvOwner=null;
+function releaseBwv(owner){
+ if(owner!==bwvOwner)return;
+ if(bwvBacking){bwvBacking.width=0;bwvBacking.height=0;}
+ bwvBacking=null;bwvContext=null;bwvOwner=null;
+}
+function drawBwv(owner,work,c,w,h,time){
+ const W=c.canvas.width,H=c.canvas.height,capH=Math.min(H,Math.max(1,Math.round(h)));
+ if(capH===H){releaseBwv(bwvOwner);return false;}
+ if(bwvOwner!==owner){releaseBwv(bwvOwner);bwvOwner=owner;}
+ if(!bwvBacking){bwvBacking=document.createElement('canvas');bwvContext=bwvBacking.getContext('2d');}
+ if(!bwvContext){releaseBwv(owner);throw new Error('Visual backing unavailable');}
+ if(bwvBacking.width!==W)bwvBacking.width=W;
+ if(bwvBacking.height!==capH)bwvBacking.height=capH;
+ const unit=Math.min(w,h)/277,lw=w/unit,lh=h/unit,sx=W/lw,sy=capH/lh;
+ const proxy=new Proxy(bwvContext,{
+  get(ctx,key){if(key==='setTransform')return(a,b,d,e,x,y)=>ctx.setTransform(a*sx,b*sy,d*sx,e*sy,x*sx,y*sy);
+   const value=ctx[key];return typeof value==='function'?value.bind(ctx):value;},
+  set(ctx,key,value){ctx[key]=value;return true;}
+ });
+ bwvContext.setTransform(1,0,0,1,0,0);bwvContext.clearRect(0,0,W,capH);
+ work.render(proxy,lw,lh,Number.isFinite(time)?Math.max(0,time):0);
+ c.save();try{
+  c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowColor='transparent';
+  c.clearRect(0,0,W,H);c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+  c.drawImage(bwvBacking,0,0,W,H);
+ }finally{c.restore();}
+ return true;
+}
 function create(id){
  const work=works[id];if(!work)return null;
- let target=null,proxy=null,scale=1;
- return {light:false,init(){return null;},draw(c,w,h,time){
+ let target=null,proxy=null,scale=1;const owner={};
+ return {light:false,init(){return null;},dispose(){releaseBwv(owner);target=null;proxy=null;},draw(c,w,h,time){
   if(!(w>0&&h>0))return false;
+  if(id==='prelude-bwv846'&&drawBwv(owner,work,c,w,h,time))return true;
   // Keep the approved 277px logical short edge and line widths at every DPR.
   const unit=Math.min(w,h)/277, lw=w/unit, lh=h/unit;
   scale=(c.canvas.width/w)*unit;
@@ -587,5 +625,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-refinepair1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-bwv1'});
 })();

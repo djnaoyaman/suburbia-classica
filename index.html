@@ -611,6 +611,7 @@ a.ilink:hover{background-size:100% 2px}
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
 <script src="realism.js?v=20261023-all74"></script>
+<script src="visual-timing.js?v=20261026-timing1"></script>
 <script src="visual-art.js?v=20261026-rachave1"></script>
 <script src="impressive-catalog.js?v=20261026-voice1"></script>
 <script src="impressive-art.js?v=20261025-impressionists-v1"></script>
@@ -1399,6 +1400,7 @@ window.onYouTubeIframeAPIReady = function(){
         if (e.data === 0) { errCount = 0; if ($('#auto').checked) go(cur + 1); }
         if (e.data === 1) { errCount = 0; setStatus(''); }
       },
+      onPlaybackRateChange:()=>{ssResetVisualTiming();},
       onError:()=>{
         setStatus('この動画は再生できません（埋め込み制限など）。');
         errCount++;
@@ -1849,6 +1851,8 @@ function ssSet(i){
   ssClearFrame(true);
   SS.st=a?.init(SS.W,SS.H); SS.t0=performance.now(); SS.elapsed=0; SS.paused=!playing; SS.dirty=true;
   SS.mediaAt=null;SS.mediaTime=null;SS.mediaDuration=0;
+  SS.timing=SS.visual?window.ClassicaVisualTiming?.create({heavy:s.id==='goldberg-aria'||s.id==='schubert-impromptu-90-3'}):null;
+  SS.visualTime=null;
   const real=window.ClassicaRealism;
   const wantsReal=artMode==='realism'&&real&&real.has(s.id);
   window.ClassicaNatureGL?.activate?.(wantsReal?s.id:null);
@@ -1875,9 +1879,26 @@ function ssImpressiveTime(now,fallback){
   if(SS.mediaTime===null)return fallback;
   return SS.mediaTime+(playing?Math.min(.3,Math.max(0,now-SS.mediaAt)/1000):0);
 }
+function ssResetVisualTiming(){
+  if(!SS.visual)return;
+  SS.timing?.reset();SS.visualTime=null;SS.dirty=true;SS.lastFrame=0;
+}
+function ssVisualTime(now){
+  const fallback=(SS.elapsed+(SS.paused?0:now-SS.t0))/1000;
+  if(!SS.timing)return ssImpressiveTime(now,fallback);
+  return SS.timing.time(now,fallback,playing,()=>{
+    if(!ytReady||typeof player?.getCurrentTime!=='function')return null;
+    return {time:player.getCurrentTime(),rate:player.getPlaybackRate?.()||1};
+  });
+}
 function ssLoop(now){
   if(!SS.on) return;
-  if((SS.dirty||!SS.paused)&&(!(SS.real||SS.visual)||!SS.lastFrame||now-SS.lastFrame>=(SS.visual?((SONGS[ssArtIndex()].id==='goldberg-aria'||SONGS[ssArtIndex()].id==='schubert-impromptu-90-3')?50:40):32))){
+  if(SS.visual&&document.hidden)return;
+  const visualTime=SS.visual&&SS.timing&&!REDUCED?ssVisualTime(now):null;
+  if(SS.visual&&SS.timing&&SS.paused&&visualTime!==SS.visualTime)SS.dirty=true;
+  const visualDue=SS.visual&&SS.timing?SS.timing.due(now,SS.dirty):null;
+  if((SS.dirty||!SS.paused)&&(visualDue!==null?visualDue:(!(SS.real||SS.visual)||!SS.lastFrame||now-SS.lastFrame>=(SS.visual?((SONGS[ssArtIndex()].id==='goldberg-aria'||SONGS[ssArtIndex()].id==='schubert-impromptu-90-3')?50:40):32)))){
+    const drawStarted=SS.visual?performance.now():0;
     SS.lastFrame=now;SS.dirty=false;
     const t=REDUCED?12:(SS.elapsed+(SS.paused?0:now-SS.t0))/1000;
     if(SS.real){
@@ -1890,12 +1911,14 @@ function ssLoop(now){
       }else ssArtNote(ssArtIndex());
     }
     if(!SS.real){
-      const time=(SS.impressive||SS.visual)&&!REDUCED?ssImpressiveTime(now,t):t;
+      const time=SS.visual&&SS.timing&&!REDUCED?visualTime:(SS.impressive||SS.visual)&&!REDUCED?ssImpressiveTime(now,t):t;
+      if(SS.visual)SS.visualTime=time;
       const progress=SS.impressive&&SS.mediaDuration>0?time/SS.mediaDuration:undefined;
       const ready=SS.art?.draw(cx,SS.W,SS.H,time,SS.st,{progress});
       if(!ready){cx.fillStyle='#242321';cx.fillRect(0,0,SS.W,SS.H);}
-      if(artMode==='impressive'||artMode==='visual')ssArtNote(ssArtIndex());
+      if(artMode==='impressive')ssArtNote(ssArtIndex());
     }
+    if(SS.visual)SS.timing?.record(performance.now()-drawStarted);
   }
   if(!REDUCED) SS.raf=requestAnimationFrame(ssLoop);
 }
@@ -1907,9 +1930,11 @@ function ssSyncPlayback(){
 function ssSetMotionPlaying(active){
   const now=performance.now();
   SS.mediaAt=null;
+  if(SS.timing)ssResetVisualTiming();
   if(active&&SS.paused){SS.t0=now;SS.paused=false;}
   else if(!active&&!SS.paused){SS.elapsed+=now-SS.t0;SS.paused=true;}
   ssSyncPlayback();
+  if(SS.on&&SS.visual&&REDUCED)ssLoop(now);
 }
 function ssStep(delta){
   const from=cur>=0?cur:Math.max(0,currentViewIdx());
@@ -2048,6 +2073,12 @@ let lx=-1,ly=-1;
 ['mousemove','mousedown','touchstart','wheel'].forEach(ev=>addEventListener(ev,()=>{SS.idle=0;},{passive:true}));
 addEventListener('keydown',e=>{SS.idle=0;if(SS.on&&e.key==='Escape')ssHide();else if(SS.on&&e.key==='Tab')ssTrapFocus(e);});
 document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement && SS.on && SS.manual) ssHide(); });
+document.addEventListener('visibilitychange',()=>{
+  if(!SS.on||(!SS.visual&&!SS.visualSuspended))return;
+  cancelAnimationFrame(SS.raf);ssResetVisualTiming();
+  SS.visualSuspended=!!document.hidden;
+  if(!document.hidden){if(REDUCED)ssLoop(performance.now());else SS.raf=requestAnimationFrame(ssLoop);}
+});
 addEventListener('resize',()=>{ if(SS.on){ssEl.classList.toggle('touch-ui',ssTouchMode());ssTouchWake();if(!ssTouchMode()){clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');} ssResize(); ssSet(ssArtIndex());SS.lastFrame=0;if(REDUCED)ssLoop(performance.now()); } });
 $('#bShow').onclick=()=>{ lx=-1; ssShow(true); };
 setInterval(()=>{ if(!SS.on && $('#saver').checked && started && playing){ if(++SS.idle>=20){ lx=-1; ssShow(false); } } else if(!playing) SS.idle=0; },1000);

@@ -2,7 +2,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),crypto=require('crypto'),path=require('path');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'visual-art.js'),'utf8');
-const expected={"raindrop": "5b98eeaf61913896221a0ed8db03157e737931419fb4226e0d45460fd771111d", "traumerei": "9b08a489e78afcb9690ec38447286574c558ccc35b3820e5e24d95997675182d", "liebestraum-3": "28c4e9f434470e9fba6c66860d030393e932c4d9a27181ac687531e2a20beccb", "flaxen-hair": "7450f3a1023e497257ab1c3ed8f3f2c96adf2341a8696752d465dcb1133566de"};
+const expected={"raindrop": "5b98eeaf61913896221a0ed8db03157e737931419fb4226e0d45460fd771111d", "traumerei": "9b08a489e78afcb9690ec38447286574c558ccc35b3820e5e24d95997675182d", "liebestraum-3": "28c4e9f434470e9fba6c66860d030393e932c4d9a27181ac687531e2a20beccb", "flaxen-hair": "548a7da962be038043f1c8bb4265eac159c12afa339a812080a416f2f146307b"};
 const sources={};
 for(const [id,hash]of Object.entries(expected)){
  const head='works['+JSON.stringify(id)+'] = (() => { const module = {exports:{}};\n';

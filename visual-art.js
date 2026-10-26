@@ -1872,6 +1872,18 @@ c.restore();}
 module.exports={render,id:'beethoven-9',duration:144};
 
 return module.exports; })();
+
+works["toccata-fugue-dm"] = (() => { const module = {exports:{}};
+'use strict';const TAU=2*Math.PI;
+// Editorial96s shear transport; no recording sync. Independent from Realism lightning.
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#252039';c.fillRect(0,0,w,h);
+function at(u,v){const V=v+.10*Math.sin(v*5+p),Vv=1+.5*Math.cos(v*5+p),U=u+.19*Math.sin(u*4-p)+.14*Math.sin(V*5+p),Uu=1+.76*Math.cos(u*4-p),Uv=.7*Math.cos(V*5+p)*Vv,Y=V+.08*Math.sin(U*6-p),Yu=.48*Math.cos(U*6-p)*Uu,Yv=Vv+.48*Math.cos(U*6-p)*Uv,X=U+.06*Math.sin(Y*5+p),Xu=Uu+.3*Math.cos(Y*5+p)*Yu,Xv=Uv+.3*Math.cos(Y*5+p)*Yv,spacing=Math.abs(Xu*Yv-Xv*Yu)/Math.max(.000001,Math.hypot(Xv,Yv)),light=.14+.86*Math.exp(-.5*(spacing/.75)**2);return{x:X*w,y:Y*h,dx:Xv*w,dy:Yv*h,light};}
+for(let i=0;i<400;i++){const u=-.7+2.4*i/399,ns=[];for(let j=0;j<=12;j++)ns.push(at(u,-.7+2.4*j/12));const A=ns[0],B=ns[12],gx=B.x-A.x,gy=B.y-A.y,den=gx*gx+gy*gy,stops=ns.map((a,j)=>({v:j===0?0:j===12?1:Math.max(.001,Math.min(.999,((a.x-A.x)*gx+(a.y-A.y)*gy)/den)),l:a.light})).sort((a,b)=>a.v-b.v),g=c.createLinearGradient(A.x,A.y,B.x,B.y);let mean=0;for(const z of stops){const l=z.l;mean+=l;g.addColorStop(z.v,`rgba(${Math.round(140+109*l)},${Math.round(131+113*l)},${Math.round(192+61*l)},${.17+.77*l})`);}c.strokeStyle=g;c.lineWidth=s*(.45+1.35*mean/13);c.beginPath();c.moveTo(A.x,A.y);for(let j=0;j<12;j++){const a=ns[j],b=ns[j+1],d=.2/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();}
+c.restore();}
+module.exports={render,id:'toccata-fugue-dm',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1920,5 +1932,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-beethoven91'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-toccata1'});
 })();

@@ -2,7 +2,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),crypto=require('crypto'),path=require('path');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'visual-art.js'),'utf8');
-const expected={"arabesque-1": "1d623fd7b4e3a5a5649998c7b22bdcb49a476ee3d9ffbda60be12370e923faf8", "prelude-bwv846": "f3eb320017804d3efb1f91de32635a2b5690ff1628a5fa5498aab468aa014eca", "nocturne-20": "0c444346acad5aba003edfc3ff6eb6bafe86d1d6b3c8d3cb3ab3f63582d276c1", "pathetique-2": "07c97edc7bee8100bbfb21f5d134fd3a3b5e86b94c569c14e0dceca9f5c3a6f4"};
+const expected={"arabesque-1": "1d623fd7b4e3a5a5649998c7b22bdcb49a476ee3d9ffbda60be12370e923faf8", "prelude-bwv846": "f3eb320017804d3efb1f91de32635a2b5690ff1628a5fa5498aab468aa014eca", "nocturne-20": "a252ec084dbfa1bb65d47edce014f618730c0b5bc2c6727bf858dcb2fb0e6979", "pathetique-2": "07c97edc7bee8100bbfb21f5d134fd3a3b5e86b94c569c14e0dceca9f5c3a6f4"};
 const sources={};
 for(const [id,hash]of Object.entries(expected)){
  const head='works['+JSON.stringify(id)+'] = (() => { const module = {exports:{}};\n';

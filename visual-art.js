@@ -178,26 +178,28 @@ module.exports={render,id:'fur-elise-private-reconsideration',duration:24};
 return module.exports; })();
 works["tristesse"] = (() => { const module = {exports:{}};
 'use strict';
-// Three independent light planes: melody, inner voice and accompaniment as an
-// editorial spatial association, not measured music or composer intention.
+// Private continuous light study: independent voice tension/reunion, not audio analysis.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
- const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24;
+ const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#2a253e');bg.addColorStop(.55,'#3e2a35');bg.addColorStop(1,'#202d3d');c.fillStyle=bg;c.fillRect(0,0,w,h);
- const planes=[
-  {angle:-.65+.25*Math.sin(p),x:.34+.12*Math.sin(p),y:.35+.14*Math.cos(p),width:.47,color:'249,214,179',alpha:.83},
-  {angle:1.07+.23*Math.sin(p+.8),x:.62+.14*Math.cos(p),y:.56+.18*Math.sin(p+.6),width:.32,color:'184,170,224',alpha:.70},
-  {angle:.10+.27*Math.sin(p+2.4),x:.46+.20*Math.sin(p+1.7),y:.70+.18*Math.cos(p+1.2),width:.36,color:'243,232,215',alpha:.70}
- ];
- for(let k=0;k<3;k++){
-  const q=planes[k],co=Math.cos(q.angle),si=Math.sin(q.angle);
-  const point=(u,v)=>[(q.x+co*u-si*v)*w,(q.y+si*u+co*v)*h];
-  const a=point(-1.4,-q.width/2),b=point(1.4,-q.width/2),d=point(1.4,q.width/2),e=point(-1.4,q.width/2);
-  const lo=point(0,-q.width/2),hi=point(0,q.width/2),g=c.createLinearGradient(lo[0],lo[1],hi[0],hi[1]);
-  const gleam=.33+.24*Math.sin(p+k*1.8);
-  g.addColorStop(0,`rgba(${q.color},.07)`);g.addColorStop(gleam,`rgba(${q.color},${q.alpha})`);g.addColorStop(1,`rgba(${q.color},.12)`);
-  c.fillStyle=g;c.beginPath();c.moveTo(...a);c.lineTo(...b);c.lineTo(...d);c.lineTo(...e);c.closePath();c.fill();
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#24213E');bg.addColorStop(.55,'#322537');bg.addColorStop(1,'#182C3D');c.fillStyle=bg;c.fillRect(0,0,w,h);c.lineCap='round';c.lineJoin='round';
+ const tension=.5-.5*Math.cos(p),count=224;
+ for(let i=0;i<count;i++){
+  const v=-.32+1.64*i/(count-1),lit=.5+.5*Math.cos(v*6.3-p),center=.45+.27*Math.sin(p+v*2.2);
+  const g=c.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,`rgba(155,139,205,${.38+.18*lit})`);g.addColorStop(Math.max(.03,center-.22),`rgba(228,178,156,${.55+.21*lit})`);g.addColorStop(center,`rgba(255,239,213,${.79+.19*lit})`);g.addColorStop(Math.min(.97,center+.21),`rgba(210,181,206,${.6+.18*lit})`);g.addColorStop(1,'rgba(126,160,203,.48)');
+  c.strokeStyle=g;c.lineWidth=.47+.32*lit;c.beginPath();
+  for(let j=0;j<=120;j++){
+   const u=-.12+1.24*j/120,arch=Math.sin(Math.PI*u);
+   const bend=.22*Math.sin(v*4.2+.6)*arch;
+   const shear=.18*tension*Math.sin(v*5.1-p)*arch*Math.tanh((u-.52)*7);
+   const inner=.032*Math.sin(TAU*u*1.8+v*7+p)*arch;
+   const y=v+bend+shear+inner;
+   const x=u+.06*Math.sin(v*4.6-p)*arch;
+   j?c.lineTo(x*w,y*h):c.moveTo(x*w,y*h);
+  }
+  c.stroke();
  }
  c.restore();
 }
@@ -504,39 +506,31 @@ module.exports={render,id:'prelude-bwv846',duration:24};
 return module.exports; })();
 works["nocturne-20"] = (() => { const module = {exports:{}};
 'use strict';
-// Long recollective phrases and reconnected ornamental intervals; editorial, not score sync.
+// Fine phrases fade into and reconnect across depth; no hard strip grid or score sync.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
  const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- c.fillStyle='#071F32';c.fillRect(0,0,w,h);
- const seams=[.22+.055*Math.sin(p),.55+.07*Math.cos(p+.6),.81+.04*Math.sin(p-1)];
- for(let row=-1;row<16;row++){
-  const y=(row/14+.018*Math.sin(p+row*.58))*h;
-  const peak=.5+.5*Math.cos(p-row*.52),thick=(.009+.025*peak)*h;
-  let edges=[-.1,...seams,1.1];
-  for(let s=0;s<4;s++){
-   const reconnect=.5+.5*Math.cos(p+row*.43+s),gap=.012+.034*(1-reconnect);
-   const x1=(edges[s]+(s?gap:0))*w,x2=(edges[s+1]-(s<3?gap:0))*w;
-   const g=c.createLinearGradient(x1,y,x2,y+thick);
-   g.addColorStop(0,`rgba(116,157,183,${.18+.25*peak})`);
-   g.addColorStop(.5,`rgba(206,199,232,${.24+.58*peak})`);
-   g.addColorStop(1,`rgba(239,201,144,${(.12+.6*peak)*reconnect})`);
-   c.fillStyle=g;c.fillRect(x1,y,x2-x1,thick);
-   for(let k=0;k<4;k++){
-    c.fillStyle=`rgba(234,236,246,${(.1+.38*peak)*(1-k/5)})`;
-    c.fillRect(x1,y+(k+.5)*thick/4,x2-x1,.5);
-   }
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#101E37');bg.addColorStop(.6,'#162C43');bg.addColorStop(1,'#242239');c.fillStyle=bg;c.fillRect(0,0,w,h);c.lineCap='round';c.lineJoin='round';
+ for(let i=0;i<248;i++){
+  const v=-.18+1.36*i/247,crest=.5+.5*Math.sin(v*5.4-p),gap=.42+.24*Math.sin(v*4.7+p),open=.065+.04*(.5+.5*Math.cos(p-v*3));
+  const g=c.createLinearGradient(-.1*w,0,1.1*w,0);
+  g.addColorStop(0,`rgba(153,175,222,${.42+.18*crest})`);
+  g.addColorStop(Math.max(.01,gap-open-.08),`rgba(224,223,242,${.72+.2*crest})`);
+  g.addColorStop(gap,'rgba(138,158,200,.035)');
+  g.addColorStop(Math.min(.99,gap+open+.08),`rgba(242,214,165,${.65+.25*(1-crest)})`);
+  g.addColorStop(1,`rgba(160,172,219,${.43+.2*crest})`);
+  c.strokeStyle=g;c.lineWidth=.48+.27*crest;c.beginPath();
+  for(let j=0;j<=112;j++){
+   const u=-.13+j*1.26/112;
+   const long=.074*Math.sin(u*3.8+v*3.4+p);
+   const response=.052*Math.cos(v*6.2-p)*Math.tanh((u-gap)*6);
+   const fine=.012*Math.sin(u*12+v*9-p);
+   const density=.085*Math.sin(v*6.3-p+.4*Math.sin(u*3+p));
+   const y=v+long+response+fine+density;
+   j?c.lineTo(u*w,y*h):c.moveTo(u*w,y*h);
   }
- }
- // Upright ornamental ladders link adjacent phrases, rather than background grid.
- for(let s=0;s<3;s++)for(let j=0;j<20;j++){
-  const y=(j/19)*h,energy=Math.pow(.5+.5*Math.cos(p-j*.3-s*1.7),4);
-  const x=seams[s]*w,len=(.012+.045*energy)*w;
-  c.fillStyle=`rgba(227,187,125,${.08+.67*energy})`;
-  c.fillRect(x-len*.5,y,len,.6+energy*.6);
-  c.fillStyle=`rgba(178,203,226,${.05+.22*energy})`;
-  c.fillRect(x-.35,y-.012*h,.7,.024*h);
+  c.stroke();
  }
  c.restore();
 }
@@ -593,5 +587,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-elise1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-refinepair1'});
 })();

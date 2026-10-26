@@ -1884,6 +1884,17 @@ c.restore();}
 module.exports={render,id:'toccata-fugue-dm',duration:96};
 
 return module.exports; })();
+
+works["carmen-prelude"] = (() => { const module = {exports:{}};
+'use strict';const T=2*Math.PI;
+// Editorial96s opening and tightening, not recording synchronization.
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,ax=.18+.02*Math.sin(p),ay=.20+.02*Math.cos(p),kv=T*.8,ku=T*.9;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#382032';c.fillRect(0,0,w,h);
+function at(u,q){const a=kv*q+p,b=ku*u-p,x=u+ax*Math.sin(a),y=q+ay*Math.sin(b),yu=ay*ku*Math.cos(b),xq=ax*kv*Math.cos(a),spacing=Math.abs(1-xq*yu)/Math.hypot(1,yu),light=.12+.88*Math.exp(-.5*(spacing/.72)**2);return{x:x*w,y:y*h,dx:w,dy:yu*h,light};}
+for(let i=0;i<440;i++){const q=-.65+2.3*i/439,ns=[];for(let j=0;j<=12;j++)ns.push(at(-.65+2.3*j/12,q));const A=ns[0],B=ns[12],g=c.createLinearGradient(A.x,0,B.x,0);let mean=0;for(let j=0;j<=12;j++){const l=ns[j].light;mean+=l;g.addColorStop(j/12,`rgba(${Math.round(165+89*l)},${Math.round(102+138*l)},${Math.round(137+61*l)},${.18+.77*l})`);}c.strokeStyle=g;c.lineWidth=s*(.45+1.35*mean/13);c.beginPath();c.moveTo(A.x,A.y);for(let j=0;j<12;j++){const a=ns[j],b=ns[j+1],d=2.3/12/3;c.bezierCurveTo(a.x+a.dx*d,a.y+a.dy*d,b.x-b.dx*d,b.y-b.dy*d,b.x,b.y);}c.stroke();}
+c.restore();}module.exports={render,id:'carmen-prelude',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1932,5 +1943,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-toccata1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-carmen1'});
 })();

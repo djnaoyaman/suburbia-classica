@@ -1,0 +1,9 @@
+# Pie Jesu: user-specified recording replacement
+
+Replaces only the selected faure-pie-jesu audio with ia5Aic7aN2Q, as explicitly requested. Supplied distribution credits identify Michel Corboz conductor, Alain Clément vocals, Philippe Corboz organ and Berner Symphonie-Orchester; album Fauré: Requiem; Warner Classics/Erato and ℗1972 Warner Music UK Limited.
+
+Independent primary evidence: https://wmg.jp/corboz/discography/25509 names the same performer set, Alain Clément as boy soprano, and explicitly dates the Fauré recording13 May1972 at Casino Bern. https://catalogue.bnf.fr/ark:/12148/cb378753006 describes original Erato STU70735 with the same performers and child voice. Thus recording date is not inferred from phonogram copyright. The public prose explicitly attributes date/venue to the matching official recording documentation and notes the supplied streaming Counter-Tenor Vocals discrepancy. Michel conducts; Philippe plays organ.2021 SACD remaster/release details are not attributed to the selected YouTube encoding, and audio identity is not claimed independently authenticated.
+
+Old selected Battle/Giulini/DG1986 narrative is removed from current-recording sections. Work history, alternative-recording recommendations and their general bibliography remain unchanged. Index REC_INFO, static song HTML, Markdown and llms-full are synchronized; all other73 selected recordings including the preceding Beethoven5 fix, all47Visual/PR76 timing and Impressive/Realism are unchanged. Static modification dates already26October remain unchanged. No new Visual release is bundled.
+
+Validation uses fresh-parent Git blobs, exact-span replacement/reverse reconstruction, focused74-recording assertions and final six-file manifest. Independent final review, Pages/live hashes and actual public UI remain separate gates. Playback availability in the user's environment is not inferred from the cloud environment.

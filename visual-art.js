@@ -636,6 +636,45 @@ function render(c,w,h,time){
 module.exports={render,id:'reverie',duration:24};
 
 return module.exports; })();
+
+works["k331-1"] = (() => { const module = {exports:{}};
+'use strict';
+// 96-second cycle; only editorial time is slowed fourfold from frozen granular source.
+// Siciliana-like compound-duple sway, six authored variations; no audio sync.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+const t=((((Number.isFinite(time)?time:0)/4)%24)+24)%24,p=t/24*TAU,z=t/4,k=Math.floor(z),f=z-k,e=f*f*(3-2*f);
+const states=[[.23,.72,.16],[.31,.58,.26],[.27,.82,-.12],[.20,.67,-.25],[.35,.9,.08],[.25,.62,.22]],a=states[k],b=states[(k+1)%6],q=a.map((v,i)=>v+(b[i]-v)*e);
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#261e34';c.fillRect(0,0,w,h);
+const centers=[[
+ .20+.065*Math.sin(p),.20+.04*Math.sin(p+.5)],
+ [.76+.055*Math.sin(p+2.1),.45+.06*Math.sin(p+2.6)],
+ [.38+.10*Math.sin(p+4.2),.81+.035*Math.sin(p+4.7)]];
+const unit=Math.min(w,h)/277;
+const bins=Array.from({length:24},()=>[]);
+for(let iy=0;iy<128;iy++)for(let ix=0;ix<160;ix++){
+const seed=((ix*73+iy*151)%211)/211,u=-.14+1.28*(ix+seed*.63)/159,v=-.14+1.28*(iy+((ix*37+iy*19)%131)/131*.63)/127;
+let x=u,y=v,density=0,turn=0;
+for(let j=0;j<3;j++){
+const dx=u-centers[j][0],dy=v-centers[j][1],rx=q[0]*(1+j*.08),ry=rx*q[1],g=Math.exp(-.5*(dx*dx/(rx*rx)+dy*dy/(ry*ry)));
+const sense=j===1?-1:1;
+x+=(-.56*dx-q[2]*1.7*sense*dy)*g;y+=(-.56*dy+q[2]*1.7*sense*dx)*g;
+density+=g;turn+=sense*g;
+}
+const depth=(ix+iy*2)%3,light=Math.min(.999,.04+.95*density);
+const modulation=.78+.22*Math.sin(u*16-v*11+Math.sin(p)*.5+depth*.8),tone=Math.min(7,Math.floor(light*modulation*8));
+const size=unit*(.45+1.4*light)*(depth===0?1.1:depth===1?.9:.78);
+bins[depth*8+tone].push(x*w,y*h,size,turn);
+}
+for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+const colors=depth===0?[250,232,197]:depth===1?[160,184,221]:[220,141,135],alpha=.16+tone*.105;
+c.fillStyle=`rgba(${colors.join(',')},${alpha})`;c.beginPath();const bin=bins[depth*8+tone];
+for(let j=0;j<bin.length;j+=4){const x=bin[j],y=bin[j+1],s=bin[j+2];c.rect(x-s*.5,y-s*.42,s,s*.84);}c.fill();
+}
+c.restore();}
+module.exports={render,id:'k331-1',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -684,5 +723,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-reverie1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-k331-1'});
 })();

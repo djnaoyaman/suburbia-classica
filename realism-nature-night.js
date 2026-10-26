@@ -20,6 +20,19 @@ vec3 cloud(vec2 q){
  sortPair(a,b);sortPair(c,d);sortPair(a,c);sortPair(b,d);sortPair(b,c);
  return max(b,min(c,e));
 }
+// A few brief meteors, not a global exposure change or a perpetual shower.
+// Source-space coordinates keep the streaks above the highest ridge in every crop.
+float meteor(vec2 q,float clock,float start,vec2 origin,vec2 direction,float duration){
+ float age=(clock-start)/duration;
+ if(age<=0.||age>=1.)return 0.;
+ vec2 dir=normalize(direction),head=origin+dir*(age*.19);
+ vec2 delta=q-head;float along=dot(delta,dir),across=abs(delta.x*dir.y-delta.y*dir.x);
+ float width=.00055+.35*.94/max(resolution.x,resolution.y);
+ float tail=exp(-pow(across/width,2.))*smoothstep(-.085,-.005,along)*(1.-smoothstep(-.002,.002,along));
+ float core=exp(-dot(delta,delta)/(.0000024));
+ float envelope=smoothstep(0.,.13,age)*(1.-smoothstep(.62,1.,age));
+ return (tail*.55+core*.32)*envelope*smoothstep(.57,.61,q.y);
+}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
  vec2 q=vec2(.5,.53)+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
@@ -30,6 +43,12 @@ void main(){
  vec3 drift=cloud(q+flow*(a-.5))*w+cloud(q+flow*(b-.5))*(1.-w);
  // Fixed high-frequency stars and terrain remain in base; only soft cloud density evolves.
  vec3 c=base+(drift-soft)*sky*.65;
+ // Deterministic 48 s schedule: long quiet intervals; no meteor at static t=12.
+ float clock=mod(time,48.);
+ float streak=meteor(q,clock,7.4,vec2(.32,.72),vec2(.84,-.54),.92)
+             +meteor(q,clock,22.6,vec2(.67,.71),vec2(-.91,-.41),.78)
+             +meteor(q,clock,40.4,vec2(.42,.72),vec2(.89,-.46),1.02);
+ c+=vec3(.70,.82,1.)*streak;
  gl_FragColor=vec4(max(c,vec3(0.)),1.);
 }
 `;

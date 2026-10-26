@@ -1,0 +1,9 @@
+# Brindisi — coupled illuminated shoulders
+
+Adds a 96-second editorial Canvas Visual (69/74), not score or recording synchronization. The existing unequal longitudinal shoulders are illuminated using actual transverse spacing and tangent-linked per-curve light/width, rather than fixed highlight positions detached from moving geometry. A single bounded unequal q-phase sway correction replaces full-cycle translation, keeping the gathered light in the visible field. Geometry support, material and curve count are otherwise preserved. Existing music facts and selected recording remain unchanged.
+
+Writer curation accepts the simple opening-to-asymmetric-return organization at the established quality level. The author retains a borderline aesthetic reservation about a strongly outlined ivory lens against regular distant teal rows; independent review considers it eligible with the same caveats. This is not unanimous unreserved aesthetic approval. No forced layers or further art iteration were added. Shared Hermite derivatives provide C1 joins, thirteen gradient stops are ordered, the spacing response is finite, full Canvas state is reset and frames are opaque/deterministic.
+
+Five-ratio loop/seek/opacity/dirty-state/restoration checks passed. Four selected 40ms samples cover phone36, quieter60, wrap96 and wide12: maximum MAD2.092862, local channel delta148 and maximum any-RGB-channel>32 area.386282 percent. Visible contacts preserve connected support; local fold interference remains. These are selected observations, not full-cycle/no-shimmer or device FPS certification. No benchmark was run.
+
+Prior68 Visual closures, PR98 axis scaling, PR76 timing, requested audio IDs and PR108 lightning are unchanged. Carmen/Toreador Realism replacement requests are separate work, not included. index.html changes only the Visual cache query.

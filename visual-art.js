@@ -1895,6 +1895,16 @@ for(let i=0;i<440;i++){const q=-.65+2.3*i/439,ns=[];for(let j=0;j<=12;j++)ns.pus
 c.restore();}module.exports={render,id:'carmen-prelude',duration:96};
 
 return module.exports; })();
+
+works["brindisi"] = (() => { const module = {exports:{}};
+'use strict';const TAU=2*Math.PI;
+// Editorial invitation/response, not recording timing.
+function render(c,w,h,time){const t=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,p=t-.2*Math.sin(t),s=Math.min(w,h)/277,c1=.24+.12*Math.sin(p),c2=.77+.10*Math.sin(p-.8),r1=.33+.04*Math.cos(p),r2=.37+.04*Math.cos(p-.8);
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#192b32';c.fillRect(0,0,w,h);
+for(let i=0;i<420;i++){const q=-.65+2.3*i/419,a=5.6*q-.55*Math.sin(p),b=5*q-.55*Math.sin(p-.8)-1.05,f1=.27*Math.sin(a),f2=.25*Math.sin(b);function at(u){const z1=(u-c1)/r1,z2=(u-c2)/r2,g1=Math.exp(-.5*z1*z1),g2=Math.exp(-.5*z2*z2),y=q-.18*(u-.5)+f1*g1+f2*g2,du=-.18-f1*g1*z1/r1-f2*g2*z2/r2,dq=1+.27*5.6*Math.cos(a)*g1+.25*5*Math.cos(b)*g2,spacing=Math.abs(dq)/Math.hypot(1,du),light=.14+.86*Math.exp(-.5*(spacing/.78)**2);return{y:y*h,dy:du*h,light};}const ns=[];for(let j=0;j<=12;j++)ns.push(at(-.35+1.7*j/12));const g=c.createLinearGradient(-.35*w,0,1.35*w,0);let mean=0;for(let j=0;j<=12;j++){const l=ns[j].light;mean+=l;g.addColorStop(j/12,`rgba(${Math.round(98+157*l)},${Math.round(154+81*l)},${Math.round(165+40*l)},${.18+.77*l})`);}c.strokeStyle=g;c.lineWidth=s*(.48+1.32*mean/13);c.beginPath();c.moveTo(-.35*w,ns[0].y);for(let j=0;j<12;j++){const u=-.35+1.7*j/12,v=-.35+1.7*(j+1)/12,d=1.7/12/3;c.bezierCurveTo((u+d)*w,ns[j].y+ns[j].dy*d,(v-d)*w,ns[j+1].y-ns[j+1].dy*d,v*w,ns[j+1].y);}c.stroke();}c.restore();}
+module.exports={render,id:'brindisi',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1943,5 +1953,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-carmen1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-brindisi1'});
 })();

@@ -1,0 +1,7 @@
+# Pomp and Circumstance No. 1 — an unmarked side drum
+
+Elgar took the march-series title from a speech in Shakespeare’s Othello that explicitly names military instruments, including the drum. A plain ceremonial side drum therefore has a direct title-source connection, unlike a horse isolated on a mountain. The work itself is an orchestral march, not a claim about a particular military-band performance. [Elgar work introduction](https://www.elgar.org/3pomp-a.htm), [Folger’s Othello, Act 3 scene 3](https://www.folger.edu/explore/shakespeares-works/othello/read/3/3/).
+
+This generated photographic still life is not the 1901 premiere, a coronation, an identified regiment or a replica of a particular museum object. No heraldry or imperial insignia appears. The drum’s membrane, wooden shell, hoops and rope tensioning follow recognisable side-drum construction; such instruments were carried on a sling. [Metropolitan Museum side-drum description](https://www.metmuseum.org/art/collection/search/504414).
+
+Only a small interior fold of the loose carrying strap responds to a gentle breeze. Its boundary, the drumhead, ropes, bench and camera remain fixed. There are no drumsticks or unattended beat-synchronized strikes. Portrait and wide crops retain the full drum and hanging strap end. The selected recording is unchanged; reduced motion holds a still frame and the existing fallback remains available.

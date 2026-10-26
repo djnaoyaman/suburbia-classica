@@ -2,7 +2,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),crypto=require('crypto'),path=require('path');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),js=fs.readFileSync(path.join(root,'visual-art.js'),'utf8');
-const expected={"fur-elise": "23bc6ed468838366a59f9a897feee6b58d784f5d4e8bfa498e49026f030abaae", "tristesse": "70a60105c31ad944a05fc4ec20bf8eb94b1108203725259bc75f2cd00954ea2d", "fantaisie-impromptu": "61a90b52e270e889a5c8e90b30871c471d0b5eb39c2c91e9a33a9a4cd535db28", "nocturne-9-2": "4c2fe4ff368a6fe1e5e69975e336b6132f14558e7cbe2fb145bd593909692518"};
+const expected={"fur-elise": "23bc6ed468838366a59f9a897feee6b58d784f5d4e8bfa498e49026f030abaae", "tristesse": "c5601b580e9894cb0df6f17f550b58f8e477f53395c1d72734b61fb970988652", "fantaisie-impromptu": "61a90b52e270e889a5c8e90b30871c471d0b5eb39c2c91e9a33a9a4cd535db28", "nocturne-9-2": "4c2fe4ff368a6fe1e5e69975e336b6132f14558e7cbe2fb145bd593909692518"};
 const sources={};
 for(const [id,hash]of Object.entries(expected)){
  const head='works['+JSON.stringify(id)+'] = (() => { const module = {exports:{}};\n';

@@ -1286,6 +1286,17 @@ function render(c,w,h,time){
 module.exports={id:'beethoven-5',duration:48,render};
 
 return module.exports; })();
+
+works["bolero"] = (() => { const module = {exports:{}};
+'use strict';
+// Continuous circulation with a slow change of orchestral breadth; editorial, not audio sync.
+const T=2*Math.PI;
+function render(c,w,h,time){const p=T*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277,margin=Math.max(4,2*s),cx=.46+.035*Math.sin(p),cy=.5+.025*Math.cos(p),bins=Array.from({length:24},()=>[]);c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#253239';c.fillRect(0,0,w,h);
+for(let j=0;j<180;j++){let a=.32+.035*Math.cos(p);for(let i=0;i<200;i++){let hash=Math.imul(i+1,1597334677)^Math.imul(j+1,3812015801);hash=Math.imul(hash^(hash>>>16),2246822519);let r=Math.sqrt((j+(hash>>>0)/4294967296)/180)*1.08,twist=.75*r+.25*Math.sin(p),t=T*(i+((i*31+j*47)%173)/240)/200,theta=t+twist+a*Math.sin(2*t-p),jac=1+2*a*Math.cos(2*t-p),x=(cx+.90*r*Math.cos(theta))*w,y=(cy+.90*r*Math.sin(theta))*h;if(x<-margin||x>w+margin||y<-margin||y>h+margin)continue;let light=Math.min(.999,.14+.68/(.38+jac)),d=(i+2*j)%3,z=s*(.48+1.45*light),tone=Math.floor(light*8);bins[d*8+tone].push(x,y,z);}}
+for(let d=0;d<3;d++)for(let k=0;k<8;k++){c.fillStyle=`rgba(${d===0?'247,196,139':d===1?'113,199,208':'214,133,123'},${.17+k*.105})`;c.beginPath();let b=bins[d*8+k];for(let i=0;i<b.length;i+=3)c.rect(b[i]-.5*b[i+2],b[i+1]-.36*b[i+2],b[i+2],b[i+2]*.72);c.fill();}c.restore();}
+module.exports={render,id:'bolero',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1334,5 +1345,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-beethoven51'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-bolero1'});
 })();

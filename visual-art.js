@@ -1508,6 +1508,23 @@ function render(c,w,h,time){
 module.exports={render,id:'liebesgruss',duration:96};
 
 return module.exports; })();
+
+works["nessun-dorma"] = (() => { const module = {exports:{}};
+'use strict';const TAU=Math.PI*2;
+function render(c,w,h,time){const t=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120,p=t-.35*Math.sin(t),s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;c.shadowColor='rgba(0,0,0,0)';c.lineCap='butt';c.lineJoin='miter';c.miterLimit=10;c.setLineDash([]);c.lineDashOffset=0;c.fillStyle='#101e2a';c.fillRect(0,0,w,h);
+for(let i=0;i<280;i++){const q=-.7+2.4*i/279,z=5.1*q-p,near=.5+.5*Math.sin(z+.6),open=.5+.5*Math.cos(p-.5);
+const x=[q+.08*Math.sin(3*q+p),q+.24*Math.sin(z)+.08*Math.sin(8*q+p),q+.29*Math.sin(4.4*q-p-1.1),q+.13*Math.sin(3.6*q+p+.7)];
+const y=[1.26,.72+.13*Math.sin(3.2*q+p),.28+.11*Math.cos(4.3*q-p),-.26];
+const dx=[.15*Math.cos(z),.22*Math.cos(4.2*q-p),-.21*Math.sin(5.2*q+p),-.13*Math.cos(z)];
+const dy=[-.43,-.43,-.43,-.43];
+const g=c.createLinearGradient(x[0]*w,y[0]*h,x[3]*w,y[3]*h),peak=.42+.17*Math.sin(z-.5),a=.38+.43*near;
+g.addColorStop(0,`rgba(50,112,137,${a*.36})`);g.addColorStop(.15,`rgba(72,145,161,${a*.73})`);g.addColorStop(peak,`rgba(255,233,187,${a})`);g.addColorStop(.85,`rgba(106,155,192,${a*.75})`);g.addColorStop(1,`rgba(69,103,147,${a*.34})`);
+c.strokeStyle=g;c.lineWidth=(.54+.35*near+.04*open)*s;c.beginPath();c.moveTo(x[0]*w,y[0]*h);for(let j=0;j<3;j++)c.bezierCurveTo((x[j]+dx[j]/3)*w,(y[j]+dy[j]/3)*h,(x[j+1]-dx[j+1]/3)*w,(y[j+1]-dy[j+1]/3)*h,x[j+1]*w,y[j+1]*h);c.stroke();}
+c.restore();}
+module.exports={render,id:'nessun-dorma',duration:120};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1556,5 +1573,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-liebes1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-nessun1'});
 })();

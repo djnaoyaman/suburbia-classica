@@ -1,0 +1,7 @@
+# Erlkönig — continuous diagonal transport
+
+Adds one existing-Canvas Visual (72/74). The earlier composed two-phase map is retained, with full continuous trajectories and local normal-spacing response replacing fragmented dark tone bins. 480 paths, sixteen shared-derivative Hermite intervals and seventeen ordered stops each, extended support, 96-second editorial loop (formerly48), not score/audio synchronization. Broad white-blue diagonal shoulders and copper response connect to fine supported curves. Strong white core, regular two-phase grid and line interference remain explicit reservations; not alias-free or guaranteed device smoothness.
+
+Source chain derivatives, C1 connections, finite bounded response, full state reset and frame-local opaque rendering reviewed. Five-ratio loop/seek/opacity/dirty-state/restoration PASS. Author and independent reviewer actually viewed phone/wide phases and selected40ms contacts at24/48/96phone and12wide; no sampled broad reset observed. Maximum MAD5.222637, local channel114, area where any RGB channel delta>32:3.18592 percent. This is limited sampling, not full-cycle/no-flash/FPS certification; no new benchmark.
+
+Existing DKc7wlfDQU8 recording and uncertain album/session attribution retained. Prior71 Visual closures, PR98 scaling, PR76 timing, all requested audio and Carmen-stage/Toreador-arena/Toccata-lightning corrections unchanged. Index changes only the Visual cache query.

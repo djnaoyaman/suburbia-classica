@@ -408,37 +408,33 @@ module.exports={render,id:'liebestraum-3',duration:24};
 return module.exports; })();
 works["flaxen-hair"] = (() => { const module = {exports:{}};
 'use strict';
-// Five open tonal regions: pentatonic simplicity as editorial spatial organization.
+// Private replacement study: continuous luminous density, not literal facets or audio analysis.
 const TAU=Math.PI*2;
 function render(c,w,h,time){
  const p=TAU*(((Number.isFinite(time)?time:0)%24+24)%24)/24;
  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
- c.fillStyle='#243B3C';c.fillRect(0,0,w,h);
- const a=.32+.055*Math.sin(p),b=.63+.04*Math.cos(p),y=.4+.045*Math.sin(p+.7),z=.72+.035*Math.cos(p-.4);
- const cells=[[[0,0],[a,0],[a+.08,y],[0,y+.2]],[[a,0],[1,0],[b,y-.03],[a+.08,y]],[[0,y+.2],[a+.08,y],[b,z],[0,1]],[[a+.08,y],[b,y-.03],[1,.34],[1,.85],[b,z]],[[0,1],[b,z],[1,.85],[1,1]]];
- const colors=[['#9B9878','#E8E0BD','#809A8C'],['#6E968D','#CBD9BD','#81977E'],['#7F9E90','#E7E5CA','#BDAC83'],['#C3BE91','#FAEBCD','#91AB98'],['#74958C','#D9DAC2','#C9B48C']];
- for(let k=0;k<5;k++){
-  const pts=cells[k],cx=pts.reduce((s,v)=>s+v[0],0)/pts.length,cy=pts.reduce((s,v)=>s+v[1],0)/pts.length;
-  // Broad interiors carry the light; shallow open seams retain negative space.
-  const g=c.createLinearGradient(w*(cx-.5+.13*Math.sin(p+k)),h*(cy-.4),w*(cx+.45),h*(cy+.5+.11*Math.cos(p-k)));
-  g.addColorStop(0,colors[k][0]);g.addColorStop(.48+.17*Math.sin(p-k*.8),colors[k][1]);g.addColorStop(1,colors[k][2]);c.fillStyle=g;
-  c.beginPath();pts.forEach((v,i)=>{const x=(cx+(v[0]-cx)*.985)*w,yy=(cy+(v[1]-cy)*.985)*h;i?c.lineTo(x,yy):c.moveTo(x,yy);});c.closePath();c.fill();
-  c.save();c.clip();
-  // Fine internal lamination bends toward each region's own edge, rather than a shared mesh.
-  const angle=[.24,1.06,-.48,.7,-.18][k],dx=Math.cos(angle),dy=Math.sin(angle);
-  for(let line=0;line<46;line++){
-   const u=-.35+1.7*line/45,lit=.5+.5*Math.cos(TAU*u-p-k*.8);
-   const gl=c.createLinearGradient(w*(cx-.45),h*(cy-.5),w*(cx+.45),h*(cy+.5));
-   gl.addColorStop(0,'rgba(255,247,216,0)');gl.addColorStop(.5,`rgba(255,252,233,${.12+.32*lit})`);gl.addColorStop(1,'rgba(50,88,79,.08)');c.strokeStyle=gl;c.lineWidth=.48+.2*lit;c.beginPath();
-   for(let j=0;j<=18;j++){
-    const q=-.8+1.6*j/18;
-    const xx=cx+q*dx-(u-.5)*dy+.025*Math.sin(q*2+p+k)*(u-.5);
-    const yy=cy+q*dy+(u-.5)*dx+.045*Math.cos(q*2-p+k)*(u-.5);
-    if(j===0)c.moveTo(xx*w,yy*h);else c.lineTo(xx*w,yy*h);
-   }
-   c.stroke();
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#092D31');bg.addColorStop(.6,'#173F3C');bg.addColorStop(1,'#182C35');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ c.lineCap='round';c.lineJoin='round';
+ const count=240;
+ for(let i=0;i<count;i++){
+  const v=-.3+1.6*i/(count-1),phase=v*TAU;
+  const crest=.5+.5*Math.cos(phase-p),center=.48+.27*Math.sin(p+v*2.3);
+  const g=c.createLinearGradient(0,h*v,w,h*v);
+  g.addColorStop(0,`rgba(91,179,156,${.4+.2*crest})`);
+  g.addColorStop(Math.max(.02,center-.2),`rgba(191,194,116,${.6+.2*crest})`);
+  g.addColorStop(center,`rgba(255,242,198,${.83+.15*crest})`);
+  g.addColorStop(Math.min(.98,center+.2),`rgba(214,190,106,${.65+.22*crest})`);
+  g.addColorStop(1,`rgba(107,185,167,${.43+.2*crest})`);
+  c.strokeStyle=g;c.lineWidth=.48+.32*crest;c.beginPath();
+  for(let j=0;j<=120;j++){
+   const u=-.12+j*1.24/120;
+   const hinge=.5+.17*Math.sin(p)+.12*Math.sin(v*4-p);
+   const turn=Math.tanh((u-hinge)*5.5);
+   const y=v+.24*turn*Math.sin(v*3.6+.4)+.055*Math.sin(TAU*u+p)*Math.cos(v*5.1-p)+.018*Math.sin(v*TAU*2.5+u*3+p);
+   const x=u+.045*Math.sin(v*4-p)*Math.sin(Math.PI*u);
+   j?c.lineTo(x*w,y*h):c.moveTo(x*w,y*h);
   }
-  c.restore();
+  c.stroke();
  }
  c.restore();
 }
@@ -599,5 +595,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261025-visual16'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-flaxen1'});
 })();

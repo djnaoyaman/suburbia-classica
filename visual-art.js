@@ -1417,6 +1417,24 @@ for(let i=0;i<240;i++){
 module.exports={render,id:'faure-apres-un-reve',duration:96};
 
 return module.exports; })();
+
+works["o-mio-babbino"] = (() => { const module = {exports:{}};
+'use strict';
+// A long appeal and quiet return, editorial rather than score/recording synchronized.
+const TAU=2*Math.PI;
+function render(c,w,h,time){const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';c.fillStyle='#092f32';c.fillRect(0,0,w,h);
+const vertex=.38+.10*Math.sin(p),breath=.84+.16*Math.sin(p);
+for(let i=0;i<260;i++){
+ const q=-.45+1.9*i/259,phase=q*5-p,tilt=.32*Math.sin(phase),curve=.90*breath*Math.cos(q*5+.45*Math.sin(p)),turn=.40*Math.sin(q*3.7+p),lit=.5+.5*Math.sin(phase+.65),center=.50+.25*Math.sin(phase+.3);
+ const y=u=>{const z=u-vertex;return q+tilt*z+curve*z*z+turn*z*z*z;},dy=u=>{const z=u-vertex;return tilt+2*curve*z+3*turn*z*z;};
+ const g=c.createLinearGradient(-.12*w,y(-.12)*h,1.12*w,y(1.12)*h);
+ g.addColorStop(0,`rgba(63,151,145,${.44+.16*lit})`);g.addColorStop(center-.21,`rgba(121,210,176,${.62+.19*lit})`);g.addColorStop(center,`rgba(255,239,195,${.82+.16*lit})`);g.addColorStop(center+.21,`rgba(223,185,133,${.62+.18*lit})`);g.addColorStop(1,`rgba(85,161,177,${.43+.17*lit})`);
+ c.strokeStyle=g;c.lineWidth=(.50+.32*lit)*s;c.beginPath();const u=-.12,v=1.12,d=(v-u)/3;c.moveTo(u*w,y(u)*h);c.bezierCurveTo((u+d)*w,(y(u)+d*dy(u))*h,(v-d)*w,(y(v)-d*dy(v))*h,v*w,y(v)*h);c.stroke();
+}c.restore();}
+module.exports={render,id:'o-mio-babbino',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1465,5 +1483,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-faure1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-omio1'});
 })();

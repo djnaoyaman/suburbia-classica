@@ -12,9 +12,12 @@ uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718;
 vec3 cloud(vec2 q,float age,float phase,float support){
  float depth=smoothstep(.34,.8,q.y);
- vec2 flow=vec2(.018+.016*depth,.008*sin(q.x*8.+q.y*7.+phase)+.009*depth);
- vec2 curl=vec2(sin(q.y*21.+phase),cos(q.x*17.-phase))*.003;
- vec2 p=q-support*(flow*(age-.5)+curl);
+ vec2 flow=vec2(.040+.030*depth,.012*sin(q.x*8.+q.y*7.+phase)+.015*depth);
+ vec2 curl=vec2(sin(q.y*21.+phase),cos(q.x*17.-phase))*.004;
+ // Fade transport in the overscan margin so edge texels never smear or wrap.
+ float edge=smoothstep(.03,.10,q.x)*(1.-smoothstep(.90,.97,q.x))
+           *smoothstep(.03,.10,q.y)*(1.-smoothstep(.90,.97,q.y));
+ vec2 p=q-support*edge*(flow*(age-.5)+curl);
  return texture2D(material,vec2(p.x,1.-p.y)).rgb;
 }
 void main(){
@@ -23,7 +26,7 @@ void main(){
  float support=smoothstep(.29,.39,q.y);
  vec3 base=texture2D(material,vec2(q.x,1.-q.y)).rgb;
  if(support==0.){gl_FragColor=vec4(base,1.);return;}
- float t=mod(time,48.)/48.,ph=TAU*t,a=fract(t*2.),b=fract(a+.5),w=.5-.5*cos(TAU*a);
+ float t=mod(time,48.)/48.,ph=TAU*t,a=fract(t*4.),b=fract(a+.5),w=.5-.5*cos(TAU*a);
  vec3 color=mix(cloud(q,b,ph,support),cloud(q,a,ph,support),w);
  gl_FragColor=vec4(color,1.);
 }

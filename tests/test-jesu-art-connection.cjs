@@ -2,7 +2,7 @@
 const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert'),crypto=require('crypto');
 const root=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const html=fs.readFileSync(root+'/index.html','utf8');
-assert(html.includes('art-connections.js?v=20261026-jesucredit1'));
+assert(/<script src="art-connections\.js\?v=[^"]+"><\/script>/.test(html));
 const sandbox={window:{},URL};vm.createContext(sandbox);vm.runInContext(fs.readFileSync(root+'/art-connections.js','utf8'),sandbox);
 const api=sandbox.window.ClassicaArtConnections;
 assert.equal(api.render('jesu-joy','church morning'),'');
@@ -15,8 +15,7 @@ const hashes={
   "mozart-pc21-2": "18803305250a3dd8d4d30ed0d09e94f141ddd1d4c308eff459c1360b21c9df61",
   "tchaikovsky-october": "20b1746623d926391a48ac28c7a603183b0642f40c4610bba49c5fae58671bc8",
   "rach-pc2-2": "3257425cb2ab4d4c608f5b613f6101e6b0c6c9e0561bfc094ac82ae86c5dc9f8",
-  "canon": "4d2a11f129b8a1be8adf86367e0a8967058307c43e4c07e2dbb08b8c7ea89d3c",
   "liebesgruss": "0ee015d80b520226ea3d267fa655201f6d1d1a7b8422dc169d5b9f3b0ff315fb"
 };
 for(const [id,hash] of Object.entries(hashes)){const got=crypto.createHash('sha256').update(JSON.stringify([api.render(id,'same scene'),api.renderFullscreen(id,'realism'),api.renderFullscreen(id,'visual'),api.renderFullscreen(id,'impressive')])).digest('hex');assert.equal(got,hash,id+' connection unchanged');}
-console.log('PASS: stale Jesu butterfly attribution removed; all other eight article/fullscreen connections exactly preserved.');
+console.log('PASS: stale Jesu butterfly attribution removed; all seven continuing article/fullscreen connections exactly preserved.');

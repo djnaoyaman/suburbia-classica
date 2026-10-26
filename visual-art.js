@@ -919,6 +919,64 @@ function render(c,w,h,time){
 module.exports={render,id:'brahms-waltz-15',duration:96};
 
 return module.exports; })();
+
+works["gnossienne-1"] = (() => { const module = {exports:{}};
+'use strict';
+// Asymmetric returning depth; editorial phrasing, no measured metre or audio input.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#24232d');bg.addColorStop(.55,'#342d30');bg.addColorStop(1,'#20222c');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<152;iy++)for(let ix=0;ix<176;ix++){
+  const u=-.18+1.36*(ix+((ix*73+iy*151)%211)/211*.91)/175,v=-.18+1.36*(iy+((ix*37+iy*19)%131)/131*.91)/151,depth=(ix+iy*2)%3;
+  const a=u+.42*v-(.48+.19*Math.sin(v*4.6+.8*Math.sin(p))),b=v-.48*u-(.46+.22*Math.cos(u*4.1-.9*Math.cos(p)));
+  const ga=Math.exp(-.5*a*a/.070),gb=Math.exp(-.5*b*b/.060);
+  const wa=.30+.09*Math.sin(p+.7),wb=.29+.10*Math.sin(p*2-1.1);
+  const x=u-wa*a*ga+.48*wb*b*gb+.037*Math.sin(v*5+p)*gb;
+  const y=v-.42*wa*a*ga-wb*b*gb+.034*Math.cos(u*6-p)*ga;
+  const compress=wa*ga+wb*gb,light=Math.min(.999,.095+1.55*compress),mod=.83+.17*Math.sin(u*9+v*12+depth*.7+.2*Math.sin(p));
+  const tone=Math.min(7,Math.floor(light*mod*8)),size=unit*(.5+1.75*light)*(depth===0?1.05:depth===1?.93:.8);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[237,230,217]:depth===1?[211,167,133]:[172,181,206];c.fillStyle=`rgba(${rgb.join(',')},${.17+tone*.107})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'gnossienne-1',duration:96};
+
+return module.exports; })();
+
+works["k310-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Two off-frame counterflow sources; editorial cantabile contrast, not audio or score synchronization.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#172a40');bg.addColorStop(.55,'#263143');bg.addColorStop(1,'#20283e');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<152;iy++)for(let ix=0;ix<176;ix++){
+  const u=-.18+1.36*(ix+((ix*73+iy*151)%211)/211*.91)/175,v=-.18+1.36*(iy+((ix*37+iy*19)%131)/131*.91)/151,depth=(ix+iy*2)%3;
+  const side=depth===1?1:0,cx=side?1.22:-.22,cy=side?.77:.23,dx=side?cx-u:u-cx,dy=v-cy,r=Math.sqrt(dx*dx+dy*dy),a=Math.atan2(dy,dx);
+  const target=side?-.46+.2*Math.cos(p-r*2.1):.44+.17*Math.sin(p+r*1.8);
+  const delta=a-target,g=Math.exp(-.5*delta*delta/.080),strength=depth===2?.24:.43;
+  const angle=a-strength*delta*g,rad=r+.032*Math.sin(a*4+(side?-p:p))*g;
+  const x=cx+(side?-1:1)*rad*Math.cos(angle),y=cy+rad*Math.sin(angle);
+  const light=Math.min(.999,.09+.85*g),mod=.82+.18*Math.sin(r*11-a*7+depth*.8+.3*Math.sin(p));
+  const tone=Math.min(7,Math.floor(light*mod*8)),size=unit*(.52+1.7*light)*(depth===0?1.03:depth===1?.96:.8);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[248,231,193]:depth===1?[164,197,232]:[220,176,142];c.fillStyle=`rgba(${rgb.join(',')},${.17+tone*.107})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'k310-2',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -967,5 +1025,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-brahms391'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-gk1'});
 })();

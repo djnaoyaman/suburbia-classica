@@ -750,6 +750,39 @@ function render(c,w,h,time){
 module.exports={render,id:'goldberg-aria',duration:24};
 
 return module.exports; })();
+
+works["waltz-64-2"] = (() => { const module = {exports:{}};
+'use strict';
+// Three-beat editorial turn, opposing cantabile and piu mosso fields, not audio analysis.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const t=(((Number.isFinite(time)?time:0)%96)+96)%96,p=TAU*t/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.fillStyle='#261e2d';c.fillRect(0,0,w,h);
+ const bins=Array.from({length:72},()=>[]);
+ for(let field=0;field<2;field++)for(let ring=0;ring<125;ring++)for(let j=0;j<144;j++){
+  const r=(ring+.2+((j*71+ring*19)%127)/127)*.0074,theta=TAU*(j+((ring*37+j*13)%109)/109)/144;
+  const direction=field===0?1:-1,a=theta+.28*Math.sin(3*theta-direction*p),turn=a+direction*p+.85*Math.sin(r*5-p);
+  const breath=1+.12*Math.cos(3*theta-direction*p*3);
+  const rx=r*breath,ry=r*(.72+.13*Math.sin(theta*2+p));
+  const x=(field===0?.12:.88)+rx*Math.cos(turn)*1.15;
+  const y=(field===0?.30:.72)+ry*Math.sin(turn);
+  if(x<-.01||x>1.01||y<-.01||y>1.01)continue;
+  // Light follows crowded turn sectors, retaining the deep opposing field.
+  const angularStretch=1+.84*Math.cos(3*theta-direction*p);
+  const light=Math.min(.999,Math.pow(.3/(.1+angularStretch),.65));
+  const tone=Math.min(8,Math.floor(light*9)),size=unit*(.45+1.45*light);
+  // Eliminate hard inner radial cutoff; smoothly reduce crowded inner density.
+  const inner=Math.min(1,r/.13),fade=inner*inner*(3-2*inner),opacity=Math.min(3,Math.floor(fade*4));
+  bins[field*36+opacity*9+tone].push(x*w,y*h,size*(.55+.45*fade));
+ }
+ for(let field=0;field<2;field++)for(let opacity=0;opacity<4;opacity++)for(let tone=0;tone<9;tone++){
+  c.globalAlpha=[.045,.3,.65,1][opacity];
+  c.fillStyle=field===0?`rgba(217,166,147,${.18+tone*.085})`:`rgba(177,167,215,${.14+tone*.08})`;c.beginPath();const b=bins[field*36+opacity*9+tone];for(let j=0;j<b.length;j+=3)c.rect(b[j],b[j+1],b[j+2],b[j+2]*.75);c.fill();
+ }c.restore();
+}
+module.exports={id:'waltz-64-2',duration:96,render};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -798,5 +831,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-goldberg-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-waltz64-1'});
 })();

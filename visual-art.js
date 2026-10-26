@@ -1465,6 +1465,23 @@ for(let i=0;i<N;i++){
 module.exports={render,id:'jesu-joy',duration:96};
 
 return module.exports; })();
+
+works["lascia-ch-io-pianga"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+function render(c,w,h,time){const t=TAU*((((Number.isFinite(time)?time:0)%120)+120)%120)/120,p=t-.32*Math.sin(t),s=Math.min(w,h)/277;
+c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineCap='round';c.lineJoin='round';c.fillStyle='#202436';c.fillRect(0,0,w,h);
+for(let i=0;i<316;i++){
+ const q=-.20+2.14*i/315,phase=4.8*q-p,cx=.44+.17*Math.sin(3.7*q-p),cy=1.25+.13*Math.sin(6.7*q+p),rx=1.02*q+.14*Math.sin(6*q-p),ry=.91*q+.17*Math.cos(7.3*q+.5*Math.sin(p)),tilt=.12*Math.sin(3*q+p),lit=.5+.5*Math.sin(phase+.4),center=.5+.27*Math.sin(phase);
+ const at=a=>[cx+rx*Math.cos(a)+tilt*Math.sin(a),cy+ry*Math.sin(a)],der=a=>[-rx*Math.sin(a)+tilt*Math.cos(a),ry*Math.cos(a)];
+ const g=c.createLinearGradient((cx-rx)*w,cy*h,(cx+rx)*w,cy*h);
+ g.addColorStop(0,`rgba(127,140,191,${.44+.15*lit})`);g.addColorStop(center-.20,`rgba(182,168,192,${.63+.18*lit})`);g.addColorStop(center,`rgba(247,240,229,${.83+.15*lit})`);g.addColorStop(center+.20,`rgba(218,192,185,${.63+.19*lit})`);g.addColorStop(1,`rgba(139,159,194,${.44+.15*lit})`);
+ c.strokeStyle=g;c.lineWidth=(.51+.32*lit)*s;c.beginPath();let a0=Math.PI,P=at(a0),D=der(a0);c.moveTo(P[0]*w,P[1]*h);
+ for(let j=1;j<=4;j++){const a1=Math.PI+Math.PI*j/4,Q=at(a1),E=der(a1),k=4/3*Math.tan((a1-a0)/4);c.bezierCurveTo((P[0]+k*D[0])*w,(P[1]+k*D[1])*h,(Q[0]-k*E[0])*w,(Q[1]-k*E[1])*h,Q[0]*w,Q[1]*h);a0=a1;P=Q;D=E;}c.stroke();
+}c.restore();}
+module.exports={render,id:'lascia-ch-io-pianga',duration:120};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1513,5 +1530,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-jesu1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-lascia1'});
 })();

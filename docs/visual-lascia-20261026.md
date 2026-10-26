@@ -1,0 +1,11 @@
+# Lascia — suspended opening light
+
+Adds one120-second editorial Visual (49/74). Unequal open elliptic arcs form a slowly opening and settling curved light surface. Depth-varying centers and axes bring unequal gatherings into the visible field, with individual broad gradients and line-width response. This is not score/beat/recording synchronization; current Bartoli/Hogwood recording attribution and compilation uncertainty are unchanged.
+
+The parent consciously curated this as a quiet single-family opening/return composition after viewing the final phone phase sheet. This is not unanimous aesthetic approval: the author/reviewer/writer recorded concern that a pale folded cap remains visually separated from similarly exposed concentric surroundings. The parent accepted the continuous fine overlapping curved surface and its transition from dense band to softer gathering as a valid interpretation. Neither three distinct depth layers nor absence of visible arcs is a user requirement. These reservations remain documented, not erased or represented as user endorsement.
+
+Frozen source has a smooth120s eased phase, consistent joined analytic ellipse tangents, ordered gradient stops, opaque balanced state, no culling/history/inverse-radius calculations or temporal branches. Extended support mitigates the initial lower wedge. Five-ratio0=120/seek/opacity checks passed. Nine selected40ms intervals include folded/support regions; strongest sampled mean RGB change6.6808/255 at60s, area with any channel change>32/255 max2.9019% at45s. Fine line interference remains possible. Selected evidence is not exhaustive full-cycle certification.
+
+Same-run native draw/readback medians: DPR1 18.05ms versus Clair36.12ms; DPR2 46.38ms versus73.19ms. Large DPR1 outliers104/202ms remain in the evidence; small noisy software samples do not establish physical-deviceFPS or guaranteed smoothness. PR76 adaptive timing is unchanged.
+
+Prior48 artwork closures, shared wrapper and PR76 helper are preserved except the renderer version. Index changes only the visual cache query; urgent Beethoven5/PieJesu audio IDs and their updated explanations from PR92/93 remain byte-exact, as do all other work facts, citations, recording data and Impressive/Realism behavior. Four-file scoped append with focused regression test and this note.

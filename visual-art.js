@@ -709,6 +709,47 @@ c.restore();}
 module.exports={render,id:'prelude-7',duration:48};
 
 return module.exports; })();
+
+works["goldberg-aria"] = (() => { const module = {exports:{}};
+'use strict';
+const TAU=Math.PI*2;
+// Private non-exact analytic tangent cubic approximation: 20 segments per contour.
+// Stable return centres and mobile ornament: editorial association, not score/audio sync.
+function render(c,w,h,time){
+ const moveTo=c.moveTo.bind(c),bezierCurveTo=c.bezierCurveTo.bind(c);
+ const p=TAU*((((Number.isFinite(time)?time:0)%24)+24)%24)/24,s=Math.min(w,h);
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;c.lineJoin='round';
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#101a2b');bg.addColorStop(.5,'#231f30');bg.addColorStop(1,'#102232');c.fillStyle=bg;c.fillRect(0,0,w,h);c.globalCompositeOperation='screen';
+ const anchors=[[.17,.2,.3],[.82,.64,-.5],[-.1,1.06,.8]];
+ for(let voice=0;voice<3;voice++){
+  const [cx,cy,rotation]=anchors[voice],phase=p-voice*TAU/3,cr=Math.cos(rotation),sr=Math.sin(rotation),depth=.5+.5*Math.sin(phase);
+
+  for(let i=0;i<93;i++){
+   const u=i/92,r=.08+u*1.27+.018*Math.sin(u*5+phase),g=c.createLinearGradient(cx*w-s*.8,cy*h-s*.9,cx*w+s*.8,cy*h+s*.9);
+   for(let k=0;k<=16;k++){
+    const v=k/16,a=Math.pow(.5+.5*Math.cos(v*TAU*1.1-phase-u*2.4),4),b=Math.pow(.5+.5*Math.sin(v*TAU*.7+phase+u*4.4),6),fade=Math.sin(Math.PI*(i+1)/94);
+    g.addColorStop(v,`rgba(${voice===1?'237,213,162':'221,225,241'},${Math.min(.98,(.04+1.65*a+.9*b)*(.65+.35*depth)*fade*(.3+.7*Math.exp(-Math.pow((u-(.48+.23*Math.sin(phase)))/.27,2))))})`);
+   }
+   c.strokeStyle=g;c.lineWidth=(.55+.22*depth)*Math.max(1,s/277);c.beginPath();
+   const step=TAU/20,handles=[];
+   for(let j=0;j<=20;j++){
+    const a=step*j,cosA=Math.cos(a),sinA=Math.sin(a),shape=1+.09*Math.cos(3*a+.35*Math.sin(phase))+.03*Math.cos(a*5+phase+u*3);
+    const derivative=-.27*Math.sin(3*a+.35*Math.sin(phase))-.15*Math.sin(a*5+phase+u*3);
+    const xx=cosA*r*s*.95*shape,yy=sinA*r*s*1.6*shape;
+    const dx=r*s*.95*(-sinA*shape+cosA*derivative),dy=r*s*1.6*(cosA*shape+sinA*derivative);
+    handles.push([cx*w+xx*cr-yy*sr,cy*h+xx*sr+yy*cr,(dx*cr-dy*sr)*step/3,(dx*sr+dy*cr)*step/3]);
+   }
+   moveTo(handles[0][0],handles[0][1]);
+   for(let j=1;j<=20;j++){
+    const a=handles[j-1],b=handles[j];bezierCurveTo(a[0]+a[2],a[1]+a[3],b[0]-b[2],b[1]-b[3],b[0],b[1]);
+   }c.closePath();c.stroke();
+  }
+ }
+ c.restore();
+}
+module.exports={render,id:'goldberg-aria',duration:24};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -757,5 +798,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-prelude7-1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-goldberg-1'});
 })();

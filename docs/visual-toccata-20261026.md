@@ -1,0 +1,9 @@
+# Toccata and Fugue — continuous shear Visual
+
+Adds a 96-second editorial Canvas Visual (67/74), entirely separate from this song's Realism lightning. The earlier sequential V-to-U-to-Y-to-X shear mapping is expressed as complete open continuous trajectories rather than isolated particles. Actual chain-rule tangents and transverse spacing drive bounded individual white/violet illumination and width, connecting a long curved shoulder to full-field fine support. Organ/pedal/flowing-figure associations are editorial, not recording synchronization. Existing Bach attribution/work notes, Walcha recording metadata and audio remain unchanged.
+
+Actual phone/wide images were accepted at the established quality level. The broad pale core, exposed regular lines and edge-emphasized quieter phases remain explicit caveats; no arbitrary extra layers or forced topology change were requested. The underlying successive triangular mapping has positive determinant, but the twelve-segment shared-derivative Hermite drawing is an approximation, not proof of exact original curves or raster injectivity. Ordered thirteen gradient stops, full state isolation, opaque repaint and deterministic 96-second time behavior were reviewed.
+
+Five-ratio loop/seek/opacity/dirty-state/restoration checks passed. Selected 40ms samples cover phone0/quiet36/wrap96 and wide12, with maximum MAD6.007, local channel delta67 and maximum any-RGB-channel>32 area4.1752 percent. Fine-line shimmer/interference remains possible; these limited samples are not a full-cycle/no-shimmer or device-FPS certificate. No new benchmark or unnecessary art revision was run.
+
+Prior66 Visual closures, PR98 axis scaling, PR76 timing, requested audio IDs and PR108 Realism lightning are unchanged. index.html changes only the Visual cache query. Focused final integration tests accompany this addition.

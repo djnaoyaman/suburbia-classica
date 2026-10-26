@@ -1208,6 +1208,59 @@ function render(c,w,h,time){
 module.exports={render,id:'solveigs-song',duration:96};
 
 return module.exports; })();
+
+works["figaro-letter-duet"] = (() => { const module = {exports:{}};
+'use strict';
+// Offset dictation and response in a shared optical field: editorial, not score-derived.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#282a34');bg.addColorStop(.5,'#332d32');bg.addColorStop(1,'#242b35');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<160;iy++)for(let ix=0;ix<180;ix++){
+  const depth=(ix+iy*2)%3,u=-.22+1.44*(ix+((ix*73+iy*151)%211)/211*.95)/179,v=-.22+1.44*(iy+((ix*37+iy*19)%131)/131*.95)/159;
+  const phase=p+depth*.85,Y=v+.085*Math.sin(TAU*u+phase),scale=1+.11*TAU*Math.cos(TAU*u+phase)*Math.cos(Math.PI*Y+.6*Math.sin(phase));
+  const x=u+.11*Math.sin(TAU*u+phase)*Math.cos(Math.PI*Y+.6*Math.sin(phase))+.08*Math.sin(TAU*Y-phase),y=Y;
+  const light=Math.min(.999,Math.max(.1,(1/Math.sqrt(scale)-.48)*.76));
+  const tone=Math.min(7,Math.floor(light*8)),size=unit*(.42+1.28*light)*(1-depth*.055);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[244,226,191]:depth===1?[207,165,130]:[170,194,211];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'figaro-letter-duet',duration:96};
+
+return module.exports; })();
+
+works["flower-duet"] = (() => { const module = {exports:{}};
+'use strict';
+// Neighboring optical depths converge and return: editorial association, not measured voices.
+const TAU=Math.PI*2;
+function render(c,w,h,time){
+ const p=TAU*((((Number.isFinite(time)?time:0)%96)+96)%96)/96,unit=Math.min(w,h)/277;
+ c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation='source-over';c.filter='none';c.shadowBlur=0;
+ const bg=c.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#242b36');bg.addColorStop(.5,'#30323a');bg.addColorStop(1,'#292535');c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const bins=Array.from({length:24},()=>[]);
+ for(let iy=0;iy<160;iy++)for(let ix=0;ix<180;ix++){
+  const depth=(ix+iy*2)%3,u=-.22+1.44*(ix+((ix*73+iy*151)%211)/211*.95)/179,v=-.22+1.44*(iy+((ix*37+iy*19)%131)/131*.95)/159;
+  const phase=p+depth*.85,cx=.5+.24*Math.sin(phase),cy=.5+.23*Math.cos(phase+.4),dx=u-cx,dy=v-cy;
+  const r2=dx*dx/(.78*.78)+dy*dy/(.56*.56),e=.55*Math.exp(-r2),scale=1-e;
+  const y=cy+dy*scale,x=cx+dx*scale+.06*Math.sin(TAU*y-phase);
+  const J=scale*(scale+2*e*r2),light=Math.min(.999,Math.max(.12,(1/Math.sqrt(Math.max(.16,J))-.55)*.72));
+  const tone=Math.min(7,Math.floor(light*8)),size=unit*(.40+1.22*light)*(1-depth*.055);
+  bins[depth*8+tone].push(x*w,y*h,size);
+ }
+ for(let depth=0;depth<3;depth++)for(let tone=0;tone<8;tone++){
+  const rgb=depth===0?[235,236,209]:depth===1?[163,204,179]:[202,172,207];c.fillStyle=`rgba(${rgb.join(',')},${.16+tone*.108})`;c.beginPath();const a=bins[depth*8+tone];
+  for(let k=0;k<a.length;k+=3){const x=a[k],y=a[k+1],s=a[k+2];c.rect(x-s*.5,y-s*.37,s,s*.74);}c.fill();
+ }c.restore();
+}
+module.exports={render,id:'flower-duet',duration:96};
+
+return module.exports; })();
 // BWV and Arabesque use the bounded raster. One backing maximum across all instances.
 let bwvBacking=null,bwvContext=null,bwvOwner=null;
 function releaseBwv(owner){
@@ -1256,5 +1309,5 @@ function create(id){
   return true;
  }};
 }
-window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-solveig1'});
+window.ClassicaVisual=Object.freeze({create,has:id=>Object.prototype.hasOwnProperty.call(works,id),list:()=>Object.keys(works),version:'20261026-duets1'});
 })();

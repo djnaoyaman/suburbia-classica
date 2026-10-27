@@ -1,0 +1,14 @@
+/* Native range input: keyboard support and a 44px touch target without covering art. */
+.playback-seek{box-sizing:border-box;display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 10px;width:100%;min-width:0;color:inherit}
+.playback-seek .seek-time{grid-column:1 / -1;display:flex;justify-content:space-between;gap:12px;font-size:11px;line-height:1.4;font-variant-numeric:tabular-nums}
+.playback-seek input[type="range"]{grid-column:1 / -1;display:block;box-sizing:border-box;width:100%;min-width:0;height:44px;margin:0;padding:0;accent-color:#ff3a00;cursor:pointer;touch-action:pan-y}
+.playback-seek input:disabled{opacity:.45;cursor:default}
+.playback-seek input:focus-visible{outline:3px solid #ff9a70;outline-offset:2px;border-radius:4px}
+#ss .ss-seek{width:min(330px,calc(100vw - 32px));margin:8px 0 8px auto;padding:2px 12px 0;border-radius:12px;background:rgba(16,20,23,.82);color:#f3ece0;pointer-events:auto}
+#ss .ss-seek input{accent-color:#d9b382}
+#ss.touch-ui .ss-seek{position:absolute;left:50%;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 126px);transform:translateX(-50%);width:min(380px,calc(100vw - 32px));margin:0}
+#ss.touch-ui:not(.ui-hidden) .info{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 200px);max-height:calc(100dvh - 320px)}
+#ss.touch-ui.ui-hidden .ss-seek{opacity:0;visibility:hidden;pointer-events:none}
+#ss.touch-ui.ui-hidden .ss-seek input{pointer-events:none}
+@media(max-width:700px){#ss:not(.touch-ui) .brand{top:max(330px,calc(env(safe-area-inset-top) + 314px))}#ss:not(.touch-ui) .ss-seek{margin-left:auto;margin-right:auto}}
+@media(max-height:480px){#ss:not(.touch-ui) .brand{top:20px}#ss.touch-ui .ss-seek{left:auto;right:16px;bottom:max(12px,env(safe-area-inset-bottom));transform:none;width:calc(50vw - 32px)}#ss.touch-ui .ss-playback{left:auto;right:16px;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 68px);transform:none}#ss.touch-ui .art-switch{left:auto;right:16px;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 136px);transform:none}#ss.touch-ui:not(.ui-hidden) .info{bottom:max(16px,env(safe-area-inset-bottom));max-height:calc(100dvh - 96px)}}

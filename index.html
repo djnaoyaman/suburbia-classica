@@ -542,6 +542,8 @@ a.ilink:hover{background-size:100% 2px}
   window.addEventListener('hashchange',function(){ setTimeout(gaView,50); });
 </script>
 <script>(function(){'use strict';if(window.NaoyamanAnalytics)return;var schemas={creator_site_visit:['target_site'],quiz_start:['quiz_mode'],quiz_answer:[],quiz_timeout:[],quiz_complete:[],quiz_restart:[],encyclopedia_expand:[],reading_mode_select:['reading_mode'],encyclopedia_navigate:['content_group'],walk_filter:['filter_group'],video_open:[],video_seek_request:['position_seconds'],catalog_filter:['filter_group'],music_play:['item_id'],music_pause:['item_id'],music_complete:['item_id'],music_filter:['filter_group'],art_display_open:[],share:['method','content_type']};window.NaoyamanAnalytics={track:function(name,values){try{if(location.hostname!=='djnaoyaman.github.io'||typeof window.gtag!=='function'||!schemas[name])return;var p={send_to:'G-FM0LBF65WC',transport_type:'beacon',page_location:location.origin+location.pathname,page_referrer:document.referrer.split(/[?#]/)[0]};schemas[name].forEach(function(k){var v=(values||{})[k];if(typeof v==='number'&&Number.isFinite(v))p[k]=v;else if(typeof v==='string'&&/^[a-zA-Z0-9_-]{1,80}$/.test(v))p[k]=v;});window.gtag('event',name,p);}catch(_){}}};document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-creator-site]');if(a)window.NaoyamanAnalytics.track('creator_site_visit',{target_site:a.dataset.creatorSite});});})();</script>
+<link rel="stylesheet" href="playback-seek.css?v=20261028-seek1">
+<script src="playback-seek.js?v=20261028-seek1"></script>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div><header class="top"><a class="lg" href="#/">SUBURBIA CLASSICA</a><nav aria-label="メインメニュー"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></nav></header>
@@ -559,6 +561,10 @@ a.ilink:hover{background-size:100% 2px}
       <div class="note" style="font-size:11px"><a href="about.html#first-song">最初の一曲：日本時間と全国気温の目安</a> · Weather data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>)</div>
       <div class="t" id="nowTitle">-</div>
       <div class="c" id="nowSub"></div>
+    </div>
+    <div class="playback-seek" aria-label="楽曲の再生位置">
+      <div class="seek-time" aria-hidden="true"><span id="playbackSeekElapsed">0:00</span><span id="playbackSeekDuration">--:--</span></div>
+      <input id="playbackSeek" type="range" min="0" max="1" value="0" step="1" aria-label="楽曲の再生位置" aria-valuetext="再生後に操作できます" disabled>
     </div>
     <div class="ctrl">
       <div class="transport" role="group" aria-label="音楽の再生操作"><button type="button" id="bPrev" title="前の曲" aria-label="前の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5v14M19 5.5 9 12l10 6.5z"/></svg></button><button type="button" id="bStop" title="停止" aria-label="停止"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg></button><button type="button" id="bToggle" title="再生" aria-label="再生" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7z"/></svg></button><button type="button" id="bNext" title="次の曲" aria-label="次の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 5v14M5 5.5 15 12 5 18.5z"/></svg></button></div>
@@ -588,6 +594,10 @@ a.ilink:hover{background-size:100% 2px}
   <canvas id="ssPrevious" aria-hidden="true"></canvas>
   <div class="ss-tools" id="ssTools">
     <div class="ss-playback transport" role="group" aria-label="全画面の再生操作"><button type="button" id="ssPrev" title="前の曲" aria-label="前の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5v14M19 5.5 9 12l10 6.5z"/></svg></button><button type="button" id="ssStop" title="停止" aria-label="停止"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg></button><button type="button" id="ssPlay" title="再生" aria-label="再生" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7z"/></svg></button><button type="button" id="ssNext" title="次の曲" aria-label="次の曲"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 5v14M5 5.5 15 12 5 18.5z"/></svg></button></div>
+    <div class="playback-seek ss-seek" aria-label="全画面の楽曲の再生位置">
+      <div class="seek-time" aria-hidden="true"><span id="ssSeekElapsed">0:00</span><span id="ssSeekDuration">--:--</span></div>
+      <input id="ssSeek" type="range" min="0" max="1" value="0" step="1" aria-label="全画面の楽曲の再生位置" aria-valuetext="再生後に操作できます" disabled>
+    </div>
     <button type="button" id="ssBack" class="ss-return">曲画面に戻る</button>
     <p id="ssPlaybackStatus" role="status" aria-live="polite"></p>
     <div class="art-switch" role="group" aria-label="アートのスタイル">
@@ -1384,6 +1394,12 @@ const htmlEscape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;'
 const view = $('#view');
 let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
 let errorSkipTimer=0;
+const seekControls=window.ClassicaSeek.create({
+  controls:['playbackSeek','ssSeek'].map(id=>({range:$('#'+id),elapsed:$('#'+id+'Elapsed'),duration:$('#'+id+'Duration')})),
+  read:()=>({player,ready:ytReady,started,videoId:SONGS[cur]?.yt.id}),
+  onSeek:()=>{SS.mediaAt=null;SS.dirty=true;ssResetVisualTiming();},
+  onKeyboard:()=>{if(SS.on){SS.uiKeyboard=true;clearTimeout(SS.uiTimer);}}
+});
 let entryWeather=null,entryChoice=null;
 const entryWeatherReady=location.protocol==='file:'?Promise.resolve():ClassicaEntry.loadWeather(fetch.bind(window)).then(cache=>{entryWeather=cache;});
 function initialSongIndex(){
@@ -1405,6 +1421,7 @@ window.onYouTubeIframeAPIReady = function(){
     events:{
       onReady:()=>{ entryWeatherReady.then(()=>{ ytReady = true; setNow(initialSongIndex(), false); ssSyncPlayback(); }); },
       onStateChange:e=>{
+        seekControls.refresh(true);
         if([0,1,2].includes(e.data)&&(window.__suburbiaAnalyticsState!==e.data||window.__suburbiaAnalyticsItem!==SONGS[cur]?.id)){window.__suburbiaAnalyticsState=e.data;window.__suburbiaAnalyticsItem=SONGS[cur]?.id;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
         ssSetMotionPlaying(playing);
@@ -1431,6 +1448,7 @@ function setNow(i, play){
   const s = SONGS[i]; if (!s) return;
   clearTimeout(errorSkipTimer);
   cur = i;
+  seekControls.reset();
   $('#nowTitle').textContent = s.title;
   $('#nowSub').textContent = s.composer + (s.yt.who ? '／演奏：' + s.yt.who : '');
   if (typeof SS !== 'undefined') { ssArtNote(i); if(SS.on) ssSwap(i); }
@@ -1968,7 +1986,7 @@ function ssStop(){
 }
 function ssTouchInert(hidden){
   $('#ssTools').inert=false;
-  $('#ssTools').querySelectorAll('button').forEach(button=>{button.inert=hidden;});
+  $('#ssTools').querySelectorAll('button,input').forEach(control=>{control.inert=hidden;});
 }
 function ssTouchMode(){return !!(window.matchMedia&&matchMedia('(pointer: coarse)').matches);}
 function ssTouchSchedule(){
@@ -2022,7 +2040,7 @@ function ssShow(manual){
   if(manual && ssEl.requestFullscreen) ssEl.requestFullscreen().catch(()=>{});
 }
 function ssHide(){
-  if(!SS.on) return; if(SS.visual)SS.art?.dispose?.(); SS.on=false; window.ClassicaNatureGL?.activate?.(null); window.ClassicaImpressive?.activate?.(null); cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
+  if(!SS.on) return;seekControls.cancel(); if(SS.visual)SS.art?.dispose?.(); SS.on=false; window.ClassicaNatureGL?.activate?.(null); window.ClassicaImpressive?.activate?.(null); cancelAnimationFrame(SS.raf); clearTimeout(SS.sw);clearTimeout(SS.uiTimer);ssTouchInert(false);ssEl.classList.remove('ui-hidden');
   ssClearFrame(true);ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
@@ -2070,7 +2088,7 @@ $('#ssCredit').addEventListener('focusout',()=>{setTimeout(()=>{if(!$('#ssTools'
 $('#ssCredit').addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Escape')ssHide();else if(e.key==='Tab')ssTrapFocus(e);});
 // Fullscreen is interactive: background input never dismisses the player.
 function ssTrapFocus(e){
-  const buttons=Array.from($('#ssTools').querySelectorAll('button:not([disabled])')).filter(button=>!button.inert);
+  const buttons=Array.from($('#ssTools').querySelectorAll('button:not([disabled]),input:not([disabled])')).filter(button=>!button.inert);
   const credit=$('#ssCredit');if(!credit.hidden){const link=credit.querySelector('a[href]');if(link)buttons.push(link);}
   if(!buttons.length)return;
   const first=buttons[0],last=buttons[buttons.length-1];

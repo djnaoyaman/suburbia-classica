@@ -1,35 +1,38 @@
-/* Brahms Waltz No.15: an intimate salon for home piano music.
- * Generated photographic interpretation, not footage or a historical production.
- * Local opaque curtain-fold motion; closed piano, bench and room remain rigid.
+/* Brahms Waltz No.15: an empty dance floor, an editorial musical interpretation.
+ * No people, human imagery, instrument or historic-venue claim.
+ * Only inset curtain folds move; parquet, architecture, light and camera stay fixed.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='brahms-waltz-15';
- const description='家庭で奏でるワルツを想う、夕暮れの小さなピアノ・サロンと柔らかな窓辺の布';
+ const description='誰もいない優雅な舞踏室。寄木の床と柔らかな光の奥で、窓辺のカーテンだけがゆっくり揺れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1672./941.;
+float curtain(vec2 p,float left,float right){
+ return smoothstep(left,left+.006,p.x)*(1.-smoothstep(right-.006,right,p.x))
+       *smoothstep(.208,.240,p.y)*(1.-smoothstep(.494,.524,p.y));
+}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- const float sourceAspect=1672./941.;
- vec2 span=vec2(min(a/sourceAspect,1.),min(sourceAspect/a,1.));
- vec2 p=vec2(.5+.04*(1.-span.x),.5)+(uv-.5)*span*.99;
- float phase=6.28318530718*mod(mod(time,60.)+60.,60.)/60.;
- // Only this opaque upper curtain patch is displaced. It ends above the piano,
- // away from the window mullions; all instrument geometry stays fixed.
- float cloth=smoothstep(.610,.625,p.x)*(1.-smoothstep(.660,.678,p.x))
-            *smoothstep(.765,.805,p.y)*(1.-smoothstep(.965,.985,p.y));
- vec2 flow=vec2(.0017*sin(phase*2.-p.y*9.)+.0004*sin(phase*3.+p.y*7.),
-                .0008*sin(phase*2.-p.y*9.-.7));
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ float cx=clamp(.5,.5*span.x+.005,1.-.5*span.x-.005);
+ vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
+ // Opaque cloth interiors only: exclude rods, window frames, hems and parquet.
+ float cloth=max(curtain(p,.419,.446),curtain(p,.529,.553));
+ vec2 flow=vec2(.0012*sin(phase*4.-p.y*11.)+.0003*sin(phase*3.+p.y*9.),
+                .00035*sin(phase*3.-p.y*8.));
  vec2 q=p+cloth*flow;
- gl_FragColor=vec4(texture2D(material,vec2(q.x,1.-q.y)).rgb,1.);
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/brahms-waltz-salon.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/brahms-waltz-empty-ballroom.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

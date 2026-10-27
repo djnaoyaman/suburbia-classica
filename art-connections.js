@@ -3,13 +3,6 @@
  'use strict';
  const items=[
   {
-    "artId": "pathetique-2",
-    "site": "鎌・くらんぽ",
-    "label": "新緑の北鎌倉を歩く",
-    "text": "葉脈を透かす光から、円覚寺・東慶寺の新緑へ。音楽の余韻を、歩く時間につなげる。",
-    "url": "https://djnaoyaman.github.io/kuranpo/knowledge/g5.html"
-  },
-  {
     "artId": "waltz-64-2",
     "site": "鎌・くらんぽ",
     "label": "稲村ヶ崎の海と伝説を読む",

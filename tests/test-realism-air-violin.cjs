@@ -4,15 +4,16 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-air-violin.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Integration scope: remove the unrelated jellyfish wrapper, retain the strings and wood base fallback.
+// Air-only garden reframe; retain the shared renderer, clock and original base fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-air-violin.js?v=20261026-violin1'));
+assert(html.includes('realism-air-violin.js?v=20261027-garden1'));
 assert(!html.includes('<script src="realism-nature-jelly.js'));
 assert(base.includes("'air-g-string':[9,4,'弦と磨かれた木肌の陰影'],"));
 assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
-assert(!source.includes('vec2 q=')&&source.includes('texture2D(material,p)'),'all instrument sampling coordinates must remain fixed');
-assert(source.includes('col*=1.+woodLight*'),'localized illumination only');
+assert(source.includes('vec2 q=p+water*nearScale*ripple;')&&source.includes('texture2D(material,q)'),'only pool-interior sampling coordinates may move');
+assert(source.includes('float water=smoothstep(.585,.615,p.y)'),'fixed masonry must be outside the mask');
+assert(!/col\s*[*+]=/.test(source),'no image-wide illumination pulse');
 assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
 
 // Load the actual 74-entry script chain, not only synthetic delegation IDs.

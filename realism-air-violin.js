@@ -1,37 +1,40 @@
-/* Air: four-string violin bridge and varnished wood.
- * Later Wilhelmj title reception, not an attributed historic instrument.
- * All image geometry fixed; sparse dust and local wood illumination only.
+/* Air: an imagined Baroque garden and reflecting pool.
+ * Musical/editorial setting, not a documented Bach place or performance.
+ * Camera, stone, trees and sky stay fixed; only pool-interior reflections ripple.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='air-g-string';
- const description='四本の弦と駒、磨かれたヴァイオリンの木肌。楽器は静止し、窓光の中の塵と弱い光だけが移ろう';
+ const description='弦の穏やかな対話を、奥行きのある回廊と庭園の風景に重ねる。石造りのテラスは静まり、池の反射だけがゆっくり揺れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718,ASPECT=1672./941.;
-float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.35,1.,length((p-c)/r));}
-float mote(vec2 p,vec2 c){return 1.-smoothstep(.0001,.0014,length((p-c)*vec2(1.,1./ASPECT)));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ // Cover crop with a small static safety inset; no camera pan or zoom.
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
  float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
- // No UV displacement: every string, notch, foot and wood grain stays fixed.
- vec3 col=texture2D(material,p).rgb;
- float woodLight=oval(p,vec2(.389,.19),vec2(.025,.10));
- col*=1.+woodLight*.028*sin(phase*6.);
- float dust=mote(p,vec2(.382,.24)+vec2(.003*sin(phase),.008*cos(phase)))*(.6+.4*sin(phase*2.+1.));
- dust+=mote(p,vec2(.396,.12)+vec2(.003*sin(phase*2.+1.),.007*cos(phase*3.)))*(.6+.4*sin(phase*2.+3.));
- dust+=mote(p,vec2(.610,.21)+vec2(.004*sin(phase+2.),.010*cos(phase*2.)))*(.6+.4*sin(phase+4.));
- col+=vec3(.90,.83,.69)*dust*.11;
- gl_FragColor=vec4(clamp(col,0.,1.),1.);
+ // The pool widens toward the viewer. Keep a dry margin inside every stone edge.
+ float depth=clamp((p.y-.585)/.415,0.,1.);
+ float left=.394-1.45*(p.y-.572),right=.607+1.52*(p.y-.572);
+ float water=smoothstep(.585,.615,p.y)*smoothstep(left+.020,left+.040,p.x)
+             *(1.-smoothstep(right-.040,right-.020,p.x));
+ // Perspective-scaled, differently paced travelling ripples in the water only.
+ // No global light pulse; reflection displacement vanishes at the basin boundary.
+ float nearScale=.25+.75*depth;
+ vec2 ripple=vec2(.0014*sin(p.y*104.-phase*8.+.65*sin(p.x*13.))
+                    +.0005*sin(p.y*177.-phase*13.+p.x*5.),
+                  .00028*sin(p.y*91.-phase*7.+p.x*11.));
+ vec2 q=p+water*nearScale*ripple;
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/air-four-string-violin.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/air-garden-terrace.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -40,9 +43,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Violin shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Garden shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Violin program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Garden program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

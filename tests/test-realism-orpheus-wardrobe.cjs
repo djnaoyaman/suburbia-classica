@@ -4,17 +4,35 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-orpheus-wardrobe.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Replace only the snake wrapper; retain the existing base fallback.
+// Integration scope: remove the arbitrary seed wrapper, retain the original procedural fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-orpheus-wardrobe.js?v=20261026-wardrobe1'));
+assert(html.includes('realism-orpheus-wardrobe.js?v=20261027-cancan1'));
 assert(!html.includes('<script src="realism-nature-snake.js'));
 assert(base.includes("'orpheus-overture':"));
-const crypto=require('crypto');
-assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'fef251e2e613dc115ca430f0aabd6e2f6fe3268d0f50d9ba3ad64717ab52986e');
-assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/orpheus-wardrobe.webp'))).digest('hex'),'2a19913cdfbc616b0bcafeff724601c3abab21ba5ecf7d7cde82584309118c26');
-assert(source.includes('texture2D(material,vec2(q.x,1.-q.y))'));
-assert(!/p\s*[+*\-]?=.{0,60}time/.test(source));
+assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
+assert(source.includes('if(haze<=0.){gl_FragColor=vec4(texture2D(material,p).rgb,1.);return;}'),'fixed performer/scenery pixels outside haze');
+assert(source.includes('float f0=fract(seconds/60.),f1=fract(f0+.5);'),'staggered phase advection');
+assert(source.includes('float weight=.5-.5*cos(TAU*f0);'),'zero-contribution reset');
+assert(source.includes('assets/realism/orpheus-cancan-stage.webp'));
+assert(!source.includes('assets/realism/orpheus-wardrobe.webp'));
+assert(source.includes('cx=clamp(.5,.5*span.x+.005'),'fixed crop bound required');
+assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
+
+// Load the actual 74-entry script chain, not only synthetic delegation IDs.
+function catalog(withCandidate){
+ const win={dispatchEvent(){}};const sb={window:win,document:{createElement:()=>({getContext:()=>null,addEventListener(){}})},Image:class{},CustomEvent:class{},console};vm.createContext(sb);
+ for(const m of html.matchAll(/<script src="(realism[^"?]+)(?:\?[^"]*)?"><\/script>/g)){
+  if(!withCandidate&&m[1]==='realism-orpheus-wardrobe.js')continue;
+  vm.runInContext(fs.readFileSync(path.join(repoRoot,m[1]),'utf8'),sb,{filename:m[1]});
+ }
+ return win.ClassicaRealism;
+}
+const realOld=catalog(false),realNew=catalog(true),before=JSON.parse(JSON.stringify(realOld.list())),after=JSON.parse(JSON.stringify(realNew.list()));
+assert.equal(before.length,74);assert.equal(after.length,74);assert.deepEqual(after.map(x=>x.id),before.map(x=>x.id));
+for(const old of before){const now=after.find(x=>x.id===old.id);assert(realNew.has(old.id));if(old.id!=='orpheus-overture'){assert.deepEqual(now,old);assert.equal(realNew.describe(old.id),realOld.describe(old.id));}}
+assert.notEqual(realNew.describe('orpheus-overture'),realOld.describe('orpheus-overture'));
+
 const ids=['orpheus-overture',...Array.from({length:73},(_,i)=>'other-'+i)];
 function setup({noGL=false,failUpload=false}={}){
  const stats={created:0,deleted:0,programs:0,deletedPrograms:0,drawn:0,fallback:0,events:[],times:[],uploads:0}, handlers={},images=[];
@@ -37,16 +55,30 @@ function setup({noGL=false,failUpload=false}={}){
  const st=a.init('orpheus-overture');a.draw(c,960,540,0,st);assert.equal(e.stats.drawn,0);
  e.images.forEach(img=>img.onload());await new Promise(r=>setImmediate(r));assert.equal(g.materialState().running,0);assert.equal(e.stats.events.length,1);
  assert(a.draw(c,1920,1080,3,st));assert.equal(e.canvas.width,960);assert.equal(e.canvas.height,540);assert.equal(e.stats.created,1);
- a.draw(c,277,600,12,st);a.draw(c,277,600,12,st);a.draw(c,960,540,120,st);a.draw(c,960,540,0,st);a.draw(c,960,540,NaN,st);a.draw(c,960,540,Infinity,st);
- assert.equal(e.stats.created,1);assert.equal(e.stats.uploads,1);assert.deepEqual(e.stats.times,[3,12,12,120,0,0,0]);assert.equal(a.draw(c,0,600,0,st),false);
+ a.draw(c,277,600,12,st);a.draw(c,277,600,12,st);a.draw(c,960,540,48,st);a.draw(c,960,540,0,st);a.draw(c,960,540,NaN,st);a.draw(c,960,540,Infinity,st);
+ assert.equal(e.stats.created,1);assert.equal(e.stats.uploads,1);assert.deepEqual(e.stats.times,[3,12,12,48,0,0,0]);assert.equal(a.draw(c,0,600,0,st),false);
  e.setLost(true);const before=e.stats.drawn;a.draw(c,277,600,1,st);assert.equal(e.stats.drawn,before);e.setLost(false);
  e.handlers.webglcontextrestored();assert.equal(e.stats.deleted,1);assert.equal(e.stats.deletedPrograms,1);
  a.draw(c,277,600,4,st);assert.equal(e.stats.created,2);
  for(const id of ['other-0','other-1']){g.activate(id);g.material(id,id+'.webp',()=>{},()=>{});}assert(!g.materialState().retained.includes('orpheus-overture'));assert.equal(e.stats.deleted,2);
  g.activate('orpheus-overture');a.available('orpheus-overture');assert.equal(g.materialState().retained.length,2);
  const bad=setup({failUpload:true});bad.win.ClassicaNatureGL.activate('orpheus-overture');bad.win.ClassicaRealism.available('orpheus-overture');bad.images.forEach(img=>img.onload());await new Promise(r=>setImmediate(r));const bst=bad.win.ClassicaRealism.init('orpheus-overture');bad.win.ClassicaRealism.draw(c,960,540,1,bst);bad.win.ClassicaRealism.draw(c,960,540,2,bst);assert.equal(bad.stats.created,1);assert.equal(bad.stats.deleted,1);assert.equal(bad.stats.drawn,0);assert.equal(bad.stats.fallback,2);
+ const failed=setup();failed.win.ClassicaNatureGL.activate('orpheus-overture');failed.win.ClassicaRealism.available('orpheus-overture');failed.images[0].onerror();assert.equal(failed.win.ClassicaNatureGL.materialState().running,0);failed.win.ClassicaRealism.draw(c,960,540,4,failed.win.ClassicaRealism.init('orpheus-overture'));assert.equal(failed.stats.drawn,0);assert.equal(failed.stats.fallback,1);
+ const old=setup();old.win.ClassicaNatureGL.material=undefined;old.win.ClassicaNatureGL.activate('orpheus-overture');old.win.ClassicaRealism.draw(c,960,540,4,old.win.ClassicaRealism.init('orpheus-overture'));assert.equal(old.images.length,0);assert.equal(old.stats.fallback,1);
  const nogl=setup({noGL:true});nogl.win.ClassicaNatureGL.activate('orpheus-overture');nogl.win.ClassicaRealism.draw(c,960,540,0,nogl.win.ClassicaRealism.init('orpheus-overture'));assert.equal(nogl.stats.fallback,1);
- const oldHost=setup();oldHost.win.ClassicaNatureGL.material=undefined;oldHost.win.ClassicaNatureGL.activate('orpheus-overture');oldHost.win.ClassicaRealism.draw(c,960,540,0,oldHost.win.ClassicaRealism.init('orpheus-overture'));assert.equal(oldHost.stats.fallback,1);assert.equal(oldHost.images.length,0);
- console.log('PASS: 74 IDs/73 delegates, 1-slot async material ready, bounded texture cache, invalid size/time, repeated draw/reduced12/seek, lost/restore disposal, 2-scene eviction release, upload fail-once fallback, unavailable GL fallback.');
+ console.log('PASS: 74 IDs/73 delegates, 1-slot async material ready, bounded texture cache, invalid size/time, repeated draw/reduced12/seek, lost/restore disposal, 2-scene eviction release, upload fail-once fallback, image failure, unavailable material API / GL fallback.');
  console.log(JSON.stringify({texturesCreated:e.stats.created,texturesDeleted:e.stats.deleted,draws:e.stats.drawn,retained:e.win.ClassicaNatureGL.materialState().retained}));
 })().catch(e=>{console.error(e);process.exit(1);});
+
+// All-time bounds: background is static; sampled haze UVs remain deep inside source.
+for(let i=0;i<=20000;i++){
+ const A=1672/941,a=.1+i*5.9/20000,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);
+ assert(.5-.5*sx>=.005-1e-12&&.5+.5*sx<=.995+1e-12);
+ assert(.5-.5*sy>=.005-1e-12&&.5+.5*sy<=.995+1e-12);
+}
+assert(.335-.006>0&&.663+.006<1&&.210-.003>0&&.285+.003<1);
+for(let i=0;i<=10000;i++){
+ const f=i/10000,w=.5-.5*Math.cos(2*Math.PI*f);assert(w>=0&&w<=1);
+}
+assert.equal(.5-.5*Math.cos(0),0);assert.equal(.5-.5*Math.cos(Math.PI),1);
+console.log('PASS: fixed background, haze-only UV bounds, continuous zero-contribution phase resets.');

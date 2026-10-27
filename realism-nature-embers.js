@@ -1,25 +1,38 @@
-/* Generated photographic-style material with local natural-motion deformation.
- * Not recorded footage or generated video; load after the shared natural context.
+/* Queen of the Night: an imposing moonlit escarpment and deep ravine.
+ * Editorial operatic landscape, not a literal stage or a documented Mozart place.
+ * Peaks, land, light and camera fixed; high-cloud interiors drift without pulses.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='queen-of-night';
- const description='炭化した木の熾火から、小さな灰片がゆっくり立ち上る';
+ const description='夜の女王の威厳と激しさを、月光に浮かぶ峻厳な山壁と深い峡谷へ重ねる。山は動かず、夜空の薄い雲だけが流れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
-const float TAU=6.28318530718;
-float rand(float n){return fract(sin(n*127.1+61.7)*43758.5453);}
-void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 q=vec2(.5,.5)+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.98;float t=mod(time,48.);vec3 col=texture2D(material,vec2(q.x,1.-q.y)).rgb;
-// Individual ash flakes rise from the coal bed; wood and ground never warp.
-for(int i=0;i<18;i++){float k=float(i),seed=rand(k+1.);float cycles=3.+floor(rand(k+19.)*3.);float f=fract(t/48.*cycles+seed);float opacity=smoothstep(0.,.12,f)*(1.-smoothstep(.78,1.,f));vec2 c=vec2(.40+.19*rand(k+31.)+.025*sin(f*5.+k)*f,.425+.235*f);float r=.0023+.0028*rand(k+43.);float spin=TAU*(f*(1.+floor(seed*3.))+seed);mat2 rot=mat2(cos(spin),-sin(spin),sin(spin),cos(spin));vec2 d=rot*(q-c)/r;d.y/=.35+.42*rand(k+53.);float rr=length(d);float shape=1.-smoothstep(.52,.95,rr*(1.+.15*sin(atan(d.y,d.x)*3.+k)));float hot=step(.64,rand(k+7.));vec3 ash=mix(vec3(.52,.47,.40),vec3(.82,.26,.035),hot);col=mix(col,ash,shape*opacity*.82);float glow=exp(-dot((q-c)/(r*2.5),(q-c)/(r*2.5)))*hot*opacity;col+=vec3(.07,.018,.002)*glow;}
-gl_FragColor=vec4(col,1.);}
+const float TAU=6.28318530718,ASPECT=1672./941.;
+void main(){
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ // Static framing keeps the silver rock wall and dark ravine together on phones.
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
+ float cx=mix(.55,.5,smoothstep(.65,ASPECT,a));
+ cx=clamp(cx,.5*span.x+.01,1.-.5*span.x-.01);
+ vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
+ // Conservative rising roof leaves a fixed margin above every rocky silhouette.
+ float roof=.100+.125*smoothstep(.18,.58,p.x);
+ float sky=smoothstep(.015,.050,p.x)*(1.-smoothstep(.950,.985,p.x))
+          *smoothstep(.012,.038,p.y)*(1.-smoothstep(roof-.025,roof,p.y));
+ // Soft cloud motion only: no stars, flashes, particles, camera movement or light pulse.
+ vec2 cloud=vec2(.007*sin(phase)+.001*sin(phase*2.+p.y*3.),.00045*sin(phase-.7));
+ vec2 q=p+sky*cloud;
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
+}
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/embers-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/queen-moonlit-ravine.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

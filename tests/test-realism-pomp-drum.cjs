@@ -4,16 +4,19 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-pomp-drum.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Replace only the unrelated animal wrapper; retain the original base fallback.
+// Reframe this one Realism as a landscape; retain the original base fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-pomp-drum.js?v=20261026-drum1'));
+assert(html.includes('realism-pomp-drum.js?v=20261027-avenue1'));
 assert(!html.includes('<script src="realism-nature-horse.js'));
 assert(base.includes("'pomp-circumstance-1':"));
 const crypto=require('crypto');
-assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'c31790e26dac5c02f240ef69cb3f5c6e5cc4110529a8693178e049e4b45ec199');
-assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/pomp-ceremonial-drum.webp'))).digest('hex'),'b68974f0ac4a2b9a8e1073011853c6a806c6dce76c8a68f3bfb432515090475d');
-assert(source.includes('texture2D(material,vec2(q.x,1.-q.y))'));
+assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'83a3a796d0fcd3f6b23753dde5193d7a25c7d42b97e83f79c34f89722f48cded');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/pomp-ceremonial-avenue.webp'))).digest('hex'),'2da4f7ddeef686c80f21b1eafc85df1be97ac24f558bf51186db93e1e58cdc98');
+assert(source.includes('texture2D(material,q)'));
+assert(source.includes('vec2 q=p+sky(p)*cloudFlow'));
+assert(source.includes('mod(mod(time,240.)+240.,240.)'));
+assert(!source.includes('float strap='));
 assert(!/p\s*[+*\-]?=.{0,60}time/.test(source));
 const ids=['pomp-circumstance-1',...Array.from({length:73},(_,i)=>'other-'+i)];
 function setup({noGL=false,failUpload=false}={}){

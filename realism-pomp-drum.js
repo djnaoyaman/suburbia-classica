@@ -1,31 +1,36 @@
-/* Elgar Pomp and Circumstance: the title-source military drum.
- * Generated editorial ceremonial still life, no regiment or premiere claim.
- * Only a loose strap fold moves; drum, membrane, ropes and bench stay fixed.
+/* Pomp and Circumstance: an expansive imagined ceremonial avenue.
+ * A processional landscape, not a reconstruction of a premiere or coronation.
+ * Only distant cloud interiors drift; trees, pavilion, avenue and camera stay fixed.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='pomp-circumstance-1';
- const description='題名の軍楽への言及を、無紋章の小太鼓と微風を受ける携帯ストラップに託す';
+ const description='行進曲の晴れやかな広がりを、並木道と遠いパヴィリオンへ重ねる。道と建物は静止し、空の雲だけがゆっくり流れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1672./941.;
+float sky(vec2 p){
+ // A deliberately conservative interior: never reaches any tree or the skyline.
+ float left=.30+.29*p.y,right=.77-.27*p.y;
+ return smoothstep(left,left+.035,p.x)*(1.-smoothstep(right-.035,right,p.x))
+       *smoothstep(.012,.055,p.y)*(1.-smoothstep(.435,.480,p.y));
+}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- const float sourceAspect=1672./941.;
- vec2 span=vec2(min(a/sourceAspect,1.),min(sourceAspect/a,1.));
- vec2 p=vec2(.50,.5)+(uv-.5)*span*.98;
- float phase=6.28318530718*mod(mod(time,120.)+120.,120.)/120.;
- // Local soft strap weave/fold only; boundary, drum, ropes and bench stay fixed.
- float strap=1.-smoothstep(.40,1.,length((p-vec2(.552,.198))/vec2(.009,.025)));
- vec2 q=p+strap*vec2(.0010*sin(phase*6.-p.y*18.),.00035*sin(phase*6.-p.y*18.-.5));
- gl_FragColor=vec4(texture2D(material,vec2(q.x,1.-q.y)).rgb,1.);
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ float phase=TAU*mod(mod(time,240.)+240.,240.)/240.;
+ // Broad cloud drift, about 0.75 source pixels/second at maximum. No camera pan.
+ vec2 cloudFlow=vec2(.014*sin(phase)+.0015*sin(phase*2.+p.y*2.),.0007*sin(phase-.7));
+ vec2 q=p+sky(p)*cloudFlow;
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/pomp-ceremonial-drum.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/pomp-ceremonial-avenue.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -34,9 +39,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Drum shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Avenue shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Drum program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Avenue program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

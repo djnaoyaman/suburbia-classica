@@ -556,6 +556,7 @@ a.ilink:hover{background-size:100% 2px}
     </div>
     <div class="now">
       <div class="label">NOW PLAYING</div>
+      <div class="note" style="font-size:11px"><a href="about.html#first-song">最初の一曲：日本時間と全国気温の目安</a> · Weather data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>)</div>
       <div class="t" id="nowTitle">-</div>
       <div class="c" id="nowSub"></div>
     </div>
@@ -610,6 +611,7 @@ a.ilink:hover{background-size:100% 2px}
 </div>
 <section class="band w"><div class="in philo"><div><h3 style="color:#ff3a00">About:</h3><p class="big">Music for the<br>quiet hours.</p><p>待合室やカフェでふと流れていてほしい曲。夜にひとりで聴きたくなる曲。昔どこかで聴いたことがある曲。そして、知っているつもりだったけれど、あらためて聴くと少し違って聞こえる曲。ピアノ曲を起点に、協奏曲、管弦楽、室内楽、オペラ、宗教曲、声楽へと広げながら集めています。青春の音楽を、もう一度。</p><p><a class="more" href="about.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">このサイトについて →</a></p><p>編者：<a href="profile.html" style="border-bottom:1px solid #ff3a00;text-decoration:none">DJ Naoyaman</a>（音楽・文化・ブランドを横断する編集者）</p></div><div class="sq" aria-hidden="true"><i></i></div></div></section><section class="band v"><div class="in"><h3>Explore:</h3><div class="cards3"><a href="#/timeline"><b>Timeline</b><small>作曲年×出身国で見る国横断年表</small></a><a href="#/mood/%E7%A9%8F%E3%82%84%E3%81%8B"><b>Mellow</b><small>穏やかな曲から探す</small></a><a href="#/cat/%E3%83%94%E3%82%A2%E3%83%8E%E7%8B%AC%E5%A5%8F"><b>Piano</b><small>ピアノ独奏の名曲</small></a></div></div></section><footer class="site"><div class="in"><div class="lab">Index</div><div class="idx"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></div><div class="lab" style="margin-bottom:10px">Share</div><div class="share" id="siteShare"></div><p>解説文は出典を調べたうえで編者が独自に書き直したものです。確認できなかった項目は「未確認」と表示しています。音源はYouTubeの埋め込みで再生しています。</p><svg class="wmf" viewBox="0 -8 1000 124" style="overflow:visible" role="img" aria-label="SUBURBIA CLASSICA" preserveAspectRatio="none"><text x="0" y="104" font-family="Instrument Sans,Noto Sans JP,Arial,sans-serif" font-weight="600" font-size="150" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="#ffffff">SUBURBIA CLASSICA</text></svg></div></footer>
 
+<script src="entry-selection.js?v=20261028-entry1"></script>
 <script src="realism.js?v=20261023-all74"></script>
 <script src="visual-timing.js?v=20261026-timing1"></script>
 <script src="visual-art.js?v=20261026-dies1"></script>
@@ -1382,6 +1384,13 @@ const htmlEscape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;'
 const view = $('#view');
 let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
 let errorSkipTimer=0;
+let entryWeather=null,entryChoice=null;
+const entryWeatherReady=location.protocol==='file:'?Promise.resolve():ClassicaEntry.loadWeather(fetch.bind(window)).then(cache=>{entryWeather=cache;});
+function initialSongIndex(){
+  if(!entryChoice)entryChoice=ClassicaEntry.choose(SONGS,{weather:entryWeather});
+  return ClassicaEntry.index(SONGS,location.hash,entryChoice);
+}
+
 if (location.protocol === 'file:') $('#banner').style.display = 'block';
 
 /* ---------- YouTube ---------- */
@@ -1394,7 +1403,7 @@ window.onYouTubeIframeAPIReady = function(){
     width:'100%', height:'100%', videoId:first.yt.id,
     playerVars:{playsinline:1, rel:0, modestbranding:1},
     events:{
-      onReady:()=>{ ytReady = true; setNow(Math.max(0,currentViewIdx()), false); ssSyncPlayback(); },
+      onReady:()=>{ entryWeatherReady.then(()=>{ ytReady = true; setNow(initialSongIndex(), false); ssSyncPlayback(); }); },
       onStateChange:e=>{
         if([0,1,2].includes(e.data)&&(window.__suburbiaAnalyticsState!==e.data||window.__suburbiaAnalyticsItem!==SONGS[cur]?.id)){window.__suburbiaAnalyticsState=e.data;window.__suburbiaAnalyticsItem=SONGS[cur]?.id;window.NaoyamanAnalytics&&window.NaoyamanAnalytics.track(e.data===1?'music_play':e.data===2?'music_pause':'music_complete',{item_id:SONGS[cur]&&SONGS[cur].id});}
         playing = (e.data === 1);
@@ -1745,7 +1754,7 @@ function route(){
   { const h=document.getElementById('hero'); if(h&&h.style){ const home=(location.hash===''||location.hash==='#/'||location.hash==='#'); h.style.display=home?'':'none'; const n=document.getElementById('heroN'); if(n) n.textContent=SONGS.length; } }
   const i = currentViewIdx(); seoRoute(i);
   ssArtNote(cur>=0?cur:Math.max(0,i));
-  if (location.hash==='#/timeline'){ document.title='国横断年表｜SUBURBIA CLASSICA'; renderTimeline(); if(!started&&ytReady&&cur<0) setNow(0,false); window.scrollTo(0,0); try{ view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); }catch(e){} initReveal(); return; }
+  if (location.hash==='#/timeline'){ document.title='国横断年表｜SUBURBIA CLASSICA'; renderTimeline(); if(!started&&ytReady&&cur<0) setNow(initialSongIndex(),false); window.scrollTo(0,0); try{ view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); }catch(e){} initReveal(); return; }
   document.title = (i>=0 ? SONGS[i].title + '｜' : '') + 'SUBURBIA CLASSICA — A Mellow Classical Selection';
   if (i >= 0) {
     renderSong(i);
@@ -1757,7 +1766,7 @@ function route(){
       let value;try{value=decodeURIComponent(m[2]);}catch(e){value=null;}
       if(value===null)renderList();else renderList(m[1],value);
     }else if (/^#\/\?/.test(location.hash)) renderList('f'); else renderList();
-    if (!started && ytReady && cur < 0) setNow(0, false);
+    if (!started && ytReady && cur < 0) setNow(initialSongIndex(), false);
   }
   window.scrollTo(0, 0);
   try{ if(view&&view.classList){ view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter'); } }catch(e){}
@@ -1771,8 +1780,9 @@ $('#overlay').onclick = () => {
   started = true;
   $('#overlay').classList.add('hide');
   const i = currentViewIdx();
-  playSong(i >= 0 ? i : 0); // Start within the user gesture, even when the first song is already cued.
-  if(i < 0)go(0);
+  const first=i>=0?i:cur>=0?cur:initialSongIndex();
+  playSong(first); // Playback stays synchronous within the user gesture.
+  if(i < 0)go(first);
 };
 $('#bPrev').onclick = () => ssStep(-1);
 $('#bNext').onclick = () => ssStep(1);

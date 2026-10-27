@@ -1,38 +1,46 @@
-/* Rachmaninov Concerto2/II: flute, clarinet and grand piano on a quiet stage.
- * Generated photographic interpretation, not footage or a historical production.
- * Only unobstructed velvet backdrop moves; all instruments, chairs and camera remain rigid.
+/* Rachmaninoff Concerto2/II: broad dawn water and receding wooded islands.
+ * Editorial lyrical landscape, not a documented place or biographical claim.
+ * Only clear water and low mist move; shore, trees, sky, light and camera stay fixed.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='rach-pc2-2';
- const description='ピアノの伴奏に重なるフルートとクラリネットの歌を、静かな管弦楽の舞台と三つの楽器に映す';
+ const description='ゆったり歌う旋律を、淡い朝焼けの湖と幾重にも遠ざかる森の島々へ重ねる。静かな水面が揺れ、低い霧がゆっくり流れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1672./941.;
+float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.45,1.,length((p-c)/r));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- const float sourceAspect=1672./941.;
- vec2 span=vec2(min(a/sourceAspect,1.),min(sourceAspect/a,1.));
- // Lower the ultrawide crop slightly so both complete instrument stands survive.
- float centerY=mix(.485,.5,smoothstep(.8,1.,span.y));
- vec2 p=vec2(.5,centerY)+(uv-.5)*span*.98;
- float phase=6.28318530718*mod(mod(time,120.)+120.,120.)/120.;
- // Clear central curtain gap: above the woodwinds, beside rather than across chairs.
- float top=smoothstep(.44,.46,p.x)*(1.-smoothstep(.54,.56,p.x))
-           *smoothstep(.86,.89,p.y)*(1.-smoothstep(.98,.995,p.y));
- // This small gap is right of both woodwinds and above the nearest chair back.
- float side=smoothstep(.53,.535,p.x)*(1.-smoothstep(.555,.56,p.x))
-            *smoothstep(.81,.83,p.y)*(1.-smoothstep(.96,.98,p.y));
- float cloth=max(top,side);
- vec2 q=p+cloth*vec2(.0015*sin(phase*3.+p.y*5.),.00025*sin(phase*3.+p.x*6.));
- gl_FragColor=vec4(texture2D(material,vec2(q.x,1.-q.y)).rgb,1.);
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
+ // Fixed cover crop: the open water and receding islands remain legible on phones.
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
+ // Clear water below every island/reed edge. Narrow lower mask avoids near reeds.
+ float mid=smoothstep(.025,.060,p.x)*(1.-smoothstep(.940,.975,p.x))
+          *smoothstep(.560,.590,p.y)*(1.-smoothstep(.660,.700,p.y));
+ float near=smoothstep(.340,.390,p.x)*(1.-smoothstep(.660,.710,p.x))
+           *smoothstep(.560,.610,p.y)*(1.-smoothstep(.950,.985,p.y));
+ float water=max(mid,near);
+ vec2 ripple=vec2(.0010*sin(phase*7.+p.y*160.)+.00045*sin(phase*11.+p.x*55.),
+                  .00065*sin(phase*8.+p.y*110.+p.x*18.));
+ vec2 q=p+water*ripple;
+ vec3 col=texture2D(material,q).rgb;
+ // Thin travelling mist above open water, never over tree silhouettes or banks.
+ float pocket=max(oval(p,vec2(.282,.444),vec2(.100,.018)),
+                  oval(p,vec2(.578,.491),vec2(.138,.022)));
+ float drift=.5+.5*sin(p.x*97.-phase*3.+1.7*sin(p.y*170.+phase));
+ float veil=.065*pocket*drift*(.65+.35*sin(p.x*43.+p.y*155.-phase*2.));
+ col=mix(col,vec3(.76,.73,.74),veil);
+ gl_FragColor=vec4(col,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/rach-woodwind-stage.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/rach-dawn-lake.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

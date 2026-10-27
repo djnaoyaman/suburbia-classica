@@ -51,7 +51,7 @@ test('failed refresh leaves last cache byte-for-byte intact',async()=>{
 });
 test('initial cue does not autoplay; direct link and manual next remain authoritative after weather settles',async()=>{
   const block=html.match(/let entryWeather=null,[\s\S]*?\n}\n/)[0];let resolveWeather;
-  const ctx={ClassicaEntry:{...entry,loadWeather:()=>new Promise(r=>resolveWeather=r)},location:{protocol:'https:',hash:''},fetch:()=>{},window:{},SONGS:songs};vm.createContext(ctx);vm.runInContext(block,ctx);
+  const ctx={ClassicaEntry:{...entry,choose:(list,options)=>entry.choose(list,{...options,now}),loadWeather:()=>new Promise(r=>resolveWeather=r)},location:{protocol:'https:',hash:''},fetch:()=>{},window:{},SONGS:songs};vm.createContext(ctx);vm.runInContext(block,ctx);
   ctx.location.hash='#/song/night';resolveWeather(cache);await Promise.resolve();await Promise.resolve();assert.equal(vm.runInContext('initialSongIndex()',ctx),2);
   const ready=html.match(/onReady:\(\)=>\{ entryWeatherReady\.then\([\s\S]*?\); \},/)[0];assert.match(ready,/setNow\(initialSongIndex\(\), false\)/);assert.doesNotMatch(ready,/playSong|playVideo|loadVideoById/);
   assert.match(html,/const first=i>=0\?i:cur>=0\?cur:initialSongIndex\(\)/);assert.match(html,/QUEUE=QUEUE_PREVIEW\.slice\(\)/);
@@ -64,7 +64,7 @@ test('ready callback cues selected recording and matching title; navigation whil
   const catalog=songs.map((song,i)=>({...song,title:'Title '+song.id,composer:'Composer',yt:{id:'video-'+i,who:'Performer'}}));
   for(const route of ['', '#/song/night']){
     let settleWeather;const calls=[],elements=new Map();const element=id=>{if(!elements.has(id))elements.set(id,{textContent:'',classList:{add(){},toggle(){}}});return elements.get(id);};
-    const ctx={ClassicaEntry:{...entry,loadWeather:()=>new Promise(resolve=>settleWeather=resolve)},location:{protocol:'https:',hash:''},fetch(){},window:{},SONGS:catalog,player:{cueVideoById:id=>calls.push(['cue',id]),loadVideoById:id=>calls.push(['load',id])},ytReady:false,cur:-1,errorSkipTimer:0,clearTimeout(){},$:element,ssSyncPlayback(){},ssArtNote(){},SS:{on:false},Date:class extends Date{constructor(value){super(value===undefined?now:value);}}};
+    const ctx={ClassicaEntry:{...entry,choose:(list,options)=>entry.choose(list,{...options,now}),loadWeather:()=>new Promise(resolve=>settleWeather=resolve)},location:{protocol:'https:',hash:''},fetch(){},window:{},SONGS:catalog,player:{cueVideoById:id=>calls.push(['cue',id]),loadVideoById:id=>calls.push(['load',id])},ytReady:false,cur:-1,errorSkipTimer:0,clearTimeout(){},$:element,ssSyncPlayback(){},ssArtNote(){},SS:{on:false},Date:class extends Date{constructor(value){super(value===undefined?now:value);}}};
     vm.createContext(ctx);vm.runInContext(html.match(/let entryWeather=null,[\s\S]*?\n}\n/)[0],ctx);
     const start=html.indexOf('function setNow('),end=html.indexOf('\nfunction playSong',start);vm.runInContext(html.slice(start,end),ctx);
     const callback=html.match(/onReady:\(\)=>\{ entryWeatherReady\.then\([\s\S]*?\); \},/)[0].slice('onReady:'.length,-1);vm.runInContext('('+callback+')()',ctx);

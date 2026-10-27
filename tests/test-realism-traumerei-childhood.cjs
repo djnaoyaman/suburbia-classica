@@ -7,13 +7,17 @@ const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
 // Integration scope: remove the arbitrary seed wrapper, retain the original procedural fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-traumerei-childhood.js?v=20261026-childhood1'));
+assert(html.includes('realism-traumerei-childhood.js?v=20261027-cappadocia1'));
 assert(!html.includes('<script src="realism-nature-seed.js'));
 assert(base.includes("'traumerei':[20,0,'夕陽を受けて漂う綿毛'],"));
 assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
-assert(source.includes('vec2 q=p+curtain*vec2('),'only curtain may deform');
+assert(source.includes('vec3 col=texture2D(material,p*vec2(1672.,941.)/vec2(1774.,1831.)).rgb;'),'landscape must sample fixed UV');
+assert(source.includes('vec2 q=(p-center-offset)/size+.5;'),'rigid independent balloon translation');
+assert(source.includes('return col*(1.-sprite.a)+min(sprite.rgb,vec3(sprite.a));'),'premultiplied alpha composition with transparent edge guard');
+assert(source.includes('traumerei-cappadocia-atlas.webp'));
+assert(!source.includes('traumerei-chair-blocks.webp'));
 assert(source.includes('cx=clamp(cx,.5*span.x+.005'),'fixed crop bound required');
-assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
+assert(source.includes('mod(mod(time,960.)+960.,960.)'),'continuous finite caller-time loop');
 
 // Load the actual 74-entry script chain, not only synthetic delegation IDs.
 function catalog(withCandidate){
@@ -66,5 +70,22 @@ function setup({noGL=false,failUpload=false}={}){
  console.log(JSON.stringify({texturesCreated:e.stats.created,texturesDeleted:e.stats.deleted,draws:e.stats.drawn,retained:e.win.ClassicaNatureGL.materialState().retained}));
 })().catch(e=>{console.error(e);process.exit(1);});
 
-function sm(lo,hi,x){let t=Math.max(0,Math.min(1,(x-lo)/(hi-lo)));return t*t*(3-2*t);}
-for(const a of [...Array.from({length:20001},(_,i)=>.1+i*5.9/20000),2150/1000,960/450]){const A=1672/941,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);let cx=.510-.010*sm(1,A,a);cx=Math.max(.5*sx+.005,Math.min(1-.5*sx-.005,cx));assert(cx-.5*sx-.0008>=-1e-12&&cx+.5*sx+.0008<=1+1e-12);assert(.5-.5*sy-.0003>=-1e-12&&.5+.5*sy+.0003<=1+1e-12);}
+// Conservative mathematical bounds cover all caller times (not just rendered snapshots).
+const A=1672/941;
+for(let i=0;i<=20000;i++){
+ const a=.1+i*5.9/20000,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);
+ const cx=Math.max(.5*sx+.005,Math.min(1-.5*sx-.005,.5));
+ for(const x of [cx-.5*sx,cx+.5*sx])assert(x*1672/1774>=0&&x*1672/1774<1);
+ for(const y of [.5-.5*sy,.5+.5*sy])assert(y*941/1831>=0&&y*941/1831<1);
+}
+for(const [center,size,lag,drift] of [[[.735,.255],[.033,.073],.30,.026],[[.510,.230],[.057,.126],.20,.032],[[.280,.245],[.080,.176],.10,.040]]){
+ const xmin=center[0]-drift*(1+Math.sin(lag))-.5*size[0],xmax=center[0]+drift*(1-Math.sin(lag))+.5*size[0];
+ const ymin=center[1]-.012*(1-Math.sin(lag*.7))-.5*size[1],ymax=center[1]+.012*(1+Math.sin(lag*.7))+.5*size[1];
+ assert(xmin>0&&xmax<1&&ymin>0&&ymax<.347,'entire balloon motion remains in safe sky envelope');
+ assert(drift*2*Math.PI/960*1672<.438,'slow horizontal speed');
+}
+for(const [x0,cw] of [[0,591],[591,592],[1183,591]])for(const q of [0,1]){
+ const x=(x0+.5+q*(cw-1))/1774,y=(944.5+q*886)/1831;
+ assert(x>0&&x<1&&y>0&&y<1,'sprite half-texel bounds');
+}
+console.log('PASS: fixed landscape UV, three rigid balloon layers, slow bounded motion, safe sky envelopes and atlas half-texel guards.');

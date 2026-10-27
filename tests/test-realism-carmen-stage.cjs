@@ -7,13 +7,32 @@ const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
 // Integration scope: replace the obsolete crab wrapper, retain base stage fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-carmen-stage.js?v=20261026-stage1'));
+assert(html.includes('realism-carmen-stage.js?v=20261027-weight1'));
 assert(!html.includes('<script src="realism-nature-crab.js'));
 assert(base.includes("'carmen-prelude':[10,2,'舞台照明を受ける緋色の幕']"));
 const crypto=require('crypto');
-assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'68c7d51aec99e827743eae5423050ada3a8e45d22cd6e37369a983021d2475a1');
-for(const [name,hash] of [['curtain','e5d40587e4ef492fc0d91c301fa61199a81b034ae5d56d0fdaae49e5b91435a6'],['background','3b4e1848b79f9ac52ebe550b074820c0899895f3df685b39d0b876c7b57085ba']])assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/carmen-stage-'+name+'.webp'))).digest('hex'),hash);
-const ids=['carmen-prelude',...Array.from({length:73},(_,i)=>'other-'+i)];
+assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'05f9e0ff40deacec2190dfe70d639ed3915bd0d0cf2314d8c45ccb2b2b43950f');
+for(const [name,hash] of [['curtain-weighted','965f91773cc86529530e9cd9fd0b5d97e6e54c6ff8b2677bc7ac20544936ad11'],['background','3b4e1848b79f9ac52ebe550b074820c0899895f3df685b39d0b876c7b57085ba']])assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/carmen-stage-'+name+'.webp'))).digest('hex'),hash);
+assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'caller clock only');
+assert(source.includes('vec3 background=stagePhoto(q);'),'background never deformed');
+assert(source.includes('mod(mod(time,60.)+60.,60.)'),'negative-safe bounded phase');
+assert(source.includes('1.-smoothstep(.86,.98,q.y)'),'upper suspension pinned');
+assert(source.includes('vec2(.0022*pressure,.00016'),'minute weighted fabric drift');
+// Load the actual 74-entry script chain, not only synthetic delegation IDs.
+function catalog(withCandidate){
+ const win={dispatchEvent(){}};const sb={window:win,document:{createElement:()=>({getContext:()=>null,addEventListener(){}})},Image:class{},CustomEvent:class{},console};vm.createContext(sb);
+ for(const m of html.matchAll(/<script src="(realism[^"?]+)(?:\?[^"]*)?"><\/script>/g)){
+  if(!withCandidate&&m[1]==='realism-carmen-stage.js')continue;
+  vm.runInContext(fs.readFileSync(path.join(repoRoot,m[1]),'utf8'),sb,{filename:m[1]});
+ }
+ return win.ClassicaRealism;
+}
+const realOld=catalog(false),realNew=catalog(true),before=JSON.parse(JSON.stringify(realOld.list())),after=JSON.parse(JSON.stringify(realNew.list()));
+assert.equal(before.length,74);assert.equal(after.length,74);assert.deepEqual(after.map(x=>x.id),before.map(x=>x.id));
+for(const old of before){const now=after.find(x=>x.id===old.id);assert(realNew.has(old.id));if(old.id!=='carmen-prelude'){assert.deepEqual(now,old);assert.equal(realNew.describe(old.id),realOld.describe(old.id));}}
+assert.notEqual(realNew.describe('carmen-prelude'),realOld.describe('carmen-prelude'));
+
+const ids=['carmen-prelude' ,...Array.from({length:73},(_,i)=>'other-'+i)];
 function setup({noGL=false,failUpload=false}={}){
  const stats={created:0,deleted:0,programs:0,deletedPrograms:0,drawn:0,fallback:0,events:[],times:[],uploads:0}, handlers={},images=[];
  let lost=false,serial=1;

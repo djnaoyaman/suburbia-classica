@@ -1,54 +1,47 @@
-/* Carmen Prelude: generated photographic-style stage material.
- * Local wind pressure animates silk folds/hem; architecture remains rigid.
- * Not recorded footage or generated video; load after the shared natural context.
+/* Carmen Prelude: weighted scarlet stage drapery, corrected hanging shape.
+ * Top suspension and left edge pinned; minute local fold drift only.
+ * The existing separate stone/backstage/floor material remains unchanged.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='carmen-prelude';
- const description='金色の舞台光に緋色の絹幕がたわみ、奥の石造アーチが深い陰影を保つ';
+ const description='金色の舞台光のなか、緋色の重い幕が吊り元から縦のひだを作って垂れ、裾近くの布だけが微かに揺れる。奥の石造アーチは深い陰影を保つ';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;uniform sampler2D backdrop;
 const float TAU=6.28318530718;
-vec4 silkPhoto(vec2 p){return texture2D(material,vec2(p.x,1.-p.y));}
+vec4 curtainPhoto(vec2 p){return texture2D(material,vec2(p.x,1.-p.y));}
 vec3 stagePhoto(vec2 p){return texture2D(backdrop,vec2(p.x,1.-p.y)).rgb;}
 void main(){
-vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
-// Responsive photographic framing: keep the free scarlet hem and the warm
-// arch edge together in the narrow crop; no camera pan or zoom is animated.
-float portrait=1.-smoothstep(.75,1.15,a);
-vec2 center=vec2(mix(.5,.56,portrait),mix(.46,.5,portrait));
-vec2 q=center+(uv-.5)*vec2(min(a,1.),min(1./a,1.))*.98;
-float t=mod(mod(time,48.)+48.,48.)/48.*TAU;
-// One 48-second, seek-deterministic wind/light cycle, not a claim of
-// bar-accurate synchronization to the recording. The upper suspension and
-// left hanging edge remain pinned; slower pressure bends the lower folds.
-// Only the alpha-isolated silk is deformed. The separate background is
-// sampled at q, so even backstage rigging and newly exposed gaps stay rigid.
-float side=smoothstep(.025,.17,q.x)*(1.-smoothstep(.61,.69,q.x));
-float height=smoothstep(.14,.24,q.y)*(1.-smoothstep(.84,.99,q.y));
-float flex=side*height*pow(1.-q.y,1.25);
-float pressure=sin(t*7.-q.y*5.5)+.32*sin(t*11.-q.y*9.+q.x*4.);
-vec2 flow=flex*vec2(.049*pressure,.014*sin(t*7.-q.y*5.5-1.2));
-vec2 p=clamp(q+flow,vec2(.001),vec2(.999));
-vec4 cloth=silkPhoto(p);
-vec3 background=stagePhoto(q);
-vec3 col=cloth.rgb;
-// Low-amplitude moving highlights follow the photographed silk only.
-// No strobe, full-screen flash, fake camera motion or warped architecture.
-float silk=smoothstep(.06,.18,col.r-max(col.g,col.b));
-float lightBand=exp(-pow((p.x-(.36+.055*sin(t*2.)))*7.,2.));
-float shadow=.5-.5*cos(t);
-float foldLight=(.95+.105*lightBand+.035*sin(t*7.-p.y*5.5)-.07*shadow);
-col*=mix(1.,foldLight,silk*side);
-gl_FragColor=vec4(mix(background,col,cloth.a),1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ float portrait=1.-smoothstep(.75,1.15,a);
+ vec2 span=vec2(min(a,1.),min(1./a,1.))*.98;
+ // Static framing keeps the weighted hem and a little stage floor in wide crops.
+ float centerX=clamp(mix(.5,.56,portrait),span.x*.5+.001,1.-span.x*.5-.001);
+ vec2 center=vec2(centerX,min(.5,.145+span.y*.5));
+ vec2 q=center+(uv-.5)*span;
+ float t=TAU*mod(mod(time,60.)+60.,60.)/60.;
+ // Heavy hanging fabric: pin upper support/left edge and limit deformation to
+ // tiny differently phased folds. No sweeping the entire cutout through space.
+ float side=smoothstep(.015,.13,q.x)*(1.-smoothstep(.54,.59,q.x));
+ float support=1.-smoothstep(.86,.98,q.y);
+ float flex=side*support*pow(max(0.,1.-q.y),1.7);
+ float pressure=sin(t*5.-q.y*3.2)+.2*sin(t*3.-q.y*5.+q.x*4.);
+ vec2 p=q+flex*vec2(.0022*pressure,.00016*sin(t*5.-q.y*3.2-1.2));
+ vec4 cloth=curtainPhoto(p);
+ // Ignore single-alpha-step generation dust outside the antialiased cloth edge.
+ cloth.a=cloth.a<.006?0.:cloth.a;
+ vec3 background=stagePhoto(q);
+ // Subtle illumination follows fabric only; background and rigging stay rigid.
+ vec3 lit=cloth.rgb*(1.+.01*side*support*sin(t*3.-p.y*4.));
+ gl_FragColor=vec4(mix(background,lit,cloth.a),1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function images(){return ['curtain','background'].map(name=>typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/carmen-stage-'+name+'.webp',announce,releaseMaterial):{state:'unavailable',value:null});}
+ function images(){return ['curtain','background'].map(name=>typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/carmen-stage-'+(name==='curtain'?'curtain-weighted':name)+'.webp',announce,releaseMaterial):{state:'unavailable',value:null});}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,uploadFailed=false;const shaders=[],textures=[];

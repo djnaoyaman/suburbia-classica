@@ -4,17 +4,34 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-farandole-chain.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Replace only the unrelated animal wrapper; retain the original base fallback.
+// Owner-selected architectural setting; all other modes/scenes remain untouched.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-farandole-chain.js?v=20261026-chain1'));
+assert(html.includes('realism-farandole-chain.js?v=20261027-sagrada1'));
 assert(!html.includes('<script src="realism-nature-bee.js'));
-assert(base.includes("'farandole':"));
-const crypto=require('crypto');
-assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'082b6a1254cb79c69f9a457486d19df5dd0124472b62af78e9faa252fbbab1b1');
-assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/farandole-linked-chain.webp'))).digest('hex'),'fb70e3356725976fd157ecc17a4dac6e288d14a9f0c7285d2dc8ff98d591c702');
-assert(source.includes('texture2D(material,vec2(q.x,1.-q.y))'));
-assert(!/p\s*[+*\-]?=.{0,60}time/.test(source));
+assert(base.includes("'farandole':[3,4,'南仏の風に揺れる草原'],"));
+assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'caller clock only');
+assert(source.includes('vec3 original=texture2D(material,p).rgb;'),'fixed photographic coordinates');
+assert.equal((source.match(/texture2D\(/g)||[]).length,1,'photo may not be sampled at moving coordinates');
+assert(source.includes('original*(1.-.018*pool*cloud)'),'floor-light attenuation local and bounded');
+assert(source.includes('col+=air*dust'),'dust stays inside local illuminated-air mask');
+assert(source.includes('mod(mod(time,120.)+120.,120.)'),'negative-safe bounded caller time');
+assert(source.includes('cx=clamp(cx,span.x*.5+.001,1.-span.x*.5-.001)'),'safe responsive focal crop');
+
+// Load the actual 74-entry script chain, not only synthetic delegation IDs.
+function catalog(withCandidate){
+ const win={dispatchEvent(){}};const sb={window:win,document:{createElement:()=>({getContext:()=>null,addEventListener(){}})},Image:class{},CustomEvent:class{},console};vm.createContext(sb);
+ for(const m of html.matchAll(/<script src="(realism[^"?]+)(?:\?[^"]*)?"><\/script>/g)){
+  if(!withCandidate&&m[1]==='realism-farandole-chain.js')continue;
+  vm.runInContext(fs.readFileSync(path.join(repoRoot,m[1]),'utf8'),sb,{filename:m[1]});
+ }
+ return win.ClassicaRealism;
+}
+const realOld=catalog(false),realNew=catalog(true),before=JSON.parse(JSON.stringify(realOld.list())),after=JSON.parse(JSON.stringify(realNew.list()));
+assert.equal(before.length,74);assert.equal(after.length,74);assert.deepEqual(after.map(x=>x.id),before.map(x=>x.id));
+for(const old of before){const now=after.find(x=>x.id===old.id);assert(realNew.has(old.id));if(old.id!=='farandole'){assert.deepEqual(now,old);assert.equal(realNew.describe(old.id),realOld.describe(old.id));}}
+assert.notEqual(realNew.describe('farandole'),realOld.describe('farandole'));
+
 const ids=['farandole',...Array.from({length:73},(_,i)=>'other-'+i)];
 function setup({noGL=false,failUpload=false}={}){
  const stats={created:0,deleted:0,programs:0,deletedPrograms:0,drawn:0,fallback:0,events:[],times:[],uploads:0}, handlers={},images=[];
@@ -37,16 +54,17 @@ function setup({noGL=false,failUpload=false}={}){
  const st=a.init('farandole');a.draw(c,960,540,0,st);assert.equal(e.stats.drawn,0);
  e.images.forEach(img=>img.onload());await new Promise(r=>setImmediate(r));assert.equal(g.materialState().running,0);assert.equal(e.stats.events.length,1);
  assert(a.draw(c,1920,1080,3,st));assert.equal(e.canvas.width,960);assert.equal(e.canvas.height,540);assert.equal(e.stats.created,1);
- a.draw(c,277,600,12,st);a.draw(c,277,600,12,st);a.draw(c,960,540,120,st);a.draw(c,960,540,0,st);a.draw(c,960,540,NaN,st);a.draw(c,960,540,Infinity,st);
- assert.equal(e.stats.created,1);assert.equal(e.stats.uploads,1);assert.deepEqual(e.stats.times,[3,12,12,120,0,0,0]);assert.equal(a.draw(c,0,600,0,st),false);
+ a.draw(c,277,600,12,st);a.draw(c,277,600,12,st);a.draw(c,960,540,48,st);a.draw(c,960,540,0,st);a.draw(c,960,540,NaN,st);a.draw(c,960,540,Infinity,st);
+ assert.equal(e.stats.created,1);assert.equal(e.stats.uploads,1);assert.deepEqual(e.stats.times,[3,12,12,48,0,0,0]);assert.equal(a.draw(c,0,600,0,st),false);
  e.setLost(true);const before=e.stats.drawn;a.draw(c,277,600,1,st);assert.equal(e.stats.drawn,before);e.setLost(false);
  e.handlers.webglcontextrestored();assert.equal(e.stats.deleted,1);assert.equal(e.stats.deletedPrograms,1);
  a.draw(c,277,600,4,st);assert.equal(e.stats.created,2);
  for(const id of ['other-0','other-1']){g.activate(id);g.material(id,id+'.webp',()=>{},()=>{});}assert(!g.materialState().retained.includes('farandole'));assert.equal(e.stats.deleted,2);
  g.activate('farandole');a.available('farandole');assert.equal(g.materialState().retained.length,2);
  const bad=setup({failUpload:true});bad.win.ClassicaNatureGL.activate('farandole');bad.win.ClassicaRealism.available('farandole');bad.images.forEach(img=>img.onload());await new Promise(r=>setImmediate(r));const bst=bad.win.ClassicaRealism.init('farandole');bad.win.ClassicaRealism.draw(c,960,540,1,bst);bad.win.ClassicaRealism.draw(c,960,540,2,bst);assert.equal(bad.stats.created,1);assert.equal(bad.stats.deleted,1);assert.equal(bad.stats.drawn,0);assert.equal(bad.stats.fallback,2);
+ const failed=setup();failed.win.ClassicaNatureGL.activate('farandole');failed.win.ClassicaRealism.available('farandole');failed.images[0].onerror();assert.equal(failed.win.ClassicaNatureGL.materialState().running,0);failed.win.ClassicaRealism.draw(c,960,540,4,failed.win.ClassicaRealism.init('farandole'));assert.equal(failed.stats.drawn,0);assert.equal(failed.stats.fallback,1);
+ const old=setup();old.win.ClassicaNatureGL.material=undefined;old.win.ClassicaNatureGL.activate('farandole');old.win.ClassicaRealism.draw(c,960,540,4,old.win.ClassicaRealism.init('farandole'));assert.equal(old.images.length,0);assert.equal(old.stats.fallback,1);
  const nogl=setup({noGL:true});nogl.win.ClassicaNatureGL.activate('farandole');nogl.win.ClassicaRealism.draw(c,960,540,0,nogl.win.ClassicaRealism.init('farandole'));assert.equal(nogl.stats.fallback,1);
- const oldHost=setup();oldHost.win.ClassicaNatureGL.material=undefined;oldHost.win.ClassicaNatureGL.activate('farandole');oldHost.win.ClassicaRealism.draw(c,960,540,0,oldHost.win.ClassicaRealism.init('farandole'));assert.equal(oldHost.stats.fallback,1);assert.equal(oldHost.images.length,0);
- console.log('PASS: 74 IDs/73 delegates, 1-slot async material ready, bounded texture cache, invalid size/time, repeated draw/reduced12/seek, lost/restore disposal, 2-scene eviction release, upload fail-once fallback, unavailable GL fallback.');
+ console.log('PASS: 74 IDs/73 delegates, 1-slot async material ready, bounded texture cache, invalid size/time, repeated draw/reduced12/seek, lost/restore disposal, 2-scene eviction release, upload fail-once fallback, image failure, unavailable material API / GL fallback.');
  console.log(JSON.stringify({texturesCreated:e.stats.created,texturesDeleted:e.stats.deleted,draws:e.stats.drawn,retained:e.win.ClassicaNatureGL.materialState().retained}));
 })().catch(e=>{console.error(e);process.exit(1);});

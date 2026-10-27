@@ -1,35 +1,56 @@
-/* Bizet/Guiraud Farandole: a hand-linked communal dance, imagined today.
- * A still photographic moment, not historic choreography or animated performance.
- * Only a skirt interior and canopy sprig move; all linked hands and feet stay fixed.
+/* Farandole: an editorial Sagrada Familia interior interpretation.
+ * Not a Bizet/Guiraud location, performance or inspiration claim.
+ * Fixed photographic geometry; local floor illumination and sparse drifting air.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='farandole';
- const description='ファランドールの手をつなぐ連なりを、陽光の草地に集う人々の一瞬へ託す';
+ const description='サグラダ・ファミリアの枝分かれする石柱と色ガラスの光。幾層にも続く空間を、ファランドールの重なり合う活気へ重ねる、想像上の鑑賞風景';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1.5;
+float hash(float x){return fract(sin(x*127.1+311.7)*43758.5453);}
+float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.40,1.,length((p-c)/r));}
+float floorLight(vec2 p){
+ return oval(p,vec2(.50,.935),vec2(.27,.10))*smoothstep(.865,.890,p.y)*(1.-smoothstep(.985,.999,p.y));
+}
+float litAir(vec2 p){return oval(p,vec2(.573,.728),vec2(.012,.10));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- const float sourceAspect=1672./941.;
- vec2 span=vec2(min(a/sourceAspect,1.),min(sourceAspect/a,1.));
- // Portrait composition preserves three complete central dancers and their outer hand links.
- float centerX=.50+.035*(1.-span.x);
- vec2 p=vec2(centerX,.5)+(uv-.5)*span*.98;
- float phase=6.28318530718*mod(mod(time,120.)+120.,120.)/120.;
- // Breeze only within a blue skirt fold and a canopy sprig; all anatomy remains fixed.
- float cloth=1.-smoothstep(.40,1.,length((p-vec2(.455,.384))/vec2(.010,.035)));
- float leaf=1.-smoothstep(.45,1.,length((p-vec2(.585,.798))/vec2(.012,.028)));
- vec2 q=p+cloth*vec2(.0008*sin(phase*6.-p.y*17.),.0005*sin(phase*6.-p.y*17.-.5))
-         +leaf*vec2(.0010*sin(phase*5.+p.y*15.),.0010*sin(phase*5.+p.x*14.-.6));
- gl_FragColor=vec4(texture2D(material,vec2(q.x,1.-q.y)).rgb,1.);
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ float cx=mix(.63,.5,smoothstep(.75,1.5,a));
+ cx=clamp(cx,span.x*.5+.001,1.-span.x*.5-.001);
+ vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ // Sample the photo once at fixed coordinates: columns, glass and floor never warp.
+ vec3 original=texture2D(material,p).rgb;
+ float cycle=mod(mod(time,120.)+120.,120.)/120.,phase=TAU*cycle;
+ float pool=floorLight(p),air=litAir(p);
+ // Slow, restrained attenuation within an existing colored floor-light pool only.
+ // No image-wide brightness or hue modulation; sunlight geometry stays fixed.
+ float cloud=.5+.5*sin(phase-p.x*3.+.3*sin(phase*2.-p.y*4.));
+ vec3 col=original*(1.-.018*pool*cloud);
+ // Reuse the existing local-air technique: a few soft tiny motes between pillars.
+ // Each fades fully before recycling, avoiding respawn flashes and glitter.
+ float dust=0.;
+ for(int i=0;i<8;i++){
+  float n=float(i),life=fract(cycle+hash(n+2.));
+  float y=.680+.095*hash(n+32.)-.060*(life-.5);
+  float x=.573+(hash(n+61.)-.5)*.014+.0012*sin(TAU*life+hash(n+94.)*TAU);
+  float radius=mix(.00055,.00085,hash(n+127.));
+  float d=length((p-vec2(x,y))*vec2(ASPECT,1.));
+  float fade=smoothstep(0.,.16,life)*(1.-smoothstep(.84,1.,life));
+  dust+=(1.-smoothstep(radius*.2,radius*2.,d))*fade;
+ }
+ col+=air*dust*vec3(.10,.08,.045);
+ gl_FragColor=vec4(clamp(col,0.,1.),1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/farandole-linked-chain.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/farandole-sagrada-interior.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -38,9 +59,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Chain shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Nave shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Chain program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Nave program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

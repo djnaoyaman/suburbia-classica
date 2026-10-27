@@ -4,13 +4,15 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-elise-practice.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Integration scope: remove the arbitrary seed wrapper, retain the original procedural fallback.
+// Elise-only landscape; preserve every other scene, clock, lifecycle and fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-elise-practice.js?v=20261026-motif1'));
+assert(html.includes('realism-elise-practice.js?v=20261027-wood1'));
 assert(html.includes('<script src="realism-nature.js'));
 assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
-assert(source.includes('cx=clamp(cx,.5*span.x+.005'),'fixed crop bound required');
+assert(source.includes('texture2D(material,p)')&&!source.includes('vec2 q='),'photo geometry and camera remain fixed');
+assert(source.includes('vec3(.78,.77,.70),veil'),'localized translucent atmospheric layer only');
+assert(!/col\s*[*+]=/.test(source),'no global illumination pulse');
 assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
 
 // Load the actual 74-entry script chain, not only synthetic delegation IDs.
@@ -64,7 +66,12 @@ function setup({noGL=false,failUpload=false}={}){
  console.log(JSON.stringify({texturesCreated:e.stats.created,texturesDeleted:e.stats.deleted,draws:e.stats.drawn,retained:e.win.ClassicaNatureGL.materialState().retained}));
 })().catch(e=>{console.error(e);process.exit(1);});
 
-function sm(lo,hi,x){let t=Math.max(0,Math.min(1,(x-lo)/(hi-lo)));return t*t*(3-2*t);}
-for(const a of [...Array.from({length:20001},(_,i)=>.01+i*19.99/20000),2150/1000,960/450]){const A=1672/941,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);let cx=.44+.06*sm(1,A,a);cx=Math.max(.5*sx+.005,Math.min(1-.5*sx-.005,cx));assert(cx-.5*sx-.0022>=0&&cx+.5*sx+.0022<=1);assert(.5-.5*sy-.0006>=0&&.5+.5*sy+.0006<=1);}
-
-assert(source.includes("vec2(.310,.49),vec2(.036,.285)"),"cloth stays inside visually verified fabric interior");
+// The static .98 cover crop is bounded at every tested aspect and every time.
+for(const a of [...Array.from({length:20001},(_,i)=>.01+i*19.99/20000),2150/1000,960/450]){
+ const A=1672/941,sx=.98*Math.min(a/A,1),sy=.98*Math.min(A/a,1);
+ assert(.5-.5*sx>=.009999&&.5+.5*sx<=.990001);
+ assert(.5-.5*sy>=.009999&&.5+.5*sy<=.990001);
+}
+assert(source.includes('vec2(.452,.497),vec2(.073,.029)'),'left mist stays inside inspected hollow');
+assert(source.includes('vec2(.652,.510),vec2(.042,.029)'),'right mist excludes large trunks');
+assert(source.includes('vec2(.581,.548),vec2(.065,.024)'),'low mist excludes foreground path');

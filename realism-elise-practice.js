@@ -1,32 +1,38 @@
-/* Für Elise: a modest piano room; an editorial contemporary scene, not a historical location. */
+/* Für Elise: an imagined beechwood hollow; musical interpretation, not biography.
+ * The photo and camera stay fixed; only localized translucent ground mist drifts. */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='fur-elise';
- const description="身近なピアノの小品としての親密さを、静かな練習室と窓辺の薄い布に重ねる。";
+ const description="親密な旋律のためらいと戻る感覚を、秋のブナ林の曲がる小道と奥の明るみに重ねる。低い霧だけが静かに流れる。";
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
 const float TAU=6.28318530718,ASPECT=1672./941.;
-float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.25,1.,length((p-c)/r));}
+float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.12,1.,length((p-c)/r));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- float cx=mix(.44,.5,smoothstep(1.,ASPECT,a));
- vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
- cx=clamp(cx,.5*span.x+.005,1.-.5*span.x-.005);
- vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ // Static cover framing preserves the path and clearing at phone widths.
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
  float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
- float cloth=oval(p,vec2(.310,.49),vec2(.036,.285));
- vec2 q=p+cloth*vec2(.0022*sin(phase*17.+p.y*14.),.0006*sin(phase*11.+p.y*9.));
- vec3 col=texture2D(material,q).rgb;
+ // Thin air pockets lie between the large trunks, away from foreground earth.
+ float mist=max(oval(p,vec2(.452,.497),vec2(.073,.029)),
+            max(oval(p,vec2(.652,.510),vec2(.042,.029)),
+                oval(p,vec2(.581,.548),vec2(.065,.024))));
+ // Travelling low-frequency wisps, not photo displacement or global exposure.
+ // Dominant lateral speed is about 1.95 source pixels per second.
+ float broad=.5+.5*sin(p.x*90.-phase*2.+1.4*sin(p.y*100.-phase));
+ float detail=.5+.5*sin(p.x*163.-phase*3.+1.2*cos(p.y*220.-phase*2.));
+ float veil=.10*mist*smoothstep(.20,.90,.72*broad+.28*detail);
+ vec3 col=texture2D(material,p).rgb;
+ col=mix(col,vec3(.78,.77,.70),veil);
  gl_FragColor=vec4(col,1.);
 }
-
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/elise-practice.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/elise-beechwood.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

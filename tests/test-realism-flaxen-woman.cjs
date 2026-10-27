@@ -4,15 +4,16 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-flaxen-woman.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Integration scope: remove the colour-pun grass wrapper, retain the original meadow fallback.
+// Flaxen-only coastal landscape; preserve other scenes and original meadow fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-flaxen-woman.js?v=20261026-woman1'));
+assert(html.includes('realism-flaxen-woman.js?v=20261027-coast1'));
 assert(!html.includes('<script src="realism-nature-grass.js'));
 assert(base.includes("'flaxen-hair':[3,0,'金色の穂を揺らす草原の風'],"));
 assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
-assert(source.includes('vec2 q=p+hair*vec2('),'only isolated lower hair/fabric may move');
-assert(source.includes('float cy=mix(.5,.40'),'fixed ultrawide head-preserving crop');
+assert(source.includes('vec2 q=p+sky*cloud+sea*ripple+grass*breeze'),'motion remains inside three inspected natural-material masks');
+assert(!/col\s*[*+]=/.test(source),'no global exposure pulse');
+assert(source.includes('vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)'),'fixed landscape framing');
 assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
 
 // Load the actual 74-entry script chain, not only synthetic delegation IDs.
@@ -66,13 +67,13 @@ function setup({noGL=false,failUpload=false}={}){
  console.log(JSON.stringify({texturesCreated:e.stats.created,texturesDeleted:e.stats.deleted,draws:e.stats.drawn,retained:e.win.ClassicaNatureGL.materialState().retained}));
 })().catch(e=>{console.error(e);process.exit(1);});
 
-// Dense aspect-domain bounds, including former intermediate-wide crop failure.
-function sm(lo,hi,x){let t=Math.max(0,Math.min(1,(x-lo)/(hi-lo)));return t*t*(3-2*t);}
-for(const a of [...Array.from({length:20001},(_,i)=>.10+i*5.9/20000),2150/1000,2.130896,960/450,960/470,960/440]){
- const A=1672/941,sy=.99*Math.min(A/a,1),sx=.99*Math.min(a/A,1);
- let cy=.5-.1*sm(A,2.2,a);cy=Math.max(.5*sy+.005,Math.min(1-.5*sy-.005,cy));
- // Conservative sum of all declared displacement maxima, even where masks do not overlap.
- assert(cy-.5*sy-.00060>=-1e-12&&cy+.5*sy+.00060<=1+1e-12,'dense y bounds '+a);
- assert(.5-.5*sx-.00130>=-1e-12&&.5+.5*sx+.00130<=1+1e-12,'dense x bounds '+a);
+// Conservative analytic bounds: all masks are disjoint in y, .98 cover inset.
+for(const a of [...Array.from({length:20001},(_,i)=>.01+i*19.99/20000),2150/1000,960/450]){
+ const A=1672/940,sx=.98*Math.min(a/A,1),sy=.98*Math.min(A/a,1);
+ assert(.5-.5*sx-.006>=0&&.5+.5*sx+.006<=1);
+ assert(.5-.5*sy-.00035>=0&&.5+.5*sy+.00035<=1);
 }
-assert(source.includes('cy=clamp(cy,.5*span.y+.005,1.-.5*span.y-.005)'),'fixed crop bound required');
+assert(source.includes('(1.-smoothstep(.215,.245,p.y))'),'clouds exclude every land silhouette');
+assert(source.includes('smoothstep(.370,.390,p.y)'),'water excludes islands and horizon');
+assert(source.includes('vec2(.34,.79),vec2(.27,.17)'),'grass excludes rocks and skyline');
+assert(source.includes('(1.-smoothstep(.455,.475,p.y))'),'sea stays above the foreground-right rock line');

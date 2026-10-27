@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "timezone": "Asia/Tokyo",
+  "unit": "celsius",
+  "description": "固定8都市の日平均気温予報の等重み平均。公式の全国平均・観測値ではありません。",
+  "source": {
+    "name": "Open-Meteo",
+    "url": "https://open-meteo.com/",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "variable": "temperature_2m_mean",
+    "aggregation": "equal-weight mean of eight daily forecast means"
+  },
+  "cityIds": [
+    "sapporo",
+    "sendai",
+    "tokyo",
+    "niigata",
+    "nagoya",
+    "osaka",
+    "fukuoka",
+    "naha"
+  ],
+  "cities": [
+    {
+      "id": "sapporo",
+      "name": "札幌",
+      "latitude": 43.0618,
+      "longitude": 141.3545,
+      "weight": 0.125
+    },
+    {
+      "id": "sendai",
+      "name": "仙台",
+      "latitude": 38.2682,
+      "longitude": 140.8694,
+      "weight": 0.125
+    },
+    {
+      "id": "tokyo",
+      "name": "東京",
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "weight": 0.125
+    },
+    {
+      "id": "niigata",
+      "name": "新潟",
+      "latitude": 37.9162,
+      "longitude": 139.0364,
+      "weight": 0.125
+    },
+    {
+      "id": "nagoya",
+      "name": "名古屋",
+      "latitude": 35.1815,
+      "longitude": 136.9066,
+      "weight": 0.125
+    },
+    {
+      "id": "osaka",
+      "name": "大阪",
+      "latitude": 34.6937,
+      "longitude": 135.5023,
+      "weight": 0.125
+    },
+    {
+      "id": "fukuoka",
+      "name": "福岡",
+      "latitude": 33.5902,
+      "longitude": 130.4017,
+      "weight": 0.125
+    },
+    {
+      "id": "naha",
+      "name": "那覇",
+      "latitude": 26.2124,
+      "longitude": 127.6809,
+      "weight": 0.125
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-10-28",
+      "fetchedAt": "2026-10-27T23:23:14.422Z",
+      "cityCount": 8,
+      "cityMeanC": [
+        3.4,
+        9.8,
+        15.2,
+        12.2,
+        15.1,
+        15.5,
+        17,
+        23.1
+      ],
+      "meanC": 13.91
+    }
+  ]
+}

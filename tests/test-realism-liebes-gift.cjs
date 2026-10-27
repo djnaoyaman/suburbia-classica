@@ -4,15 +4,17 @@ const path=require('path');
 const repoRoot=path.resolve(process.argv[2]||path.join(__dirname,'..'));
 const source=fs.readFileSync(path.join(repoRoot,'realism-liebes-gift.js'),'utf8');
 const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
-// Integration scope: replace the unrelated snail wrapper, retain base letter-and-rose fallback.
+// Reframe this one photographic Realism as a landscape; retain the base fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-liebes-gift.js?v=20261026-gift1'));
+assert(html.includes('realism-liebes-gift.js?v=20261027-dales1'));
 assert(!html.includes('<script src="realism-nature-snail.js'));
 assert(base.includes("'liebesgruss':[15,1,'朝の手紙に添えられた薔薇'],"));
 const crypto=require('crypto');
-assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'bf9f9917ae3dfe94417ab23353d659b3e9764bc2d8e5cf7821a0b7a7a99914bb');
-assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/liebes-music-gift.webp'))).digest('hex'),'ede1ba4eb25cc6ee19197d661e10d5909953780d7c261a3ef0578c448819c44e');
+assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'61c727c2a118a3075fbd8a7e71fc1065a508187dac67eb095fd785be6e9c7633');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repoRoot,'assets/realism/liebes-dales-river.webp'))).digest('hex'),'44545939144f987955d85fdec45a2b05a3034d70be5c2f5f51761aab756590b1');
+assert(source.includes('vec2 q=p+water(p)*ripple'));
+assert(!source.includes('float tip='));
 const ids=['liebesgruss',...Array.from({length:73},(_,i)=>'other-'+i)];
 function setup({noGL=false,failUpload=false}={}){
  const stats={created:0,deleted:0,programs:0,deletedPrograms:0,drawn:0,fallback:0,events:[],times:[],uploads:0}, handlers={},images=[];

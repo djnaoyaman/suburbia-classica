@@ -1,4 +1,4 @@
-/* verdi-dies-irae: localized animal movement with fixed environment.
+/* verdi-dies-irae: continuously rising, drifting ash with fixed terrain.
  * Not video footage. Load after the existing natural studies and shared context host.
  */
 (() => {
@@ -9,13 +9,43 @@
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718;
 float ellipse(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.45,1.,length((p-c)/r));}
-vec2 flow(vec2 p,float age,float m){float v=.011+.004*sin(p.x*76.+p.y*22.);return p-vec2(.003*sin(p.y*83.+age*3.),v*age)*m;}
-void main(){vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
-float m=max(ellipse(p,vec2(.501,.527),vec2(.037,.069)),ellipse(p,vec2(.481,.616),vec2(.058,.054)));m*=smoothstep(.453,.478,p.y);
-float phase=fract(mod(time,48.)/12.);float p2=fract(phase+.5);float w=.5+.5*cos(6.28318530718*phase);
-vec2 q1=flow(p,phase,m),q2=flow(p,p2,m);vec3 c=mix(texture2D(material,vec2(q1.x,1.-q1.y)).rgb,texture2D(material,vec2(q2.x,1.-q2.y)).rgb,w);
-gl_FragColor=vec4(c,1.);}
+float plume(vec2 p){
+ // Source-image plume envelope, including a small wispy margin. Crater stays dry.
+ float stem=ellipse(p,vec2(.503,.520),vec2(.046,.075));
+ float crown=ellipse(p,vec2(.486,.627),vec2(.087,.100));
+ return max(stem,crown)*smoothstep(.455,.478,p.y);
+}
+vec2 rise(vec2 p,float age,float mask,float t){
+ float height=smoothstep(.470,.630,p.y);
+ float distance=.004+.042*height;
+ // Sampling progressively lower material sends detail upward, never down/backward.
+ // Faster rise aloft, slight leftward wind and small travelling billow folds.
+ float curl=.0026*height*sin(p.y*79.-TAU*t/56.+p.x*11.);
+ return p+mask*vec2(.008*height*age+curl,-distance*age);
+}
+void main(){
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ // Preserve the existing photograph and focal crop exactly.
+ vec2 p=(uv-.5)*vec2(a,1.)/max(a,1.)+.5;
+ float t=mod(mod(time,168.)+168.,168.);
+ float mask=plume(p);
+ if(mask<=0.){gl_FragColor=texture2D(material,vec2(p.x,1.-p.y));return;}
+ float phase=fract(t/14.),other=fract(phase+.5);
+ float blend=.5+.5*cos(TAU*phase);
+ vec2 q1=rise(p,phase,mask,t),q2=rise(p,other,mask,t);
+ vec3 c=mix(texture2D(material,vec2(q1.x,1.-q1.y)).rgb,
+            texture2D(material,vec2(q2.x,1.-q2.y)).rgb,blend);
+ // Only upper ash becomes slightly translucent in upward-travelling wisps.
+ // Nearby same-height sky estimates the light behind the ash; no global fade.
+ float upper=smoothstep(.575,.685,p.y);
+ float wisps=.5+.5*sin(p.y*94.-TAU*t/21.+.8*sin(p.x*73.));
+ vec3 sky=mix(texture2D(material,vec2(.385,1.-p.y)).rgb,
+              texture2D(material,vec2(.610,1.-p.y)).rgb,clamp((p.x-.385)/.225,0.,1.));
+ c=mix(c,sky,mask*upper*(.035+.13*wisps));
+ gl_FragColor=vec4(c,1.);
+}
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
@@ -29,9 +59,9 @@ gl_FragColor=vec4(c,1.);}
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Seed shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Ash shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Seed program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Ash program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

@@ -1,32 +1,37 @@
-/* prelude-7: grounded editorial interpretation; not a historical photograph. */
+/* Prelude No.7: an editorial spring orchard for a graceful mazurka miniature.
+ * Not a specific Chopin place or historical inspiration claim.
+ * Only grass interiors sway; trees, village, lane, light and camera remain fixed.
+ */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='prelude-7';
- const description="マズルカ的な小品の軽やかさを、踊り出す前の二人と柔らかな衣服に重ねる。";
+ const description='春の果樹園から小さな村の緑へ開ける風景。花の枝と家並みは静止し、手前の草だけが柔らかな風に揺れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
-const float TAU=6.28318530718,ASPECT=1672./941.;
+const float TAU=6.28318530718,ASPECT=1672./940.;
 float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.25,1.,length((p-c)/r));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- float cx=mix(0.5,.5,smoothstep(1.,ASPECT,a));
+ float cx=mix(.55,.5,smoothstep(1.,ASPECT,a));
  vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
  cx=clamp(cx,.5*span.x+.005,1.-.5*span.x-.005);
  vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
  float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
- float localMask=oval(p,vec2(0.446,0.615),vec2(0.036,0.074));
- vec2 q=p+localMask*vec2(0.0012*sin(phase*15.+p.y*14.),0.0004*sin(phase*11.+p.x*13.));
- vec3 col=texture2D(material,q).rgb;
- gl_FragColor=vec4(col,1.);
+ // Grass interiors only. Trunks, stone walls, lane and cottages are excluded.
+ float grass=max(oval(p,vec2(.330,.845),vec2(.240,.105)),
+                 oval(p,vec2(.650,.865),vec2(.120,.085)));
+ vec2 breeze=vec2(.00085*sin(phase*5.+p.y*18.-p.x*8.)+.00030*sin(phase*7.+p.x*13.),
+                  .00018*sin(phase*5.-p.x*7.));
+ vec2 q=p+grass*breeze;
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
 }
-
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/prelude7-dance.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/prelude7-spring-orchard.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

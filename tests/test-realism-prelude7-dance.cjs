@@ -7,9 +7,14 @@ const shared=fs.readFileSync(path.join(repoRoot,'realism-context.js'),'utf8');
 // Integration scope: remove the arbitrary seed wrapper, retain the original procedural fallback.
 const html=fs.readFileSync(path.join(repoRoot,'index.html'),'utf8');
 const base=fs.readFileSync(path.join(repoRoot,'realism.js'),'utf8');
-assert(html.includes('realism-prelude7-dance.js?v=20261026-motif1'));
+assert(html.includes('realism-prelude7-dance.js?v=20261027-orchard1'));
 assert(!html.includes('<script src="realism-nature-steam.js'));
 assert(!/requestAnimationFrame|setInterval|Date\.now|performance\.now/.test(source),'must use caller clock only');
+assert(source.includes('vec2 q=p+grass*breeze;'),'grass-only source displacement');
+assert(source.includes('assets/realism/prelude7-spring-orchard.webp'));
+assert(!source.includes('assets/realism/prelude7-dance.webp'));
+assert(source.includes('oval(p,vec2(.330,.845),vec2(.240,.105))'));
+assert(source.includes('oval(p,vec2(.650,.865),vec2(.120,.085))'));
 assert(source.includes('cx=clamp(cx,.5*span.x+.005'),'fixed crop bound required');
 assert(source.includes('mod(mod(time,120.)+120.,120.)'),'continuous finite caller-time loop');
 
@@ -65,4 +70,4 @@ function setup({noGL=false,failUpload=false}={}){
 })().catch(e=>{console.error(e);process.exit(1);});
 
 function sm(lo,hi,x){let t=Math.max(0,Math.min(1,(x-lo)/(hi-lo)));return t*t*(3-2*t);}
-for(const a of [...Array.from({length:20001},(_,i)=>.01+i*19.99/20000),2150/1000,960/450]){const A=1672/941,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);let cx=0.5+0.0*sm(1,A,a);cx=Math.max(.5*sx+.005,Math.min(1-.5*sx-.005,cx));assert(cx-.5*sx-0.0012>=0&&cx+.5*sx+0.0012<=1);assert(.5-.5*sy-0.0004>=0&&.5+.5*sy+0.0004<=1);}
+for(const a of [...Array.from({length:20001},(_,i)=>.01+i*19.99/20000),2150/1000,960/450]){const A=1672/940,sx=.99*Math.min(a/A,1),sy=.99*Math.min(A/a,1);let cx=.55-.05*sm(1,A,a);cx=Math.max(.5*sx+.005,Math.min(1-.5*sx-.005,cx));assert(cx-.5*sx-.00115>=0&&cx+.5*sx+.00115<=1);assert(.5-.5*sy-.00018>=0&&.5+.5*sy+.00018<=1);}

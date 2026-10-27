@@ -1,39 +1,48 @@
-/* Generated photographic-style material with local natural-motion deformation.
- * Not recorded footage or generated video; load after the shared natural context.
+/* K331 first movement: mountain panorama from a quiet tea veranda.
+ * An editorial listening scene, not Mozart biography or a documented place.
+ * Camera, mountains and tea setting fixed; high clouds and a fine steam wisp move.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='k331-1';
- const description='同じ主題の変奏に重ねた、岩肌を伝う細い水筋';
+ const description='美しい山々と谷を眺めながら、お茶をゆっくり楽しむテラス。空の雲と細い湯気だけが静かに動く';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
-uniform vec2 resolution;
-uniform float time;
-uniform sampler2D material;
-const float TAU=6.28318530718;
-vec3 sampleAt(vec2 q){return texture2D(material,vec2(q.x,1.-q.y)).rgb;}
+uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1672./941.;
 void main(){
- vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;
- vec2 q=.5+(uv-.5)*vec2(min(aspect,1.),min(1./aspect,1.))*.94;
- float ph=TAU*mod(time,48.)/48.;vec3 base=sampleAt(q);
- float neutral=1.-smoothstep(.02,.17,max(base.r,max(base.g,base.b))-min(base.r,min(base.g,base.b)));
- float bright=smoothstep(.33,.66,dot(base,vec3(.2126,.7152,.0722)));
- float channel=exp(-pow(abs((q.x-.515)/.14),4.));float water=bright*neutral*channel;
- // Two staggered backtraces advect microstructure downward; each reset is hidden at zero weight.
- float a=fract(mod(time,48.)/6.),b=fract(a+.5),w=.5-.5*cos(TAU*a);
- float speed=.035+.014*sin(q.y*19.)+.009*sin(q.x*31.);
- vec2 warp=vec2(.003*sin(q.y*73.+ph*8.),0.);
- vec3 moving=sampleAt(q+warp+vec2(0.,(a-.5)*speed))*w+sampleAt(q-warp+vec2(0.,(b-.5)*speed))*(1.-w);
- float caustic=.94+.06*sin(q.y*120.+ph*8.+sin(q.x*35.));
- vec3 color=mix(base,moving*caustic,water*.9);
- gl_FragColor=vec4(color,1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ // Static portrait focal shift keeps both the deep valley and the small tea cue.
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
+ float cx=mix(.68,.5,smoothstep(.65,ASPECT,a));
+ cx=clamp(cx,.5*span.x+.01,1.-.5*span.x-.01);
+ vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
+ // Upper sky only; leave a broad fixed margin above the highest mountain ridge.
+ float roof=.110+.045*smoothstep(.25,.50,p.x);
+ float sky=smoothstep(.045,.075,p.x)*(1.-smoothstep(.945,.985,p.x))
+          *smoothstep(.012,.035,p.y)*(1.-smoothstep(roof-.020,roof,p.y));
+ vec2 cloud=vec2(.006*sin(phase)+.001*sin(phase*2.+p.y*3.),.00030*sin(phase-.7));
+ vec2 q=p+sky*cloud;
+ vec3 col=texture2D(material,q).rgb;
+ // A rising, dispersing translucent wisp above (never on) the cup rim.
+ // Background geometry is sampled at fixed p here, not stretched with the steam.
+ float h=clamp((.750-p.y)/.078,0.,1.);
+ float centre=.759+.006*h+.003*h*sin(h*9.-phase*20.);
+ float width=.0013+.0015*h;
+ float area=smoothstep(.742,.748,p.x)*(1.-smoothstep(.775,.781,p.x))
+           *smoothstep(.672,.688,p.y)*(1.-smoothstep(.742,.749,p.y));
+ float curl=exp(-pow((p.x-centre)/width,2.));
+ float steam=area*curl*(1.-smoothstep(.55,1.,h))*(.055+.035*sin(h*23.-phase*17.));
+ col=mix(col,vec3(.90,.90,.86),steam);
+ gl_FragColor=vec4(col,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/k331-1-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/k331-mountain-tea.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];

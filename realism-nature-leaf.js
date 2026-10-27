@@ -1,46 +1,44 @@
-/* pathetique-2: generated photographic material with local elastic deformation.
- * Not video footage. Load after the existing natural studies and shared context host.
+/* Pathetique II: an imagined quiet Dubrovnik-inspired residential lane.
+ * Editorial listening scene, not a documented Beethoven place.
+ * Architecture and camera fixed; only the open window's curtain breathes.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='pathetique-2';
- const description='葉柄を支点に若葉が曲がり、葉脈へ光が透ける情景';
+ const description='晴れた午後のドゥブロヴニク旧市街を思わせる石畳の路地。家の開いた窓で薄いカーテンが揺れ、室内からピアノが聴こえるような静けさを想像する';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
-uniform vec2 resolution;
-uniform float time;
-uniform sampler2D material;
-const float TAU=6.28318530718;
-float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float noise(vec2 p){vec2 a=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(a),hash(a+vec2(1,0)),f.x),mix(hash(a+vec2(0,1)),hash(a+1.),f.x),f.y);}
+uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1.5;
+float curtain(vec2 p){
+ float depth=clamp((p.y-.284)/.144,0.,1.);
+ float left=mix(.601,.582,depth),right=mix(.619,.615,depth)-.009*smoothstep(.386,.405,p.y);
+ // Feather inside the photographed aperture: masonry, shutters and sill are fixed.
+ return smoothstep(.284,.298,p.y)*(1.-smoothstep(.397,.405,p.y))
+       *smoothstep(left,left+.003,p.x)*(1.-smoothstep(right-.003,right,p.x));
+}
 void main(){
- vec2 uv=gl_FragCoord.xy/resolution;float aspect=resolution.x/resolution.y;vec2 p=(uv-.5)*vec2(aspect,1.);
- float ph=TAU*mod(time,48.)/48.;float n=noise(p*2.)*.7+noise(p*4.)*.3;
- vec3 col=mix(vec3(.022,.052,.041),vec3(.09,.14,.077),n);
- col+=vec3(.06,.071,.025)*exp(-dot(p-vec2(-.22,.26),p-vec2(-.22,.26))*3.);
- float size=min(.88,aspect*1.18);vec2 tx=p/size+.5;
- float h=clamp(tx.y-.035,0.,1.),lateral=tx.x-.51;
- // Leaf petiole fixed: bending increases quadratically along midrib with delayed lobe torsion.
- float bend=.026*h*h*sin(ph-.7*h)+.008*h*h*sin(ph*2.-h*2.);
- tx.x-=bend;
- float curl=.065*sin(ph*2.-h*3.)*h;
- tx.x=.51+(tx.x-.51)/(1.+curl);
- tx.y+=.017*lateral*lateral*sin(ph*3.-h*3.5)*h+.005*abs(lateral)*sin(ph*2.-h*5.);
- vec4 s=texture2D(material,vec2(tx.x,1.-tx.y));
- float inside=step(0.,tx.x)*step(tx.x,1.)*step(0.,tx.y)*step(tx.y,1.);
- float diffuse=.83+.08*cos(ph-.7*h)+.035*cos(ph*2.-h*3.)*lateral;
- float transmission=.07*pow(max(0.,sin(ph-h*2.)*.5+.5),2.)*smoothstep(.01,.25,abs(lateral));
- vec3 lit=s.rgb*vec3(.90,.96,.79)*diffuse+vec3(.11,.13,.025)*transmission;
- col=mix(col,lit,s.a*inside);
- col*=1.-.12*dot(uv-.5,uv-.5);
- gl_FragColor=vec4(col,1.);
+ vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
+ // Static centered cover crop retains both lane and open window on phones.
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ float mask=curtain(p);
+ if(mask<=0.){gl_FragColor=texture2D(material,p);return;}
+ float phase=TAU*mod(mod(time,60.)+60.,60.)/60.;
+ float depth=clamp((p.y-.284)/.144,0.,1.);
+ // Header is anchored; the free cloth folds respond to two slow breeze scales.
+ float bend=depth*depth*(.0012*sin(phase*5.-depth*.8)+.0004*sin(phase*3.-depth*2.));
+ vec2 q=p+mask*vec2(bend,.00025*depth*sin(phase*4.-depth));
+ vec3 c=texture2D(material,q).rgb;
+ // A minute local fold-light change, never a whole-scene brightness pulse.
+ c*=1.+mask*.008*sin(phase*3.-depth*1.3);
+ gl_FragColor=vec4(c,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/pathetique-leaf-material.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/pathetique-dubrovnik-lane.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -49,9 +47,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Seed shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Lane shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Seed program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Lane program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

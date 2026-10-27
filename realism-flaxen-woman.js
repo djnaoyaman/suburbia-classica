@@ -1,36 +1,43 @@
-/* La Fille aux cheveux de lin: an imagined adult figure from the title.
- * Not a real muse, singer or historic portrait; face/head stay fixed.
- * A few lower hair tips and a fabric patch respond to a light breeze.
+/* La Fille aux cheveux de lin: an imagined flowering coastal meadow.
+ * Literary/musical landscape, not a portrait or a documented Debussy place.
+ * Only grass, clear sea interiors and high clouds move; terrain and camera fixed.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='flaxen-hair';
- const description='静かな草地に立つ亜麻色の髪の成人女性。顔と姿勢は動かず、毛先と衣服にだけ微風が通る';
+ const description='花咲く草地と遠い海、亜麻色の穂を渡る微風。素朴な旋律の明るさを、人のいない広い海辺の情景へ重ねる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
-const float TAU=6.28318530718,ASPECT=1672./941.;
-float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.35,1.,length((p-c)/r));}
+const float TAU=6.28318530718,ASPECT=1672./940.;
+float oval(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.28,1.,length((p-c)/r));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- float cy=mix(.5,.40,smoothstep(ASPECT,2.2,a));
- vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
- cy=clamp(cy,.5*span.y+.005,1.-.5*span.y-.005);
- vec2 p=vec2(.5,cy)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ vec2 p=vec2(.5)+(vec2(uv.x,1.-uv.y)-.5)*vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.98;
  float phase=TAU*mod(mod(time,120.)+120.,120.)/120.;
- // Masks are below the face, eyes, mouth, neck and rigid upper head.
- float hair=max(oval(p,vec2(.407,.735),vec2(.042,.058)),oval(p,vec2(.310,.605),vec2(.040,.075)));
- float cloth=oval(p,vec2(.545,.855),vec2(.045,.070));
- vec2 q=p+hair*vec2(.00085*sin(phase*10.+p.y*11.),.00035*sin(phase*6.+p.x*10.))+cloth*vec2(.00045*sin(phase*6.+p.y*9.),.00025*sin(phase*4.+p.x*12.));
- vec3 col=texture2D(material,q).rgb;
- gl_FragColor=vec4(clamp(col,0.,1.),1.);
+ // High cloud interiors stay above every headland, island and horizon.
+ float sky=smoothstep(.015,.055,p.x)*(1.-smoothstep(.945,.985,p.x))
+          *smoothstep(.015,.045,p.y)*(1.-smoothstep(.215,.245,p.y));
+ // Clear sea only: keep margins from the left rocks and the foreground shore.
+ float sea=smoothstep(.53,.57,p.x)*(1.-smoothstep(.94,.975,p.x))
+          *smoothstep(.370,.390,p.y)*(1.-smoothstep(.455,.475,p.y));
+ // Individual soft grass masses, not a translating whole foreground.
+ float grass=max(oval(p,vec2(.34,.79),vec2(.27,.17)),
+                 oval(p,vec2(.76,.78),vec2(.20,.16)));
+ vec2 cloud=vec2(.005*sin(phase)+.001*sin(phase*2.+p.y*3.),.00035*sin(phase-.7));
+ vec2 ripple=vec2(.00085*sin(p.y*130.-phase*13.+p.x*7.)+.00025*sin(p.y*190.-phase*19.),
+                   .00022*sin(p.y*150.-phase*9.+p.x*11.));
+ vec2 breeze=vec2(.0015*sin(phase*19.+p.y*20.)+.0004*sin(phase*29.+p.x*16.),
+                   .00035*sin(phase*17.+p.x*13.));
+ vec2 q=p+sky*cloud+sea*ripple+grass*breeze;
+ gl_FragColor=vec4(texture2D(material,q).rgb,1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/flaxen-woman-meadow.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/flaxen-coastal-meadow.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -39,9 +46,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Flaxen portrait shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Flaxen coast shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Flaxen portrait program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Flaxen coast program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

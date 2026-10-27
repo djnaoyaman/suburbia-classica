@@ -1,34 +1,42 @@
-/* Offenbach/Binder overture: a contemporary backstage costume interpretation.
- * The Galop melody's can-can reception, not an authentic 1858 costume or a dancer.
- * Interior flounces move gently; support, bodice, silhouette and room remain fixed.
+/* Offenbach/Binder overture: a contemporary French-cancan stage interpretation.
+ * Not a reconstruction of the original operatic dance or a named theatre production.
+ * Performer anatomy, costumes, stage, architecture and camera remain rigid.
+ * Only three safe overhead haze interiors receive continuous blended advection.
  */
 (() => {
  'use strict';
  const legacy=window.ClassicaRealism,id='orpheus-overture';
- const description='ギャロップがカンカンとして親しまれた華やぎを、舞台裏で出番を待つ青白のフリル衣装に託す';
+ const description='フレンチカンカンを想う劇場の全景。踊り手と舞台は静止し、頭上の薄い霞だけがゆっくり流れる';
  const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
  const fragment=`
 precision highp float;
 uniform vec2 resolution;uniform float time;uniform sampler2D material;
+const float TAU=6.28318530718,ASPECT=1672./941.;
+float oval(vec2 p,vec2 center,vec2 radius){return 1.-smoothstep(.25,1.,length((p-center)/radius));}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;float a=resolution.x/resolution.y;
- const float sourceAspect=1916./821.;
- vec2 span=vec2(min(a/sourceAspect,1.),min(sourceAspect/a,1.));
- vec2 p=vec2(.503,.5)+(uv-.5)*span*.99;
- float phase=6.28318530718*mod(mod(time,120.)+120.,120.)/120.;
- // Interior cotton tiers only. The outer hem, bodice, clip and stand are rigid.
- float cloth=smoothstep(.475,.487,p.x)*(1.-smoothstep(.550,.565,p.x))
-            *smoothstep(.28,.30,p.y)*(1.-smoothstep(.445,.465,p.y));
- vec2 flow=vec2(.00115*sin(phase*6.-p.y*15.)+.00030*sin(phase*10.+p.y*9.),
-                .00065*sin(phase*6.-p.y*15.-.7));
- vec2 q=p+cloth*flow;
- gl_FragColor=vec4(texture2D(material,vec2(q.x,1.-q.y)).rgb,1.);
+ vec2 span=vec2(min(a/ASPECT,1.),min(ASPECT/a,1.))*.99;
+ float cx=clamp(.5,.5*span.x+.005,1.-.5*span.x-.005);
+ vec2 p=vec2(cx,.5)+(vec2(uv.x,1.-uv.y)-.5)*span;
+ float seconds=mod(mod(time,120.)+120.,120.);
+ // Overhead wisps only, well above every head and clear of curtain/painted-tree edges.
+ float haze=max(oval(p,vec2(.360,.245),vec2(.025,.035)),
+            max(oval(p,vec2(.490,.250),vec2(.035,.035)),
+                oval(p,vec2(.635,.240),vec2(.024,.028))));
+ if(haze<=0.){gl_FragColor=vec4(texture2D(material,p).rgb,1.);return;}
+ float f0=fract(seconds/60.),f1=fract(f0+.5);
+ float weight=.5-.5*cos(TAU*f0);
+ vec2 wind=vec2(.012,-.006)*haze;
+ // Each phase resets only at zero contribution, preventing a reset jump.
+ vec3 a0=texture2D(material,p-wind*(f0-.5)).rgb;
+ vec3 a1=texture2D(material,p-wind*(f1-.5)).rgb;
+ gl_FragColor=vec4(mix(a1,a0,weight),1.);
 }
 `;
  let renderer;
  const announce=()=>window.dispatchEvent(new CustomEvent('classica-nature-ready',{detail:{id}}));
  function releaseMaterial(){if(renderer)renderer.releaseTexture();}
- function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/orpheus-wardrobe.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
+ function image(){return typeof window.ClassicaNatureGL?.material==='function'?window.ClassicaNatureGL.material(id,'assets/realism/orpheus-cancan-stage.webp',announce,releaseMaterial):{state:'unavailable',value:null};}
  function create(){
   const surface=window.ClassicaNatureGL?.acquire();if(!surface)return null;
   const {canvas,gl}=surface;let program,buffer,texture,uploadFailed=false;const shaders=[];
@@ -37,9 +45,9 @@ void main(){
    program=gl.createProgram();
    for(const [type,source] of [[gl.VERTEX_SHADER,vertex],[gl.FRAGMENT_SHADER,fragment]]){
     const s=gl.createShader(type);shaders.push(s);gl.shaderSource(s,source);gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Wardrobe shader unavailable');gl.attachShader(program,s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Cancan stage shader unavailable');gl.attachShader(program,s);
    }
-   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Wardrobe program unavailable');
+   gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Cancan stage program unavailable');
    shaders.splice(0).forEach(s=>gl.deleteShader(s));buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
    const u=Object.fromEntries(['resolution','time','material'].map(k=>[k,gl.getUniformLocation(program,k)]));

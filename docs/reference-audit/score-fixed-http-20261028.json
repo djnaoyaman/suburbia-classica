@@ -1,0 +1,662 @@
+[
+  {
+    "id": "fur-elise",
+    "url": "https://imslp.org/wiki/F%C3%BCr_Elise,_WoO_59_(Beethoven,_Ludwig_van)",
+    "finalUrl": "https://imslp.org/wiki/F%C3%BCr_Elise,_WoO_59_(Beethoven,_Ludwig_van)",
+    "status": 200,
+    "title": "Für Elise, WoO 59 (Beethoven, Ludwig van) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "moonlight",
+    "url": "https://imslp.org/wiki/Piano_Sonata_No.14,_Op.27/2_(Beethoven,_Ludwig_van)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Sonata_No.14,_Op.27/2_(Beethoven,_Ludwig_van)",
+    "status": 200,
+    "title": "Piano Sonata No.14, Op.27 No.2 (Beethoven, Ludwig van) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "tristesse",
+    "url": "https://imslp.org/wiki/%C3%89tudes,_Op.10_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/%C3%89tudes,_Op.10_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Études, Op.10 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "fantaisie-impromptu",
+    "url": "https://imslp.org/wiki/Fantaisie-impromptu,_Op.66_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Fantaisie-impromptu,_Op.66_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Fantaisie-impromptu, Op.66 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "nocturne-9-2",
+    "url": "https://imslp.org/wiki/Nocturnes,_Op.9_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Nocturnes,_Op.9_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Nocturnes, Op.9 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "raindrop",
+    "url": "https://imslp.org/wiki/Preludes,_Op.28_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Preludes,_Op.28_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Preludes, Op.28 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "clair-de-lune",
+    "url": "https://imslp.org/wiki/Suite_bergamasque_(Debussy,_Claude)",
+    "finalUrl": "https://imslp.org/wiki/Suite_bergamasque_(Debussy,_Claude)",
+    "status": 200,
+    "title": "Suite bergamasque, CD 82 (Debussy, Claude) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "gymnopedie-1",
+    "url": "https://imslp.org/wiki/3_Gymnop%C3%A9dies_(Satie,_Erik)",
+    "finalUrl": "https://imslp.org/wiki/3_Gymnop%C3%A9dies_(Satie,_Erik)",
+    "status": 200,
+    "title": "3 Gymnopédies (Satie, Erik) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "traumerei",
+    "url": "https://imslp.org/wiki/Kinderszenen,_Op.15_(Schumann,_Robert)",
+    "finalUrl": "https://imslp.org/wiki/Kinderszenen,_Op.15_(Schumann,_Robert)",
+    "status": 200,
+    "title": "Kinderszenen, Op.15 (Schumann, Robert) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "liebestraum-3",
+    "url": "https://imslp.org/wiki/Liebestr%C3%A4ume,_S.541_(Liszt,_Franz)",
+    "finalUrl": "https://imslp.org/wiki/Liebestr%C3%A4ume,_S.541_(Liszt,_Franz)",
+    "status": 200,
+    "title": "Liebesträume, S.541 (Liszt, Franz) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "flaxen-hair",
+    "url": "https://imslp.org/wiki/Pr%C3%A9ludes,_Livre_1_(Debussy,_Claude)",
+    "finalUrl": "https://imslp.org/wiki/Pr%C3%A9ludes,_Livre_1_(Debussy,_Claude)",
+    "status": 200,
+    "title": "Préludes, Livre 1, CD 125 (Debussy, Claude) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "arabesque-1",
+    "url": "https://imslp.org/wiki/2_Arabesques_(Debussy,_Claude)",
+    "finalUrl": "https://imslp.org/wiki/2_Arabesques_(Debussy,_Claude)",
+    "status": 200,
+    "title": "2 Arabesques, CD 74 (Debussy, Claude) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "prelude-bwv846",
+    "url": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)",
+    "finalUrl": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)",
+    "status": 200,
+    "title": "Prelude and Fugue in C major, BWV 846 (Bach, Johann Sebastian) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "pavane",
+    "url": "https://imslp.org/wiki/Pavane_pour_une_infante_d%C3%A9funte_(Ravel,_Maurice)",
+    "finalUrl": "https://imslp.org/wiki/Pavane_pour_une_infante_d%C3%A9funte_(Ravel,_Maurice)",
+    "status": 200,
+    "title": "Pavane pour une infante défunte, M.19 (Ravel, Maurice) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "nocturne-20",
+    "url": "https://imslp.org/wiki/Nocturne_in_C-sharp_minor,_B.49_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Nocturne_in_C-sharp_minor,_B.49_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Nocturne in C-sharp minor, B.49 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "pathetique-2",
+    "url": "https://imslp.org/wiki/Piano_Sonata_No.8,_Op.13_(Beethoven,_Ludwig_van)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Sonata_No.8,_Op.13_(Beethoven,_Ludwig_van)",
+    "status": 200,
+    "title": "Piano Sonata No.8, Op.13 (Beethoven, Ludwig van) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "k331-1",
+    "url": "https://imslp.org/wiki/Piano_Sonata_No.11_in_A_major,_K.331/300i_(Mozart,_Wolfgang_Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Sonata_No.11_in_A_major,_K.331/300i_(Mozart,_Wolfgang_Amadeus)",
+    "status": 200,
+    "title": "Piano Sonata No.11 in A major, K.331∕300i (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "prelude-7",
+    "url": "https://imslp.org/wiki/Preludes,_Op.28_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Preludes,_Op.28_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Preludes, Op.28 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "brahms-waltz-15",
+    "url": "https://imslp.org/wiki/16_Waltzes,_Op.39_(Brahms,_Johannes)",
+    "finalUrl": "https://imslp.org/wiki/16_Waltzes,_Op.39_(Brahms,_Johannes)",
+    "status": 200,
+    "title": "16 Waltzes, Op.39 (Brahms, Johannes) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "mendelssohn-spring-song",
+    "url": "https://imslp.org/wiki/Lieder_ohne_Worte,_Op.62_(Mendelssohn,_Felix)",
+    "finalUrl": "https://imslp.org/wiki/Lieder_ohne_Worte,_Op.62_(Mendelssohn,_Felix)",
+    "status": 200,
+    "title": "Lieder ohne Worte, Op.62 (Mendelssohn, Felix) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "goldberg-aria",
+    "url": "https://imslp.org/wiki/Goldberg-Variationen,_BWV_988_(Bach,_Johann_Sebastian)",
+    "finalUrl": "https://imslp.org/wiki/Goldberg-Variationen,_BWV_988_(Bach,_Johann_Sebastian)",
+    "status": 200,
+    "title": "Goldberg-Variationen, BWV 988 (Bach, Johann Sebastian) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "reverie",
+    "url": "https://imslp.org/wiki/R%C3%AAverie_(Debussy,_Claude)",
+    "finalUrl": "https://imslp.org/wiki/R%C3%AAverie_(Debussy,_Claude)",
+    "status": 200,
+    "title": "Rêverie, CD 76 (Debussy, Claude) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "gnossienne-1",
+    "url": "https://imslp.org/wiki/Gnossiennes_(Satie,_Erik)",
+    "finalUrl": "https://imslp.org/wiki/Gnossiennes_(Satie,_Erik)",
+    "status": 200,
+    "title": "Gnossiennes (Satie, Erik) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "waltz-64-2",
+    "url": "https://imslp.org/wiki/Waltzes,_Op.64_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Waltzes,_Op.64_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Waltzes, Op.64 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "waltz-69-1",
+    "url": "https://imslp.org/wiki/Waltzes,_Op.69_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "finalUrl": "https://imslp.org/wiki/Waltzes,_Op.69_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+    "status": 200,
+    "title": "Waltzes, Op.69 (Chopin, Frédéric) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "tchaikovsky-october",
+    "url": "https://imslp.org/wiki/The_Seasons,_Op.37a_(Tchaikovsky,_Pyotr)",
+    "finalUrl": "https://imslp.org/wiki/The_Seasons,_Op.37a_(Tchaikovsky,_Pyotr)",
+    "status": 200,
+    "title": "The Seasons, Op.37a (Tchaikovsky, Pyotr) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "k310-2",
+    "url": "https://imslp.org/wiki/Piano_Sonata_No.8_in_A_minor,_K.310/300d_(Mozart,_Wolfgang_Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Sonata_No.8_in_A_minor,_K.310/300d_(Mozart,_Wolfgang_Amadeus)",
+    "status": 200,
+    "title": "Piano Sonata No.8 in A minor, K.310∕300d (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "schubert-impromptu-90-3",
+    "url": "https://imslp.org/wiki/4_Impromptus,_D.899_(Schubert,_Franz)",
+    "finalUrl": "https://imslp.org/wiki/4_Impromptus,_D.899_(Schubert,_Franz)",
+    "status": 200,
+    "title": "4 Impromptus, D.899 (Schubert, Franz) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "brahms-op118-2",
+    "url": "https://imslp.org/wiki/6_Pieces,_Op.118_(Brahms,_Johannes)",
+    "status": "unverified",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "canon",
+    "url": "https://imslp.org/wiki/Canon%20and%20Gigue%20in%20D%20major,%20P.37%20(Pachelbel,%20Johann)",
+    "finalUrl": "https://imslp.org/wiki/Canon%20and%20Gigue%20in%20D%20major,%20P.37%20(Pachelbel,%20Johann)",
+    "status": 200,
+    "title": "Canon and Gigue in D major, P.37 (Pachelbel, Johann) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "air-g-string",
+    "url": "https://imslp.org/wiki/Orchestral%20Suite%20No.3%20in%20D%20major,%20BWV%201068%20(Bach,%20Johann%20Sebastian)",
+    "finalUrl": "https://imslp.org/wiki/Orchestral%20Suite%20No.3%20in%20D%20major,%20BWV%201068%20(Bach,%20Johann%20Sebastian)",
+    "status": 200,
+    "title": "Orchestral Suite No.3 in D major, BWV 1068 (Bach, Johann Sebastian) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "jesu-joy",
+    "url": "https://imslp.org/wiki/Herz%20und%20Mund%20und%20Tat%20und%20Leben,%20BWV%20147%20(Bach,%20Johann%20Sebastian)",
+    "finalUrl": "https://imslp.org/wiki/Herz%20und%20Mund%20und%20Tat%20und%20Leben,%20BWV%20147%20(Bach,%20Johann%20Sebastian)",
+    "status": 200,
+    "title": "Herz und Mund und Tat und Leben, BWV 147 (Bach, Johann Sebastian) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "rach-pc2-2",
+    "url": "https://imslp.org/wiki/Piano_Concerto_No.2,_Op.18_(Rachmaninoff,_Sergei)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Concerto_No.2,_Op.18_(Rachmaninoff,_Sergei)",
+    "status": 200,
+    "title": "Piano Concerto No.2, Op.18 (Rachmaninoff, Sergei) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "schubert-ave-maria",
+    "url": "https://imslp.org/wiki/12_Lieder_von_Franz_Schubert,_S.558_(Liszt,_Franz)",
+    "finalUrl": "https://imslp.org/wiki/12_Lieder_von_Franz_Schubert,_S.558_(Liszt,_Franz)",
+    "status": 200,
+    "title": "12 Lieder von Franz Schubert, S.558 (Liszt, Franz) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "liebesgruss",
+    "url": "https://imslp.org/wiki/Salut_d%27amour,_Op.12_(Elgar,_Edward)",
+    "finalUrl": "https://imslp.org/wiki/Salut_d%27amour,_Op.12_(Elgar,_Edward)",
+    "status": 200,
+    "title": "Salut d'amour, Op.12 (Elgar, Edward) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "vocalise",
+    "url": "https://imslp.org/wiki/14%20Romances,%20Op.34%20(Rachmaninoff,%20Sergei)",
+    "finalUrl": "https://imslp.org/wiki/14%20Romances,%20Op.34%20(Rachmaninoff,%20Sergei)",
+    "status": 200,
+    "title": "14 Romances, Op.34 (Rachmaninoff, Sergei) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "brahms-lullaby",
+    "url": "https://imslp.org/wiki/Wiegenlied_(Brahms,_Johannes)",
+    "finalUrl": "https://imslp.org/wiki/Wiegenlied_(Brahms,_Johannes)",
+    "status": 200,
+    "title": "5 Lieder, Op.49 (Brahms, Johannes) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "mozart-pc21-2",
+    "url": "https://imslp.org/wiki/Piano%20Concerto%20No.21%20in%20C%20major,%20K.467%20(Mozart,%20Wolfgang%20Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Piano%20Concerto%20No.21%20in%20C%20major,%20K.467%20(Mozart,%20Wolfgang%20Amadeus)",
+    "status": 200,
+    "title": "Piano Concerto No.21 in C major, K.467 (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "faure-apres-un-reve",
+    "url": "https://imslp.org/wiki/3_Songs,_Op.7_(Faur%C3%A9,_Gabriel)",
+    "finalUrl": "https://imslp.org/wiki/3_Songs,_Op.7_(Faur%C3%A9,_Gabriel)",
+    "status": 200,
+    "title": "3 Songs, Op.7 (Fauré, Gabriel) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "paganini-var18",
+    "url": "https://imslp.org/wiki/Rhapsody_on_a_Theme_of_Paganini,_Op.43_(Rachmaninoff,_Sergei)",
+    "finalUrl": "https://imslp.org/wiki/Rhapsody_on_a_Theme_of_Paganini,_Op.43_(Rachmaninoff,_Sergei)",
+    "status": 200,
+    "title": "Rhapsody on a Theme of Paganini, Op.43 (Rachmaninoff, Sergei) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "solveigs-song",
+    "url": "https://imslp.org/wiki/Piano_Transcriptions_of_Songs,_Op.52_(Grieg,_Edvard)",
+    "finalUrl": "https://imslp.org/wiki/Piano_Transcriptions_of_Songs,_Op.52_(Grieg,_Edvard)",
+    "status": 200,
+    "title": "Piano Transcriptions of Songs, Op.52 (Grieg, Edvard) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "beethoven-5",
+    "url": "https://imslp.org/wiki/Symphony_No.5,_Op.67_(Beethoven,_Ludwig_van)",
+    "finalUrl": "https://imslp.org/wiki/Symphony_No.5,_Op.67_(Beethoven,_Ludwig_van)",
+    "status": 200,
+    "title": "Symphony No.5, Op.67 (Beethoven, Ludwig van) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "beethoven-9",
+    "url": "https://imslp.org/wiki/Symphony_No.9,_Op.125_(Beethoven,_Ludwig_van)",
+    "finalUrl": "https://imslp.org/wiki/Symphony_No.9,_Op.125_(Beethoven,_Ludwig_van)",
+    "status": 200,
+    "title": "Symphony No.9, Op.125 (Beethoven, Ludwig van) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "vivaldi-spring",
+    "url": "https://imslp.org/wiki/Violin_Concerto_in_E_major,_RV_269_(Vivaldi,_Antonio)",
+    "finalUrl": "https://imslp.org/wiki/Violin_Concerto_in_E_major,_RV_269_(Vivaldi,_Antonio)",
+    "status": 200,
+    "title": "Violin Concerto in E major, RV 269 (Vivaldi, Antonio) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "largo-new-world",
+    "url": "https://imslp.org/wiki/Symphony%20No.9,%20Op.95%20(Dvo%C5%99%C3%A1k,%20Anton%C3%ADn)",
+    "finalUrl": "https://imslp.org/wiki/Symphony%20No.9,%20Op.95%20(Dvo%C5%99%C3%A1k,%20Anton%C3%ADn)",
+    "status": 200,
+    "title": "Symphony No.9, Op.95 (Dvořák, Antonín) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "bolero",
+    "url": "https://imslp.org/wiki/Bol%C3%A9ro%20(Ravel,%20Maurice)",
+    "finalUrl": "https://imslp.org/wiki/Bol%C3%A9ro_(Ravel,_Maurice)",
+    "status": 200,
+    "title": "Boléro, M.81 (Ravel, Maurice) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "pomp-circumstance-1",
+    "url": "https://imslp.org/wiki/Pomp_and_Circumstance_March_No.1,_Op.39_No.1_(Elgar,_Edward)",
+    "finalUrl": "https://imslp.org/wiki/Pomp_and_Circumstance_March_No.1,_Op.39_No.1_(Elgar,_Edward)",
+    "status": 200,
+    "title": "Pomp and Circumstance March No.1, Op.39 No.1 (Elgar, Edward) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "eine-kleine",
+    "url": "https://imslp.org/wiki/Eine%20kleine%20Nachtmusik,%20K.525%20(Mozart,%20Wolfgang%20Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Eine%20kleine%20Nachtmusik,%20K.525%20(Mozart,%20Wolfgang%20Amadeus)",
+    "status": 200,
+    "title": "Eine kleine Nachtmusik, K.525 (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "pictures",
+    "url": "https://imslp.org/wiki/Pictures_at_an_Exhibition_(Mussorgsky,_Modest)",
+    "finalUrl": "https://imslp.org/wiki/Pictures_at_an_Exhibition_(Mussorgsky,_Modest)",
+    "status": 200,
+    "title": "Pictures at an Exhibition (Mussorgsky, Modest) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "le-cygne",
+    "url": "https://imslp.org/wiki/Le_carnaval_des_animaux_(Saint-Sa%C3%ABns,_Camille)",
+    "finalUrl": "https://imslp.org/wiki/Le_carnaval_des_animaux_(Saint-Sa%C3%ABns,_Camille)",
+    "status": 200,
+    "title": "Le carnaval des animaux (Saint-Saëns, Camille) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "jupiter",
+    "url": "https://imslp.org/wiki/The_Planets,_Op.32_(Holst,_Gustav)",
+    "finalUrl": "https://imslp.org/wiki/The_Planets,_Op.32_(Holst,_Gustav)",
+    "status": 200,
+    "title": "The Planets, Op.32 (Holst, Gustav) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "toccata-fugue-dm",
+    "url": "https://imslp.org/wiki/Toccata_and_Fugue_in_D_minor,_BWV_565_(Bach,_Johann_Sebastian)",
+    "finalUrl": "https://imslp.org/wiki/Toccata_and_Fugue_in_D_minor,_BWV_565_(Bach,_Johann_Sebastian)",
+    "status": 200,
+    "title": "Toccata and Fugue in D minor, BWV 565 (Bach, Johann Sebastian) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "farandole",
+    "url": "https://imslp.org/wiki/L%27Arl%C3%A9sienne_Suite_No.2_(Bizet,_Georges)",
+    "finalUrl": "https://imslp.org/wiki/L%27Arl%C3%A9sienne_Suite_No.2_(Bizet,_Georges)",
+    "status": 200,
+    "title": "L'Arlésienne Suite No.2 (Bizet, Georges) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "carmen-prelude",
+    "url": "https://imslp.org/wiki/Carmen_(Bizet,_Georges)",
+    "finalUrl": "https://imslp.org/wiki/Carmen_(Bizet,_Georges)",
+    "status": 200,
+    "title": "Carmen (Bizet, Georges) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "cavalleria-intermezzo",
+    "url": "https://imslp.org/wiki/Cavalleria_rusticana_(Mascagni,_Pietro)",
+    "finalUrl": "https://imslp.org/wiki/Cavalleria_rusticana_(Mascagni,_Pietro)",
+    "status": 200,
+    "title": "Cavalleria rusticana (Mascagni, Pietro) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "barber-adagio",
+    "url": "https://imslp.org/wiki/Special:Search?search=Adagio+for+Strings,+Op.+11",
+    "finalUrl": "https://imslp.org/friendlytest.html",
+    "status": 200,
+    "title": "",
+    "search": true,
+    "copyrightWarning": false
+  },
+  {
+    "id": "nessun-dorma",
+    "url": "https://imslp.org/wiki/Turandot,_SC_91_(Puccini,_Giacomo)",
+    "finalUrl": "https://imslp.org/wiki/Turandot,_SC_91_(Puccini,_Giacomo)",
+    "status": 200,
+    "title": "Turandot, SC 91 (Puccini, Giacomo) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "brindisi",
+    "url": "https://imslp.org/wiki/La_traviata_(Verdi,_Giuseppe)",
+    "finalUrl": "https://imslp.org/wiki/La_traviata_(Verdi,_Giuseppe)",
+    "status": 200,
+    "title": "La traviata (Verdi, Giuseppe) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "habanera",
+    "url": "https://imslp.org/wiki/Habanera_(from_Carmen)_(Bizet,_Georges)",
+    "finalUrl": "https://imslp.org/wiki/Habanera_(from_Carmen)_(Bizet,_Georges)",
+    "status": 200,
+    "title": "Carmen (Bizet, Georges) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "orpheus-overture",
+    "url": "https://imslp.org/wiki/Overture_to_Offenbach%27s_opera_%27Orph%C3%A9e_aux_Enfers%27_(Binder,_Carl)",
+    "finalUrl": "https://imslp.org/wiki/Overture_to_Offenbach%27s_opera_%27Orph%C3%A9e_aux_Enfers%27_(Binder,_Carl)",
+    "status": 200,
+    "title": "Overture to Offenbach's Opera 'Orphée aux Enfers' (Binder, Carl) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "william-tell-overture",
+    "url": "https://imslp.org/wiki/Guillaume_Tell_(Rossini,_Gioacchino)",
+    "finalUrl": "https://imslp.org/wiki/Guillaume_Tell_(Rossini,_Gioacchino)",
+    "status": 200,
+    "title": "Guillaume Tell (Rossini, Gioachino) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "queen-of-night",
+    "url": "https://imslp.org/wiki/Die_Zauberfl%C3%B6te,_K.620_(Mozart,_Wolfgang_Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Die_Zauberfl%C3%B6te,_K.620_(Mozart,_Wolfgang_Amadeus)",
+    "status": 200,
+    "title": "Die Zauberflöte, K.620 (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "toreador",
+    "url": "https://imslp.org/wiki/Carmen_(Bizet,_Georges)",
+    "finalUrl": "https://imslp.org/wiki/Carmen_(Bizet,_Georges)",
+    "status": 200,
+    "title": "Carmen (Bizet, Georges) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "figaro-letter-duet",
+    "url": "https://imslp.org/wiki/Le_nozze_di_Figaro,_K.492_(Mozart,_Wolfgang_Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Le_nozze_di_Figaro,_K.492_(Mozart,_Wolfgang_Amadeus)",
+    "status": 200,
+    "title": "Le nozze di Figaro, K.492 (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "flower-duet",
+    "url": "https://imslp.org/work/28148",
+    "status": "unverified",
+    "error": "HTTP Error 502: Bad Gateway"
+  },
+  {
+    "id": "o-mio-babbino",
+    "url": "https://imslp.org/wiki/Gianni_Schicchi_(Puccini,_Giacomo)",
+    "finalUrl": "https://imslp.org/wiki/Gianni_Schicchi_(Puccini,_Giacomo)",
+    "status": 200,
+    "title": "Gianni Schicchi, SC 88 (Puccini, Giacomo) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "lascia-ch-io-pianga",
+    "url": "https://imslp.org/wiki/Rinaldo,_HWV_7b_(Handel,_George_Frideric)",
+    "finalUrl": "https://imslp.org/wiki/Rinaldo,_HWV_7b_(Handel,_George_Frideric)",
+    "status": 200,
+    "title": "Rinaldo, HWV 7b (Handel, George Frideric) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "rojo-no-tsuki",
+    "url": "https://imslp.org/wiki/K%C5%8Dj%C5%8D_no_Tsuki_(Taki,_Rentar%C5%8D)",
+    "finalUrl": "https://imslp.org/wiki/K%C5%8Dj%C5%8D_no_Tsuki_(Taki,_Rentar%C5%8D)",
+    "status": 200,
+    "title": "Kōjō no Tsuki (Taki, Rentarō) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "heidenroslein",
+    "url": "https://imslp.org/wiki/Heidenr%C3%B6slein,_D.257_(Schubert,_Franz)",
+    "finalUrl": "https://imslp.org/wiki/Heidenr%C3%B6slein,_D.257_(Schubert,_Franz)",
+    "status": 200,
+    "title": "Heidenröslein, D.257 (Schubert, Franz) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "ave-verum-corpus",
+    "url": "https://imslp.org/wiki/Ave_verum_corpus,_K.618_(Mozart,_Wolfgang_Amadeus)",
+    "finalUrl": "https://imslp.org/wiki/Ave_verum_corpus,_K.618_(Mozart,_Wolfgang_Amadeus)",
+    "status": 200,
+    "title": "Ave verum corpus, K.618 (Mozart, Wolfgang Amadeus) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "erlkonig",
+    "url": "https://imslp.org/wiki/Erlk%C3%B6nig,_D.328_(Schubert,_Franz)",
+    "finalUrl": "https://imslp.org/wiki/Erlk%C3%B6nig,_D.328_(Schubert,_Franz)",
+    "status": 200,
+    "title": "Erlkönig, D.328 (Schubert, Franz) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "caccini-ave-maria",
+    "url": "https://imslp.org/wiki/Ave_Maria_(Vavilov,_Vladimir)",
+    "finalUrl": "https://imslp.org/wiki/Ave_Maria_(Vavilov,_Vladimir)",
+    "status": 200,
+    "title": "Ave Maria (Vavilov, Vladimir) - IMSLP",
+    "search": false,
+    "copyrightWarning": false
+  },
+  {
+    "id": "faure-pie-jesu",
+    "url": "https://imslp.org/wiki/Requiem,_Op.48_(Faur%C3%A9,_Gabriel)",
+    "finalUrl": "https://imslp.org/wiki/Requiem,_Op.48_(Faur%C3%A9,_Gabriel)",
+    "status": 200,
+    "title": "Requiem, Op.48 (Fauré, Gabriel) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  },
+  {
+    "id": "verdi-dies-irae",
+    "url": "https://imslp.org/wiki/Requiem_(Verdi,_Giuseppe)",
+    "finalUrl": "https://imslp.org/wiki/Requiem_(Verdi,_Giuseppe)",
+    "status": 200,
+    "title": "Requiem (Verdi, Giuseppe) - IMSLP",
+    "search": false,
+    "copyrightWarning": true
+  }
+]

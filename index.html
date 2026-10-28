@@ -544,6 +544,8 @@ a.ilink:hover{background-size:100% 2px}
 <script>(function(){'use strict';if(window.NaoyamanAnalytics)return;var schemas={creator_site_visit:['target_site'],quiz_start:['quiz_mode'],quiz_answer:[],quiz_timeout:[],quiz_complete:[],quiz_restart:[],encyclopedia_expand:[],reading_mode_select:['reading_mode'],encyclopedia_navigate:['content_group'],walk_filter:['filter_group'],video_open:[],video_seek_request:['position_seconds'],catalog_filter:['filter_group'],music_play:['item_id'],music_pause:['item_id'],music_complete:['item_id'],music_filter:['filter_group'],art_display_open:[],share:['method','content_type']};window.NaoyamanAnalytics={track:function(name,values){try{if(location.hostname!=='djnaoyaman.github.io'||typeof window.gtag!=='function'||!schemas[name])return;var p={send_to:'G-FM0LBF65WC',transport_type:'beacon',page_location:location.origin+location.pathname,page_referrer:document.referrer.split(/[?#]/)[0]};schemas[name].forEach(function(k){var v=(values||{})[k];if(typeof v==='number'&&Number.isFinite(v))p[k]=v;else if(typeof v==='string'&&/^[a-zA-Z0-9_-]{1,80}$/.test(v))p[k]=v;});window.gtag('event',name,p);}catch(_){}}};document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-creator-site]');if(a)window.NaoyamanAnalytics.track('creator_site_visit',{target_site:a.dataset.creatorSite});});})();</script>
 <link rel="stylesheet" href="playback-seek.css?v=20261028-seek1">
 <script src="playback-seek.js?v=20261028-seek1"></script>
+<link rel="stylesheet" href="premium-playback-hint.css">
+<script src="premium-playback-hint.js"></script>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div><header class="top"><a class="lg" href="#/">SUBURBIA CLASSICA</a><nav aria-label="メインメニュー"><a href="#/">Player</a><a href="songs/index.html">Songs</a><a href="#/timeline">Timeline</a><a href="about.html">About</a><a href="profile.html">Editor</a></nav></header>
@@ -1396,6 +1398,7 @@ const TBD ='<span class="pend">調査中・確認できず</span>';
 const $ = s => document.querySelector(s);
 const htmlEscape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const view = $('#view');
+const premiumPlaybackHint=PremiumPlaybackHint.create({host:$('.player'),key:'suburbia-premium-hint-v1',get storage(){return window.sessionStorage;}});
 let player = null, ytReady = false, started = false, playing = false, cur = -1, activeFilter = null, errCount = 0;
 let errorSkipTimer=0;
 const seekControls=window.ClassicaSeek.create({
@@ -1459,7 +1462,7 @@ function setNow(i, play){
   if (!ytReady) return;
   if (play) player.loadVideoById(s.yt.id); else player.cueVideoById(s.yt.id);
 }
-function playSong(i){ setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
+function playSong(i){ if(!SS.on)premiumPlaybackHint.show(); setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
 let QUEUE=null;
 function queueIndex(i){
   let n = (i + SONGS.length) % SONGS.length;
@@ -2046,6 +2049,7 @@ function ssHide(){
   ssClearFrame(true);ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+  if(started)premiumPlaybackHint.show();
 }
 function ssSwap(i){ // 曲が変わったら旧フレームを破棄して切り替える
   clearTimeout(SS.sw);ssSet(i);SS.lastFrame=0;

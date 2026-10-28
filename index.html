@@ -1462,7 +1462,7 @@ function setNow(i, play){
   if (!ytReady) return;
   if (play) player.loadVideoById(s.yt.id); else player.cueVideoById(s.yt.id);
 }
-function playSong(i){ setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
+function playSong(i){ premiumPlaybackHint.show(); setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
 let QUEUE=null;
 function queueIndex(i){
   let n = (i + SONGS.length) % SONGS.length;
@@ -1800,7 +1800,6 @@ window.addEventListener('hashchange', route);
 /* ---------- 操作 ---------- */
 $('#overlay').onclick = () => {
   if (!ytReady) { setStatus('プレイヤーを読み込み中です。少し待ってからもう一度。'); return; }
-  premiumPlaybackHint.show();
   started = true;
   $('#overlay').classList.add('hide');
   const i = currentViewIdx();

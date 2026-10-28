@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-10-28",
+  "policy": "Only primary brand/publisher statements accepted; absence of source is not proof of no usage. No YouTube queries performed.",
+  "verified": {
+    "fur-elise": {
+      "title": "日産スカイライン R31「2ドア スポーツクーペ」篇",
+      "detail": "1986年5月22日から放映。原曲はベートーヴェン「エリーゼのために」、編曲は佐久間正英。日産公式FAQでは演奏者を無名ミュージシャンと記載。",
+      "url": "https://faq2.nissan.co.jp/faq/show/1612?category_id=67&site_domain=default",
+      "evidence": "Official FAQ explicitly gives date/title/composer/arranger; replaces vague 1985–1990 claim."
+    },
+    "beethoven-9": {
+      "title": "サントリー「2020年の希望」篇",
+      "detail": "2020年12月19日から放映。第4楽章「歓喜の歌」に基づく「Joyful Joyful」を幾田りらが歌唱。交響曲の既存録音そのものではありません。",
+      "url": "https://www.suntory.co.jp/news/article/13814.html",
+      "evidence": "Brand release 2020-12-17 specifies Joyful Joyful, singer, broadcast date and Beethoven ninth fourth movement."
+    },
+    "flower-duet": {
+      "title": "British Airways「You make us fly」",
+      "detail": "2021年5月7日にテレビ放映開始。ドリーブ《ラクメ》の「花の二重唱」を使用。同社の公式発表で曲名を確認。演奏者はこの資料では未確認。",
+      "url": "https://mediacentre.britishairways.com/news/06052021/we-all-have-something-that-makes-us-fly.-for-us-its-you",
+      "evidence": "Official 2021-05-06 release identifies Flower Duet from Lakme; old 1989 Aria arrangement claim not carried over."
+    },
+    "prelude-7": {
+      "title": "太田胃散のテレビCMテーマ",
+      "detail": "太田胃散の2011年4月の公式発表が、ショパン「前奏曲第7番イ長調」を長年テレビCMのテーマにしていたと説明しています。採用開始年・個別篇名・演奏者はこの資料では未確認。なお同資料の新CM「戦うOL」篇は別のオリジナル曲です。",
+      "url": "https://prtimes.jp/a/?c=3312&f=4f7090feeeb3db34ac0a6b0aea3cd4f4.pdf&r=2",
+      "evidence": "Brand-authored press release p1 lines20–23 explicitly confirms historic use, NOT new 2011 campaign use."
+    }
+  },
+  "held": {
+    "nocturne-9-2": [
+      [
+        "au（KDDI）「三太郎」シリーズ『本命？』篇（アレンジ版をBGMに使用）",
+        "2017",
+        "https://ja.wikipedia.org/wiki/夜想曲第2番_(ショパン)"
+      ]
+    ],
+    "raindrop": [
+      [
+        "Halo 3（Xbox 360）の宣伝映像『Halo: Believe.』",
+        "2007",
+        "https://en.wikipedia.org/wiki/Prelude_Op._28,_No._15_(Chopin)"
+      ]
+    ],
+    "clair-de-lune": [
+      [
+        "シャネル（ニコール・キッドマン出演、クレイグ・アームストロング編曲）",
+        "2006",
+        "https://fr.wikipedia.org/wiki/Suite_bergamasque"
+      ]
+    ],
+    "gymnopedie-1": [
+      [
+        "スバル レガシィB4（efによるクラブミックス風アレンジ）",
+        "2003",
+        "https://ja.wikipedia.org/wiki/ジムノペディ"
+      ],
+      [
+        "アース製薬 アース OH!ノーマット「撃退成分横澤」篇・「撃退成分横山」篇",
+        "年未確認",
+        "https://www.ragnet.co.jp/piano-commercial-songs/5"
+      ]
+    ],
+    "traumerei": [
+      [
+        "Raymond（インドの衣料ブランド）の広告キャンペーン『The Complete Man』のテーマ音楽",
+        "年未確認",
+        "https://en.wikipedia.org/wiki/Kinderszenen"
+      ]
+    ],
+    "canon": [
+      [
+        "Woolmark（Pure New Wool）英国TV広告",
+        "1975年頃から",
+        "https://en.wikipedia.org/wiki/Pachelbel%27s_Canon"
+      ]
+    ],
+    "air-g-string": [
+      [
+        "Hamlet（英国の葉巻）TV広告（ジャズ編曲）",
+        "1966〜1991",
+        "https://en.wikipedia.org/wiki/Air_on_the_G_String"
+      ]
+    ],
+    "jupiter": [
+      [
+        "ACジャパン（旧・公共広告機構）「臨時キャンペーン・災害支援『できること』篇」",
+        "2005年です。平原綾香『Jupiter』がCMソングとして使用されています。",
+        "https://ja.wikipedia.org/wiki/Jupiter_(%E5%B9%B3%E5%8E%9F%E7%B6%BE%E9%A6%99%E3%81%AE%E6%9B%B2)"
+      ]
+    ],
+    "nessun-dorma": [
+      [
+        "ラバッツァ（コーヒー）",
+        "2009年のキャンペーンでアントニー・ヘガティ（アノーニ）が歌っています。",
+        "https://www.theguardian.com/music/musicblog/2009/oct/22/antony-hegarty-opera-coffee"
+      ]
+    ],
+    "william-tell-overture": [
+      [
+        "リーボック「Defy Convention」キャンペーン",
+        "2001年、DJシャドウによるヒップホップ版です。",
+        "https://en.wikipedia.org/wiki/William_Tell_Overture"
+      ],
+      [
+        "ホンダ・シビック",
+        "2008年、電子音楽版のキャンペーンです。",
+        "https://en.wikipedia.org/wiki/William_Tell_Overture"
+      ]
+    ],
+    "largo-new-world": [
+      {
+        "title": "Hovis「Boy on the Bike」",
+        "detail": "1973年の広告。リドリー・スコット監督。Hovis公式沿革が音楽をドヴォルザーク《新世界交響曲》と紹介しています。ブラスバンドによる演奏で、サイトの管弦楽録音とは異なります。",
+        "url": "https://www.hovis.co.uk/our-story",
+        "sources": [
+          "https://www.hovis.co.uk/our-story",
+          "https://www.hovis.co.uk/the-boy-on-the-bike"
+        ],
+        "evidence": "1973/music stated in official timeline; official remaster page names Ashington Colliery brass band and relatives of original players. Timeline does not spell out movement number."
+      }
+    ]
+  },
+  "partial": {
+    "raindrop": {
+      "url": "https://www.dandad.org/work/d-ad-awards-archive/believe",
+      "reason": "Agency award submission identifies Halo3 Believe and Chopin soundtrack but not exact work; insufficient by itself."
+    },
+    "largo-new-world": {
+      "sources": [
+        "https://www.hovis.co.uk/our-story",
+        "https://www.hovis.co.uk/the-boy-on-the-bike"
+      ],
+      "reason": "Official brand names the symphony but not the Largo movement. Hold outside CM facets until exact movement/version attribution is verified."
+    }
+  },
+  "heldReason": "Existing entries rely on Wikipedia, editorial articles or personal sources. No sufficient primary work/version confirmation established in this pass; retain privately for further research, not as verified CM cards.",
+  "additionalResearch": {
+    "nocturne-9-2": {
+      "primaryCampaignSource": "https://kyodonewsprwire.jp/release/201702038455",
+      "finding": "KDDI-authored release confirms 本命？ campaign and 2017-02-06 rollout, but no composer/music title in text. Publisher/distributor score page https://www.at-elise.com/elise/CCDPRM00117/ mentions au 本命？, but not ad-producer music credit. Hold remains.",
+      "status": "held-music-not-primary-confirmed"
+    },
+    "gymnopedie-1": {
+      "primaryChecked": [
+        "https://www.earth.jp/oh-nomat/",
+        "https://corp.earth.jp/jp/news/2026/index.html"
+      ],
+      "secondaryLead": "https://www.cdjournal.com/research/-/9934",
+      "finding": "CDJournal names Gymnopedie1 for 横山/横澤 campaign; brand pages inspected do not state music. Hold remains.",
+      "status": "held-music-not-primary-confirmed"
+    },
+    "jupiter": {
+      "primaryChecked": "https://www.ad-c.or.jp/campaign/search.php?keyword=Jupiter",
+      "finding": "Primary archive request inaccessible via web tool; official-domain searches no matching music credit. Do not substitute a false claim of no CM use. Secondary lawyer-association memoir identifies campaign but is not producer proof.",
+      "status": "held-primary-not-established"
+    }
+  }
+}

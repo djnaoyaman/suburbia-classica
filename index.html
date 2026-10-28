@@ -1462,7 +1462,7 @@ function setNow(i, play){
   if (!ytReady) return;
   if (play) player.loadVideoById(s.yt.id); else player.cueVideoById(s.yt.id);
 }
-function playSong(i){ premiumPlaybackHint.show(); setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
+function playSong(i){ if(!SS.on)premiumPlaybackHint.show(); setNow(i, true); document.querySelectorAll('.card').forEach(c=>c.classList.toggle('playing', c.dataset.i == i)); }
 let QUEUE=null;
 function queueIndex(i){
   let n = (i + SONGS.length) % SONGS.length;
@@ -2049,6 +2049,7 @@ function ssHide(){
   ssClearFrame(true);ssEl.classList.remove('on'); ssEl.setAttribute('aria-hidden','true');ssEl.inert=true;SS.idle=0;
   if(SS.focusBefore&&SS.focusBefore.isConnected)SS.focusBefore.focus({preventScroll:true});
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+  if(started)premiumPlaybackHint.show();
 }
 function ssSwap(i){ // 曲が変わったら旧フレームを破棄して切り替える
   clearTimeout(SS.sw);ssSet(i);SS.lastFrame=0;

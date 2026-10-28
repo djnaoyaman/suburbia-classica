@@ -8,11 +8,13 @@ for(const width of [320,390,768,1280])for(const blocked of [false,true]){
  await page.route('**/*',r=>{const u=new URL(r.request().url());if(u.origin!==base.slice(0,-1))return r.abort();const p=path.join(root,u.pathname);return fs.existsSync(p)&&fs.statSync(p).isFile()?r.fulfill({path:p}):r.fulfill({status:404,body:'missing'});});
  await page.goto(base+'index.html');
  await page.evaluate(()=>{ytReady=true;player={loadVideoById(){},cueVideoById(){}};});
+ if(width===320){await page.evaluate(()=>{SS.on=true;playSong(0);});assert.equal(await page.locator('.premium-playback-hint').count(),0);checks++;await page.evaluate(()=>{SS.on=false;});}
  await page.locator('#overlay').click();
  assert.equal(await page.locator('.premium-playback-hint').count(),1);checks++;
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));checks++;
  const hint=await page.locator('.premium-playback-hint').boundingBox(),video=await page.locator('.vwrap').boundingBox(),controls=await page.locator('.ctrl').boundingBox();
  assert(hint.y>=video.y+video.height-1&&hint.y>=controls.y+controls.height-1);checks++;
+ if(!blocked&&[390,1280].includes(width)){fs.mkdirSync(path.join(root,'test-artifacts'),{recursive:true});await page.locator('.player').screenshot({path:path.join(root,'test-artifacts','premium-hint-'+width+'.png')});}
  await page.locator('.premium-playback-hint a').focus();await page.waitForTimeout(8100);
  assert.equal(await page.locator('.premium-playback-hint').count(),1);checks++;
  await page.locator('.premium-playback-hint button').click();

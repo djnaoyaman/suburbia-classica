@@ -24,7 +24,7 @@
 - [Songs](https://djnaoyaman.github.io/suburbia-classica/songs/index.html): 全74曲
 - [国横断年表](https://djnaoyaman.github.io/suburbia-classica/timeline.html): 作曲年×出身国
 - [このサイトについて](https://djnaoyaman.github.io/suburbia-classica/about.html): 方針・出典の扱い
-- [編者プロフィール](https://djnaoyaman.github.io/suburbia-classica/profile.html): 編者DJ Naoyamanの経歴・名義・関連プロジェクト
+- [編者プロフィール](https://djnaoyaman.github.io/suburbia-classica/profile.html): 編者DJ Naoyamanの制作意図と編集方針
 - [プレイヤー](https://djnaoyaman.github.io/suburbia-classica/): 再生・スクリーンセーバー表示
 - [全曲まとめ（Markdown）](https://djnaoyaman.github.io/suburbia-classica/llms-full.txt)
 
@@ -114,4 +114,5 @@
 
 ## Optional
 - [sitemap.xml](https://djnaoyaman.github.io/suburbia-classica/sitemap.xml)
+
 

@@ -20,8 +20,8 @@ assert(!pathetiqueHTML.includes('kuranpo/knowledge/g5.html'));
 assert(!pathetiqueHTML.includes('aria-labelledby="realism-inspiration"'));
 const hashes={
   "waltz-64-2": "b38e0e5346717efac896bb1053c7ac1fa1fb0b23ab673c336861b619c2c333ff",
-  "brahms-op118-2": "ec96725e78b2a0ffcaada277687259eab78d96ef3861e06a096a3ce2574ea381",
-  "mozart-pc21-2": "18803305250a3dd8d4d30ed0d09e94f141ddd1d4c308eff459c1360b21c9df61"
+  "brahms-op118-2": "f463cca5a35c3e12d56aa16eede95dfe0d6880669cd916fe55f7c9f5b926d68f",
+  "mozart-pc21-2": "356fb3f3cb184ed1e17a22203f45c7e31496703acd9ad6fe53728ef1daba1bdf"
 };
 for(const [id,hash] of Object.entries(hashes)){const got=crypto.createHash('sha256').update(JSON.stringify([api.render(id,'same scene'),api.renderFullscreen(id,'realism'),api.renderFullscreen(id,'visual'),api.renderFullscreen(id,'impressive')])).digest('hex');assert.equal(got,hash,id+' connection unchanged');}
 console.log('PASS: stale Jesu butterfly, October fungus and Pathetique leaf attributions removed; all three continuing article/fullscreen connections exactly preserved.');

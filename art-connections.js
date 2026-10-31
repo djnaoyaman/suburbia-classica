@@ -37,7 +37,7 @@
    '<a class="art-connection-link" href="'+esc(item.url)+'" target="_blank" rel="noopener noreferrer">'+esc(item.label)+'<span>'+esc(item.site)+' ↗ <span class="art-connection-new">（別タブ）</span></span></a>'+
    '<p class="art-connection-note">アートから広がる編集上の連想です。作曲者の意図や実際の撮影地を示すものではありません。</p></section>';
  }
- const shortSites={'鎌・くらんぽ':'鎌・くらんぽ','一見坊の【日本妖怪学体系】':'妖怪学体系','Earth Number':'Earth Number','gooooooooood expression':'expression','花鳥風月、そして魚と虫。':'花鳥風月'};
+ const shortSites={'鎌・くらんぽ':'鎌・くらんぽ','一見坊の【日本妖怪学体系】':'一見坊の【日本妖怪学体系】','Earth Number':'Earth Number','gooooooooood expression':'expression','花鳥風月、そして魚と虫。':'花鳥風月'};
  function renderFullscreen(id,mode){
   const item=mode==='realism'?byId.get(id):null;if(!item)return '';
   const name=shortSites[item.site]||item.site;

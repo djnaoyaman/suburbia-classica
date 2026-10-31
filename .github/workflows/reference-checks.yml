@@ -21,6 +21,8 @@ jobs:
       - run: npm install --no-save --package-lock=false playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node tests/test-reference-browser.cjs
+      - run: node tests/test-jesu-art-connection.cjs
+      - run: node tests/test-youkai-full-name-browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
